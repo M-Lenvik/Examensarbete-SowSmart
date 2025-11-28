@@ -1,0 +1,8 @@
+@use '../../Styles/color' as *;
+
+/* Layout styles */
+main {
+  animation: fadeIn 0.3s ease-in;
+  background-color: $background-color;
+}
+
