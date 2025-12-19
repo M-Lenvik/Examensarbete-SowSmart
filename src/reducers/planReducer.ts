@@ -95,6 +95,7 @@ export const planReducer = (state: PlanState, action: PlanAction): PlanState => 
     default: {
       // Exhaustiveness check
       const _never: never = action;
+      void _never;
       return state;
     }
   }
