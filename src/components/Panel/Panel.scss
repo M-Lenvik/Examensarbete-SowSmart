@@ -1,0 +1,25 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/mixins" as *;
+
+.panel {
+  width: 100%;
+  max-width: 40rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: $background-light;
+  border: 1px solid $border-color;
+  @include shadow-sm;
+}
+
+.panel__title {
+  margin: 0 0 0.75rem;
+  color: $text-color;
+}
+
+.panel__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+

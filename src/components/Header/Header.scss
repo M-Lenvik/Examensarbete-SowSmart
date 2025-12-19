@@ -32,6 +32,11 @@
   }
 }
 
+.header-title-link {
+  color: $header-text;
+  text-decoration: none;
+}
+
 .header-nav {
   display: flex;
   gap: 1rem;

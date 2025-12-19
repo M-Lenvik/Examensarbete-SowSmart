@@ -1,0 +1,12 @@
+@use "../../Styles/mixins" as *;
+
+.home-test-component {
+  width: 100%;
+  @include flex-column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: #ffb6c1; /* Light pink ("laxrosa") */
+}
+
+

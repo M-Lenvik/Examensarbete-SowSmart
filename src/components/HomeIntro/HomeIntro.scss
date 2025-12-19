@@ -1,0 +1,16 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/mixins" as *;
+
+.home-intro {
+  width: 100%;
+  max-width: 40rem;
+  @include flex-column;
+  align-items: center;
+}
+
+.home-intro__actions {
+  width: 50%;
+  margin: 1rem 0 1.5rem;
+}
+
+

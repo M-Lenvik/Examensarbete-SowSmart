@@ -1,0 +1,223 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2025-11-18",
+    "source": "Web scraping from Impecta (https://www.impecta.se)",
+    "totalPlants": 242
+  },
+  "plants": [
+    {
+      "id": 1,
+      "type": "Körsbärstomat - korrekt data",
+      "name": "Sungold - korrekt data",
+      "englishName": "Cherry Tomato",
+      "scientificName": "Solanum lycopersicum",
+      "category": "grönsaker",
+      "subcategory": "tomat",
+      "articleNumber": "9696",
+      "url": "https://www.impecta.se/froer/gronsaker/korsbarstomat-f1-sungold",
+      "price": "59.50",
+      "inStock": true,
+      "isOrganic": false,
+      "imageUrl": "https://www.impecta.se/bilder/artiklar/zoom/9696_1.jpg",
+      "imageUrls": [
+        "https://www.impecta.se/bilder/artiklar/zoom/9696_1.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_1.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_2.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_3.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_4.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_5.jpg",
+        "https://www.impecta.se/bilder/artiklar/9696.jpg"
+      ],
+      "annuality": "Ettårig",
+      "portionSize": "7 frö",
+      "height": "150 cm",
+      "color": "Gul",
+      "growingLocation": "sol",
+      "description": "Gyllene orangegula, något större körsbärstomater på ca 20 gram. En av världens sötaste sorter. Saftiga frukter med förträfflig tropisk fruktsmak. För växthus och varma utelägen.",
+      
+      "plantingWindows": {
+        "indoors": {
+          "start": "feb",
+          "end": "april"
+        },
+        "outdoors": {
+          "start": "",
+          "end": ""
+        }
+      },
+      "movePlantOutdoor": {
+        "description": "efter avhärdning när frostrisken är över",
+        "start": "maj",
+        "end": "juni"
+      },
+      "harvestTime": {
+        "start": "juli",
+        "end": "okt"
+      },
+      
+      "daysOutdoorToHarvest": 60,
+      "daysIndoorGrowth": 75,
+      "hardeningDays": 7,
+      "plantingMethod": "indoor",
+      "totalDaysFromSeed": 135,
+      
+      "germinationTime": "5-15 dagar",
+      "germinationTemperature": "22-25°C",
+      "growingTemperature": "18-20°C",
+      "soilMix": "2/3 planteringsjord, 1/3 såjord",
+      
+      "frostTolerant": false,
+      "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
+      "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
+      
+      "source": "Impecta"
+    },
+    {
+      "id": 2,
+      "type": "Körsbärstomat - kopia på data",
+      "name": "Tomatsort 2, tas bort sen",
+      "englishName": "Cherry Tomato",
+      "scientificName": "Solanum lycopersicum",
+      "category": "grönsaker",
+      "subcategory": "tomat",
+      "articleNumber": "9696",
+      "url": "https://www.impecta.se/froer/gronsaker/korsbarstomat-f1-sungold",
+      "price": "59.50",
+      "inStock": true,
+      "isOrganic": false,
+      "imageUrl": "https://www.impecta.se/bilder/artiklar/zoom/9696_1.jpg",
+      "imageUrls": [
+        "https://www.impecta.se/bilder/artiklar/zoom/9696_1.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_1.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_2.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_3.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_4.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_5.jpg",
+        "https://www.impecta.se/bilder/artiklar/9696.jpg"
+      ],
+      "annuality": "Ettårig",
+      "portionSize": "7 frö",
+      "height": "150 cm",
+      "color": "Gul",
+      "growingLocation": "sol",
+      "description": "Gyllene orangegula, något större körsbärstomater på ca 20 gram. En av världens sötaste sorter. Saftiga frukter med förträfflig tropisk fruktsmak. För växthus och varma utelägen.",
+      
+      "plantingWindows": {
+        "indoors": {
+          "start": "feb",
+          "end": "april"
+        },
+        "outdoors": {
+          "start": "",
+          "end": ""
+        }
+      },
+      "movePlantOutdoor": {
+        "description": "efter avhärdning när frostrisken är över",
+        "start": "maj",
+        "end": "juni"
+      },
+      "harvestTime": {
+        "start": "juli",
+        "end": "okt"
+      },
+      
+      "daysOutdoorToHarvest": 60,
+      "daysIndoorGrowth": 75,
+      "hardeningDays": 7,
+      "plantingMethod": "indoor",
+      "totalDaysFromSeed": 135,
+      
+      "germinationTime": "5-15 dagar",
+      "germinationTemperature": "22-25°C",
+      "growingTemperature": "18-20°C",
+      "soilMix": "2/3 planteringsjord, 1/3 såjord",
+      
+      "frostTolerant": false,
+      "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
+      "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
+      
+      "source": "Impecta"
+    },
+    {
+      "id": 3,
+      "type": "Körsbärstomat - kopia på data",
+      "name": "Tomatsort placeholder, tas bort sen.",
+      "englishName": "Cherry Tomato",
+      "scientificName": "Solanum lycopersicum",
+      "category": "grönsaker",
+      "subcategory": "tomat",
+      "articleNumber": "9696",
+      "url": "https://www.impecta.se/froer/gronsaker/korsbarstomat-f1-sungold",
+      "price": "59.50",
+      "inStock": true,
+      "isOrganic": false,
+      "imageUrl": "https://www.impecta.se/bilder/artiklar/zoom/9696_1.jpg",
+      "imageUrls": [
+        "https://www.impecta.se/bilder/artiklar/zoom/9696_1.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_1.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_2.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_3.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_4.jpg",
+        "https://www.impecta.se/img/bilder/artiklar/zoom/9696_5.jpg",
+        "https://www.impecta.se/bilder/artiklar/9696.jpg"
+      ],
+      "annuality": "Ettårig",
+      "portionSize": "7 frö",
+      "height": "150 cm",
+      "color": "Gul",
+      "growingLocation": "sol",
+      "description": "Gyllene orangegula, något större körsbärstomater på ca 20 gram. En av världens sötaste sorter. Saftiga frukter med förträfflig tropisk fruktsmak. För växthus och varma utelägen.",
+      
+      "plantingWindows": {
+        "indoors": {
+          "start": "feb",
+          "end": "april"
+        },
+        "outdoors": {
+          "start": "",
+          "end": ""
+        }
+      },
+      "movePlantOutdoor": {
+        "description": "efter avhärdning när frostrisken är över",
+        "start": "maj",
+        "end": "juni"
+      },
+      "harvestTime": {
+        "start": "juli",
+        "end": "okt"
+      },
+      
+      "daysOutdoorToHarvest": 60,
+      "daysIndoorGrowth": 75,
+      "hardeningDays": 7,
+      "plantingMethod": "indoor",
+      "totalDaysFromSeed": 135,
+      
+      "germinationTime": "5-15 dagar",
+      "germinationTemperature": "22-25°C",
+      "growingTemperature": "18-20°C",
+      "soilMix": "2/3 planteringsjord, 1/3 såjord",
+      
+      "frostTolerant": false,
+      "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
+      "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
+      
+      "source": "Impecta"
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+

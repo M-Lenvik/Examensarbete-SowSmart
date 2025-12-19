@@ -1,10 +1,15 @@
+import { HomeHowItWorks } from "../components/HomeHowItWorks/HomeHowItWorks";
+import { HomeIntro } from "../components/HomeIntro/HomeIntro";
+import { HomeTestComponent } from "../components/HomeTestComponent/HomeTestComponent";
 import "./Home.scss";
 
 export const Home = () => {
   return (
-    <div className="home">
-      <h1>Mitt examensarbete</h1>
-    </div>
+    <section className="home">
+      <HomeIntro />
+      <HomeHowItWorks />
+      <HomeTestComponent />
+    </section>
   );
 };
 

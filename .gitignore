@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cursor workspace files (project-local plans/rules/terminals)
+.cursor/
+
+# Local backups
+src/data/plants copy.json
