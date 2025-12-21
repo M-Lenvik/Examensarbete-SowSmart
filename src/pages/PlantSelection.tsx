@@ -2,6 +2,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Panel } from "../components/Panel/Panel";
+import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailModal";
 import { PlantsList } from "../components/PlantsList/PlantsList";
 import { PlantsSearch } from "../components/PlantsSearch/PlantsSearch";
 import { PlantsSelectedSummary } from "../components/PlantsSelectedSummary/PlantsSelectedSummary";
@@ -18,6 +19,8 @@ export const PlantSelection = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [subcategoryFilter, setSubcategoryFilter] = useState("all");
+  const [selectedPlantForModal, setSelectedPlantForModal] = useState<Plant | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -59,6 +62,16 @@ export const PlantSelection = () => {
     return Array.from(unique).sort((a, b) => a.localeCompare(b));
   }, [plants]);
 
+  const handleOpenDetails = (plant: Plant) => {
+    setSelectedPlantForModal(plant);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedPlantForModal(null);
+  };
+
   return (
     <section>
       <h1>Fröbanken</h1>
@@ -85,6 +98,7 @@ export const PlantSelection = () => {
             plants={filteredPlants}
             selectedPlantIds={state.selectedPlantIds}
             onToggleSelected={actions.toggleSelectedPlant}
+            onOpenDetails={handleOpenDetails}
           />
         )}
       </Panel>
@@ -98,6 +112,12 @@ export const PlantSelection = () => {
           onContinue={() => navigate("/planner")}
         />
       </Panel>
+
+      <PlantsDetailModal
+        isOpen={isModalOpen}
+        plant={selectedPlantForModal}
+        onClose={handleCloseModal}
+      />
     </section>
   );
 };

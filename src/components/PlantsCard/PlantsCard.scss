@@ -1,0 +1,64 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/mixins" as *;
+
+.plants-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid $border-color;
+  background-color: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  @include shadow-sm;
+
+  &:hover {
+    transform: none;
+    background-color: lightgray;
+  }
+
+  &:focus-within {
+    outline: 2px solid $accent-green;
+    outline-offset: 2px;
+  }
+}
+
+.plants-card__image {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  border: 1px solid $border-color;
+  background-color: $background-light;
+  flex-shrink: 0;
+}
+
+.plants-card__checkbox {
+  display: inline-flex;
+}
+
+.plants-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+}
+
+.plants-card__title {
+  font-weight: 600;
+  color: $text-color;
+}
+
+.plants-card__meta {
+  font-size: 0.875rem;
+  color: $text-light;
+}
+
+

@@ -49,10 +49,9 @@ export const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
             ×
           </button>
         </header>
+        {/* Modal content whith plant information like category, subcategory, type, planting method, planting windows, days outdoor to harvest, days indoor growth, hardening days, move plant outdoor, url, description */}
         <div className="modal__content">{children}</div>
       </div>
     </div>
   );
 };
-
-

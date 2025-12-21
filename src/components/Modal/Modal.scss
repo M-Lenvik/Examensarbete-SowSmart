@@ -13,12 +13,15 @@
 }
 
 .modal {
+  max-height: calc(100vh - 2rem);
   width: 100%;
   max-width: 40rem;
   background-color: #ffffff;
   border-radius: 0.75rem;
   border: 1px solid $border-color;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   animation: slideIn 0.2s ease-out;
   @include shadow-lg;
 }
@@ -54,6 +57,7 @@
 
 .modal__content {
   padding: 1rem;
+  overflow-y: auto;
 }
 
 
