@@ -1,8 +1,10 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Button } from "../components/Button/Button";
 import { Panel } from "../components/Panel/Panel";
+import { PlantsList } from "../components/PlantsList/PlantsList";
+import { PlantsSearch } from "../components/PlantsSearch/PlantsSearch";
+import { PlantsSelectedSummary } from "../components/PlantsSelectedSummary/PlantsSelectedSummary";
 import { PlanContext } from "../context/PlanContext";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
@@ -13,6 +15,7 @@ export const PlantSelection = () => {
 
   const [plants, setPlants] = useState<Plant[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const load = async () => {
@@ -30,59 +33,42 @@ export const PlantSelection = () => {
     return plants.filter((plant) => selectedSet.has(plant.id));
   }, [plants, state.selectedPlantIds]);
 
+  const filteredPlants = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (query.length === 0) return plants;
+    return plants.filter((plant) => plant.name.toLowerCase().includes(query));
+  }, [plants, searchQuery]);
+
   return (
     <section>
       <h1>Fröbanken</h1>
 
+      <Panel title="Sök">
+        <PlantsSearch searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
+      </Panel>
+
       <Panel title="Välj dina fröer">
         {isLoading ? (
           <p>Laddar fröer...</p>
-        ) : plants.length === 0 ? (
+        ) : filteredPlants.length === 0 ? (
           <p>Inga fröer hittades.</p>
         ) : (
-          <ul>
-            {plants.map((plant) => {
-              const isSelected = state.selectedPlantIds.includes(plant.id);
-
-              return (
-                <li key={plant.id}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={isSelected}
-                      onChange={() => actions.toggleSelectedPlant(plant.id)}
-                    />
-                    {plant.name}
-                  </label>
-                </li>
-              );
-            })}
-          </ul>
+          <PlantsList
+            plants={filteredPlants}
+            selectedPlantIds={state.selectedPlantIds}
+            onToggleSelected={actions.toggleSelectedPlant}
+          />
         )}
       </Panel>
 
       <Panel title={`Valda fröer (${state.selectedPlantIds.length})`}>
-        {state.selectedPlantIds.length === 0 ? (
-          <p>Du har inte valt några fröer än.</p>
-        ) : (
-          <>
-            <ul>
-              {selectedPlants.map((plant) => (
-                <li key={plant.id}>{plant.name}</li>
-              ))}
-            </ul>
-            <Button variant="secondary" onClick={actions.clearSelection}>
-              Rensa val
-            </Button>
-          </>
-        )}
-
-        <Button
-          disabled={state.selectedPlantIds.length === 0}
-          onClick={() => navigate("/planner")}
-        >
-          Till planeraren
-        </Button>
+        <PlantsSelectedSummary
+          selectedPlants={selectedPlants}
+          selectedCount={state.selectedPlantIds.length}
+          canContinue={state.selectedPlantIds.length > 0}
+          onClear={actions.clearSelection}
+          onContinue={() => navigate("/planner")}
+        />
       </Panel>
     </section>
   );

@@ -28,3 +28,6 @@ dist-ssr
 
 # Local backups
 src/data/plants copy.json
+
+# Local documentation handoff (not for repo)
+docs/HANDOFF.md
