@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import "./Header.scss";
 
 export const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <header className="header">
       <div className="header-content">
@@ -10,23 +13,54 @@ export const Header = () => {
             SåSmart
           </NavLink>
         </h1>
-        <nav className="header-nav">
-          <NavLink to="/" className="nav-link">
+
+        <button
+          type="button"
+          className="header-menu-button"
+          aria-label={isMenuOpen ? "Stäng meny" : "Öppna meny"}
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+        >
+          Meny
+        </button>
+
+        <nav className={`header-nav ${isMenuOpen ? "header-nav--open" : ""}`}>
+          <NavLink to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>
             Startsida
           </NavLink>
-          <NavLink to="/plants" className="nav-link">
+          <NavLink
+            to="/plants"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             Fröbanken
           </NavLink>
-          <NavLink to="/planner" className="nav-link">
+          <NavLink
+            to="/planner"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             Planera
           </NavLink>
-          <NavLink to="/calendar" className="nav-link">
+          <NavLink
+            to="/calendar"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             Kalender
           </NavLink>
-          <NavLink to="/my-garden" className="nav-link">
+          <NavLink
+            to="/my-garden"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             Min frösida
           </NavLink>
-          <NavLink to="/about" className="nav-link">
+          <NavLink
+            to="/about"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
             Om
           </NavLink>
         </nav>

@@ -14,15 +14,28 @@
 
 .header-content {
   @include container;
-  @include flex-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "title menu"
+    "nav nav";
+  align-items: center;
+  gap: 0.75rem;
   padding: 0 1rem;
 
   @include tablet {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "nav";
+    align-items: start;
+    justify-items: start;
     padding: 0 2rem;
   }
 }
 
 .header-title {
+  grid-area: title;
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0;
@@ -37,11 +50,44 @@
   text-decoration: none;
 }
 
-.header-nav {
-  display: flex;
-  gap: 1rem;
+.header-menu-button {
+  grid-area: menu;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  color: $header-text;
+  font: inherit;
+  cursor: pointer;
+  @include transition(background-color);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &:focus {
+    outline: 2px solid $accent-green;
+    outline-offset: 2px;
+  }
 
   @include tablet {
+    display: none;
+  }
+}
+
+.header-nav {
+  grid-area: nav;
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &.header-nav--open {
+    display: flex;
+  }
+
+  @include tablet {
+    display: flex;
+    flex-direction: row;
     gap: 1.5rem;
   }
 }
