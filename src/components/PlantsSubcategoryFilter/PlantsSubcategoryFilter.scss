@@ -1,0 +1,29 @@
+@use "../../Styles/color" as *;
+
+.plants-subcategory-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.plants-subcategory-filter__label {
+  font-weight: 600;
+  color: $text-color;
+}
+
+.plants-subcategory-filter__select {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-color;
+  background-color: #ffffff;
+  color: $text-color;
+
+  &:focus {
+    outline: 2px solid $accent-green;
+    outline-offset: 2px;
+  }
+}
+
+
