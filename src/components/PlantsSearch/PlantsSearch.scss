@@ -1,5 +1,37 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/mixins" as *;
+
 .plants-search {
   width: 100%;
+}
+
+.plants-search__wrapper {
+  position: relative;
+}
+
+.plants-search__clear {
+  position: absolute;
+  right: 0.75rem;
+  top: 2.50rem;
+  appearance: none;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  color: $text-light;
+  cursor: pointer;
+  @include transition(color);
+
+  &:hover {
+    color: $text-color;
+  }
+
+  &:focus {
+    outline: 2px solid $accent-green;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
 }
 
 

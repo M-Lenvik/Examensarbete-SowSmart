@@ -50,13 +50,14 @@ export type RawPlant = {
 
   plantingWindows: PlantingWindows;
 
-  // TODO: KOLLA OM INTE DETTA ÄNDRAS MED NYA JSON FILEN SEN, DEN BORDE INTE VARA TOM. BORDE KUNNA VARA NUMBER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // Legacy field from existing dataset (often empty string).
-  daysToHarvest?: string;
+  // Legacy field from existing dataset (can be number or string).
+  daysToHarvest?: number | string;
 
   harvestTime?: HarvestTime;
   germinationTime?: string;
-  frostTolerant?: boolean;
+  germinationTemperature?: string;
+  growingTemperature?: string;
+  frostTolerant?: boolean | null;
   source?: string;
 
   // todo ta bort kommentar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -74,16 +75,20 @@ export type RawPlant = {
  */
 export type Plant = Omit<
   RawPlant,
-  "daysToHarvest" | "daysOutdoorToHarvest" | "plantingMethod" | "movePlantOutdoor"
+  "daysToHarvest" | "daysOutdoorToHarvest" | "plantingMethod" | "movePlantOutdoor" | "germinationTime" | "germinationTemperature" | "growingTemperature" | "frostTolerant"
 > & {
   daysOutdoorToHarvest: number | null;
   daysIndoorGrowth: number | null;
   hardeningDays: number | null;
   plantingMethod: PlantingMethod;
   movePlantOutdoor: MovePlantOutdoor | null;
+  germinationTime: string | null;
+  germinationTemperature: string | null;
+  growingTemperature: string | null;
+  frostTolerant: boolean | null;
 
   // Keep legacy raw fields optional for traceability/debugging.
-  daysToHarvest?: string;
+  daysToHarvest?: number | string;
 };
 
 

@@ -116,6 +116,8 @@ export const PlantSelection = () => {
           canContinue={state.selectedPlantIds.length > 0}
           onClear={actions.clearSelection}
           onContinue={() => navigate("/planner")}
+          onOpenDetails={handleOpenDetails}
+          onRemove={actions.toggleSelectedPlant}
         />
       </Panel>
 

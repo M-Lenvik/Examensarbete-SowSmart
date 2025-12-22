@@ -1,0 +1,187 @@
+import type { MovePlantOutdoor, PlantingMethod } from "../models/Plant";
+
+/**
+ * Default planting method by subcategory.
+ * Used when plantingMethod is missing from raw data.
+ */
+export const DEFAULT_PLANTING_METHOD_BY_SUBCATEGORY: Record<string, PlantingMethod> = {
+  // Frost-sensitive, typically started indoors
+  "tomat": "indoor",
+  "gurka": "indoor",
+  "melon": "indoor",
+  "aubergin": "indoor",
+  "paprika": "indoor",
+  "chili": "indoor",
+  "physalis": "indoor",
+  // Frost-tolerant, typically direct-sown outdoors
+  "ärter": "outdoor",
+  "bönor": "outdoor",
+  "sparris": "outdoor",
+  // Can be both
+  "pumpa": "outdoor",
+};
+
+/**
+ * Default hardening days by subcategory.
+ * Used when hardeningDays is missing from raw data.
+ * Most indoor-started plants need 7 days of hardening.
+ */
+export const DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY: Record<string, number> = {
+  // Indoor-started plants need hardening
+  "tomat": 7,
+  "gurka": 7,
+  "melon": 7,
+  "aubergin": 7,
+  "paprika": 7,
+  "chili": 7,
+  "physalis": 7,
+  "pumpa": 7,
+  // Outdoor plants typically don't need hardening
+  "ärter": 0,
+  "bönor": 0,
+  "sparris": 0,
+};
+
+/**
+ * Default frost tolerance by subcategory.
+ * Used when frostTolerant is missing from raw data.
+ */
+export const DEFAULT_FROST_TOLERANT_BY_SUBCATEGORY: Record<string, boolean> = {
+  // Frost-tolerant plants
+  "ärter": true,
+  "bönor": true,
+  "sparris": true,
+  // Frost-sensitive plants
+  "tomat": false,
+  "gurka": false,
+  "melon": false,
+  "aubergin": false,
+  "paprika": false,
+  "chili": false,
+  "physalis": false,
+  "pumpa": false,
+};
+
+/**
+ * Global defaults when subcategory-specific defaults are not available.
+ */
+export const GLOBAL_DEFAULT_HARDENING_DAYS = 7;
+export const GLOBAL_DEFAULT_PLANTING_METHOD: PlantingMethod = "outdoor";
+export const GLOBAL_DEFAULT_FROST_TOLERANT = false;
+
+/**
+ * Default germination time by subcategory.
+ * Used when germinationTime is missing from raw data.
+ */
+export const DEFAULT_GERMINATION_TIME_BY_SUBCATEGORY: Record<string, string> = {
+  // Warm-season crops (indoor-started)
+  "tomat": "5-15 dagar",
+  "gurka": "5-15 dagar",
+  "melon": "5-15 dagar",
+  "aubergin": "10-30 dagar",
+  "paprika": "20-30 dagar",
+  "chili": "20-30 dagar",
+  "physalis": "10-30 dagar",
+  "pumpa": "5-15 dagar",
+  // Cool-season crops (outdoor)
+  "ärter": "5-15 dagar",
+  "bönor": "5-15 dagar",
+  "sparris": "20-30 dagar",
+};
+
+/**
+ * Default germination temperature by subcategory.
+ * Used when germinationTemperature is missing from raw data.
+ */
+export const DEFAULT_GERMINATION_TEMPERATURE_BY_SUBCATEGORY: Record<string, string> = {
+  // Warm-season crops
+  "tomat": "22-25 grader",
+  "gurka": "ca 25 grader",
+  "melon": "ca 25 grader",
+  "aubergin": "ca 25 grader",
+  "paprika": "ca 25 grader",
+  "chili": "ca 25 grader",
+  "physalis": "ca 25 grader",
+  "pumpa": "ca 25 grader",
+  // Cool-season crops (outdoor sowing temperature)
+  "ärter": "5-10 grader",
+  "bönor": "10-15 grader",
+  "sparris": "8 grader",
+};
+
+/**
+ * Default growing temperature by subcategory.
+ * Used when growingTemperature is missing from raw data.
+ */
+export const DEFAULT_GROWING_TEMPERATURE_BY_SUBCATEGORY: Record<string, string> = {
+  // Warm-season crops
+  "tomat": "18-20 grader",
+  "gurka": "16-20 grader",
+  "melon": "20-25 grader",
+  "aubergin": "20-25 grader",
+  "paprika": "18-22 grader",
+  "chili": "18-22 grader",
+  "physalis": "18-22 grader",
+  "pumpa": "18-22 grader",
+  // Cool-season crops
+  "ärter": "18-20 grader",
+  "bönor": "15-20 grader",
+  "sparris": "15-20 grader",
+};
+
+/**
+ * Global defaults for germination fields when subcategory-specific defaults are not available.
+ * // TODO FUNDERA PÅ OM MAN SKA SKICKA MED EN VARNING TILL ANVÄNDAREN OM ATT DETTA ÄR GLOBALT OCH DET KAN VARA FEL.
+ */
+export const GLOBAL_DEFAULT_GERMINATION_TIME = "7-14 dagar";
+export const GLOBAL_DEFAULT_GERMINATION_TEMPERATURE = "20-25 grader";
+export const GLOBAL_DEFAULT_GROWING_TEMPERATURE = "18-22 grader";
+
+/**
+ * Get default movePlantOutdoor based on subcategory and frost tolerance.
+ * Returns a generic "when frost risk is over" rule for frost-sensitive plants.
+ */
+export const getDefaultMovePlantOutdoor = (
+  subcategory: string,
+  frostTolerant: boolean | null
+): MovePlantOutdoor | null => {
+  // If frost-tolerant, can be moved out earlier (typically mid-spring)
+  if (frostTolerant === true) {
+    return {
+      description: "när frosten släpper",
+      start: "april",
+      end: "maj",
+    };
+  }
+
+  // For frost-sensitive plants that are started indoors, move out after hardening
+  if (frostTolerant === false) {
+    return {
+      description: "efter avhärdning när frostrisken är över",
+      start: "maj",
+      end: "juni",
+    };
+  }
+
+  // If frost tolerance is unknown, check subcategory defaults
+  const frostTolerantDefault = DEFAULT_FROST_TOLERANT_BY_SUBCATEGORY[subcategory];
+  if (frostTolerantDefault === true) {
+    return {
+      description: "när frosten släpper",
+      start: "april",
+      end: "maj",
+    };
+  }
+
+  if (frostTolerantDefault === false) {
+    return {
+      description: "efter avhärdning när frostrisken är över",
+      start: "maj",
+      end: "juni",
+    };
+  }
+
+  // If no default can be determined, return null
+  return null;
+};
+

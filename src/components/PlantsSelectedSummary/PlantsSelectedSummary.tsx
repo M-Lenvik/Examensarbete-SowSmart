@@ -7,6 +7,8 @@ type PlantsSelectedSummaryProps = {
   selectedCount: number;
   onClear: () => void;
   onContinue: () => void;
+  onOpenDetails: (plant: Plant) => void;
+  onRemove: (plantId: number) => void;
   canContinue: boolean;
 };
 
@@ -15,6 +17,8 @@ export const PlantsSelectedSummary = ({
   selectedCount,
   onClear,
   onContinue,
+  onOpenDetails,
+  onRemove,
   canContinue,
 }: PlantsSelectedSummaryProps) => {
   return (
@@ -25,7 +29,27 @@ export const PlantsSelectedSummary = ({
         <>
           <ul className="plants-selected-summary__list">
             {selectedPlants.map((plant) => (
-              <li key={plant.id}>{plant.name}</li>
+              <li key={plant.id} className="plants-selected-summary__list-item">
+                <button
+                  type="button"
+                  className="plants-selected-summary__item"
+                  onClick={() => onOpenDetails(plant)}
+                  aria-label={`Öppna detaljer för ${plant.name}`}
+                >
+                  {plant.name}
+                </button>
+                <button
+                  type="button"
+                  className="plants-selected-summary__remove"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    onRemove(plant.id);
+                  }}
+                  aria-label={`Ta bort ${plant.name}`}
+                >
+                  ×
+                </button>
+              </li>
             ))}
           </ul>
           <Button variant="secondary" onClick={onClear}>

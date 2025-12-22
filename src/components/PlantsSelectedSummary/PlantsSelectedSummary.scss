@@ -1,3 +1,6 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/mixins" as *;
+
 .plants-selected-summary {
   display: flex;
   flex-direction: column;
@@ -7,6 +10,59 @@
 .plants-selected-summary__list {
   margin: 0;
   padding-left: 1.25rem;
+}
+
+.plants-selected-summary__list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.plants-selected-summary__item {
+  flex: 1;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  color: $accent-green;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  @include transition(color);
+
+  &:hover {
+    color: darken($accent-green, 10%);
+  }
+
+  &:focus {
+    outline: 2px solid $accent-green;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+}
+
+.plants-selected-summary__remove {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  color: #dc2626;
+  cursor: pointer;
+  @include transition(color);
+
+  &:hover {
+    color: #991b1b;
+  }
+
+  &:focus {
+    outline: 2px solid #dc2626;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
 }
 
 
