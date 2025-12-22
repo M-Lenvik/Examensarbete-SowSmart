@@ -10,6 +10,7 @@ import { PlantsSubcategoryFilter } from "../components/PlantsSubcategoryFilter/P
 import { PlanContext } from "../context/PlanContext";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
+import { sortPlantsBySubcategoryAndName } from "../helpers/sorting";
 
 export const PlantSelection = () => {
   const navigate = useNavigate();
@@ -35,7 +36,8 @@ export const PlantSelection = () => {
   const selectedPlants = useMemo(() => {
     if (state.selectedPlantIds.length === 0) return [];
     const selectedSet = new Set(state.selectedPlantIds);
-    return plants.filter((plant) => selectedSet.has(plant.id));
+    const filtered = plants.filter((plant) => selectedSet.has(plant.id));
+    return sortPlantsBySubcategoryAndName(filtered);
   }, [plants, state.selectedPlantIds]);
 
   const afterFilter = useMemo(() => {
@@ -45,13 +47,17 @@ export const PlantSelection = () => {
 
   const filteredPlants = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    if (query.length === 0) return afterFilter;
-
-    return afterFilter.filter(
-      (plant) =>
-        plant.name.toLowerCase().includes(query) ||
-        plant.subcategory.toLowerCase().includes(query)
-    );
+    let result = afterFilter;
+    
+    if (query.length > 0) {
+      result = afterFilter.filter(
+        (plant) =>
+          plant.name.toLowerCase().includes(query) ||
+          plant.subcategory.toLowerCase().includes(query)
+      );
+    }
+    
+    return sortPlantsBySubcategoryAndName(result);
   }, [afterFilter, searchQuery]);
 
   const subcategoryOptions = useMemo(() => {
