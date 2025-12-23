@@ -67,6 +67,7 @@ export type RawPlant = {
   hardeningDays?: number | null;
   plantingMethod?: PlantingMethod;
   movePlantOutdoor?: MovePlantOutdoor;
+  totalDaysFromSeed?: number | null;
 };
 
 /**
@@ -75,7 +76,7 @@ export type RawPlant = {
  */
 export type Plant = Omit<
   RawPlant,
-  "daysToHarvest" | "daysOutdoorToHarvest" | "plantingMethod" | "movePlantOutdoor" | "germinationTime" | "germinationTemperature" | "growingTemperature" | "frostTolerant"
+  "daysToHarvest" | "daysOutdoorToHarvest" | "plantingMethod" | "movePlantOutdoor" | "germinationTime" | "germinationTemperature" | "growingTemperature" | "frostTolerant" | "totalDaysFromSeed"
 > & {
   daysOutdoorToHarvest: number | null;
   daysIndoorGrowth: number | null;
@@ -86,6 +87,7 @@ export type Plant = Omit<
   germinationTemperature: string | null;
   growingTemperature: string | null;
   frostTolerant: boolean | null;
+  totalDaysFromSeed: number | null;
 
   // Keep legacy raw fields optional for traceability/debugging.
   daysToHarvest?: number | string;

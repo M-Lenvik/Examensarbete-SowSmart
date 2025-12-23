@@ -130,12 +130,42 @@ export const DEFAULT_GROWING_TEMPERATURE_BY_SUBCATEGORY: Record<string, string> 
 };
 
 /**
+ * Default days indoor growth by subcategory.
+ * Used when daysIndoorGrowth is missing from raw data.
+ * Source: odla.nu
+ * Values converted from weeks to days (1 week = 7 days):
+ * - 6-8 weeks = 49 days (average of 42-56)
+ * - 4-5 weeks = 32 days (average of 28-35)
+ * - 3-4 weeks = 25 days (average of 21-28)
+ * 
+ * TODO: Verify values for aubergine and physalis
+ */
+export const DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY: Record<string, number> = {
+  // 6-8 weeks (49 days average)
+  "aubergin": 49, // TODO: Verify value
+  "chili": 49,
+  "paprika": 49,
+  "physalis": 49, // TODO: Verify value
+  "tomat": 49,
+  // 4-5 weeks (32 days average)
+  "gurka": 32,
+  "melon": 32,
+  // 3-4 weeks (25 days average)
+  "pumpa": 25,
+};
+
+/**
  * Global defaults for germination fields when subcategory-specific defaults are not available.
  * // TODO FUNDERA PÅ OM MAN SKA SKICKA MED EN VARNING TILL ANVÄNDAREN OM ATT DETTA ÄR GLOBALT OCH DET KAN VARA FEL.
  */
 export const GLOBAL_DEFAULT_GERMINATION_TIME = "7-14 dagar";
 export const GLOBAL_DEFAULT_GERMINATION_TEMPERATURE = "20-25 grader";
 export const GLOBAL_DEFAULT_GROWING_TEMPERATURE = "18-22 grader";
+
+/**
+ * Global default for days indoor growth when subcategory-specific default is not available.
+ */
+export const GLOBAL_DEFAULT_DAYS_INDOOR_GROWTH = 40;
 
 /**
  * Get default movePlantOutdoor based on subcategory and frost tolerance.

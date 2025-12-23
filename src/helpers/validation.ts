@@ -6,12 +6,14 @@ import {
   DEFAULT_GERMINATION_TIME_BY_SUBCATEGORY,
   DEFAULT_GERMINATION_TEMPERATURE_BY_SUBCATEGORY,
   DEFAULT_GROWING_TEMPERATURE_BY_SUBCATEGORY,
+  DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY,
   GLOBAL_DEFAULT_HARDENING_DAYS,
   GLOBAL_DEFAULT_PLANTING_METHOD,
   GLOBAL_DEFAULT_FROST_TOLERANT,
   GLOBAL_DEFAULT_GERMINATION_TIME,
   GLOBAL_DEFAULT_GERMINATION_TEMPERATURE,
   GLOBAL_DEFAULT_GROWING_TEMPERATURE,
+  GLOBAL_DEFAULT_DAYS_INDOOR_GROWTH,
   getDefaultMovePlantOutdoor,
 } from "./plantDefaults";
 
@@ -100,12 +102,32 @@ export const normalizePlant = (raw: RawPlant): Plant => {
   // Calculate plantingMethod early as it's needed for other fields
   const plantingMethod = inferPlantingMethod(raw);
 
-  // daysOutdoorToHarvest: use raw value or legacy daysToHarvest, otherwise null
-  const daysOutdoorToHarvest =
-    raw.daysOutdoorToHarvest ?? toNullableNumber(raw.daysToHarvest) ?? null;
+  // totalDaysFromSeed: use raw value (now contains the actual total days from seed to harvest)
+  const totalDaysFromSeed = raw.totalDaysFromSeed ?? null;
 
-  // daysIndoorGrowth: use raw value, otherwise null (no defaults available)
-  const daysIndoorGrowth = raw.daysIndoorGrowth ?? null;
+  // daysOutdoorToHarvest: set to null (will be calculated in Milstolpe E)
+  // Formula: daysOutdoorToHarvest = totalDaysFromSeed - germinationTime - daysIndoorGrowth - hardeningDays
+  const daysOutdoorToHarvest = null;
+
+  // daysIndoorGrowth: use raw value, then subcategory default, then global default
+  let daysIndoorGrowth = raw.daysIndoorGrowth ?? null;
+  if (daysIndoorGrowth === null) {
+    const subcategoryDefault = DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY[raw.subcategory];
+    if (subcategoryDefault !== undefined) {
+      daysIndoorGrowth = subcategoryDefault;
+      console.warn(
+        `[normalizePlant] Missing daysIndoorGrowth for "${raw.name}" (${raw.subcategory}), using subcategory default: ${daysIndoorGrowth}`
+      );
+    } else {
+      // Use global default only for indoor plants
+      if (plantingMethod === "indoor" || plantingMethod === "both") {
+        daysIndoorGrowth = GLOBAL_DEFAULT_DAYS_INDOOR_GROWTH;
+        console.warn(
+          `[normalizePlant] Missing daysIndoorGrowth for "${raw.name}" (${raw.subcategory}), using global default: ${daysIndoorGrowth}`
+        );
+      }
+    }
+  }
 
   // hardeningDays: use raw value, then subcategory default, then global default
   let hardeningDays = raw.hardeningDays ?? null;
@@ -223,6 +245,7 @@ export const normalizePlant = (raw: RawPlant): Plant => {
     germinationTemperature,
     growingTemperature,
     frostTolerant,
+    totalDaysFromSeed,
   };
 };
 

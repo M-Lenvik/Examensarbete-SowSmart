@@ -91,8 +91,8 @@ export const PlantsDetailCard = ({ plant }: PlantsDetailCardProps) => {
           </>
         ) : null}
 
-        <dt>Dagar ute till skörd</dt>
-        <dd>{formatDaysOrMissing(plant.daysOutdoorToHarvest)}</dd>
+        <dt>Totalt antal dagar från sådd till skörd</dt>
+        <dd>{formatDaysOrMissing(plant.totalDaysFromSeed)}</dd>
 
         <dt>Dagar inomhus (till utplantering)</dt>
         <dd>{formatDaysOrMissing(plant.daysIndoorGrowth)}</dd>
