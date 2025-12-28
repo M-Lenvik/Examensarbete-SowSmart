@@ -9,19 +9,39 @@ import { calculateSowDate } from "./sowDate";
 import { DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY } from "./plantDefaults";
 
 /**
- * Generate planting recommendations for selected plants based on harvest date.
+ * Generate complete planting recommendations for selected plants based on harvest date.
  * 
- * Uses calculateSowDate() which calculates sow date relative to planting window
- * based on harvest date position in harvest window (seedConstant formula).
+ * This is the main orchestrator function that combines all calculation logic:
+ * - Uses calculateSowDate() for relative sow date calculation
+ * - Calculates hardening dates using daysIndoorGrowth and hardeningDays
+ * - Calculates transplant dates
+ * - Handles both indoor and outdoor planting methods
+ * - Falls back to defaults when plant-specific data is missing
  * 
- * Calculation order for indoor plants:
- * 1. indoorSowDate = calculateSowDate() (relative calculation)
- * 2. hardenStartDate = indoorSowDate + (daysIndoorGrowth - hardeningDays)
- * 3. movePlantOutdoorDate = indoorSowDate + daysIndoorGrowth
+ * **Calculation order for indoor plants:**
+ * 1. `indoorSowDate` = calculateSowDate() (relative calculation)
+ * 2. `hardenStartDate` = indoorSowDate + (daysIndoorGrowth - hardeningDays)
+ * 3. `movePlantOutdoorDate` = indoorSowDate + daysIndoorGrowth
  * 
- * @param plants - Array of selected plants
+ * **Calculation order for outdoor plants:**
+ * 1. `outdoorSowDate` = calculateSowDate() (relative calculation)
+ * 
+ * @param plants - Array of selected plants to generate recommendations for
  * @param harvestDateIso - The target harvest date in ISO format (YYYY-MM-DD)
- * @returns Array of recommendations, one per plant
+ * 
+ * @returns Array of recommendations, one per plant. Each recommendation includes:
+ *   - `plantId`: ID of the plant
+ *   - `outdoorSowDate`: Calculated outdoor sow date (ISO string) or null
+ *   - `indoorSowDate`: Calculated indoor sow date (ISO string) or null
+ *   - `hardenStartDate`: When to start hardening (ISO string) or null
+ *   - `movePlantOutdoorDate`: When to transplant outdoors (ISO string) or null
+ *   - `warnings`: Array of Swedish warning messages if data is missing
+ * 
+ * @example
+ * const plants = [tomatoPlant, cucumberPlant];
+ * const harvestDate = "2026-07-15";
+ * const recommendations = generateRecommendations(plants, harvestDate);
+ * // Returns array with complete planting schedule for each plant
  */
 export const generateRecommendations = (
   plants: Plant[],

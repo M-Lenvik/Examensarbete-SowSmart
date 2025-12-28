@@ -8,9 +8,27 @@ import { calculateTotalDaysFromSeed } from "./totalDaysFromSeed";
  * Validates a harvest date input string.
  * Also checks if the date allows enough time for totalDaysFromSeed.
  * 
+ * Performs three validation checks:
+ * 1. Date is required (not null or empty)
+ * 2. Date cannot be in the past
+ * 3. Date must allow enough time for totalDaysFromSeed
+ * 
  * @param dateString - Date string in YYYY-MM-DD format (from native date input) or null/empty
  * @param totalDaysFromSeed - Total days from seed to harvest (optional, for validation)
- * @returns Object with isValid flag, error message (if invalid), and warning (if date is too early)
+ * 
+ * @returns Object with:
+ *   - `isValid`: boolean indicating if date passes validation
+ *   - `error`: Swedish error message if invalid, otherwise null
+ *   - `warning`: Swedish warning message if date is too early (but still valid), otherwise null
+ * 
+ * @example
+ * const result = validateHarvestDate("2026-08-15", 120);
+ * if (!result.isValid) {
+ *   console.error(result.error); // "Skördedatumet kan inte vara i det förflutna"
+ * }
+ * if (result.warning) {
+ *   console.warn(result.warning); // "För att skörda 2026-08-15 skulle du behövt så på 2026-04-17"
+ * }
  */
 export const validateHarvestDate = (
   dateString: string | null,
@@ -101,14 +119,31 @@ const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
 
 /**
  * Get warning message for a single plant showing the calculated sow date.
- * Handles different scenarios:
- * 1. If harvest date is in the past: just show "Skördedatumet är i det förflutna"
+ * 
+ * Handles multiple scenarios:
+ * 1. If harvest date is in the past: show "Skördedatumet är i det förflutna"
  * 2. If harvest date is outside harvest window: show warning + recommended sow date
  * 3. If harvest date is too close (not enough time): show warning + nearest recommended sow date
+ * 4. Normal case: show "Sås på {sowDate}"
+ * 
+ * The function validates that the harvest date falls within the plant's harvest window
+ * and that there is enough time from today to complete the full growing cycle.
  * 
  * @param dateString - Date string in YYYY-MM-DD format
- * @param plant - Plant to validate
- * @returns Warning message, or null if sow date cannot be calculated
+ * @param plant - Plant object to validate against
+ * 
+ * @returns Swedish warning message string, or null if:
+ *   - dateString is null/empty
+ *   - plant.harvestTime is null (no harvest window data)
+ *   - Sow date cannot be calculated
+ * 
+ * @example
+ * const warning = getPlantWarning("2026-12-15", tomatoPlant);
+ * // Returns: "Valt datum är efter skördefönstret. Rekommenderat sådatum: 2026-08-20"
+ * 
+ * @example
+ * const warning = getPlantWarning("2026-07-15", tomatoPlant);
+ * // Returns: "Sås på 2026-03-22" (normal case)
  */
 export const getPlantWarning = (
   dateString: string | null,

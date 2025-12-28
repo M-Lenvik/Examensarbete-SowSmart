@@ -7,22 +7,29 @@ import { addDays } from "./date";
 /**
  * Calculate the number of days a plant will be outdoors before harvest date.
  * 
- * Formula:
- * - moveOutdoorDate = sowDate + daysIndoorGrowth + hardeningDays
- * - daysOutdoorToHarvest = harvestDate - moveOutdoorDate
+ * Used for indoor plants that are transplanted outdoors. The function first
+ * calculates when the plant is moved outdoors, then counts days until harvest.
  * 
- * @param sowDate - The calculated sow date
+ * **Formulas:**
+ * - `moveOutdoorDate` = sowDate + daysIndoorGrowth + hardeningDays
+ * - `daysOutdoorToHarvest` = harvestDate - moveOutdoorDate
+ * 
+ * @param sowDate - The calculated sow date (from calculateSowDate)
  * @param harvestDate - The selected harvest date
  * @param daysIndoorGrowth - Number of days the plant grows indoors (or null)
- * @param hardeningDays - Number of days for hardening (or null)
- * @returns Number of days the plant will be outdoors before harvest, or null if calculation cannot be done
+ * @param hardeningDays - Number of days for hardening process (or null)
+ * 
+ * @returns Number of days the plant will be outdoors before harvest, or null if:
+ *   - daysIndoorGrowth is null (required for calculation)
+ *   - Result is negative (harvest date is before transplant date - should not happen)
  * 
  * @example
- * // Plant sown on 24 feb, harvest on 1 aug
+ * // Plant sown on Feb 24, harvest on Aug 1
  * // daysIndoorGrowth = 60, hardeningDays = 7
- * // moveOutdoorDate = 24 feb + 60 + 7 = 2 maj
- * // daysOutdoorToHarvest = 1 aug - 2 maj = 91 days
- * calculateDaysOutdoorToHarvest(sowDate, harvestDate, 60, 7)
+ * // moveOutdoorDate = Feb 24 + 60 + 7 = May 2
+ * // daysOutdoorToHarvest = Aug 1 - May 2 = 91 days
+ * const days = calculateDaysOutdoorToHarvest(sowDate, harvestDate, 60, 7);
+ * // Returns: 91
  */
 export const calculateDaysOutdoorToHarvest = (
   sowDate: Date,

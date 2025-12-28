@@ -5,8 +5,8 @@
 /**
  * Add days to a date.
  * 
- * Exempel: Om vi har datumet 2024-05-15 och lägger till 10 dagar,
- * får vi 2024-05-25.
+ * Exempel: Om vi har datumet 2026-05-15 och lägger till 10 dagar,
+ * får vi 2026-05-25.
  * 
  * Hur det fungerar:
  * 1. Skapar en kopia av datumet (så vi inte ändrar originalet)
@@ -26,8 +26,8 @@ export const addDays = (date: Date, days: number): Date => {
 /**
  * Subtract days from a date.
  * 
- * Exempel: Om vi har datumet 2024-05-25 och subtraherar 10 dagar,
- * får vi 2024-05-15.
+ * Exempel: Om vi har datumet 2026-05-25 och subtraherar 10 dagar,
+ * får vi 2026-05-15.
  * 
  * Hur det fungerar:
  * Använder addDays() med negativt värde (lägg till -10 = subtrahera 10).
@@ -43,10 +43,10 @@ export const subtractDays = (date: Date, days: number): Date => {
 /**
  * Format a date to ISO string (YYYY-MM-DD format).
  * 
- * Exempel: Date objektet för 2024-05-15 blir strängen "2024-05-15".
+ * Exempel: Date objektet för 2026-05-15 blir strängen "2026-05-15".
  * 
  * Hur det fungerar:
- * 1. getFullYear() ger året (2024)
+ * 1. getFullYear() ger året (2026)
  * 2. getMonth() ger 0-11 (maj = 4), så vi lägger till 1
  * 3. padStart(2, "0") säkerställer två siffror (5 → "05")
  * 4. getDate() ger dagen (15)
@@ -64,7 +64,7 @@ export const formatDateIso = (date: Date): string => {
 /**
  * Parse an ISO date string (YYYY-MM-DD) to a Date object.
  * 
- * Exempel: Strängen "2024-05-15" blir ett Date objekt för den 15:e maj 2024.
+ * Exempel: Strängen "2026-05-15" blir ett Date objekt för den 15:e maj 2026.
  * 
  * Hur det fungerar:
  * 1. new Date(iso) kan parsa ISO-format direkt

@@ -9,9 +9,13 @@ import { getMonthSpan } from "./monthSpan";
 /**
  * Get the first day of a month in a given year.
  * 
- * @param monthName - Month name (e.g., "feb", "april")
- * @param year - Year (e.g., 2024)
- * @returns Date object for the first day of the month, or null if month name is invalid
+ * @param monthName - Swedish month name (e.g., "feb", "april", "juni")
+ * @param year - Year as number (e.g., 2026)
+ * @returns Date object for the first day of the month, or null if monthName is invalid
+ * 
+ * @example
+ * const firstDay = getFirstDayOfMonth("mars", 2026);
+ * // Returns: Date object for March 1, 2026
  */
 const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
   const monthOrderMap: Record<string, number> = {
@@ -40,20 +44,47 @@ const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
 };
 
 /**
- * Calculate sow date based on harvest date, planting windows, and harvest time.
+ * Calculate the optimal sow date based on desired harvest date.
  * 
- * Formula:
- * - plantingWindowsSpan = days from first day in first month to last day in last month of plantingWindows
- * - harvestTimeSpan = days from first day in first month to last day in last month of harvestTime
- * - seedConstant = harvestTimeSpan / plantingWindowsSpan
- * - harvestDaySpan = days from first day in harvestTime to harvestDate
- * - sowDateOffset = harvestDaySpan / seedConstant
- * - sowDate = first day in plantingWindows + sowDateOffset
+ * Uses proportional distribution of the planting window based on where
+ * the harvest date falls within the harvest window. Prioritizes indoor
+ * sowing if available, otherwise uses outdoor sowing.
  * 
- * @param harvestDate - The selected harvest date
- * @param plantingWindows - Planting windows (indoors/outdoors)
- * @param harvestTime - Harvest time window, or null if missing
- * @returns Calculated sow date, or null if data is missing or invalid
+ * **Calculation formulas:**
+ * 1. `plantingWindowsSpan` = days from first to last month in planting window
+ * 2. `harvestTimeSpan` = days from first to last month in harvest window
+ * 3. `seedConstant` = harvestTimeSpan / plantingWindowsSpan (proportional factor)
+ * 4. `harvestDaySpan` = days from start of harvest window to selected harvest date
+ * 5. `sowDateOffset` = harvestDaySpan / seedConstant
+ * 6. `sowDate` = first day in planting window + sowDateOffset
+ * 
+ * **Edge cases:**
+ * - If harvest date is before harvest window: returns first day of planting window
+ * - If harvest date is after harvest window: returns last day of planting window
+ * - If plantingWindowsSpan is 0: returns null (to avoid division by zero)
+ * 
+ * @param harvestDate - The date the user wants to harvest
+ * @param plantingWindows - Object with planting windows for indoor and outdoor sowing
+ * @param harvestTime - Harvest window from Impecta catalog, or null if data is missing
+ * 
+ * @returns The calculated sow date, or null if:
+ *   - harvestTime is missing or null
+ *   - No valid planting windows exist (both indoors and outdoors empty)
+ *   - harvestTime.start or harvestTime.end are empty strings
+ *   - plantingWindowsSpan is 0
+ *   - Invalid month in any of the strings
+ * 
+ * @example
+ * // Calculate sow date for tomatoes
+ * const harvestDate = new Date(2026, 6, 15); // July 15, 2026
+ * const plantingWindows = {
+ *   indoors: { start: "mars", end: "april" },
+ *   outdoors: { start: "", end: "" }
+ * };
+ * const harvestTime = { start: "juli", end: "sept" };
+ * 
+ * const sowDate = calculateSowDate(harvestDate, plantingWindows, harvestTime);
+ * // Returns a date in March-April based on proportional distribution
  */
 export const calculateSowDate = (
   harvestDate: Date,
