@@ -2,7 +2,7 @@
  * Helper functions for calculating days outdoor to harvest.
  */
 
-import { addDays } from "./date";
+import { addDays } from "../date/date";
 
 /**
  * Calculate the number of days a plant will be outdoors before harvest date.

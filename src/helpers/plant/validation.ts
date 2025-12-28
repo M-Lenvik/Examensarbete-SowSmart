@@ -1,4 +1,4 @@
-import type { Plant, PlantingMethod, RawPlant } from "../models/Plant";
+import type { Plant, PlantingMethod, RawPlant } from "../../models/Plant";
 import {
   DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY,
   DEFAULT_PLANTING_METHOD_BY_SUBCATEGORY,
@@ -9,7 +9,7 @@ import {
   DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY,
   getDefaultMovePlantOutdoor,
 } from "./plantDefaults";
-import { calculateTotalDaysFromSeed } from "./totalDaysFromSeed";
+import { calculateTotalDaysFromSeed } from "../calculation/totalDaysFromSeed";
 
 /**
  * Parse a value into a nullable number.

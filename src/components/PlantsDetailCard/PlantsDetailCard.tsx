@@ -1,5 +1,5 @@
 import type { Plant } from "../../models/Plant";
-import { FALLBACK_PLANT_IMAGE_SRC, handleImageError } from "../../helpers/image";
+import { FALLBACK_PLANT_IMAGE_SRC, handleImageError } from "../../helpers/utils/image";
 import "./PlantsDetailCard.scss";
 
 type PlantsDetailCardProps = {

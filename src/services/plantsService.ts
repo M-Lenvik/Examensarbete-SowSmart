@@ -1,5 +1,5 @@
 import plantsJsonRaw from "../data/plants.json?raw";
-import { normalizePlant } from "../helpers/validation";
+import { normalizePlant } from "../helpers/plant/validation";
 import type { Plant, RawPlant } from "../models/Plant";
 import type { PlantsFile } from "../models/PlantsFile";
 

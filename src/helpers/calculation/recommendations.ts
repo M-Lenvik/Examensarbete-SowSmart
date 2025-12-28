@@ -2,11 +2,11 @@
  * Helper functions for generating planting recommendations.
  */
 
-import type { Plant } from "../models/Plant";
-import type { Recommendation } from "../reducers/planReducer";
-import { formatDateIso, parseDateIso, addDays } from "./date";
+import type { Plant } from "../../models/Plant";
+import type { Recommendation } from "../../reducers/planReducer";
+import { formatDateIso, parseDateIso, addDays } from "../date/date";
 import { calculateSowDate } from "./sowDate";
-import { DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY } from "./plantDefaults";
+import { DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY } from "../plant/plantDefaults";
 
 /**
  * Generate complete planting recommendations for selected plants based on harvest date.

@@ -2,8 +2,8 @@
  * Helper functions for calculating totalDaysFromSeed.
  */
 
-import type { HarvestTime, PlantingWindows } from "../models/Plant";
-import { getMonthSpan } from "./monthSpan";
+import type { HarvestTime, PlantingWindows } from "../../models/Plant";
+import { getMonthSpan } from "../date/monthSpan";
 
 /**
  * Calculate totalDaysFromSeed from plantingWindows and harvestTime.

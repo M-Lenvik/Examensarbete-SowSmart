@@ -10,7 +10,7 @@ import { PlantsSubcategoryFilter } from "../components/PlantsSubcategoryFilter/P
 import { PlanContext } from "../context/PlanContext";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
-import { sortPlantsBySubcategoryAndName } from "../helpers/sorting";
+import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
 
 export const PlantSelection = () => {
   const navigate = useNavigate();

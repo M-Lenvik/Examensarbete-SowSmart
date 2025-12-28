@@ -7,8 +7,8 @@ import { PlannerDateInput } from "../components/PlannerDateInput/PlannerDateInpu
 import { PlannerSelectedPlants } from "../components/PlannerSelectedPlants/PlannerSelectedPlants";
 import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailModal";
 import { PlanContext } from "../context/PlanContext";
-import { getPlantWarning, validateHarvestDate } from "../helpers/dateValidation";
-import { generateRecommendations } from "../helpers/recommendations";
+import { getPlantWarning, validateHarvestDate } from "../helpers/date/dateValidation";
+import { generateRecommendations } from "../helpers/calculation/recommendations";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
 
