@@ -13,12 +13,11 @@ export const DEFAULT_PLANTING_METHOD_BY_SUBCATEGORY: Record<string, PlantingMeth
   "paprika": "indoor",
   "chili": "indoor",
   "physalis": "indoor",
+  "pumpa": "indoor",
   // Frost-tolerant, typically direct-sown outdoors
   "ärter": "outdoor",
   "bönor": "outdoor",
   "sparris": "outdoor",
-  // Can be both
-  "pumpa": "outdoor",
 };
 
 /**
@@ -62,12 +61,6 @@ export const DEFAULT_FROST_TOLERANT_BY_SUBCATEGORY: Record<string, boolean> = {
   "pumpa": false,
 };
 
-/**
- * Global defaults when subcategory-specific defaults are not available.
- */
-export const GLOBAL_DEFAULT_HARDENING_DAYS = 7;
-export const GLOBAL_DEFAULT_PLANTING_METHOD: PlantingMethod = "outdoor";
-export const GLOBAL_DEFAULT_FROST_TOLERANT = false;
 
 /**
  * Default germination time by subcategory.
@@ -154,18 +147,6 @@ export const DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY: Record<string, number> =
   "pumpa": 25,
 };
 
-/**
- * Global defaults for germination fields when subcategory-specific defaults are not available.
- * // TODO FUNDERA PÅ OM MAN SKA SKICKA MED EN VARNING TILL ANVÄNDAREN OM ATT DETTA ÄR GLOBALT OCH DET KAN VARA FEL.
- */
-export const GLOBAL_DEFAULT_GERMINATION_TIME = "7-14 dagar";
-export const GLOBAL_DEFAULT_GERMINATION_TEMPERATURE = "20-25 grader";
-export const GLOBAL_DEFAULT_GROWING_TEMPERATURE = "18-22 grader";
-
-/**
- * Global default for days indoor growth when subcategory-specific default is not available.
- */
-export const GLOBAL_DEFAULT_DAYS_INDOOR_GROWTH = 40;
 
 /**
  * Get default movePlantOutdoor based on subcategory and frost tolerance.

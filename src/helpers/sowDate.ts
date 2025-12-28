@@ -1,0 +1,158 @@
+/**
+ * Helper functions for calculating sow date.
+ */
+
+import { addDays } from "./date";
+import type { HarvestTime, PlantingWindows } from "../models/Plant";
+import { getMonthSpan } from "./monthSpan";
+
+/**
+ * Get the first day of a month in a given year.
+ * 
+ * @param monthName - Month name (e.g., "feb", "april")
+ * @param year - Year (e.g., 2024)
+ * @returns Date object for the first day of the month, or null if month name is invalid
+ */
+const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
+  const monthOrderMap: Record<string, number> = {
+    "jan": 0, // JavaScript months are 0-indexed
+    "feb": 1,
+    "mars": 2,
+    "april": 3,
+    "maj": 4,
+    "juni": 5,
+    "juli": 6,
+    "aug": 7,
+    "sept": 8,
+    "okt": 9,
+    "nov": 10,
+    "dec": 11,
+  };
+
+  const normalized = monthName.toLowerCase().trim();
+  const monthIndex = monthOrderMap[normalized];
+
+  if (monthIndex === undefined) {
+    return null;
+  }
+
+  return new Date(year, monthIndex, 1);
+};
+
+/**
+ * Calculate sow date based on harvest date, planting windows, and harvest time.
+ * 
+ * Formula:
+ * - plantingWindowsSpan = days from first day in first month to last day in last month of plantingWindows
+ * - harvestTimeSpan = days from first day in first month to last day in last month of harvestTime
+ * - seedConstant = harvestTimeSpan / plantingWindowsSpan
+ * - harvestDaySpan = days from first day in harvestTime to harvestDate
+ * - sowDateOffset = harvestDaySpan / seedConstant
+ * - sowDate = first day in plantingWindows + sowDateOffset
+ * 
+ * @param harvestDate - The selected harvest date
+ * @param plantingWindows - Planting windows (indoors/outdoors)
+ * @param harvestTime - Harvest time window, or null if missing
+ * @returns Calculated sow date, or null if data is missing or invalid
+ */
+export const calculateSowDate = (
+  harvestDate: Date,
+  plantingWindows: PlantingWindows,
+  harvestTime: HarvestTime | null
+): Date | null => {
+  // Check if harvestTime is missing
+  if (!harvestTime) {
+    return null;
+  }
+
+  // Determine which planting window to use (indoors or outdoors)
+  let plantingStart: string | null = null;
+  let plantingEnd: string | null = null;
+
+  // Check indoors first
+  if (
+    plantingWindows.indoors.start &&
+    plantingWindows.indoors.end &&
+    plantingWindows.indoors.start.trim() !== "" &&
+    plantingWindows.indoors.end.trim() !== ""
+  ) {
+    plantingStart = plantingWindows.indoors.start;
+    plantingEnd = plantingWindows.indoors.end;
+  } else if (
+    plantingWindows.outdoors.start &&
+    plantingWindows.outdoors.end &&
+    plantingWindows.outdoors.start.trim() !== "" &&
+    plantingWindows.outdoors.end.trim() !== ""
+  ) {
+    plantingStart = plantingWindows.outdoors.start;
+    plantingEnd = plantingWindows.outdoors.end;
+  }
+
+  // If no valid planting window found, return null
+  if (!plantingStart || !plantingEnd) {
+    return null;
+  }
+
+  // Check if harvestTime has valid data
+  if (
+    !harvestTime.start ||
+    !harvestTime.end ||
+    harvestTime.start.trim() === "" ||
+    harvestTime.end.trim() === ""
+  ) {
+    return null;
+  }
+
+  // Calculate plantingWindowsSpan (from first day in plantingStart to last day in plantingEnd)
+  const plantingWindowsSpan = getMonthSpan(plantingStart, plantingEnd);
+  if (plantingWindowsSpan === null) {
+    return null;
+  }
+
+  // Calculate harvestTimeSpan (from first day in harvestTime.start to last day in harvestTime.end)
+  const harvestTimeSpan = getMonthSpan(harvestTime.start, harvestTime.end);
+  if (harvestTimeSpan === null) {
+    return null;
+  }
+
+  // Calculate seedConstant
+  if (plantingWindowsSpan === 0) {
+    return null; // Avoid division by zero
+  }
+  const seedConstant = harvestTimeSpan / plantingWindowsSpan;
+
+  // Get the year from harvestDate (we'll use this year for all date calculations)
+  const year = harvestDate.getFullYear();
+
+  // Get first day of harvestTime.start
+  const firstDayOfHarvestTime = getFirstDayOfMonth(harvestTime.start, year);
+  if (!firstDayOfHarvestTime) {
+    return null;
+  }
+
+  // Calculate harvestDaySpan: days from first day in harvestTime to harvestDate
+  const harvestDaySpan = Math.floor(
+    (harvestDate.getTime() - firstDayOfHarvestTime.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
+  // Handle dates outside harvest window:
+  // - If before harvestTime.start: use 0 (will give first day of planting window)
+  // - If after harvestTime.end: use harvestTimeSpan (will give last day of planting window)
+  // We still calculate sowDate, but getPlantWarning will show a warning
+  const clampedHarvestDaySpan = Math.max(0, Math.min(harvestDaySpan, harvestTimeSpan));
+
+  // Calculate sowDateOffset using clamped value
+  const sowDateOffset = clampedHarvestDaySpan / seedConstant;
+
+  // Get first day of plantingStart
+  const firstDayOfPlanting = getFirstDayOfMonth(plantingStart, year);
+  if (!firstDayOfPlanting) {
+    return null;
+  }
+
+  // Calculate sowDate: first day in plantingWindows + sowDateOffset
+  const sowDate = addDays(firstDayOfPlanting, Math.round(sowDateOffset));
+
+  return sowDate;
+};
+

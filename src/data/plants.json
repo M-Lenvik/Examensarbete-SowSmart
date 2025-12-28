@@ -55,7 +55,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
@@ -67,7 +66,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus el. på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 2,
@@ -117,11 +117,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -129,7 +128,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 3,
@@ -179,11 +179,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -191,7 +190,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 4,
@@ -242,11 +242,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -254,7 +253,8 @@
       "frostTolerant": null,
       "careInstructions": "Förkultiveras inomhus. Fyll krukorna med 2/3 planteringsjord och 1/3 såjord ovanpå. Håll sådden vid 22-25 gr, efter groning 18-20 gr, så ljust som möjligt. Utplanteras efter avhärdning i växthus el. varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus el. varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 5,
@@ -306,11 +306,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -318,7 +317,8 @@
       "frostTolerant": null,
       "careInstructions": "Förkultiveras inne i krukor februari-april. Fyll krukorna med 2/3 planteringsjord och 1/3 såjord ovanpå. Håll sådden vid 22-25 gr, efter groning 18-20 gr och så ljust som möjligt. Utplanteras efter avhärdning i växthus el. på varmt frilandsläge när frostrisken är över. Stödjes vid behov. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus el. på varmt frilandsläge när frostrisken är över. Stödjes vid behov. Behöver ej.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 6,
@@ -367,11 +367,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -379,7 +378,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 7,
@@ -428,11 +428,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -440,7 +439,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 8,
@@ -490,11 +490,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -502,7 +501,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 9,
@@ -553,7 +553,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
@@ -565,7 +564,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 10,
@@ -615,11 +615,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -627,7 +626,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 11,
@@ -674,11 +674,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -686,7 +685,8 @@
       "frostTolerant": null,
       "careInstructions": "Förkultiveras inne feb-april. Fyll krukorna m. 2/3 planteringsjord och 1/3 såjord ovanpå. Håll sådden vid 22-25 gr, efter groning 18-20 gr, så ljust som möjligt. Utplanteras i växthus el. varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras i växthus el. varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 12,
@@ -737,11 +737,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -749,7 +748,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 13,
@@ -799,11 +799,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -811,7 +810,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 14,
@@ -862,7 +862,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
@@ -874,7 +873,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus el. på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 15,
@@ -924,11 +924,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -936,7 +935,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 16,
@@ -986,11 +986,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -998,7 +997,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 17,
@@ -1048,11 +1048,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -1060,7 +1059,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 18,
@@ -1111,11 +1111,10 @@
         "start": "aug",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "18-20 gr",
@@ -1123,7 +1122,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas måttligt.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 19,
@@ -1174,11 +1174,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -1186,7 +1185,8 @@
       "frostTolerant": null,
       "careInstructions": "Tjyvas inte.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus el. på varm, solig plats i lådor el. amplar när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 20,
@@ -1236,11 +1236,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -1248,7 +1247,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 21,
@@ -1300,11 +1300,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -1312,7 +1311,8 @@
       "frostTolerant": null,
       "careInstructions": "Förkultiveras inomhus i krukor februari-april. Fyll krukorna med 2/3 planteringsjord och 1/3 såjord ovanpå. Håll sådden vid 22-25 gr, efter groning 18-20 gr, så ljust som möjligt. Utplanteras efter avhärdning i växthus eller varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 22,
@@ -1363,11 +1363,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -1375,7 +1374,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 23,
@@ -1425,11 +1425,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -1437,7 +1436,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus el. varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 24,
@@ -1487,11 +1487,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -1499,7 +1498,8 @@
       "frostTolerant": null,
       "careInstructions": "Förkultiveras inomhus i krukor februari-april. Fyll krukorna med 2/3 planteringsjord och 1/3 såjord ovanpå. Håll sådden vid 22-25 gr, efter groning 18-20 gr, så ljust som möjligt. Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 25,
@@ -1551,11 +1551,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -1563,7 +1562,8 @@
       "frostTolerant": null,
       "careInstructions": "Förkultiveras inne i krukor feb-april. Fyll krukorna med 2/3 planteringsjord och 1/3 såjord ovanpå. Håll sådden vid 22-25 gr, efter groning 18-20 gr och så ljust som möjligt. Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 26,
@@ -1613,11 +1613,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -1625,7 +1624,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 27,
@@ -1671,11 +1671,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -1683,7 +1682,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras i växthus el. på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 28,
@@ -1733,7 +1733,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
@@ -1745,7 +1744,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 29,
@@ -1795,11 +1795,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -1807,7 +1806,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 30,
@@ -1857,11 +1857,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -1869,7 +1868,8 @@
       "frostTolerant": null,
       "careInstructions": "Förkultiveras inomhus i krukor februari-april. Fyll krukorna med 2/3 planteringsjord och 1/3 såjord ovanpå. Håll sådden vid 22-25 grader, efter groning 18-20 grader, så ljust som möjligt. Utplanteras efter avhärdning i växthus eller varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 31,
@@ -1919,11 +1919,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -1931,7 +1930,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 32,
@@ -1982,11 +1982,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -1994,7 +1993,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 33,
@@ -2044,11 +2044,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2056,7 +2055,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 34,
@@ -2107,11 +2107,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -2119,7 +2118,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 35,
@@ -2169,7 +2169,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
@@ -2181,7 +2180,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 36,
@@ -2232,11 +2232,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2244,7 +2243,8 @@
       "frostTolerant": null,
       "careInstructions": "Förkultiveras inomhus i krukor feb-april. Fyll krukorna med 2/3 planteringsjord och 1/3 såjord ovanpå. Håll sådden vid 22-25 gr, efter groning 18-20 gr, så ljust som möjligt. Utplanteras efter avhärdning i växthus eller varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 37,
@@ -2293,11 +2293,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2305,7 +2304,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 38,
@@ -2355,11 +2355,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2367,7 +2366,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 39,
@@ -2417,11 +2417,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-20 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2429,7 +2428,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas inte.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 40,
@@ -2479,11 +2479,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -2491,7 +2490,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 41,
@@ -2541,11 +2541,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -2553,7 +2552,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 42,
@@ -2602,11 +2602,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -2614,7 +2613,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 43,
@@ -2664,11 +2664,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-20 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2676,7 +2675,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas inte.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 44,
@@ -2726,11 +2726,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2738,7 +2737,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 45,
@@ -2790,11 +2790,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 45,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 45,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2802,7 +2801,8 @@
       "frostTolerant": null,
       "careInstructions": "Tjyvas inte.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus el. varmt uteläge i lådor eller amplar när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 46,
@@ -2853,11 +2853,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2865,7 +2864,8 @@
       "frostTolerant": null,
       "careInstructions": "Förkultiveras inomhus i krukor feb-april. Fyll krukorna med 2/3 planteringsjord och 1/3 såjord ovanpå. Håll sådden vid 22-25 gr, efter groning 18-20 gr, så ljust som möjligt. Utplanteras efter avhärdning i växthus el. varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus el. varmt frilandsläge när frostrisken är över. Busktomat. Stödjes vid behov. Behöver ej.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 47,
@@ -2915,11 +2915,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2927,7 +2926,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 48,
@@ -2972,11 +2972,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -2984,7 +2983,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 49,
@@ -3035,7 +3035,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
@@ -3047,7 +3046,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus el. på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 50,
@@ -3097,7 +3097,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
@@ -3109,7 +3108,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 51,
@@ -3160,11 +3160,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -3172,7 +3171,8 @@
       "frostTolerant": null,
       "careInstructions": "Tjyvas inte.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge i lådor eller amplar när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 52,
@@ -3221,11 +3221,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": "18-20 gr",
@@ -3233,7 +3232,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 53,
@@ -3285,11 +3285,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -3297,7 +3296,8 @@
       "frostTolerant": null,
       "careInstructions": "Tjyvas inte.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge i lådor eller amplar när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 54,
@@ -3347,11 +3347,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -3359,7 +3358,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 55,
@@ -3411,7 +3411,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
@@ -3423,7 +3422,8 @@
       "frostTolerant": null,
       "careInstructions": "Förkultiveras inne i krukor februari-april. Fyll krukorna med 2/3 planteringsjord och 1/3 såjord ovanpå. Håll sådden vid 22-25 gr, efter groning 18-20 gr och så ljust som möjligt. Utplanteras efter avhärdning i växthus el. på varmt frilandsläge när frostrisken är över. Stödjes vid behov. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus el. på varmt frilandsläge när frostrisken är över. Stödjes vid behov. Behöver ej.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 56,
@@ -3472,11 +3472,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -3484,7 +3483,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 57,
@@ -3535,11 +3535,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -3547,7 +3546,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 58,
@@ -3597,11 +3597,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -3609,7 +3608,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 59,
@@ -3661,11 +3661,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -3673,7 +3672,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 60,
@@ -3720,11 +3720,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -3732,7 +3731,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 61,
@@ -3782,11 +3782,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -3794,7 +3793,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 62,
@@ -3844,11 +3844,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 50,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 50,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -3856,7 +3855,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 63,
@@ -3906,11 +3906,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -3918,7 +3917,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 64,
@@ -3968,11 +3968,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -3980,7 +3979,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 65,
@@ -4033,11 +4033,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -4045,7 +4044,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 66,
@@ -4095,11 +4095,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "18-20 gr",
@@ -4107,7 +4106,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 67,
@@ -4156,11 +4156,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -4168,7 +4167,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 68,
@@ -4218,11 +4218,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -4230,7 +4229,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 69,
@@ -4280,11 +4280,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -4292,7 +4291,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 70,
@@ -4341,11 +4341,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -4353,7 +4352,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 71,
@@ -4403,11 +4403,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "18-20 gr",
@@ -4415,7 +4414,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 72,
@@ -4465,11 +4465,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -4477,7 +4476,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 73,
@@ -4527,11 +4527,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -4539,7 +4538,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller varmt uteläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 74,
@@ -4589,11 +4589,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -4601,7 +4600,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Busktomat. Behöver ej tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 75,
@@ -4652,7 +4652,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
@@ -4664,7 +4663,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 76,
@@ -4713,11 +4713,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -4725,7 +4724,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Kan bli mycket hög, toppas ej innan ett antal klasar bildats. Sidoskotten tjyvas.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 77,
@@ -4774,11 +4774,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 50,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 50,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 gr",
@@ -4786,7 +4785,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 78,
@@ -4833,11 +4833,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": "ca 20 grader",
@@ -4845,7 +4844,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes eller markodlas. Blommorna handpollineras med pensel. Mogna frukter doftar melon och stjälken spricker vid fruktfästet.",
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 79,
@@ -4891,11 +4891,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 45,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 45,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 gr",
@@ -4903,7 +4902,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 80,
@@ -4950,11 +4950,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": "16-20 gr",
@@ -4962,7 +4961,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 81,
@@ -5008,11 +5008,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 gr",
@@ -5020,7 +5019,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 82,
@@ -5070,11 +5070,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 grader",
@@ -5082,7 +5081,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas i kärl eller större krukor på varmt uteläge eller växthus. Skörda efterhand.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 83,
@@ -5128,11 +5128,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 85,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 85,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": "ca 20 gr",
@@ -5140,7 +5139,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes eller markodlas. Blommorna handpollineras med pensel. Mogna frukter doftar melon och stjälken spricker vid fruktfästet.",
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 84,
@@ -5190,11 +5190,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 grader",
@@ -5202,7 +5201,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt utomhusläge eller i växthus. Skördas efterhand.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Ta bort tillväxtpunkten efter 5-7 blad och bind upp sidoskotten.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 85,
@@ -5248,11 +5248,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 35,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 35,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 grader",
@@ -5260,7 +5259,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 86,
@@ -5306,11 +5306,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 100,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 100,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": "ca 20 gr",
@@ -5318,7 +5317,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 87,
@@ -5363,11 +5363,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 85,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 85,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": "ca 20 gr",
@@ -5375,7 +5374,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes eller markodlas. Blommorna handpollineras med pensel. Mogna frukter doftar melon och stjälken spricker vid fruktfästet.",
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 88,
@@ -5423,11 +5423,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": "ca 20 grader",
@@ -5435,7 +5434,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 89,
@@ -5479,11 +5479,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": "ca 20 gr",
@@ -5491,7 +5490,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 90,
@@ -5539,11 +5539,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 grader",
@@ -5551,7 +5550,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge eller i växthus. Skördas efterhand.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Kan även sås direkt på friland när jorden blivit uppvärmd till ca 15 grader. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 91,
@@ -5599,11 +5599,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 grader",
@@ -5611,7 +5610,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt utomhusläge eller i växthus. Skördas efterhand.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Ta bort tillväxtpunkten efter 5-7 blad och bind upp sidoskotten.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 92,
@@ -5660,11 +5660,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 gr",
@@ -5672,7 +5671,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt utomhusläge eller växthus. Skördas när frukterna börjar övergå i gult.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 93,
@@ -5719,11 +5719,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": "ca 20 gr",
@@ -5731,7 +5730,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes el. markodlas. Blommorna handpollineras med pensel. Mogna frukter doftar melon och stjälken spricker vid fruktfästet.",
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 94,
@@ -5782,11 +5782,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": null,
@@ -5794,7 +5793,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt utomhusläge eller växthus. Skördas efterhand.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Ta bort tillväxtpunkten efter 5-7 blad och bind upp sidoskotten.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 95,
@@ -5841,11 +5841,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 100,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 100,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": "ca 20 gr",
@@ -5853,7 +5852,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 96,
@@ -5899,11 +5899,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 105,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 105,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": "ca 20 grader",
@@ -5911,7 +5910,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes eller markodlas. Blommorna handpollineras med pensel. Mogna frukter doftar melon och stjälken spricker vid fruktfästet.",
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 97,
@@ -5956,11 +5956,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 85,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 85,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": "ca 20 gr",
@@ -5968,7 +5967,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes eller markodlas i bänk el. växthus. Blommorna handpollineras. Mogna frukter doftar melon och stjälken spricker vid fruktfästet.",
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 98,
@@ -6018,11 +6018,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 grader",
@@ -6030,7 +6029,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Kan även sås direkt på friland när jorden blivit uppvärmd till minst 15 grader. Vattna jorden före sådd och håll fuktigt under grotiden. Täck gärna med fiberduk. Varmt uteläge eller växthus. Skördas efterhand.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 99,
@@ -6077,11 +6077,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": "ca 20 grader",
@@ -6089,7 +6088,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes eller markodlas. Blommorna handpollineras med pensel. Mogna frukter doftar melon och stjälken spricker vid fruktfästet.",
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 100,
@@ -6138,11 +6138,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -6150,7 +6149,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Kan även sås direkt på friland när jorden blivit uppvärmd till minst 15 grader. Ta bort tillväxtpunkten efter 5-7 blad och bind upp sidoskotten. Varmt uteläge eller växthus. Skördas efterhand.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 101,
@@ -6202,11 +6202,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 95,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 95,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -6214,7 +6213,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt utomhusläge eller växthus. Skördas efterhand.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Ta bort tillväxtpunkten efter 5-7 blad och bind upp sidoskotten.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 102,
@@ -6260,11 +6260,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 120,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 120,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -6272,7 +6271,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Blommorna handpollineras med pensel. Frukterna skördas gröna, knappt 1 dm långa.",
       "transplantingInstructions": "Utplanteras när frostrisken är över i växthus eller varmt utomhusläge.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 103,
@@ -6318,11 +6318,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": "ca 16-20 gr",
@@ -6330,7 +6329,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 104,
@@ -6380,11 +6380,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -6392,7 +6391,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Nyp av sidoskotten för att begränsa tillväxten. Växthus eller varmt uteläge.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 105,
@@ -6439,11 +6439,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": "ca 16-20 gr",
@@ -6451,7 +6450,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 106,
@@ -6497,11 +6497,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 120,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 120,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": "16-20 grader",
@@ -6509,7 +6508,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes mot spaljé eller liknande.",
       "transplantingInstructions": "Utplanteras i växthus eller på varmt utomhusläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 107,
@@ -6560,11 +6560,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -6572,7 +6571,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Kan även sås direkt på friland när jorden blivit uppvärmd till ca 15 grader. Täck gärna med fiberduk. Varmt uteläge eller växthus. Skördas efterhand.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 108,
@@ -6622,11 +6622,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 50,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 50,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 grader",
@@ -6634,7 +6633,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Kan även sås direkt på friland när jorden blivit uppvärmd till minst 15 grader. Vattna jorden före sådd och håll fuktigt under grotiden. Varmt uteläge eller växthus. Skördas efterhand.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 109,
@@ -6682,11 +6682,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": "16-20 grader",
@@ -6694,7 +6693,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Kan även sås direkt på friland när jorden blivit uppvärmd till minst 15 grader. Vattna jorden före sådd och håll fuktigt under grotiden. Täck gärna med fiberduk. Varmt uteläge eller växthus. Skördas efterhand.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 110,
@@ -6744,11 +6744,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -6756,7 +6755,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas i växthus eller på varmt utomhusläge.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 111,
@@ -6806,11 +6806,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 45,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 45,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -6818,7 +6817,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Toppas vid ca 30 cm för buskigare växtsätt.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 112,
@@ -6871,11 +6871,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -6883,7 +6882,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas i växthus eller på varmt utomhusläge.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 113,
@@ -6933,11 +6933,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -6945,7 +6944,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas i växthus eller på varmt utomhusläge. Stödjes.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 114,
@@ -6996,11 +6996,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 50,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 50,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7008,7 +7007,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Växthus el. varmt friland.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 115,
@@ -7058,11 +7058,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7070,7 +7069,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas i växthus eller på varmt utomhusläge. Stödjes.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 116,
@@ -7116,7 +7116,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": null,
       "plantingMethod": "indoor",
@@ -7128,7 +7127,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Växthus eller varmt uteläge.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 117,
@@ -7175,11 +7175,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7187,7 +7186,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas i växthus eller på varmt utomhusläge.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 118,
@@ -7236,11 +7236,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 105,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 105,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7248,124 +7247,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För växthus eller varmt utomhusläge.",
-      "source": "Impecta"
-    },
-    {
-      "id": 119,
-      "type": "Sommaraster",
-      "name": "King Size Apricot",
-      "englishName": "China Aster",
-      "scientificName": "Callistephus chinensis",
-      "category": "grönsaker",
-      "subcategory": null,
-      "articleNumber": "81311",
-      "url": "https://www.impecta.se/froer/ettariga-blommor/sommaraster-king-size-apricot",
-      "price": "27",
-      "inStock": true,
-      "isOrganic": false,
-      "imageUrl": "https://www.impecta.se/bilder/artiklar/81311.jpg",
-      "imageUrls": [
-        "https://www.impecta.se/bilder/artiklar/81311.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/81311_1.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/81311_2.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/81311_3.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/81311_4.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/81311_5.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/81311_6.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/81311_7.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/81311_8.jpg"
-      ],
-      "annuality": "Ettårig",
-      "portionSize": "100 frö",
-      "height": "100 cm",
-      "color": "Aprikos",
-      "growingLocation": "sol",
-      "description": "Stora, helt fyllda blommor i mjukt aprikos med vaniljgul mitt. Fin sensommarblom med extra lång hållbarhet för snitt och rabatt.",
-      "plantingWindows": {
-        "indoors": {
-          "start": null,
-          "end": null
-        },
-        "outdoors": {
-          "start": "mars",
-          "end": "april"
-        }
-      },
-      "movePlantOutdoor": null,
-      "harvestTime": {
-        "start": "juli",
-        "end": "okt"
-      },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
-      "hardeningDays": null,
-      "plantingMethod": "outdoor",
-      "totalDaysFromSeed": null,
-      "germinationTime": "5-15 dagar",
-      "germinationTemperature": null,
-      "growingTemperature": null,
-      "soilMix": null,
-      "frostTolerant": null,
-      "careInstructions": null,
-      "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Rensa efterhand för längre blomtid. Växla odlingsplats från år till år.",
-      "source": "Impecta"
-    },
-    {
-      "id": 120,
-      "type": null,
-      "name": "Kornvallmo",
-      "englishName": null,
-      "scientificName": "Papaver rhoeas",
-      "category": "grönsaker",
-      "subcategory": null,
-      "articleNumber": "3066",
-      "url": "https://www.impecta.se/froer/nordiska-vildblommor/kornvallmo",
-      "price": "27",
-      "inStock": true,
-      "isOrganic": false,
-      "imageUrl": "https://www.impecta.se/bilder/artiklar/3066.jpg",
-      "imageUrls": [
-        "https://www.impecta.se/bilder/artiklar/3066.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/3066_1.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/3066_2.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/3066_3.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/3066_4.jpg",
-        "https://www.impecta.se/img/bilder/artiklar/zoom/3066_5.jpg"
-      ],
-      "annuality": "Ettårig",
-      "portionSize": "1000 frö",
-      "height": "50 cm",
-      "color": "Röd",
-      "growingLocation": "sol",
-      "description": "Vildform. Lysande scharlakansröda blommor, ca 7-8 cm stora, med endast fyra kronblad. För torvtak, vildäng och liknande. Kulturbunden art, numer mindre allmän, förekommer främst i Skåne och på Öland.",
-      "plantingWindows": {
-        "indoors": {
-          "start": null,
-          "end": null
-        },
-        "outdoors": {
-          "start": "april-maj/sep-okt",
-          "end": null
-        }
-      },
-      "movePlantOutdoor": null,
-      "harvestTime": {
-        "start": "juni",
-        "end": "aug"
-      },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
-      "hardeningDays": null,
-      "plantingMethod": "outdoor",
-      "totalDaysFromSeed": null,
-      "germinationTime": "5-15 dagar",
-      "germinationTemperature": null,
-      "growingTemperature": null,
-      "soilMix": null,
-      "frostTolerant": null,
-      "careInstructions": null,
-      "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 121,
@@ -7408,11 +7291,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7420,7 +7302,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 122,
@@ -7467,11 +7350,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7479,7 +7361,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 123,
@@ -7524,11 +7407,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7536,7 +7418,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 124,
@@ -7580,11 +7463,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7592,7 +7474,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 125,
@@ -7638,11 +7521,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7650,7 +7532,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 3-4 plantor runt 2 m höga störar, spaljé eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 126,
@@ -7696,11 +7579,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -7708,7 +7590,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 3-4 plantor runt 2 meter höga störar, spaljé, vägg eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 127,
@@ -7755,11 +7638,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -7767,7 +7649,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 2-3 plantor runt 2 meter höga störar, spaljé, vägg eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 128,
@@ -7814,11 +7697,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7826,7 +7708,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 129,
@@ -7871,11 +7754,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7883,7 +7765,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 130,
@@ -7928,11 +7811,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 85,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 85,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7940,7 +7822,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Bönorna skördas strax innan mognad.",
       "transplantingInstructions": "Utplanteras i växthus eller efter avhärdning på varmt vindskyddat frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 131,
@@ -7987,11 +7870,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -7999,7 +7881,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 132,
@@ -8046,11 +7929,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8058,7 +7940,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 133,
@@ -8103,11 +7986,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8115,7 +7997,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 134,
@@ -8160,11 +8043,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8172,7 +8054,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 136,
@@ -8217,11 +8100,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8229,12 +8111,13 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 137,
-      "type": null,
-      "name": "Kikärt",
+      "type": "Kikärt",
+      "name": "Garbanzoböna",
       "englishName": "Chick Pea",
       "scientificName": "Cicer arietinum",
       "category": "grönsaker",
@@ -8274,11 +8157,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 120,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 120,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8286,7 +8168,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över på varmt frilandsläge. Kan även sås direkt på friland i maj-juni. Utvecklas bäst på sandig, mullrik jord. Stödjes.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 138,
@@ -8330,11 +8213,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 50,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 50,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8342,7 +8224,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 139,
@@ -8387,7 +8270,6 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
@@ -8399,7 +8281,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 2-3 plantor runt 2 meter höga störar, spaljé, vägg eller liknande. Rensa regelbundet för rikligare blom.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 140,
@@ -8444,11 +8327,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8456,7 +8338,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 141,
@@ -8502,11 +8385,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 45,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 45,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8514,7 +8396,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 142,
@@ -8560,11 +8443,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8572,7 +8454,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "utplanteras efter avhärdning när frostrisken är över. Skördas späda 2-3 cm långa.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 143,
@@ -8618,11 +8501,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8630,7 +8512,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 144,
@@ -8677,11 +8560,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8689,7 +8571,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 3-4 plantor runt 2 meter höga störar, spaljé, vägg eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 145,
@@ -8733,11 +8616,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8745,7 +8627,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 146,
@@ -8791,11 +8674,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8803,7 +8685,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 147,
@@ -8848,11 +8731,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -8860,7 +8742,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 148,
@@ -8905,11 +8788,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 85,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 85,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -8917,7 +8799,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 149,
@@ -8963,11 +8846,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -8975,7 +8857,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 150,
@@ -9024,11 +8907,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9036,7 +8918,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 2-3 plantor runt 2 meter höga störar, spaljé, vägg eller liknande. Rensa regelbundet för rikligare blom.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 151,
@@ -9082,11 +8965,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -9094,7 +8976,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 3-4 plantor runt 2 meter höga störar, spaljé, vägg eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 152,
@@ -9140,11 +9023,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9152,7 +9034,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 153,
@@ -9199,11 +9082,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -9211,7 +9093,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd. Stödjes vid behov.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 154,
@@ -9256,11 +9139,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 100,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 100,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9268,7 +9150,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 155,
@@ -9315,11 +9198,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9327,7 +9209,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 156,
@@ -9374,7 +9257,6 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
@@ -9386,7 +9268,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 2-3 plantor runt 2 meter höga störar, spaljé, vägg eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 157,
@@ -9433,11 +9316,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9445,7 +9327,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 158,
@@ -9492,11 +9375,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 85,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 85,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9504,7 +9386,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Bönorna skördas strax innan mognad.",
       "transplantingInstructions": "Utplanteras i växthus eller efter avhärdning på varmt vindskyddat frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 159,
@@ -9550,11 +9433,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -9562,7 +9444,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 160,
@@ -9609,11 +9492,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 50,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 50,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -9621,7 +9503,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 161,
@@ -9667,11 +9550,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9679,7 +9561,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 3-4 plantor runt 2 meter höga störar, spaljé, vägg eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 162,
@@ -9726,11 +9609,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9738,7 +9620,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas runt korta störar. Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 163,
@@ -9784,11 +9667,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -9796,7 +9678,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 164,
@@ -9841,11 +9724,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9853,7 +9735,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 165,
@@ -9899,11 +9782,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9911,7 +9793,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 166,
@@ -9956,11 +9839,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -9968,7 +9850,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 2-3 plantor runt 2 meter höga störar, spaljé, vägg eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 167,
@@ -10014,11 +9897,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -10026,7 +9908,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 168,
@@ -10073,11 +9956,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -10085,7 +9967,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd. Stödjes vid behov.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 169,
@@ -10130,11 +10013,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 gr",
       "growingTemperature": null,
@@ -10142,7 +10024,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 170,
@@ -10186,11 +10069,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -10198,7 +10080,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 171,
@@ -10242,11 +10125,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -10254,7 +10136,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 172,
@@ -10301,11 +10184,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -10313,7 +10195,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 173,
@@ -10361,11 +10244,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -10373,7 +10255,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 3-4 plantor runt 2 meter höga störar, spaljé, vägg eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 174,
@@ -10420,11 +10303,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 95,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 95,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -10432,7 +10314,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 175,
@@ -10479,7 +10362,6 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
@@ -10491,7 +10373,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 2-3 plantor runt 2 meter höga störar, spaljé, vägg eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 176,
@@ -10536,11 +10419,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 120,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 120,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -10548,7 +10430,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över på varmt frilandsläge. Kan även sås direkt på friland i maj-juni. Utvecklas bäst på sandig, mullrik jord. Stödjes.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 177,
@@ -10594,11 +10477,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -10606,7 +10488,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 178,
@@ -10652,11 +10535,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -10664,7 +10546,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk. Sätt 3-4 plantor runt 2 meter höga störar, spaljé, vägg eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 179,
@@ -10711,11 +10594,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -10723,7 +10605,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 180,
@@ -10770,7 +10653,6 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
@@ -10782,7 +10664,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 181,
@@ -10828,11 +10711,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": null,
@@ -10840,7 +10722,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 182,
@@ -10886,11 +10769,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 55,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 55,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -10898,7 +10780,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 183,
@@ -10946,11 +10829,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 grader",
       "growingTemperature": null,
@@ -10958,7 +10840,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 184,
@@ -11006,11 +10889,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 gr",
       "growingTemperature": null,
@@ -11018,7 +10900,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, i växthus el. likn.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 185,
@@ -11064,11 +10947,10 @@
         "start": "aug",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 95,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 95,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-40 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -11076,7 +10958,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus el. liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 186,
@@ -11123,11 +11006,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -11135,7 +11017,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras när frostrisken är över. För varmt uteläge el. växthus.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 187,
@@ -11185,11 +11068,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -11197,7 +11079,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 188,
@@ -11242,11 +11125,10 @@
         "start": "aug",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 gr",
       "growingTemperature": null,
@@ -11254,7 +11136,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, i växthus el. liknande.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 189,
@@ -11304,11 +11187,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 100,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 100,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -11316,7 +11198,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus el. likn.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 190,
@@ -11365,11 +11248,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 grader",
       "growingTemperature": null,
@@ -11377,7 +11259,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, i växthus eller liknande.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 191,
@@ -11424,11 +11307,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 100,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 100,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -11436,7 +11318,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Varmt uteläge eller växthus.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 192,
@@ -11485,11 +11368,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 grader",
       "growingTemperature": null,
@@ -11497,7 +11379,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge eller i växthus.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 193,
@@ -11544,11 +11427,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 grader",
       "growingTemperature": null,
@@ -11556,7 +11438,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, i växthus eller liknande.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 194,
@@ -11602,11 +11485,10 @@
         "start": "aug",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 gr",
       "growingTemperature": null,
@@ -11614,7 +11496,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, i växthus eller liknande.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 195,
@@ -11661,11 +11544,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -11673,7 +11555,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras när frostrisken är över. För varmt uteläge eller växthus.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 196,
@@ -11720,11 +11603,10 @@
         "start": "aug",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 110,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 110,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -11732,7 +11614,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras när frostrisken är över. För varmt uteläge el. växthus.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 197,
@@ -11783,11 +11666,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -11795,7 +11677,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Varmt uteläge, växthus el. likn.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 198,
@@ -11845,7 +11728,6 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
@@ -11857,7 +11739,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, i växthus eller liknande.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 199,
@@ -11907,11 +11790,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -11919,7 +11801,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 200,
@@ -11966,11 +11849,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 gr",
       "growingTemperature": null,
@@ -11978,7 +11860,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 201,
@@ -12028,11 +11911,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 100,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 100,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -12040,7 +11922,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 202,
@@ -12090,11 +11973,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -12102,7 +11984,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus el. likn.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 203,
@@ -12152,11 +12035,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -12164,7 +12046,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, växthus el. likn.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 204,
@@ -12211,11 +12094,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 gr",
       "growingTemperature": null,
@@ -12223,7 +12105,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Varmt uteläge, växthus el. likn.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 205,
@@ -12273,11 +12156,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 gr",
       "growingTemperature": null,
@@ -12285,7 +12167,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, i växthus eller liknande.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 206,
@@ -12331,11 +12214,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 110,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 110,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-40 dagar",
       "germinationTemperature": "20-25 grader",
       "growingTemperature": null,
@@ -12343,7 +12225,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, i växthus eller liknande.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 207,
@@ -12393,11 +12276,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 50,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 50,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -12405,7 +12287,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 208,
@@ -12451,11 +12334,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -12463,7 +12345,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 209,
@@ -12513,11 +12396,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -12525,7 +12407,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge eller i växthus.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 210,
@@ -12575,11 +12458,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -12587,7 +12469,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 211,
@@ -12637,11 +12520,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 100,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 100,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -12649,7 +12531,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus eller liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 212,
@@ -12699,11 +12582,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -12711,7 +12593,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus el liknande.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 213,
@@ -12761,11 +12644,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 gr",
       "growingTemperature": null,
@@ -12773,7 +12655,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 214,
@@ -12821,11 +12704,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 grader",
       "growingTemperature": null,
@@ -12833,7 +12715,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, i växthus eller liknande.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 215,
@@ -12883,11 +12766,10 @@
         "start": "juni",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 65,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 65,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 gr",
       "growingTemperature": null,
@@ -12895,7 +12777,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Varmt uteläge, växthus el. likn.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 216,
@@ -12942,11 +12825,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -12954,7 +12836,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. För varmt uteläge, växthus el. likn.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 217,
@@ -13005,11 +12888,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 60,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 60,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-20 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -13017,7 +12899,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Korspollinerande, minst två plantor krävs för fruktsättning.",
       "transplantingInstructions": "Utplanteras efter avhärdning i  växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 218,
@@ -13065,11 +12948,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 70,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 70,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-20 dagar",
       "germinationTemperature": "22-25 gr",
       "growingTemperature": "18-20 gr",
@@ -13077,7 +12959,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Korspollinerande, minst två plantor krävs för fruktsättning.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 219,
@@ -13123,11 +13006,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 160,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 160,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": "18-20 grader",
@@ -13135,7 +13017,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Kapkrusbär är tvåårig. Den ger frukt redan första året men kan övervintras och ge skörd även andra året. Övervintras ljust och runt 10-15 grader. Tas in innan första frosten och kan beskäras om den är stor och yvig. Den kan också beskäras lite till våren när den ska igång igen.",
       "transplantingInstructions": "Utplanteras efter avhärdning i växthus eller på varmt friland när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 220,
@@ -13180,7 +13063,6 @@
         "start": "april",
         "end": "juni"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
@@ -13192,7 +13074,8 @@
       "frostTolerant": null,
       "careInstructions": "Blötlägg fröerna i ljummet vatten två dygn före sådd. Förkultiveras inomhus. Utplanteras på friland efter avhärdning när frostrisken är över. Efter två år gallras honplantorna bort och hanplantorna flyttas till slutlig växtplats i djupa, breda fåror tidigt på våren. Kupas ca 10 cm. Skörd kan börja tredje året.",
       "transplantingInstructions": "Utplanteras på friland efter avhärdning när frostrisken är över. Efter två år.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 221,
@@ -13237,11 +13120,10 @@
         "start": "aug",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "10-30 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": "18-20 grader",
@@ -13249,11 +13131,12 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Övervintras frostfritt.",
       "transplantingInstructions": "Utplanteras i växthus eller på varmt frilandsläge när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 225,
-      "type": null,
+      "type": "Gurka",
       "name": "Kiwano",
       "englishName": "Horned Melon",
       "scientificName": "Cucumis metuliferus",
@@ -13296,11 +13179,10 @@
         "start": "aug",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 120,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 120,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "22-25 grader",
       "growingTemperature": null,
@@ -13308,7 +13190,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes.",
       "transplantingInstructions": "Utplanteras i växthus eller på varmt frilandsläge efter avhärdning.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 228,
@@ -13353,7 +13236,6 @@
         "start": "aug",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
       "daysIndoorGrowth": null,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
@@ -13365,7 +13247,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Frukterna skördas halvstora för matlagning.",
       "transplantingInstructions": "Utplanteras i växthus eller varmt utomhusläge när frostrisken är över. Blommorna handpollineras med pensel.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 231,
@@ -13412,11 +13295,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 75,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 75,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": "18-20 gr",
@@ -13424,7 +13306,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes.",
       "transplantingInstructions": null,
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 238,
@@ -13470,11 +13353,10 @@
         "start": "juli",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 50,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 50,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -13482,7 +13364,8 @@
       "frostTolerant": null,
       "careInstructions": "Skörda regelbundet för rikligare skörd.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Täck gärna med fiberduk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 239,
@@ -13530,11 +13413,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -13542,7 +13424,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras när frostrisken är över. För varmt uteläge el. växthus.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 240,
@@ -13588,11 +13471,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 90,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 90,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": null,
       "growingTemperature": null,
@@ -13600,7 +13482,8 @@
       "frostTolerant": null,
       "careInstructions": null,
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över. Varmt uteläge, växthus el. likn.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 241,
@@ -13647,11 +13530,10 @@
         "start": "juli",
         "end": "okt"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 80,
       "hardeningDays": null,
       "plantingMethod": "outdoor",
-      "totalDaysFromSeed": 80,
+      "totalDaysFromSeed": null,
       "germinationTime": "20-30 dagar",
       "germinationTemperature": "20-25 grader",
       "growingTemperature": null,
@@ -13659,7 +13541,8 @@
       "frostTolerant": null,
       "careInstructions": "Odlas på varmt uteläge, i växthus eller liknande.",
       "transplantingInstructions": "Utplanteras efter avhärdning när frostrisken är över.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     },
     {
       "id": 242,
@@ -13707,11 +13590,10 @@
         "start": "aug",
         "end": "sep"
       },
-      "daysOutdoorToHarvest": null,
-      "daysIndoorGrowth": null,
+      "daysIndoorGrowth": 115,
       "hardeningDays": 7,
       "plantingMethod": "indoor",
-      "totalDaysFromSeed": 115,
+      "totalDaysFromSeed": null,
       "germinationTime": "5-15 dagar",
       "germinationTemperature": "ca 25 grader",
       "growingTemperature": "ca 20 grader",
@@ -13719,7 +13601,8 @@
       "frostTolerant": null,
       "careInstructions": "Uppbindes. Ge rikligt med vatten och näring hela sommaren. Lagras 2-4 månader.",
       "transplantingInstructions": "Utplanteras efter avhärdning på varmt frilandsläge eller i drivbänk.",
-      "source": "Impecta"
+      "source": "Impecta",
+      "daysOutdoor": null
     }
   ]
 }

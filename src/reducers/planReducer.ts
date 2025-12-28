@@ -7,8 +7,14 @@ export const PLAN_ACTIONS = {
 } as const;
 
 export type Recommendation = {
-  // TODO: Replace with the real recommendation model in Milestone D/E
   plantId: number;
+  // Outdoor path (if applicable)
+  outdoorSowDate: string | null; // ISO-format
+  // Indoor path (if applicable)
+  indoorSowDate: string | null; // ISO-format
+  hardenStartDate: string | null; // ISO-format
+  movePlantOutdoorDate: string | null; // ISO-format
+  warnings: string[]; // Varningar om saknad data
 };
 
 export type PlanState = {

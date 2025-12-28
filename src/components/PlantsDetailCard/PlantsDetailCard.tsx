@@ -91,6 +91,15 @@ export const PlantsDetailCard = ({ plant }: PlantsDetailCardProps) => {
           </>
         ) : null}
 
+        {hasRange(plant.harvestTime?.start, plant.harvestTime?.end) ? (
+          <>
+            <dt>Skördefönster</dt>
+            <dd>
+              {formatRange(plant.harvestTime?.start, plant.harvestTime?.end)}
+            </dd>
+          </>
+        ) : null}
+
         <dt>Totalt antal dagar från sådd till skörd</dt>
         <dd>{formatDaysOrMissing(plant.totalDaysFromSeed)}</dd>
 

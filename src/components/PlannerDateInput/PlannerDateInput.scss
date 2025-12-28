@@ -1,0 +1,18 @@
+@use "../../Styles/color" as *;
+
+.planner-date-input {
+  width: 100%;
+}
+
+.planner-date-input__error {
+  margin-top: 0.5rem;
+  color: $error-color;
+  font-size: 0.875rem;
+}
+
+.planner-date-input__warning {
+  margin-top: 0.5rem;
+  color: $warning-color;
+  font-size: 0.875rem;
+}
+

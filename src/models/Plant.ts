@@ -62,7 +62,7 @@ export type RawPlant = {
 
   // todo ta bort kommentar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // Enrichment fields (may be missing until migration is done)
-  daysOutdoorToHarvest?: number | null;
+  daysOutdoor?: number | null;
   daysIndoorGrowth?: number | null;
   hardeningDays?: number | null;
   plantingMethod?: PlantingMethod;
@@ -76,9 +76,9 @@ export type RawPlant = {
  */
 export type Plant = Omit<
   RawPlant,
-  "daysToHarvest" | "daysOutdoorToHarvest" | "plantingMethod" | "movePlantOutdoor" | "germinationTime" | "germinationTemperature" | "growingTemperature" | "frostTolerant" | "totalDaysFromSeed"
+  "daysToHarvest" | "daysOutdoor" | "plantingMethod" | "movePlantOutdoor" | "germinationTime" | "germinationTemperature" | "growingTemperature" | "frostTolerant" | "totalDaysFromSeed"
 > & {
-  daysOutdoorToHarvest: number | null;
+  daysOutdoor: number | null;
   daysIndoorGrowth: number | null;
   hardeningDays: number | null;
   plantingMethod: PlantingMethod;
