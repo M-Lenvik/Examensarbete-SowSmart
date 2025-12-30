@@ -1,9 +1,16 @@
 /**
  * Helper functions for calculating sow date.
+ * 
+ * Data sources:
+ * - plantingWindows: From plants.json (Plant.plantingWindows)
+ * - harvestTime: From plants.json (Plant.harvestTime)
+ * - harvestDate: User input (selected harvest date)
+ * - Uses seedConstant formula to calculate relative sow date based on harvest date position in harvest window
  */
 
 import { addDays } from "../date/date";
-import type { HarvestTime, PlantingWindows } from "../../models/Plant";
+import type { HarvestTime, PlantingMethod, PlantingWindows } from "../../models/Plant";
+import { selectPlantingWindow } from "../plant/plantingWindow";
 import { getMonthSpan } from "../date/monthSpan";
 
 /**
@@ -28,6 +35,7 @@ const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
     "juli": 6,
     "aug": 7,
     "sept": 8,
+    "sep": 8, // Alias for "sept" (used in plants.json)
     "okt": 9,
     "nov": 10,
     "dec": 11,
@@ -66,6 +74,7 @@ const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
  * @param harvestDate - The date the user wants to harvest
  * @param plantingWindows - Object with planting windows for indoor and outdoor sowing
  * @param harvestTime - Harvest window from Impecta catalog, or null if data is missing
+ * @param plantingMethod - Optional planting method ("indoor" or "outdoor") to determine which window to use
  * 
  * @returns The calculated sow date, or null if:
  *   - harvestTime is missing or null
@@ -89,38 +98,17 @@ const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
 export const calculateSowDate = (
   harvestDate: Date,
   plantingWindows: PlantingWindows,
-  harvestTime: HarvestTime | null
+  harvestTime: HarvestTime | null,
+  plantingMethod?: PlantingMethod
 ): Date | null => {
   // Check if harvestTime is missing
   if (!harvestTime) {
     return null;
   }
 
-  // Determine which planting window to use (indoors or outdoors)
-  let plantingStart: string | null = null;
-  let plantingEnd: string | null = null;
-
-  // Check indoors first
-  if (
-    plantingWindows.indoors.start &&
-    plantingWindows.indoors.end &&
-    plantingWindows.indoors.start.trim() !== "" &&
-    plantingWindows.indoors.end.trim() !== ""
-  ) {
-    plantingStart = plantingWindows.indoors.start;
-    plantingEnd = plantingWindows.indoors.end;
-  } else if (
-    plantingWindows.outdoors.start &&
-    plantingWindows.outdoors.end &&
-    plantingWindows.outdoors.start.trim() !== "" &&
-    plantingWindows.outdoors.end.trim() !== ""
-  ) {
-    plantingStart = plantingWindows.outdoors.start;
-    plantingEnd = plantingWindows.outdoors.end;
-  }
-
-  // If no valid planting window found, return null
-  if (!plantingStart || !plantingEnd) {
+  // Select the appropriate planting window based on plantingMethod
+  const plantingWindow = selectPlantingWindow(plantingWindows, plantingMethod);
+  if (!plantingWindow) {
     return null;
   }
 
@@ -134,8 +122,8 @@ export const calculateSowDate = (
     return null;
   }
 
-  // Calculate plantingWindowsSpan (from first day in plantingStart to last day in plantingEnd)
-  const plantingWindowsSpan = getMonthSpan(plantingStart, plantingEnd);
+  // Calculate plantingWindowsSpan (from first day in plantingWindow.start to last day in plantingWindow.end)
+  const plantingWindowsSpan = getMonthSpan(plantingWindow.start, plantingWindow.end);
   if (plantingWindowsSpan === null) {
     return null;
   }
@@ -175,8 +163,8 @@ export const calculateSowDate = (
   // Calculate sowDateOffset using clamped value
   const sowDateOffset = clampedHarvestDaySpan / seedConstant;
 
-  // Get first day of plantingStart
-  const firstDayOfPlanting = getFirstDayOfMonth(plantingStart, year);
+  // Get first day of plantingWindow.start
+  const firstDayOfPlanting = getFirstDayOfMonth(plantingWindow.start, year);
   if (!firstDayOfPlanting) {
     return null;
   }

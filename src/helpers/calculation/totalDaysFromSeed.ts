@@ -1,8 +1,14 @@
 /**
  * Helper functions for calculating totalDaysFromSeed.
+ * 
+ * Data sources:
+ * - plantingWindows: From plants.json (Plant.plantingWindows)
+ * - harvestTime: From plants.json (Plant.harvestTime)
+ * - Calculates span from first day of first month in plantingWindows to last day of last month in harvestTime
  */
 
 import type { HarvestTime, PlantingWindows } from "../../models/Plant";
+import { selectPlantingWindow } from "../plant/plantingWindow";
 import { getMonthSpan } from "../date/monthSpan";
 
 /**
@@ -11,8 +17,12 @@ import { getMonthSpan } from "../date/monthSpan";
  * This calculates the span from the first day of the first month in plantingWindows
  * to the last day of the last month in harvestTime.
  * 
+ * For outdoor plants, uses outdoors planting window directly.
+ * For indoor plants, prefers indoors if available, otherwise uses outdoors.
+ * 
  * @param plantingWindows - Planting windows (indoors/outdoors)
  * @param harvestTime - Harvest time window, or null if missing
+ * @param plantingMethod - Optional planting method to determine which window to use
  * @returns Number of days from first day in plantingWindows to last day in harvestTime, or null if data is missing
  * 
  * @example
@@ -23,39 +33,17 @@ import { getMonthSpan } from "../date/monthSpan";
  */
 export const calculateTotalDaysFromSeed = (
   plantingWindows: PlantingWindows,
-  harvestTime: HarvestTime | null
+  harvestTime: HarvestTime | null,
+  plantingMethod?: "indoor" | "outdoor"
 ): number | null => {
   // Check if harvestTime is missing
   if (!harvestTime) {
     return null;
   }
 
-  // Determine which planting window to use (indoors or outdoors)
-  // Prefer indoors if it has valid data, otherwise use outdoors
-  let plantingStart: string | null = null;
-  let plantingEnd: string | null = null;
-
-  // Check indoors first
-  if (
-    plantingWindows.indoors.start &&
-    plantingWindows.indoors.end &&
-    plantingWindows.indoors.start.trim() !== "" &&
-    plantingWindows.indoors.end.trim() !== ""
-  ) {
-    plantingStart = plantingWindows.indoors.start;
-    plantingEnd = plantingWindows.indoors.end;
-  } else if (
-    plantingWindows.outdoors.start &&
-    plantingWindows.outdoors.end &&
-    plantingWindows.outdoors.start.trim() !== "" &&
-    plantingWindows.outdoors.end.trim() !== ""
-  ) {
-    plantingStart = plantingWindows.outdoors.start;
-    plantingEnd = plantingWindows.outdoors.end;
-  }
-
-  // If no valid planting window found, return null
-  if (!plantingStart || !plantingEnd) {
+  // Select the appropriate planting window based on plantingMethod
+  const plantingWindow = selectPlantingWindow(plantingWindows, plantingMethod);
+  if (!plantingWindow) {
     return null;
   }
 
@@ -69,9 +57,9 @@ export const calculateTotalDaysFromSeed = (
     return null;
   }
 
-  // Calculate span from first day in plantingStart to last day in harvestTime.end
+  // Calculate span from first day in plantingWindow.start to last day in harvestTime.end
   // This is the total days from seed (first possible planting day) to harvest (last possible harvest day)
-  const span = getMonthSpan(plantingStart, harvestTime.end);
+  const span = getMonthSpan(plantingWindow.start, harvestTime.end);
 
   return span;
 };

@@ -3,6 +3,16 @@ import { formatDateIso, parseDateIso, subtractDays, addDays } from "./date";
 import { calculateSowDate } from "../calculation/sowDate";
 import { getDaysInMonth } from "./monthToDays";
 import { calculateTotalDaysFromSeed } from "../calculation/totalDaysFromSeed";
+import { selectPlantingWindow } from "../plant/plantingWindow";
+
+/**
+ * Helper functions for validating harvest dates and plant warnings.
+ * 
+ * Data sources:
+ * - dateString: User input from native date input (YYYY-MM-DD format)
+ * - totalDaysFromSeed: Calculated from plants.json (plantingWindows, harvestTime)
+ * - Plant data: From plants.json via Plant type
+ */
 
 /**
  * Validates a harvest date input string.
@@ -102,6 +112,7 @@ const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
     "juli": 6,
     "aug": 7,
     "sept": 8,
+    "sep": 8, // Alias for "sept" (used in plants.json)
     "okt": 9,
     "nov": 10,
     "dec": 11,
@@ -188,41 +199,21 @@ export const getPlantWarning = (
   const isBeforeHarvestWindow = harvestDate < firstDayOfHarvestTime;
   const isAfterHarvestWindow = harvestDate > lastDayOfHarvestTime;
 
-  // Determine which planting window to use
-  let plantingStart: string | null = null;
-  let plantingEnd: string | null = null;
-
-  if (
-    plant.plantingWindows.indoors.start &&
-    plant.plantingWindows.indoors.end &&
-    plant.plantingWindows.indoors.start.trim() !== "" &&
-    plant.plantingWindows.indoors.end.trim() !== ""
-  ) {
-    plantingStart = plant.plantingWindows.indoors.start;
-    plantingEnd = plant.plantingWindows.indoors.end;
-  } else if (
-    plant.plantingWindows.outdoors.start &&
-    plant.plantingWindows.outdoors.end &&
-    plant.plantingWindows.outdoors.start.trim() !== "" &&
-    plant.plantingWindows.outdoors.end.trim() !== ""
-  ) {
-    plantingStart = plant.plantingWindows.outdoors.start;
-    plantingEnd = plant.plantingWindows.outdoors.end;
-  }
-
-  if (!plantingStart || !plantingEnd) {
+  // Select the appropriate planting window based on plantingMethod
+  const plantingWindow = selectPlantingWindow(plant.plantingWindows, plant.plantingMethod);
+  if (!plantingWindow) {
     return null;
   }
 
   // Get first and last day of planting window
-  const firstDayOfPlanting = getFirstDayOfMonth(plantingStart, year);
-  const lastDayOfPlanting = getFirstDayOfMonth(plantingEnd, year);
+  const firstDayOfPlanting = getFirstDayOfMonth(plantingWindow.start, year);
+  const lastDayOfPlanting = getFirstDayOfMonth(plantingWindow.end, year);
   
   if (!firstDayOfPlanting || !lastDayOfPlanting) {
     return null;
   }
 
-  const daysInLastPlantingMonth = getDaysInMonth(plantingEnd);
+  const daysInLastPlantingMonth = getDaysInMonth(plantingWindow.end);
   if (daysInLastPlantingMonth === null) {
     return null;
   }
@@ -230,7 +221,8 @@ export const getPlantWarning = (
   lastDayOfPlanting.setHours(23, 59, 59, 999);
 
   // Calculate sow date using the seedConstant formula (we need this for all cases)
-  const sowDate = calculateSowDate(harvestDate, plant.plantingWindows, plant.harvestTime);
+  // Pass plantingMethod to ensure outdoor plants use outdoors window
+  const sowDate = calculateSowDate(harvestDate, plant.plantingWindows, plant.harvestTime, plant.plantingMethod);
   
   if (!sowDate) {
     return null;
@@ -273,14 +265,16 @@ export const getPlantWarning = (
   // Only check this if harvest date is WITHIN harvest window
   if (sowDate < today) {
     // Calculate the minimum harvest date needed (today + totalDaysFromSeed)
-    const totalDaysFromSeed = calculateTotalDaysFromSeed(plant.plantingWindows, plant.harvestTime);
+    // Pass plantingMethod to ensure outdoor plants use outdoors window
+    const totalDaysFromSeed = calculateTotalDaysFromSeed(plant.plantingWindows, plant.harvestTime, plant.plantingMethod);
     
     if (totalDaysFromSeed !== null && totalDaysFromSeed > 0) {
       const minHarvestDate = addDays(today, totalDaysFromSeed);
       minHarvestDate.setHours(0, 0, 0, 0);
 
       // Calculate the recommended sow date based on the minimum harvest date
-      const recommendedSowDate = calculateSowDate(minHarvestDate, plant.plantingWindows, plant.harvestTime);
+      // Pass plantingMethod to ensure outdoor plants use outdoors window
+      const recommendedSowDate = calculateSowDate(minHarvestDate, plant.plantingWindows, plant.harvestTime, plant.plantingMethod);
       
       if (recommendedSowDate) {
         recommendedSowDate.setHours(0, 0, 0, 0);
