@@ -1,4 +1,12 @@
-import type { Plant } from "../models/Plant";
+import type { Plant } from "../../models/Plant";
+
+/**
+ * Helper functions for sorting plants.
+ * 
+ * Data sources:
+ * - Plants come from plants.json (via Plant type)
+ * - Sorts by subcategory and name from plant data
+ */
 
 /**
  * Sort plants by subcategory first (A-Z), then by name (A-Z).

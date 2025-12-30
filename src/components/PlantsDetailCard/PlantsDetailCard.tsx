@@ -36,8 +36,6 @@ const formatPlantingMethod = (method: Plant["plantingMethod"]) => {
       return "Inomhus";
     case "outdoor":
       return "Utomhus";
-    case "both":
-      return "Både och";
   }
 };
 

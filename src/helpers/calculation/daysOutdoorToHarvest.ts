@@ -1,5 +1,11 @@
 /**
  * Helper functions for calculating days outdoor to harvest.
+ * 
+ * Data sources:
+ * - sowDate: Calculated from calculateSowDate() (based on plantingWindows, harvestTime, and user's harvestDate)
+ * - harvestDate: User input (selected harvest date)
+ * - daysIndoorGrowth: From plants.json or defaults from plantDefaults.ts
+ * - hardeningDays: From plants.json or defaults from plantDefaults.ts
  */
 
 import { addDays } from "../date/date";
@@ -14,7 +20,7 @@ import { addDays } from "../date/date";
  * - `moveOutdoorDate` = sowDate + daysIndoorGrowth + hardeningDays
  * - `daysOutdoorToHarvest` = harvestDate - moveOutdoorDate
  * 
- * @param sowDate - The calculated sow date (from calculateSowDate)
+ * @param sowDate - The calculated sowDate from calculateSowDate in sowDate.ts
  * @param harvestDate - The selected harvest date
  * @param daysIndoorGrowth - Number of days the plant grows indoors (or null)
  * @param hardeningDays - Number of days for hardening process (or null)

@@ -12,6 +12,15 @@ import {
 import { calculateTotalDaysFromSeed } from "../calculation/totalDaysFromSeed";
 
 /**
+ * Helper functions for normalizing and validating plant data.
+ * 
+ * Data sources:
+ * - Raw plant data comes from plants.json (via RawPlant type)
+ * - Defaults come from plantDefaults.ts (based on subcategory)
+ * - Calculates totalDaysFromSeed from plantingWindows and harvestTime
+ */
+
+/**
  * Parse a value into a nullable number.
  * Returns null for empty strings, non-numeric strings, NaN, or non-finite numbers.
  */
@@ -28,7 +37,7 @@ export const toNullableNumber = (value: unknown): number | null => {
 };
 
 export const isPlantingMethod = (value: unknown): value is PlantingMethod => {
-  return value === "indoor" || value === "outdoor" || value === "both";
+  return value === "indoor" || value === "outdoor";
 };
 
 /**
@@ -62,7 +71,8 @@ const inferPlantingMethod = (raw: RawPlant): PlantingMethod => {
     raw.plantingWindows.outdoors.start.trim().length > 0 ||
     raw.plantingWindows.outdoors.end.trim().length > 0;
 
-  if (hasIndoors && hasOutdoors) return "both";
+  // If both exist, prefer indoor
+  if (hasIndoors && hasOutdoors) return "indoor";
   if (hasIndoors) return "indoor";
   if (hasOutdoors) return "outdoor";
 
@@ -104,8 +114,7 @@ const inferPlantingMethod = (raw: RawPlant): PlantingMethod => {
  * Fallback order:
  * 1. Use value from raw if present
  * 2. Use subcategory default from plantDefaults.ts
- * 3. Use global default
- * 4. Use null and log warning
+ * 3. Use null and log warning/error
  */
 export const normalizePlant = (raw: RawPlant): Plant => {
   // Calculate plantingMethod early as it's needed for other fields
@@ -113,26 +122,37 @@ export const normalizePlant = (raw: RawPlant): Plant => {
 
   // totalDaysFromSeed: calculate from plantingWindows and harvestTime
   // This is now calculated, not read from JSON
-  const totalDaysFromSeed = calculateTotalDaysFromSeed(raw.plantingWindows, raw.harvestTime ?? null);
+  // Pass plantingMethod to ensure outdoor plants use outdoors window
+  const totalDaysFromSeed = calculateTotalDaysFromSeed(raw.plantingWindows, raw.harvestTime ?? null, plantingMethod);
 
-  // daysIndoorGrowth: use raw value (now contains values moved from totalDaysFromSeed), then subcategory default
-  let daysIndoorGrowth = raw.daysIndoorGrowth ?? null;
-  if (daysIndoorGrowth === null) {
-    const subcategoryDefault = DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY[raw.subcategory];
-    if (subcategoryDefault !== undefined) {
-      daysIndoorGrowth = subcategoryDefault;
-      console.warn(
-        `[normalizePlant] Missing daysIndoorGrowth for "${raw.name}" (${raw.subcategory}), using subcategory default: ${daysIndoorGrowth}`
-      );
-    } else {
-      // No default available - log error
-      if (plantingMethod === "indoor" || plantingMethod === "both") {
+  // daysIndoorGrowth: only for indoor plants, always null for outdoor plants
+  let daysIndoorGrowth: number | null = null;
+  if (plantingMethod === "indoor") {
+    // For indoor plants: use raw value, then subcategory default
+    daysIndoorGrowth = raw.daysIndoorGrowth ?? null;
+    if (daysIndoorGrowth === null) {
+      const subcategoryDefault = DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY[raw.subcategory];
+      if (subcategoryDefault !== undefined) {
+        daysIndoorGrowth = subcategoryDefault;
+        console.warn(
+          `[normalizePlant] Missing daysIndoorGrowth for "${raw.name}" (${raw.subcategory}), using subcategory default: ${daysIndoorGrowth}`
+        );
+      } else {
+        // No default available - log error
         console.error(
           `[normalizePlant] Missing daysIndoorGrowth for "${raw.name}" (${raw.subcategory}) and no subcategory default available. This plant may need manual data entry.`
         );
+        // Leave as null - will be handled by calling code
       }
-      // Leave as null - will be handled by calling code
     }
+  } else {
+    // For outdoor plants: always null, ignore any value in JSON
+    if (raw.daysIndoorGrowth !== null && raw.daysIndoorGrowth !== undefined) {
+      console.warn(
+        `[normalizePlant] Ignoring daysIndoorGrowth (${raw.daysIndoorGrowth}) for outdoor plant "${raw.name}" - setting to null`
+      );
+    }
+    daysIndoorGrowth = null;
   }
 
   // daysOutdoor: calculate from totalDaysFromSeed and daysIndoorGrowth

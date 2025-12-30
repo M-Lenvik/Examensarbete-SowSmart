@@ -1,4 +1,4 @@
-import type { MovePlantOutdoor, PlantingMethod } from "../models/Plant";
+import type { MovePlantOutdoor, PlantingMethod } from "../../models/Plant";
 
 /**
  * Default planting method by subcategory.
@@ -135,10 +135,10 @@ export const DEFAULT_GROWING_TEMPERATURE_BY_SUBCATEGORY: Record<string, string> 
  */
 export const DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY: Record<string, number> = {
   // 6-8 weeks (49 days average)
-  "aubergin": 49, // TODO: Verify value
+  "aubergin": 49, // TODO: Verify value, not on odla.nu
   "chili": 49,
   "paprika": 49,
-  "physalis": 49, // TODO: Verify value
+  "physalis": 49, // TODO: Verify value, not on odla.nu
   "tomat": 49,
   // 4-5 weeks (32 days average)
   "gurka": 32,

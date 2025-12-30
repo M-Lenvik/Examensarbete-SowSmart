@@ -1,6 +1,10 @@
 /**
  * Handle broken images by swapping to a safe fallback.
  * This avoids broken image icons and prevents infinite error loops.
+ * 
+ * Data sources:
+ * - Image URLs come from plants.json (Plant.imageUrl)
+ * - Fallback SVG is generated programmatically when image fails to load
  */
 import type React from "react";
 

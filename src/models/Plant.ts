@@ -1,4 +1,4 @@
-export type PlantingMethod = "indoor" | "outdoor" | "both";
+export type PlantingMethod = "indoor" | "outdoor";
 
 export type PlantingWindow = {
   start: string;

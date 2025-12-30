@@ -1,5 +1,11 @@
 /**
  * Helper functions for generating planting recommendations.
+ * 
+ * Data sources:
+ * - plants: From plants.json (selected plants from user)
+ * - harvestDateIso: User input (selected harvest date in ISO format)
+ * - Plant data: plantingWindows, harvestTime, plantingMethod, daysIndoorGrowth, hardeningDays from plants.json
+ * - Defaults: From plantDefaults.ts when plant-specific data is missing
  */
 
 import type { Plant } from "../../models/Plant";
@@ -15,7 +21,7 @@ import { DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SU
  * - Uses calculateSowDate() for relative sow date calculation
  * - Calculates hardening dates using daysIndoorGrowth and hardeningDays
  * - Calculates transplant dates
- * - Handles both indoor and outdoor planting methods
+ * - Handles indoor and outdoor planting methods
  * - Falls back to defaults when plant-specific data is missing
  * 
  * **Calculation order for indoor plants:**
@@ -26,7 +32,7 @@ import { DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SU
  * **Calculation order for outdoor plants:**
  * 1. `outdoorSowDate` = calculateSowDate() (relative calculation)
  * 
- * @param plants - Array of selected plants to generate recommendations for
+ * @param plants - Array of selected plants to generate recommendations
  * @param harvestDateIso - The target harvest date in ISO format (YYYY-MM-DD)
  * 
  * @returns Array of recommendations, one per plant. Each recommendation includes:
@@ -74,7 +80,8 @@ export const generateRecommendations = (
         const outdoorSowDate = calculateSowDate(
           harvestDate,
           plant.plantingWindows,
-          plant.harvestTime ?? null
+          plant.harvestTime ?? null,
+          "outdoor"
         );
 
         if (!outdoorSowDate) {
@@ -96,7 +103,8 @@ export const generateRecommendations = (
         const indoorSowDate = calculateSowDate(
           harvestDate,
           plant.plantingWindows,
-          plant.harvestTime ?? null
+          plant.harvestTime ?? null,
+          "indoor"
         );
 
         if (!indoorSowDate) {

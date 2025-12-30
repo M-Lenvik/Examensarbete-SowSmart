@@ -1,5 +1,9 @@
 /**
  * Helper functions for calculating spans between months.
+ * 
+ * Data sources:
+ * - Month names come from plants.json (plantingWindows.indoors/outdoors, harvestTime.start/end)
+ * - Used to calculate totalDaysFromSeed and sow date positions
  */
 
 import { getDaysInMonth } from "./monthToDays";
@@ -25,6 +29,7 @@ const getMonthOrder = (monthName: string): number | null => {
     "juli": 7,
     "aug": 8,
     "sept": 9,
+    "sep": 9, // Alias for "sept" (used in plants.json)
     "okt": 10,
     "nov": 11,
     "dec": 12,

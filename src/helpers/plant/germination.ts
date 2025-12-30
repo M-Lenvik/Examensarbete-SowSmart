@@ -1,5 +1,9 @@
 /**
  * Helper functions for parsing germination-related data.
+ * 
+ * Data sources:
+ * - germinationTime strings come from plants.json (Plant.germinationTime)
+ * - Format: "5-15 dagar" (range) or "10 dagar" (single value)
  */
 
 /**
@@ -18,33 +22,27 @@ export const parseGerminationTime = (germinationTime: string | null): number | n
     return null;
   }
 
-  // Steg 1: Ta bort mellanslag i början och slutet
+  // Step 1: Remove whitespace at start and end
   const trimmed = germinationTime.trim();
   if (trimmed.length === 0) {
     return null;
   }
 
-  // Steg 2: Ta bort ordet "dagar" eller "dag" i slutet (om det finns)
-  // Exempel: "5-15 dagar" → "5-15", "10 dagar" → "10"
+  // Step 2: Remove "dagar" suffix if present
+  // Example: "5-15 dagar" → "5-15", "10 dagar" → "10"
   const lowerTrimmed = trimmed.toLowerCase();
   let withoutSuffix: string;
   
   if (lowerTrimmed.endsWith("dagar")) {
-    // "dagar" är 5 bokstäver, så ta bort de sista 5 tecknen
-    // Exempel: "5-15 dagar" (10 tecken) → ta bort sista 5 → "5-15" (5 tecken)
+    // "dagar" is 5 characters, so remove the last 5 characters
+    // Example: "5-15 dagar" (10 chars) → remove last 5 → "5-15" (5 chars)
     const dagarLength = 5;
     withoutSuffix = trimmed.slice(0, trimmed.length - dagarLength).trim();
-  } else if (lowerTrimmed.endsWith("dag")) {
-    // "dag" är 3 bokstäver, så ta bort de sista 3 tecknen
-    // Exempel: "10 dag" (6 tecken) → ta bort sista 3 → "10" (3 tecken)
-    const dagLength = 3;
-    withoutSuffix = trimmed.slice(0, trimmed.length - dagLength).trim();
   } else {
     withoutSuffix = trimmed;
   }
 
-  // Steg 3: Kolla om det är ett intervall (t.ex. "5-15" eller "20-30")
-  // Använd split() istället för regex för att dela upp vid bindestrecket
+  // Step 3: Check if it's a range (e.g., "5-15" or "20-30")
   if (withoutSuffix.includes("-")) {
     const parts = withoutSuffix.split("-");
     
@@ -55,20 +53,20 @@ export const parseGerminationTime = (germinationTime: string | null): number | n
       const start = parseInt(startText, 10); // 5
       const end = parseInt(endText, 10);     // 15
       
-      // Kontrollera att båda är giltiga nummer och att start <= end
+      // Check that both are valid numbers and start <= end
       if (!isNaN(start) && !isNaN(end) && start > 0 && end > 0 && start <= end) {
-        // Räkna ut medelvärdet: (5 + 15) / 2 = 10
+        // Calculate average: (5 + 15) / 2 = 10
         const average = (start + end) / 2;
-        return Math.round(average); // Avrunda till närmaste heltal
+        return Math.round(average); // Round to nearest integer
       }
     }
   }
 
-  // Steg 4: Kolla om det är ett enskilt nummer (t.ex. "5" eller "10")
-  // Använd parseInt direkt - om det bara är siffror kommer det att fungera
+  // Step 4: Check if it's a single number (e.g., "5" or "10")
+  // Use parseInt directly - if it's only digits it will work
   const trimmedNumber = withoutSuffix.trim();
   if (trimmedNumber.length > 0) {
-    // Kontrollera att alla tecken är siffror
+    // Check that all characters are digits
     let isAllDigits = true;
     for (let i = 0; i < trimmedNumber.length; i++) {
       const char = trimmedNumber[i];
@@ -80,14 +78,14 @@ export const parseGerminationTime = (germinationTime: string | null): number | n
     
     if (isAllDigits) {
       const value = parseInt(trimmedNumber, 10);
-      // Kontrollera att det är ett giltigt nummer och större än 0
+      // Check that it's a valid number and greater than 0
       if (!isNaN(value) && value > 0) {
         return value;
       }
     }
   }
 
-  // Steg 5: Om vi inte kunde parsa strängen, returnera null
+  // Step 5: If we couldn't parse the string, return null
   return null;
 };
 

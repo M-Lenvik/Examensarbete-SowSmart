@@ -1,5 +1,9 @@
 /**
  * Helper functions for converting month names to number of days.
+ * 
+ * Data sources:
+ * - Month names come from plants.json (plantingWindows, harvestTime)
+ * - Uses fixed calendar values (non-leap year)
  */
 
 /**
@@ -31,6 +35,7 @@ export const getDaysInMonth = (monthName: string): number | null => {
     "juli": 31,
     "aug": 31,
     "sept": 30,
+    "sep": 30, // Alias for "sept" (used in plants.json)
     "okt": 31,
     "nov": 30,
     "dec": 31,
