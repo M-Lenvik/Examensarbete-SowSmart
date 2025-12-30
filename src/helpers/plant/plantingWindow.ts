@@ -23,7 +23,7 @@ const isValidWindowValue = (value: string | null | undefined): value is string =
 /**
  * Select the appropriate planting window based on plantingMethod.
  * 
- * For outdoor plants, uses outdoors window directly.
+ * For outdoor plants, prefers outdoors window, but falls back to indoors if outdoors is missing.
  * For indoor/unknown, prefers indoors if available, otherwise uses outdoors.
  * 
  * @param plantingWindows - Planting windows (indoors/outdoors)
@@ -38,7 +38,7 @@ export const selectPlantingWindow = (
   plantingWindows: PlantingWindows,
   plantingMethod?: PlantingMethod
 ): { start: string; end: string } | null => {
-  // For outdoor plants, use outdoors window directly
+  // For outdoor plants, prefer outdoors window, but fallback to indoors if outdoors is missing
   if (plantingMethod === "outdoor") {
     if (
       isValidWindowValue(plantingWindows.outdoors.start) &&
@@ -47,6 +47,16 @@ export const selectPlantingWindow = (
       return {
         start: plantingWindows.outdoors.start,
         end: plantingWindows.outdoors.end,
+      };
+    }
+    // Fallback to indoors window if outdoors is missing (some outdoor plants only have indoors window in data)
+    if (
+      isValidWindowValue(plantingWindows.indoors.start) &&
+      isValidWindowValue(plantingWindows.indoors.end)
+    ) {
+      return {
+        start: plantingWindows.indoors.start,
+        end: plantingWindows.indoors.end,
       };
     }
     return null;

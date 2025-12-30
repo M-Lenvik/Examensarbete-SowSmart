@@ -7,6 +7,8 @@ import { PlantsList } from "../components/PlantsList/PlantsList";
 import { PlantsSearch } from "../components/PlantsSearch/PlantsSearch";
 import { PlantsSelectedSummary } from "../components/PlantsSelectedSummary/PlantsSelectedSummary";
 import { PlantsSubcategoryFilter } from "../components/PlantsSubcategoryFilter/PlantsSubcategoryFilter";
+//TODO, remove debug component before production 
+import { PlantsSelectAllDebug } from "../components/PlantsSelectAllDebug/PlantsSelectAllDebug";
 import { PlanContext } from "../context/PlanContext";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
@@ -100,12 +102,18 @@ export const PlantSelection = () => {
         ) : filteredPlants.length === 0 ? (
           <p>Inga fröer hittades.</p>
         ) : (
-          <PlantsList
-            plants={filteredPlants}
-            selectedPlantIds={state.selectedPlantIds}
-            onToggleSelected={actions.toggleSelectedPlant}
-            onOpenDetails={handleOpenDetails}
-          />
+
+          //TODO, remove debug component before production 
+          <>
+            <PlantsSelectAllDebug filteredPlants={filteredPlants} />
+            <PlantsList
+              plants={filteredPlants}
+              selectedPlantIds={state.selectedPlantIds}
+              onToggleSelected={actions.toggleSelectedPlant}
+              onOpenDetails={handleOpenDetails}
+            />
+          </>
+          //TODO, remove debug component before production 
         )}
       </Panel>
 
