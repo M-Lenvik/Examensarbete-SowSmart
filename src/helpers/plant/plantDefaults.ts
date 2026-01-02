@@ -152,44 +152,45 @@ export const DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY: Record<string, number> =
  * Get default movePlantOutdoor based on subcategory and frost tolerance.
  * Returns a generic "when frost risk is over" rule for frost-sensitive plants.
  */
+/**
+ * Get movePlantOutdoor configuration for frost-tolerant plants.
+ */
+const getFrostTolerantMovePlantOutdoor = (): MovePlantOutdoor => ({
+  description: "när frosten släpper",
+  start: "april",
+  end: "maj",
+});
+
+/**
+ * Get movePlantOutdoor configuration for frost-sensitive plants.
+ */
+const getFrostSensitiveMovePlantOutdoor = (): MovePlantOutdoor => ({
+  description: "efter avhärdning när frostrisken är över",
+  start: "maj",
+  end: "juni",
+});
+
 export const getDefaultMovePlantOutdoor = (
   subcategory: string,
   frostTolerant: boolean | null
 ): MovePlantOutdoor | null => {
-  // If frost-tolerant, can be moved out earlier (typically mid-spring)
+  // Use explicit frost tolerance if available
   if (frostTolerant === true) {
-    return {
-      description: "när frosten släpper",
-      start: "april",
-      end: "maj",
-    };
+    return getFrostTolerantMovePlantOutdoor();
   }
-
-  // For frost-sensitive plants that are started indoors, move out after hardening
+  
   if (frostTolerant === false) {
-    return {
-      description: "efter avhärdning när frostrisken är över",
-      start: "maj",
-      end: "juni",
-    };
+    return getFrostSensitiveMovePlantOutdoor();
   }
 
   // If frost tolerance is unknown, check subcategory defaults
   const frostTolerantDefault = DEFAULT_FROST_TOLERANT_BY_SUBCATEGORY[subcategory];
   if (frostTolerantDefault === true) {
-    return {
-      description: "när frosten släpper",
-      start: "april",
-      end: "maj",
-    };
+    return getFrostTolerantMovePlantOutdoor();
   }
-
+  
   if (frostTolerantDefault === false) {
-    return {
-      description: "efter avhärdning när frostrisken är över",
-      start: "maj",
-      end: "juni",
-    };
+    return getFrostSensitiveMovePlantOutdoor();
   }
 
   // If no default can be determined, return null

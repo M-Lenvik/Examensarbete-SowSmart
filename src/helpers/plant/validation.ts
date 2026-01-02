@@ -59,6 +59,138 @@ const normalizeTemperatureString = (value: string | null): string | null => {
   return normalizedWords.join(" ");
 };
 
+/**
+ * Get a value with fallback to subcategory default.
+ * Returns the value if not null, otherwise tries subcategory default, otherwise null.
+ */
+const getValueWithDefault = <T>(
+  value: T | null | undefined,
+  subcategory: string,
+  defaults: Record<string, T>,
+  fieldName: string,
+  plantName: string
+): T | null => {
+  if (value !== null && value !== undefined) {
+    return value;
+  }
+
+  const subcategoryDefault = defaults[subcategory];
+  if (subcategoryDefault !== undefined) {
+    console.warn(
+      `[normalizePlant] Missing ${fieldName} for "${plantName}" (${subcategory}), using subcategory default: ${subcategoryDefault}`
+    );
+    return subcategoryDefault;
+  }
+
+  console.error(
+    `[normalizePlant] Missing ${fieldName} for "${plantName}" (${subcategory}) and no subcategory default available. This plant may need manual data entry.`
+  );
+  return null;
+};
+
+/**
+ * Calculate daysOutdoor from totalDaysFromSeed and daysIndoorGrowth.
+ * Returns null if either input is null or if result would be negative.
+ */
+const calculateDaysOutdoor = (
+  totalDaysFromSeed: number | null,
+  daysIndoorGrowth: number | null,
+  plantName: string
+): number | null => {
+  if (totalDaysFromSeed === null || daysIndoorGrowth === null) {
+    return null;
+  }
+
+  const daysOutdoor = totalDaysFromSeed - daysIndoorGrowth;
+  if (daysOutdoor < 0) {
+    console.warn(
+      `[normalizePlant] Calculated negative daysOutdoor for "${plantName}" (${totalDaysFromSeed} - ${daysIndoorGrowth} = ${daysOutdoor}), setting to null`
+    );
+    return null;
+  }
+
+  return daysOutdoor;
+};
+
+/**
+ * Get daysIndoorGrowth for indoor plants, always null for outdoor plants.
+ */
+const getDaysIndoorGrowth = (
+  raw: RawPlant,
+  plantingMethod: PlantingMethod
+): number | null => {
+  if (plantingMethod !== "indoor") {
+    if (raw.daysIndoorGrowth !== null && raw.daysIndoorGrowth !== undefined) {
+      console.warn(
+        `[normalizePlant] Ignoring daysIndoorGrowth (${raw.daysIndoorGrowth}) for outdoor plant "${raw.name}" - setting to null`
+      );
+    }
+    return null;
+  }
+
+  return getValueWithDefault(
+    raw.daysIndoorGrowth,
+    raw.subcategory,
+    DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY,
+    "daysIndoorGrowth",
+    raw.name
+  );
+};
+
+/**
+ * Get hardeningDays with fallback to subcategory default.
+ * Only logs error for indoor plants.
+ */
+const getHardeningDays = (
+  raw: RawPlant,
+  plantingMethod: PlantingMethod
+): number | null => {
+  const value = getValueWithDefault(
+    raw.hardeningDays,
+    raw.subcategory,
+    DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY,
+    "hardeningDays",
+    raw.name
+  );
+
+  // Only log error for indoor plants if no default found
+  if (value === null && plantingMethod === "indoor") {
+    console.error(
+      `[normalizePlant] Missing hardeningDays for "${raw.name}" (${raw.subcategory}) and no subcategory default available. This plant may need manual data entry.`
+    );
+  }
+
+  return value;
+};
+
+/**
+ * Get temperature value with normalization and fallback to subcategory default.
+ */
+const getTemperatureWithDefault = (
+  rawValue: string | null,
+  subcategory: string,
+  defaults: Record<string, string>,
+  fieldName: string,
+  plantName: string
+): string | null => {
+  if (rawValue !== null) {
+    return normalizeTemperatureString(rawValue);
+  }
+
+  const subcategoryDefault = defaults[subcategory];
+  if (subcategoryDefault !== undefined) {
+    console.warn(
+      `[normalizePlant] Missing ${fieldName} for "${plantName}" (${subcategory}), using subcategory default: ${subcategoryDefault}`
+    );
+    return subcategoryDefault;
+  }
+
+  console.error(
+    `[normalizePlant] Missing ${fieldName} for "${plantName}" (${subcategory}) and no subcategory default available. This plant may need manual data entry.`
+  );
+  return null;
+};
+
 const inferPlantingMethod = (raw: RawPlant): PlantingMethod => {
   // 1. Use explicit value if present
   if (isPlantingMethod(raw.plantingMethod)) return raw.plantingMethod;
@@ -126,86 +258,23 @@ export const normalizePlant = (raw: RawPlant): Plant => {
   const totalDaysFromSeed = calculateTotalDaysFromSeed(raw.plantingWindows, raw.harvestTime ?? null, plantingMethod);
 
   // daysIndoorGrowth: only for indoor plants, always null for outdoor plants
-  let daysIndoorGrowth: number | null = null;
-  if (plantingMethod === "indoor") {
-    // For indoor plants: use raw value, then subcategory default
-    daysIndoorGrowth = raw.daysIndoorGrowth ?? null;
-    if (daysIndoorGrowth === null) {
-      const subcategoryDefault = DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY[raw.subcategory];
-      if (subcategoryDefault !== undefined) {
-        daysIndoorGrowth = subcategoryDefault;
-        console.warn(
-          `[normalizePlant] Missing daysIndoorGrowth for "${raw.name}" (${raw.subcategory}), using subcategory default: ${daysIndoorGrowth}`
-        );
-      } else {
-        // No default available - log error
-        console.error(
-          `[normalizePlant] Missing daysIndoorGrowth for "${raw.name}" (${raw.subcategory}) and no subcategory default available. This plant may need manual data entry.`
-        );
-        // Leave as null - will be handled by calling code
-      }
-    }
-  } else {
-    // For outdoor plants: always null, ignore any value in JSON
-    if (raw.daysIndoorGrowth !== null && raw.daysIndoorGrowth !== undefined) {
-      console.warn(
-        `[normalizePlant] Ignoring daysIndoorGrowth (${raw.daysIndoorGrowth}) for outdoor plant "${raw.name}" - setting to null`
-      );
-    }
-    daysIndoorGrowth = null;
-  }
+  const daysIndoorGrowth = getDaysIndoorGrowth(raw, plantingMethod);
 
   // daysOutdoor: calculate from totalDaysFromSeed and daysIndoorGrowth
   // Formula: daysOutdoor = totalDaysFromSeed - daysIndoorGrowth
-  let daysOutdoor: number | null = null;
-  if (totalDaysFromSeed !== null && daysIndoorGrowth !== null) {
-    daysOutdoor = totalDaysFromSeed - daysIndoorGrowth;
-    // Ensure non-negative result
-    if (daysOutdoor < 0) {
-      console.warn(
-        `[normalizePlant] Calculated negative daysOutdoor for "${raw.name}" (${totalDaysFromSeed} - ${daysIndoorGrowth} = ${daysOutdoor}), setting to null`
-      );
-      daysOutdoor = null;
-    }
-  }
+  const daysOutdoor = calculateDaysOutdoor(totalDaysFromSeed, daysIndoorGrowth, raw.name);
 
   // hardeningDays: use raw value, then subcategory default
-  let hardeningDays = raw.hardeningDays ?? null;
-  if (hardeningDays === null) {
-    const subcategoryDefault = DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY[raw.subcategory];
-    if (subcategoryDefault !== undefined) {
-      hardeningDays = subcategoryDefault;
-      console.warn(
-        `[normalizePlant] Missing hardeningDays for "${raw.name}" (${raw.subcategory}), using subcategory default: ${hardeningDays}`
-      );
-    } else {
-      // No default available - log error
-      if (plantingMethod === "indoor") {
-        console.error(
-          `[normalizePlant] Missing hardeningDays for "${raw.name}" (${raw.subcategory}) and no subcategory default available. This plant may need manual data entry.`
-        );
-      }
-      // Leave as null - will be handled by calling code
-    }
-  }
+  const hardeningDays = getHardeningDays(raw, plantingMethod);
 
   // frostTolerant: use raw value, then subcategory default
-  let frostTolerant = raw.frostTolerant ?? null;
-  if (frostTolerant === null) {
-    const subcategoryDefault = DEFAULT_FROST_TOLERANT_BY_SUBCATEGORY[raw.subcategory];
-    if (subcategoryDefault !== undefined) {
-      frostTolerant = subcategoryDefault;
-      console.warn(
-        `[normalizePlant] Missing frostTolerant for "${raw.name}" (${raw.subcategory}), using subcategory default: ${frostTolerant}`
-      );
-    } else {
-      // No default available - log error
-      console.error(
-        `[normalizePlant] Missing frostTolerant for "${raw.name}" (${raw.subcategory}) and no subcategory default available. This plant may need manual data entry.`
-      );
-      // Leave as null - will be handled by calling code
-    }
-  }
+  const frostTolerant = getValueWithDefault(
+    raw.frostTolerant,
+    raw.subcategory,
+    DEFAULT_FROST_TOLERANT_BY_SUBCATEGORY,
+    "frostTolerant",
+    raw.name
+  );
 
   // movePlantOutdoor: use raw value, then getDefaultMovePlantOutdoor
   let movePlantOutdoor = raw.movePlantOutdoor ?? null;
@@ -219,64 +288,31 @@ export const normalizePlant = (raw: RawPlant): Plant => {
   }
 
   // germinationTime: use raw value, then subcategory default
-  let germinationTime = raw.germinationTime ?? null;
-  if (germinationTime === null) {
-    const subcategoryDefault = DEFAULT_GERMINATION_TIME_BY_SUBCATEGORY[raw.subcategory];
-    if (subcategoryDefault !== undefined) {
-      germinationTime = subcategoryDefault;
-      console.warn(
-        `[normalizePlant] Missing germinationTime for "${raw.name}" (${raw.subcategory}), using subcategory default: ${germinationTime}`
-      );
-    } else {
-      // No default available - log error
-      console.error(
-        `[normalizePlant] Missing germinationTime for "${raw.name}" (${raw.subcategory}) and no subcategory default available. This plant may need manual data entry.`
-      );
-      // Leave as null - will be handled by calling code
-    }
-  }
+  const germinationTime = getValueWithDefault(
+    raw.germinationTime,
+    raw.subcategory,
+    DEFAULT_GERMINATION_TIME_BY_SUBCATEGORY,
+    "germinationTime",
+    raw.name
+  );
 
-  // germinationTemperature: use raw value, then subcategory default
-  let germinationTemperature = raw.germinationTemperature ?? null;
-  if (germinationTemperature === null) {
-    const subcategoryDefault = DEFAULT_GERMINATION_TEMPERATURE_BY_SUBCATEGORY[raw.subcategory];
-    if (subcategoryDefault !== undefined) {
-      germinationTemperature = subcategoryDefault;
-      console.warn(
-        `[normalizePlant] Missing germinationTemperature for "${raw.name}" (${raw.subcategory}), using subcategory default: ${germinationTemperature}`
-      );
-    } else {
-      // No default available - log error
-      console.error(
-        `[normalizePlant] Missing germinationTemperature for "${raw.name}" (${raw.subcategory}) and no subcategory default available. This plant may need manual data entry.`
-      );
-      // Leave as null - will be handled by calling code
-    }
-  } else {
-    // Normalize existing value to use "grader"
-    germinationTemperature = normalizeTemperatureString(germinationTemperature);
-  }
+  // germinationTemperature: use raw value, then subcategory default, normalize to use "grader"
+  const germinationTemperature = getTemperatureWithDefault(
+    raw.germinationTemperature ?? null,
+    raw.subcategory,
+    DEFAULT_GERMINATION_TEMPERATURE_BY_SUBCATEGORY,
+    "germinationTemperature",
+    raw.name
+  );
 
-  // growingTemperature: use raw value, then subcategory default
-  let growingTemperature = raw.growingTemperature ?? null;
-  if (growingTemperature === null) {
-    const subcategoryDefault = DEFAULT_GROWING_TEMPERATURE_BY_SUBCATEGORY[raw.subcategory];
-    if (subcategoryDefault !== undefined) {
-      growingTemperature = subcategoryDefault;
-      console.warn(
-        `[normalizePlant] Missing growingTemperature for "${raw.name}" (${raw.subcategory}), using subcategory default: ${growingTemperature}`
-      );
-    } else {
-      // No default available - log error
-      console.error(
-        `[normalizePlant] Missing growingTemperature for "${raw.name}" (${raw.subcategory}) and no subcategory default available. This plant may need manual data entry.`
-      );
-      // Leave as null - will be handled by calling code
-    }
-  } else {
-    // Normalize existing value to use "grader"
-    growingTemperature = normalizeTemperatureString(growingTemperature);
-  }
+  // growingTemperature: use raw value, then subcategory default, normalize to use "grader"
+  const growingTemperature = getTemperatureWithDefault(
+    raw.growingTemperature ?? null,
+    raw.subcategory,
+    DEFAULT_GROWING_TEMPERATURE_BY_SUBCATEGORY,
+    "growingTemperature",
+    raw.name
+  );
 
   return {
     ...raw,

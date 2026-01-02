@@ -50,12 +50,13 @@
   }
 }
 
-.planner-selected-plants__warning {
+.planner-selected-plants__message {
   display: block;
   font-size: 0.875rem;
   color: $warning-color;
   font-style: italic;
   margin-left: 0.5rem;
+  white-space: pre-line;
 }
 
 .planner-selected-plants__actions {

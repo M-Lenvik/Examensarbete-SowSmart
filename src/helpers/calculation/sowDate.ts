@@ -157,7 +157,7 @@ export const calculateSowDate = (
   // Handle dates outside harvest window:
   // - If before harvestTime.start: use 0 (will give first day of planting window)
   // - If after harvestTime.end: use harvestTimeSpan (will give last day of planting window)
-  // We still calculate sowDate, but getPlantWarning will show a warning
+  // We calculate sowDate, but getPlantSowResult will show a result message
   const clampedHarvestDaySpan = Math.max(0, Math.min(harvestDaySpan, harvestTimeSpan));
 
   // Calculate sowDateOffset using clamped value

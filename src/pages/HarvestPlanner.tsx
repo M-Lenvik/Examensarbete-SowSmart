@@ -7,7 +7,7 @@ import { PlannerDateInput } from "../components/PlannerDateInput/PlannerDateInpu
 import { PlannerSelectedPlants } from "../components/PlannerSelectedPlants/PlannerSelectedPlants";
 import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailModal";
 import { PlanContext } from "../context/PlanContext";
-import { getPlantWarning, validateHarvestDate } from "../helpers/date/dateValidation";
+import { getPlantSowResult, validateHarvestDate } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
@@ -42,20 +42,20 @@ export const HarvestPlanner = () => {
     return plants.filter((plant) => selectedSet.has(plant.id));
   }, [plants, state.selectedPlantIds]);
 
-  // Calculate warnings per plant
-  const plantWarnings = useMemo(() => {
+  // Calculate sow result messages per plant
+  const plantMessages = useMemo(() => {
     if (!dateInputValue || selectedPlants.length === 0) {
       return new Map<number, string>();
     }
 
-    const warnings = new Map<number, string>();
+    const results = new Map<number, string>();
     for (const plant of selectedPlants) {
-      const warning = getPlantWarning(dateInputValue, plant);
-      if (warning) {
-        warnings.set(plant.id, warning);
+      const sowResult = getPlantSowResult(dateInputValue, plant);
+      if (sowResult) {
+        results.set(plant.id, sowResult.message);
       }
     }
-    return warnings;
+    return results;
   }, [dateInputValue, selectedPlants]);
 
 
@@ -66,8 +66,8 @@ export const HarvestPlanner = () => {
     // Validate basic rules (required, not in past)
     const validation = validateHarvestDate(value, null);
     setValidationError(validation.error);
-    // Note: General warning is calculated in useMemo (generalWarning)
-    // Per-plant warnings are shown in the selected plants list
+    // Note: Per-plant sow result messages are calculated in useMemo (plantMessages)
+    // and shown in the selected plants list
   };
 
   // Check if calculate button should be disabled
@@ -157,7 +157,7 @@ export const HarvestPlanner = () => {
       </Panel>
       <PlannerSelectedPlants
         selectedPlants={selectedPlants}
-        plantWarnings={plantWarnings}
+        plantMessages={plantMessages}
         onOpenDetails={handleOpenDetails}
       />
       <PlannerCalculateButton

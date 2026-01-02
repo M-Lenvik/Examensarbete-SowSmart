@@ -1,229 +1,191 @@
-import type { Plant } from "../../models/Plant";
-import { formatDateIso, parseDateIso, subtractDays, addDays } from "./date";
+import { formatDateIso, parseDateIso } from "./date";
 import { calculateSowDate } from "../calculation/sowDate";
-import { getDaysInMonth } from "./monthToDays";
-import { calculateTotalDaysFromSeed } from "../calculation/totalDaysFromSeed";
 import { selectPlantingWindow } from "../plant/plantingWindow";
+import type { Plant, HarvestTime } from "../../models/Plant";
+
+type ValidationResult = {
+  isValid: boolean;
+  error: string | null;
+};
+
+export type PlantSowResultKey =
+  | "harvestDate"
+  | "harvestDateInPast"
+  | "harvestToClose"
+  | "harvestDateBeforeHarvestWindow"
+  | "harvestDateAfterHarvestWindow";
+
+export type PlantSowResult = {
+  key: PlantSowResultKey;
+  message: string;
+  sowDateIso: string | null;
+};
+
+const normalizeToStartOfDay = (date: Date): Date => {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
+
+const getNowDate = (now: Date | null): Date => {
+  return normalizeToStartOfDay(now ?? new Date());
+};
+
+const getMonthIndex = (monthName: string): number | null => {
+  const normalized = monthName.toLowerCase().trim();
+  const monthOrderMap: Record<string, number> = {
+    jan: 0,
+    feb: 1,
+    mars: 2,
+    april: 3,
+    maj: 4,
+    juni: 5,
+    juli: 6,
+    aug: 7,
+    sept: 8,
+    sep: 8, // Alias for "sept" (used in plants.json)
+    okt: 9,
+    nov: 10,
+    dec: 11,
+  };
+
+  return monthOrderMap[normalized] ?? null;
+};
+
+const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
+  const monthIndex = getMonthIndex(monthName);
+  if (monthIndex === null) return null;
+
+  const date = new Date(year, monthIndex, 1);
+  date.setHours(0, 0, 0, 0);
+  return date;
+};
+
+const getLastDayOfMonth = (monthName: string, year: number): Date | null => {
+  const monthIndex = getMonthIndex(monthName);
+  if (monthIndex === null) return null;
+
+  const date = new Date(year, monthIndex + 1, 0);
+  date.setHours(0, 0, 0, 0);
+  return date;
+};
+
+const getHarvestWindowDates = (
+  harvestTime: HarvestTime | null,
+  year: number
+): { start: Date; end: Date } | null => {
+  if (!harvestTime) return null;
+  if (!harvestTime.start || !harvestTime.end) return null;
+  if (harvestTime.start.trim() === "" || harvestTime.end.trim() === "") return null;
+
+  const startMonthIndex = getMonthIndex(harvestTime.start);
+  const endMonthIndex = getMonthIndex(harvestTime.end);
+  if (startMonthIndex === null || endMonthIndex === null) return null;
+
+  // If end is before start (wrap-around), treat as invalid (consistent with monthSpan logic).
+  if (endMonthIndex < startMonthIndex) return null;
+
+  const start = new Date(year, startMonthIndex, 1);
+  const end = new Date(year, endMonthIndex + 1, 0); // last day of end month
+  start.setHours(0, 0, 0, 0);
+  end.setHours(0, 0, 0, 0);
+
+  return { start, end };
+};
+
+const getPlantingWindowDates = (
+  plant: Plant,
+  year: number
+): { start: Date; end: Date } | null => {
+  const plantingWindow = selectPlantingWindow(plant.plantingWindows, plant.plantingMethod);
+  if (!plantingWindow) return null;
+  if (!plantingWindow.start || !plantingWindow.end) return null;
+  if (plantingWindow.start.trim() === "" || plantingWindow.end.trim() === "") return null;
+
+  const start = getFirstDayOfMonth(plantingWindow.start, year);
+  const end = getLastDayOfMonth(plantingWindow.end, year);
+  if (!start || !end) return null;
+  if (end.getTime() < start.getTime()) return null;
+
+  return { start, end };
+};
+
+const diffDays = (later: Date, earlier: Date): number => {
+  return Math.floor((later.getTime() - earlier.getTime()) / (1000 * 60 * 60 * 24));
+};
 
 /**
- * Helper functions for validating harvest dates and plant warnings.
- * 
- * Data sources:
- * - dateString: User input from native date input (YYYY-MM-DD format)
- * - totalDaysFromSeed: Calculated from plants.json (plantingWindows, harvestTime)
- * - Plant data: From plants.json via Plant type
- */
-
-/**
- * Validates a harvest date input string.
- * Also checks if the date allows enough time for totalDaysFromSeed.
- * 
- * Performs three validation checks:
- * 1. Date is required (not null or empty)
- * 2. Date cannot be in the past
- * 3. Date must allow enough time for totalDaysFromSeed
- * 
- * @param dateString - Date string in YYYY-MM-DD format (from native date input) or null/empty
- * @param totalDaysFromSeed - Total days from seed to harvest (optional, for validation)
- * 
- * @returns Object with:
- *   - `isValid`: boolean indicating if date passes validation
- *   - `error`: Swedish error message if invalid, otherwise null
- *   - `warning`: Swedish warning message if date is too early (but still valid), otherwise null
- * 
- * @example
- * const result = validateHarvestDate("2026-08-15", 120);
- * if (!result.isValid) {
- *   console.error(result.error); // "Skördedatumet kan inte vara i det förflutna"
- * }
- * if (result.warning) {
- *   console.warn(result.warning); // "För att skörda 2026-08-15 skulle du behövt så på 2026-04-17"
- * }
+ * Validate the harvest date input (basic rules only).
+ *
+ * Notes:
+ * - Returns { isValid: false, error: null } for empty input to avoid showing an error
+ *   while the user hasn't picked a date yet.
  */
 export const validateHarvestDate = (
-  dateString: string | null,
-  totalDaysFromSeed: number | null = null
-): { isValid: boolean; error: string | null; warning: string | null } => {
-  // Rule 1: Date is required
-  if (!dateString || dateString.trim() === "") {
-    return {
-      isValid: false,
-      error: "Välj ett skördedatum",
-      warning: null,
-    };
-  }
-
-  // Parse the date string (YYYY-MM-DD format from native input)
-  let harvestDate: Date;
-  try {
-    harvestDate = parseDateIso(dateString);
-  } catch {
-    return {
-      isValid: false,
-      error: "Ogiltigt datumformat",
-      warning: null,
-    };
-  }
-
-  // Rule 2: Date cannot be in the past
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // Reset time to start of day for accurate comparison
-  
-  if (harvestDate < today) {
-    return {
-      isValid: false,
-      error: "Skördedatumet kan inte vara i det förflutna",
-      warning: null,
-    };
-  }
-
-  // Rule 3: Check if date allows enough time for totalDaysFromSeed
-  let warning: string | null = null;
-  if (totalDaysFromSeed !== null && totalDaysFromSeed > 0) {
-    const minSowDate = subtractDays(harvestDate, totalDaysFromSeed);
-    minSowDate.setHours(0, 0, 0, 0);
-    
-    if (minSowDate < today) {
-      const minSowDateIso = formatDateIso(minSowDate);
-      warning = `För att skörda ${dateString} skulle du behövt så på ${minSowDateIso}`;
-    }
-  }
-
-  // Date is valid (warning is optional and doesn't make it invalid)
-  return {
-    isValid: true,
-    error: null,
-    warning,
-  };
-};
-
-/**
- * Get the first day of a month in a given year.
- * Helper function for checking if harvest date is within harvest window.
- */
-const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
-  const monthOrderMap: Record<string, number> = {
-    "jan": 0,
-    "feb": 1,
-    "mars": 2,
-    "april": 3,
-    "maj": 4,
-    "juni": 5,
-    "juli": 6,
-    "aug": 7,
-    "sept": 8,
-    "sep": 8, // Alias for "sept" (used in plants.json)
-    "okt": 9,
-    "nov": 10,
-    "dec": 11,
-  };
-
-  const normalized = monthName.toLowerCase().trim();
-  const monthIndex = monthOrderMap[normalized];
-
-  if (monthIndex === undefined) {
-    return null;
-  }
-
-  return new Date(year, monthIndex, 1);
-};
-
-/**
- * Get warning message for a single plant showing the calculated sow date.
- * 
- * Handles multiple scenarios:
- * 1. If harvest date is in the past: show "Skördedatumet är i det förflutna"
- * 2. If harvest date is outside harvest window: show warning + recommended sow date
- * 3. If harvest date is too close (not enough time): show warning + nearest recommended sow date
- * 4. Normal case: show "Sås på {sowDate}"
- * 
- * The function validates that the harvest date falls within the plant's harvest window
- * and that there is enough time from today to complete the full growing cycle.
- * 
- * @param dateString - Date string in YYYY-MM-DD format
- * @param plant - Plant object to validate against
- * 
- * @returns Swedish warning message string, or null if:
- *   - dateString is null/empty
- *   - plant.harvestTime is null (no harvest window data)
- *   - Sow date cannot be calculated
- * 
- * @example
- * const warning = getPlantWarning("2026-12-15", tomatoPlant);
- * // Returns: "Valt datum är efter skördefönstret. Rekommenderat sådatum: 2026-08-20"
- * 
- * @example
- * const warning = getPlantWarning("2026-07-15", tomatoPlant);
- * // Returns: "Sås på 2026-03-22" (normal case)
- */
-export const getPlantWarning = (
-  dateString: string | null,
-  plant: Plant
-): string | null => {
-  if (!dateString || !plant.harvestTime) {
-    return null;
+  harvestDateIso: string,
+  now: Date | null
+): ValidationResult => {
+  if (!harvestDateIso || harvestDateIso.trim() === "") {
+    return { isValid: false, error: null };
   }
 
   let harvestDate: Date;
   try {
-    harvestDate = parseDateIso(dateString);
+    harvestDate = normalizeToStartOfDay(parseDateIso(harvestDateIso));
+  } catch {
+    return { isValid: false, error: "Ogiltigt skördedatum" };
+  }
+
+  const today = getNowDate(now);
+  if (harvestDate.getTime() <= today.getTime()) {
+    return {
+      isValid: false,
+      error: "Skördedatum kan ej vara i det förflutna. Välj ett giltigt datum",
+    };
+  }
+
+  return { isValid: true, error: null };
+};
+
+/**
+ * Calculate per-plant sow result message based on desired harvest date.
+ *
+ * - Detects harvest date outside harvest window (before/after)
+ * - Detects if the computed sow date is too close (i.e., would need to have been sown before today)
+ * - Returns message with computed sow date (ISO) when possible
+ */
+export const getPlantSowResult = (
+  harvestDateIso: string,
+  plant: Plant,
+  now: Date | null = null
+): PlantSowResult | null => {
+  if (!harvestDateIso || harvestDateIso.trim() === "") return null;
+
+  let harvestDate: Date;
+  try {
+    harvestDate = normalizeToStartOfDay(parseDateIso(harvestDateIso));
   } catch {
     return null;
   }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const today = getNowDate(now);
 
-  // Case 1: If harvest date is in the past
-  if (harvestDate < today) {
-    return "Skördedatumet är i det förflutna";
+  // Rule: harvest date is today or in the past
+  if (harvestDate.getTime() <= today.getTime()) {
+    return {
+      key: "harvestDateInPast",
+      message: "Skördedatum kan ej vara i det förflutna. Välj ett giltigt datum",
+      sowDateIso: null,
+    };
   }
 
-  // Check if harvest date is outside harvest window
-  const year = harvestDate.getFullYear();
-  const firstDayOfHarvestTime = getFirstDayOfMonth(plant.harvestTime.start, year);
-  const lastDayOfHarvestTime = getFirstDayOfMonth(plant.harvestTime.end, year);
-  
-  if (!firstDayOfHarvestTime || !lastDayOfHarvestTime) {
-    return null;
-  }
+  const sowDate = calculateSowDate(
+    harvestDate,
+    plant.plantingWindows,
+    plant.harvestTime ?? null,
+    plant.plantingMethod
+  );
 
-  // Get last day of harvest month
-  const daysInLastMonth = getDaysInMonth(plant.harvestTime.end);
-  if (daysInLastMonth === null) {
-    return null;
-  }
-  lastDayOfHarvestTime.setDate(daysInLastMonth);
-  lastDayOfHarvestTime.setHours(23, 59, 59, 999);
-
-  const isBeforeHarvestWindow = harvestDate < firstDayOfHarvestTime;
-  const isAfterHarvestWindow = harvestDate > lastDayOfHarvestTime;
-
-  // Select the appropriate planting window based on plantingMethod
-  const plantingWindow = selectPlantingWindow(plant.plantingWindows, plant.plantingMethod);
-  if (!plantingWindow) {
-    return null;
-  }
-
-  // Get first and last day of planting window
-  const firstDayOfPlanting = getFirstDayOfMonth(plantingWindow.start, year);
-  const lastDayOfPlanting = getFirstDayOfMonth(plantingWindow.end, year);
-  
-  if (!firstDayOfPlanting || !lastDayOfPlanting) {
-    return null;
-  }
-
-  const daysInLastPlantingMonth = getDaysInMonth(plantingWindow.end);
-  if (daysInLastPlantingMonth === null) {
-    return null;
-  }
-  lastDayOfPlanting.setDate(daysInLastPlantingMonth);
-  lastDayOfPlanting.setHours(23, 59, 59, 999);
-
-  // Calculate sow date using the seedConstant formula (we need this for all cases)
-  // Pass plantingMethod to ensure outdoor plants use outdoors window
-  const sowDate = calculateSowDate(harvestDate, plant.plantingWindows, plant.harvestTime, plant.plantingMethod);
-  
   if (!sowDate) {
     return null;
   }
@@ -231,64 +193,93 @@ export const getPlantWarning = (
   sowDate.setHours(0, 0, 0, 0);
   const sowDateIso = formatDateIso(sowDate);
 
-  // Case 2: If harvest date is outside harvest window
-  if (isBeforeHarvestWindow || isAfterHarvestWindow) {
-    let recommendedSowDate: Date;
-    
-    if (isBeforeHarvestWindow) {
-      // Calculate days before harvest window
-      const daysBefore = Math.floor(
-        (firstDayOfHarvestTime.getTime() - harvestDate.getTime()) / (1000 * 60 * 60 * 24)
-      );
-      // Recommended sow date: first day of planting window - days before
-      recommendedSowDate = subtractDays(firstDayOfPlanting, daysBefore);
-    } else {
-      // Calculate days after harvest window
-      const daysAfter = Math.floor(
-        (harvestDate.getTime() - lastDayOfHarvestTime.getTime()) / (1000 * 60 * 60 * 24)
-      );
-      // Recommended sow date: last day of planting window + days after
-      recommendedSowDate = addDays(lastDayOfPlanting, daysAfter);
+  const window = getHarvestWindowDates(plant.harvestTime ?? null, harvestDate.getFullYear());
+  if (!window) {
+    // If we can't determine harvest window, still provide a generic message based on closeness.
+    if (sowDate.getTime() >= today.getTime()) {
+      return {
+        key: "harvestDate",
+        message: `Sås på ${sowDateIso}`,
+        sowDateIso,
+      };
     }
 
-    recommendedSowDate.setHours(0, 0, 0, 0);
-    const recommendedSowDateIso = formatDateIso(recommendedSowDate);
+    return {
+      key: "harvestToClose",
+      message: `Datumet ligger för nära i tid för att hinna mogna. Närmsta rekommenderade sådatum: ${sowDateIso}`,
+      sowDateIso,
+    };
+  }
 
-    if (isBeforeHarvestWindow) {
-      return `Valt datum är före skördefönstret. Rekommenderat sådatum: ${recommendedSowDateIso}`;
+  const isBeforeWindow = harvestDate.getTime() < window.start.getTime();
+  const isAfterWindow = harvestDate.getTime() > window.end.getTime();
+  const isWithinWindow = !isBeforeWindow && !isAfterWindow;
+
+  // "Too close" should be based on time to maturity, not "today", otherwise future dates won't trigger.
+  // Days estimated to harvest from the dataset windows:
+  // - plantingWindowEnd -> harvestWindowStart
+  // This creates a plant-specific minimal growth time based on available data.
+  const plantingWindowDates = getPlantingWindowDates(plant, harvestDate.getFullYear());
+  const estimatedDaysToHarvest =
+    plantingWindowDates !== null
+      ? Math.max(0, diffDays(window.start, plantingWindowDates.end))
+      : null;
+
+  const daysBetweenSowAndHarvest = diffDays(harvestDate, sowDate);
+  const isTooCloseByMaturity =
+    estimatedDaysToHarvest !== null && daysBetweenSowAndHarvest < estimatedDaysToHarvest;
+
+  const isTooClose = sowDate.getTime() < today.getTime() || isTooCloseByMaturity;
+
+  // Rule: within harvest window and not too close
+  if (isWithinWindow && !isTooClose) {
+    return {
+      key: "harvestDate",
+      message: `Sås på ${sowDateIso}`,
+      sowDateIso,
+    };
+  }
+
+  const messages: string[] = [];
+
+  // If outside harvest window, always show the corresponding message
+  if (isBeforeWindow) {
+    messages.push(
+      `Valt datum är före skördefönstret. Vill du ändå försöka skörda då är rekommenderat sådatum: ${sowDateIso}`
+    );
+  } else if (isAfterWindow) {
+    messages.push(`Valt datum är efter skördefönstret. Du skulle behövt så: ${sowDateIso}`);
+  }
+
+  // If too close, also show the too-close message (so user can see both when applicable)
+  if (isTooClose) {
+    if (isBeforeWindow) {
+      messages.push(
+        `Datumet ligger för nära i tid för att hinna mogna och före skördefönstret. Närmsta rekommenderade sådatum: ${sowDateIso}`
+      );
+    } else if (isAfterWindow) {
+      messages.push(
+        `Datumet ligger för nära i tid för att hinna mogna och efter skördefönstret. Närmsta rekommenderade sådatum: ${sowDateIso}`
+      );
     } else {
-      return `Valt datum är efter skördefönstret. Rekommenderat sådatum: ${recommendedSowDateIso}`;
+      messages.push(
+        `Datumet ligger för nära i tid för att hinna mogna. Närmsta rekommenderade sådatum: ${sowDateIso}`
+      );
     }
   }
 
-  // Case 3: Check if sow date is in the past (harvest date is too close)
-  // Only check this if harvest date is WITHIN harvest window
-  if (sowDate < today) {
-    // Calculate the minimum harvest date needed (today + totalDaysFromSeed)
-    // Pass plantingMethod to ensure outdoor plants use outdoors window
-    const totalDaysFromSeed = calculateTotalDaysFromSeed(plant.plantingWindows, plant.harvestTime, plant.plantingMethod);
-    
-    if (totalDaysFromSeed !== null && totalDaysFromSeed > 0) {
-      const minHarvestDate = addDays(today, totalDaysFromSeed);
-      minHarvestDate.setHours(0, 0, 0, 0);
-
-      // Calculate the recommended sow date based on the minimum harvest date
-      // Pass plantingMethod to ensure outdoor plants use outdoors window
-      const recommendedSowDate = calculateSowDate(minHarvestDate, plant.plantingWindows, plant.harvestTime, plant.plantingMethod);
-      
-      if (recommendedSowDate) {
-        recommendedSowDate.setHours(0, 0, 0, 0);
-        const nearestSowDateIso = formatDateIso(recommendedSowDate);
-        return `Datumet ligger för nära i tid för att hinna mogna. Närmsta rekommenderade sådatum: ${nearestSowDateIso}`;
-      }
-    }
-
-    // Fallback: show that sow date was in the past
-    return `Behövde sås på ${sowDateIso}`;
+  if (messages.length > 0) {
+    return {
+      key: isTooClose
+        ? "harvestToClose"
+        : isBeforeWindow
+          ? "harvestDateBeforeHarvestWindow"
+          : "harvestDateAfterHarvestWindow",
+      message: messages.join("\n"),
+      sowDateIso,
+    };
   }
 
-  // Normal case: show sow date
-  return `Sås på ${sowDateIso}`;
+  return null;
 };
-
 

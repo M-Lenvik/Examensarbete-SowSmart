@@ -15,6 +15,35 @@ import { calculateSowDate } from "./sowDate";
 import { DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY } from "../plant/plantDefaults";
 
 /**
+ * Get daysIndoorGrowth from plant or subcategory default.
+ * Returns null if neither is available.
+ */
+const getDaysIndoorGrowthWithDefault = (plant: Plant): number | null => {
+  if (plant.daysIndoorGrowth !== null) {
+    return plant.daysIndoorGrowth;
+  }
+  return DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY[plant.subcategory] ?? null;
+};
+
+/**
+ * Get hardeningDays from plant or subcategory default.
+ * Adds warning if default is missing and uses 0 as fallback.
+ */
+const getHardeningDaysWithDefault = (plant: Plant, warnings: string[]): number => {
+  if (plant.hardeningDays !== null) {
+    return plant.hardeningDays;
+  }
+  
+  const defaultDays = DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY[plant.subcategory] ?? null;
+  if (defaultDays === null) {
+    warnings.push("Saknar data för antal avhärdningsdagar");
+    return 0; // Use 0 as fallback to continue calculation
+  }
+  
+  return defaultDays;
+};
+
+/**
  * Generate complete planting recommendations for selected plants based on harvest date.
  * 
  * This is the main orchestrator function that combines all calculation logic:
@@ -120,32 +149,21 @@ export const generateRecommendations = (
         }
 
         // Get daysIndoorGrowth (use from plant or default)
-        let daysIndoorGrowth = plant.daysIndoorGrowth;
+        const daysIndoorGrowth = getDaysIndoorGrowthWithDefault(plant);
         if (daysIndoorGrowth === null) {
-          daysIndoorGrowth = DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY[plant.subcategory] ?? null;
-          if (daysIndoorGrowth === null) {
-            warnings.push("Saknar data för antal dagar inomhusväxt");
-            return {
-              plantId: plant.id,
-              outdoorSowDate: null,
-              indoorSowDate: formatDateIso(indoorSowDate),
-              hardenStartDate: null,
-              movePlantOutdoorDate: null,
-              warnings,
-            };
-          }
+          warnings.push("Saknar data för antal dagar inomhusväxt");
+          return {
+            plantId: plant.id,
+            outdoorSowDate: null,
+            indoorSowDate: formatDateIso(indoorSowDate),
+            hardenStartDate: null,
+            movePlantOutdoorDate: null,
+            warnings,
+          };
         }
 
         // Get hardeningDays (use from plant or default)
-        let hardeningDays = plant.hardeningDays;
-        if (hardeningDays === null) {
-          hardeningDays = DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY[plant.subcategory] ?? null;
-          if (hardeningDays === null) {
-            warnings.push("Saknar data för antal avhärdningsdagar");
-            // Use 0 as fallback to continue calculation
-            hardeningDays = 0;
-          }
-        }
+        const hardeningDays = getHardeningDaysWithDefault(plant, warnings);
 
         // Calculate hardenStartDate: indoorSowDate + (daysIndoorGrowth - hardeningDays)
         // Hardening happens during the last hardeningDays of daysIndoorGrowth

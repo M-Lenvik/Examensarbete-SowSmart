@@ -6,13 +6,13 @@ import "./PlannerSelectedPlants.scss";
 
 type PlannerSelectedPlantsProps = {
   selectedPlants: Plant[];
-  plantWarnings?: Map<number, string>; // Map of plantId -> warning message
+  plantMessages?: Map<number, string>; // Map of plantId -> sow result message
   onOpenDetails?: (plant: Plant) => void; // Callback to open plant detail modal
 };
 
 export const PlannerSelectedPlants = ({
   selectedPlants,
-  plantWarnings,
+  plantMessages,
   onOpenDetails,
 }: PlannerSelectedPlantsProps) => {
   if (selectedPlants.length === 0) {
@@ -30,7 +30,7 @@ export const PlannerSelectedPlants = ({
       <div className="planner-selected-plants">
         <ul className="planner-selected-plants__list">
           {selectedPlants.map((plant) => {
-            const warning = plantWarnings?.get(plant.id);
+            const message = plantMessages?.get(plant.id);
             return (
               <li key={plant.id} className="planner-selected-plants__item">
                 {onOpenDetails ? (
@@ -47,9 +47,9 @@ export const PlannerSelectedPlants = ({
                     {plant.name}
                   </span>
                 )}
-                {warning && (
-                  <span className="planner-selected-plants__warning">
-                    {warning}
+                {message && (
+                  <span className="planner-selected-plants__message">
+                    {message}
                   </span>
                 )}
               </li>
