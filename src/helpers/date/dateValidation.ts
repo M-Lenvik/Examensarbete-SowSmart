@@ -286,12 +286,24 @@ export const getPlantSowResult = (
     }
   }
 
-  // If too close by theoretical maturity (try anyway), show the theoretical sow date
-  if (isTooCloseTryAnyway && tryAnywaySowDateIso) {
-    messages.push(
-      `Om du vill försöka ändå så är rekommenderat sådatum: ${tryAnywaySowDateIso}. Tänk dock på att du isåfall behöver exempelvis ett tempererat växthus för att lyckas.`
-    );
+
+
+    // If too close by theoretical maturity (try anyway), show the theoretical sow date
+  // Always show the "other year" message when isTooCloseTryAnyway is true
+  if (isTooCloseTryAnyway && tryAnywaySowDateIso && tryAnywaySowDate) {
+    // Show short message if sow date is in the future (theoretically possible this year)
+    if (tryAnywaySowDate.getTime() >= today.getTime()) {
+      messages.push(
+        `Du behöver så: ${tryAnywaySowDateIso}. Tänk dock på att du isåfall behöver exempelvis ett tempererat växthus för att lyckas.`
+      );
+    } else {
+      // Show long message if sow date is in the past (need to try another year)
+      messages.push(
+        `Om du till ett annat år vill försöka ändå så skulle du behövt så: ${tryAnywaySowDateIso}. Tänk dock på att du isåfall behöver exempelvis ett tempererat växthus för att lyckas.`
+      );
+    }
   }
+  
 
   if (messages.length > 0) {
     return {
