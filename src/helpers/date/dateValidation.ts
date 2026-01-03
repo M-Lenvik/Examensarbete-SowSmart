@@ -1,4 +1,4 @@
-import { formatDateIso, parseDateIso } from "./date";
+import { formatDateIso, parseDateIso, subtractDays } from "./date";
 import { calculateSowDate } from "../calculation/sowDate";
 import { selectPlantingWindow } from "../plant/plantingWindow";
 import type { Plant, HarvestTime } from "../../models/Plant";
@@ -152,6 +152,7 @@ export const validateHarvestDate = (
  *
  * - Detects harvest date outside harvest window (before/after)
  * - Detects if the computed sow date is too close (i.e., would need to have been sown before today)
+ * - Detects if time is too short based on theoretical maturity (try anyway)
  * - Returns message with computed sow date (ISO) when possible
  */
 export const getPlantSowResult = (
@@ -231,8 +232,25 @@ export const getPlantSowResult = (
 
   const isTooClose = sowDate.getTime() < today.getTime() || isTooCloseByMaturity;
 
-  // Rule: within harvest window and not too close
-  if (isWithinWindow && !isTooClose) {
+  // "Try anyway" maturity: theoretical growth time from first day of planting window to first day of harvest window.
+  // This is a gentler estimate (longer time) that allows users with controlled environments to try anyway.
+  const maturityDaysTryAnyway =
+    plantingWindowDates !== null
+      ? Math.max(0, diffDays(window.start, plantingWindowDates.start))
+      : null;
+
+  const isTooCloseTryAnyway =
+    maturityDaysTryAnyway !== null && daysBetweenSowAndHarvest < maturityDaysTryAnyway;
+
+  // Calculate the theoretical sow date for "try anyway" scenario
+  const tryAnywaySowDate =
+    maturityDaysTryAnyway !== null
+      ? normalizeToStartOfDay(subtractDays(harvestDate, maturityDaysTryAnyway))
+      : null;
+  const tryAnywaySowDateIso = tryAnywaySowDate ? formatDateIso(tryAnywaySowDate) : null;
+
+  // Rule: within harvest window and not too close (neither strict nor try-anyway)
+  if (isWithinWindow && !isTooClose && !isTooCloseTryAnyway) {
     return {
       key: "harvestDate",
       message: `Sås på ${sowDateIso}`,
@@ -245,27 +263,34 @@ export const getPlantSowResult = (
   // If outside harvest window, always show the corresponding message
   if (isBeforeWindow) {
     messages.push(
-      `Valt datum är före skördefönstret. Vill du ändå försöka skörda då är rekommenderat sådatum: ${sowDateIso}`
+      `Valt skördedatum är före skördefönstret. Rekommenderat första sådatum för att skörda ${plant.name} inom skördeperioden är: ${sowDateIso}`
     );
   } else if (isAfterWindow) {
-    messages.push(`Valt datum är efter skördefönstret. Du skulle behövt så: ${sowDateIso}`);
+    messages.push(`Valt skördedatum är efter skördefönstret. För mognad till detta datum är teoretiskt sådatum: ${tryAnywaySowDateIso}. Om du ändå vill försöka skörda då ligger det utanför skördefönstret och du kan behöva exempelvis ett tempererat växthus för att lyckas. Rekommenderat första sådatum för att skörda inom skördeperioden för ${plant.name} är: ${sowDateIso}.`);
   }
 
   // If too close, also show the too-close message (so user can see both when applicable)
   if (isTooClose) {
     if (isBeforeWindow) {
       messages.push(
-        `Datumet ligger för nära i tid för att hinna mogna och före skördefönstret. Närmsta rekommenderade sådatum: ${sowDateIso}`
+        `Datumet ligger för nära i tid för att hinna mogna och före skördefönstret. Närmsta rekommenderade sådatum: ${sowDateIso}. Om du till ett annat år ändå vill försöka skörda till ${harvestDateIso} så är rekommenderat sådatum: ${tryAnywaySowDateIso}. Tänk dock på att du isåfall behöver exempelvis ett tempererat växthus för att lyckas.`
       );
     } else if (isAfterWindow) {
       messages.push(
-        `Datumet ligger för nära i tid för att hinna mogna och efter skördefönstret. Närmsta rekommenderade sådatum: ${sowDateIso}`
+        `Datumet ligger för nära i tid för att hinna mogna och efter skördefönstret. Rekommenderad såperiod för ${plant.name} är: ${plantingWindowDates?.start.toLocaleDateString()} - ${plantingWindowDates?.end.toLocaleDateString()}. Om du till ett annat år ändå vill försöka skörda till ${harvestDateIso} så är rekommenderat sådatum: ${tryAnywaySowDateIso}. Tänk dock på att du isåfall behöver exempelvis ett tempererat växthus för att lyckas.`
       );
     } else {
       messages.push(
-        `Datumet ligger för nära i tid för att hinna mogna. Närmsta rekommenderade sådatum: ${sowDateIso}`
+        `Datumet ligger för nära i tid för att hinna mogna. Rekommenderad såperiod för ${plant.name} är: ${plantingWindowDates?.start.toLocaleDateString()} - ${plantingWindowDates?.end.toLocaleDateString()}. Om du ändå vill försöka skörda till ${harvestDateIso} så är rekommenderat sådatum: ${tryAnywaySowDateIso}. Tänk dock på att du isåfall behöver exempelvis ett tempererat växthus för att lyckas.`
       );
     }
+  }
+
+  // If too close by theoretical maturity (try anyway), show the theoretical sow date
+  if (isTooCloseTryAnyway && tryAnywaySowDateIso) {
+    messages.push(
+      `Om du vill försöka ändå så är rekommenderat sådatum: ${tryAnywaySowDateIso}. Tänk dock på att du isåfall behöver exempelvis ett tempererat växthus för att lyckas.`
+    );
   }
 
   if (messages.length > 0) {
