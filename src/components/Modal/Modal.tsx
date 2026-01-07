@@ -39,7 +39,7 @@ export const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
         aria-label={title ?? "Dialog"}
       >
         <header className="modal__header">
-          <div className="modal__title">{title}</div>
+          <h3 className="modal__title">{title}</h3>
           <button
             type="button"
             className="modal__close"

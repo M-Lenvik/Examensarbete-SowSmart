@@ -10,6 +10,7 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   onClick?: () => void;
+  className?: string;
 };
 
 export const Button = ({
@@ -18,11 +19,12 @@ export const Button = ({
   type = "button",
   disabled = false,
   onClick,
+  className,
 }: ButtonProps) => {
   return (
     <button
       type={type}
-      className={`button button--${variant}`}
+      className={`button button--${variant} ${className || ""}`.trim()}
       disabled={disabled}
       onClick={onClick}
     >

@@ -17,8 +17,16 @@
   margin-bottom: 0.5rem;
   color: $text-color;
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.planner-selected-plants__plant-info {
+  display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  flex: 1;
 }
 
 .planner-selected-plants__plant-name {

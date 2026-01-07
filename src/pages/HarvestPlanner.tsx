@@ -9,6 +9,7 @@ import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailM
 import { PlanContext } from "../context/PlanContext";
 import { getPlantSowResult, validateHarvestDate } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";
+import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
 
@@ -35,11 +36,12 @@ export const HarvestPlanner = () => {
     void load();
   }, []);
 
-  // Filter selected plants
+  // Filter and sort selected plants
   const selectedPlants = useMemo(() => {
     if (state.selectedPlantIds.length === 0) return [];
     const selectedSet = new Set(state.selectedPlantIds);
-    return plants.filter((plant) => selectedSet.has(plant.id));
+    const filtered = plants.filter((plant) => selectedSet.has(plant.id));
+    return sortPlantsBySubcategoryAndName(filtered);
   }, [plants, state.selectedPlantIds]);
 
   // Calculate sow result messages per plant
@@ -159,6 +161,7 @@ export const HarvestPlanner = () => {
         selectedPlants={selectedPlants}
         plantMessages={plantMessages}
         onOpenDetails={handleOpenDetails}
+        onRemove={actions.toggleSelectedPlant}
       />
       <PlannerCalculateButton
         onCalculate={handleCalculate}

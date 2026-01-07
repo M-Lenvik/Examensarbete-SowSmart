@@ -5,11 +5,11 @@ import { CalendarLegend } from "../components/CalendarLegend/CalendarLegend";
 import { CalendarMonth } from "../components/CalendarMonth/CalendarMonth";
 import { CalendarMonthNavigation } from "../components/CalendarMonthNavigation/CalendarMonthNavigation";
 import { CalendarTooltip } from "../components/CalendarTooltip/CalendarTooltip";
+import { Panel } from "../components/Panel/Panel";
 import { PlanContext } from "../context/PlanContext";
 import { recommendationsToEvents } from "../helpers/calendar/events";
 import type { CalendarEvent } from "../helpers/calendar/events";
 import { getPlants } from "../services/plantsService";
-import "./CalendarView.scss";
 
 export const CalendarView = () => {
   const { state } = useContext(PlanContext);
@@ -81,7 +81,7 @@ export const CalendarView = () => {
 
   if (isLoading) {
     return (
-      <section className="calendar-view">
+      <section>
         <h1>Kalender</h1>
         <p>Laddar...</p>
       </section>
@@ -90,7 +90,7 @@ export const CalendarView = () => {
 
   if (recommendations.length === 0 || !harvestDateIso) {
     return (
-      <section className="calendar-view">
+      <section>
         <h1>Kalender</h1>
         <p>Ingen plan skapad än. Gå till planeraren för att skapa en plan.</p>
         <Link to="/planner">Gå till planeraren</Link>
@@ -99,15 +99,17 @@ export const CalendarView = () => {
   }
 
   return (
-    <section className="calendar-view">
+    <section>
       <h1>Kalender</h1>
-      <CalendarMonthNavigation
-        currentMonth={currentMonth}
-        onPreviousMonth={handlePreviousMonth}
-        onNextMonth={handleNextMonth}
-      />
-      <CalendarLegend />
-      <CalendarMonth month={currentMonth} events={events} onDayHover={handleDayHover} />
+      <Panel>
+        <CalendarMonthNavigation
+          currentMonth={currentMonth}
+          onPreviousMonth={handlePreviousMonth}
+          onNextMonth={handleNextMonth}
+        />
+        <CalendarLegend />
+        <CalendarMonth month={currentMonth} events={events} onDayHover={handleDayHover} />
+      </Panel>
       {hoveredDay && (
         <CalendarTooltip
           events={hoveredDay.events}

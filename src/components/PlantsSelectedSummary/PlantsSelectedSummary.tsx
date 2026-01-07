@@ -1,4 +1,5 @@
 import { Button } from "../Button/Button";
+import { RemoveButton } from "../RemoveButton/RemoveButton";
 import type { Plant } from "../../models/Plant";
 import "./PlantsSelectedSummary.scss";
 
@@ -22,7 +23,7 @@ export const PlantsSelectedSummary = ({
   canContinue,
 }: PlantsSelectedSummaryProps) => {
   return (
-    <div className="plants-selected-summary">
+    <section className="plants-selected-summary">
       {selectedCount === 0 ? (
         <p>Du har inte valt några fröer än.</p>
       ) : (
@@ -38,30 +39,34 @@ export const PlantsSelectedSummary = ({
                 >
                   {plant.name}
                 </button>
-                <button
-                  type="button"
-                  className="plants-selected-summary__remove"
+                <RemoveButton
                   onClick={(event) => {
                     event.stopPropagation();
                     onRemove(plant.id);
                   }}
-                  aria-label={`Ta bort ${plant.name}`}
-                >
-                  ×
-                </button>
+                  ariaLabel={`Ta bort ${plant.name}`}
+                />
               </li>
             ))}
           </ul>
-          <Button variant="secondary" onClick={onClear}>
+          <Button 
+            variant="secondary" 
+            className="plants-selected-summary__button"
+            onClick={onClear}
+          >
             Rensa val
           </Button>
         </>
       )}
 
-      <Button disabled={!canContinue} onClick={onContinue}>
+      <Button 
+        className="plants-selected-summary__button"
+        disabled={!canContinue} 
+        onClick={onContinue}
+      >
         Till planeraren
       </Button>
-    </div>
+    </section>
   );
 };
 

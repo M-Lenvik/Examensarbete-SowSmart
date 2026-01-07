@@ -13,8 +13,8 @@ $accent-dark-green: #3a5f47;  // Dark green for emphasis
 /* Neutral Colors */
 $text-color: #2d2d2d;         // Dark charcoal for text
 $text-light: #5a5a5a;         // Light gray for secondary text
-$background-color: #ffffff;   // White background
-$background-light: #fafafa;   // Very light gray
+$background-color: #b6a38d;   // White background
+$background-light: #fdf8f2;   // Very light gray
 
 /* Header & Navigation */
 $header-background: $primary-green;
@@ -22,7 +22,7 @@ $header-text: #ffffff;
 
 /* Semantic Colors */
 $success-color: $accent-green;
-$warning-color: #d4a574;      // Warm tan
+$warning-color: #dd241d;      // Alarm red
 $error-color: #c45c4e;        // Muted red
 $info-color: $primary-green;
 
@@ -30,11 +30,32 @@ $info-color: $primary-green;
 $border-color: #e0ddd4;       // Light beige-gray
 $divider-color: #d5d1c6;      // Medium beige-gray
 
+/* Shadows */
+$panel-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25), 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+
+/* Box Shadow Mixins */
+@mixin shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+@mixin shadow-md {
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+@mixin shadow-lg {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Transition Mixin */
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
 /* Calendar Colors */
 $calendar-event-sow-outdoor: #cc800f;
 $calendar-event-sow-indoor: #ffd102;
-$calendar-event-harden-start: #57cf11;
-$calendar-event-move-plant-outdoor: #3883f3;
+$calendar-event-harden-start: #67bde6;
+$calendar-event-move-plant-outdoor: #116df8;
 $calendar-event-harvest: #277214;
 
 /* Animations */
