@@ -1,5 +1,5 @@
-import { formatDateIso, parseDateIso, subtractDays } from "./date";
-import { calculateSowDate } from "../calculation/sowDate";
+import { formatDateIso, parseDateIso } from "./date";
+import { calculateSowDate, calculateTryAnywaySowDate } from "../calculation/sowDate";
 import { selectPlantingWindow } from "../plant/plantingWindow";
 import type { Plant, HarvestTime } from "../../models/Plant";
 
@@ -242,11 +242,8 @@ export const getPlantSowResult = (
   const isTooCloseTryAnyway =
     maturityDaysTryAnyway !== null && daysBetweenSowAndHarvest < maturityDaysTryAnyway;
 
-  // Calculate the theoretical sow date for "try anyway" scenario
-  const tryAnywaySowDate =
-    maturityDaysTryAnyway !== null
-      ? normalizeToStartOfDay(subtractDays(harvestDate, maturityDaysTryAnyway))
-      : null;
+  // Calculate the theoretical sow date for "try anyway" scenario using shared function
+  const tryAnywaySowDate = calculateTryAnywaySowDate(harvestDate, plant);
   const tryAnywaySowDateIso = tryAnywaySowDate ? formatDateIso(tryAnywaySowDate) : null;
 
   // Rule: within harvest window and not too close (neither strict nor try-anyway)

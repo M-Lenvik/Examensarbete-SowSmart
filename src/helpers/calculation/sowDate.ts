@@ -8,8 +8,8 @@
  * - Uses seedConstant formula to calculate relative sow date based on harvest date position in harvest window
  */
 
-import { addDays } from "../date/date";
-import type { HarvestTime, PlantingMethod, PlantingWindows } from "../../models/Plant";
+import { addDays, subtractDays } from "../date/date";
+import type { HarvestTime, PlantingMethod, PlantingWindows, Plant } from "../../models/Plant";
 import { selectPlantingWindow } from "../plant/plantingWindow";
 import { getMonthSpan } from "../date/monthSpan";
 
@@ -171,6 +171,78 @@ export const calculateSowDate = (
 
   // Calculate sowDate: first day in plantingWindows + sowDateOffset
   const sowDate = addDays(firstDayOfPlanting, Math.round(sowDateOffset));
+
+  return sowDate;
+};
+
+/**
+ * Calculate the "try anyway" sow date backwards from harvest date.
+ * 
+ * This calculates the theoretical sow date based on the minimum growth time
+ * from the first day of the planting window to the first day of the harvest window.
+ * This is a gentler estimate (longer time) that allows users with controlled
+ * environments to try anyway, even when the harvest date is outside the optimal window.
+ * 
+ * **Calculation formula:**
+ * 1. `maturityDaysTryAnyway` = days from planting window start to harvest window start
+ * 2. `sowDate` = harvestDate - maturityDaysTryAnyway
+ * 
+ * This is the same logic used in dateValidation.ts for "try anyway" scenarios
+ * and is used by the calendar view to ensure consistent date calculations.
+ * 
+ * @param harvestDate - The date the user wants to harvest
+ * @param plant - The plant object with plantingWindows, harvestTime, and plantingMethod
+ * 
+ * @returns The calculated sow date, or null if:
+ *   - harvestTime is missing or null
+ *   - No valid planting windows exist
+ *   - harvestTime.start is empty or invalid
+ *   - plantingWindow.start is empty or invalid
+ * 
+ * @example
+ * // Calculate try-anyway sow date for tomatoes
+ * const harvestDate = new Date(2026, 5, 8); // June 8, 2026
+ * const plant = { plantingWindows: {...}, harvestTime: {...}, plantingMethod: "indoor" };
+ * const sowDate = calculateTryAnywaySowDate(harvestDate, plant);
+ * // Returns: Date object calculated backwards from harvest date
+ */
+export const calculateTryAnywaySowDate = (
+  harvestDate: Date,
+  plant: Plant
+): Date | null => {
+  if (!plant.harvestTime || !plant.harvestTime.start) {
+    return null;
+  }
+
+  const plantingWindow = selectPlantingWindow(plant.plantingWindows, plant.plantingMethod);
+  if (!plantingWindow || !plantingWindow.start) {
+    return null;
+  }
+
+  const year = harvestDate.getFullYear();
+
+  // Get harvest window start date (first day of harvestTime.start month)
+  const harvestStartDate = getFirstDayOfMonth(plant.harvestTime.start, year);
+  if (!harvestStartDate) {
+    return null;
+  }
+
+  // Get planting window start date (first day of plantingWindow.start month)
+  const plantingStartDate = getFirstDayOfMonth(plantingWindow.start, year);
+  if (!plantingStartDate) {
+    return null;
+  }
+
+  // Calculate maturityDaysTryAnyway: days from planting window start to harvest window start
+  const diffDays = (later: Date, earlier: Date): number => {
+    return Math.floor((later.getTime() - earlier.getTime()) / (1000 * 60 * 60 * 24));
+  };
+
+  const maturityDaysTryAnyway = Math.max(0, diffDays(harvestStartDate, plantingStartDate));
+
+  // Calculate sow date backwards: harvestDate - maturityDaysTryAnyway
+  const sowDate = subtractDays(harvestDate, maturityDaysTryAnyway);
+  sowDate.setHours(0, 0, 0, 0);
 
   return sowDate;
 };

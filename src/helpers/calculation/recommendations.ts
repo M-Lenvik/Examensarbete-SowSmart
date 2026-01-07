@@ -14,86 +14,9 @@
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 import { formatDateIso, parseDateIso, subtractDays, addDays } from "../date/date";
-import { selectPlantingWindow } from "../plant/plantingWindow";
+import { calculateTryAnywaySowDate } from "./sowDate";
 import { DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY } from "../plant/plantDefaults";
 
-/**
- * Get the first day of a month in a given year.
- */
-const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
-  const monthOrderMap: Record<string, number> = {
-    jan: 0,
-    feb: 1,
-    mars: 2,
-    april: 3,
-    maj: 4,
-    juni: 5,
-    juli: 6,
-    aug: 7,
-    sept: 8,
-    sep: 8,
-    okt: 9,
-    nov: 10,
-    dec: 11,
-  };
-
-  const normalized = monthName.toLowerCase().trim();
-  const monthIndex = monthOrderMap[normalized];
-
-  if (monthIndex === undefined) {
-    return null;
-  }
-
-  return new Date(year, monthIndex, 1);
-};
-
-/**
- * Calculate the number of days between two dates.
- */
-const diffDays = (later: Date, earlier: Date): number => {
-  return Math.floor((later.getTime() - earlier.getTime()) / (1000 * 60 * 60 * 24));
-};
-
-/**
- * Calculate sow date backwards from harvest date using the same logic as tryAnywaySowDate.
- * This calculates: harvestDate - (harvestWindowStart - plantingWindowStart)
- */
-const calculateSowDateBackwards = (
-  harvestDate: Date,
-  plant: Plant
-): Date | null => {
-  if (!plant.harvestTime) {
-    return null;
-  }
-
-  const plantingWindow = selectPlantingWindow(plant.plantingWindows, plant.plantingMethod);
-  if (!plantingWindow || !plantingWindow.start || !plantingWindow.end) {
-    return null;
-  }
-
-  const year = harvestDate.getFullYear();
-
-  // Get harvest window dates
-  const harvestStartMonthIndex = getFirstDayOfMonth(plant.harvestTime.start, year);
-  if (!harvestStartMonthIndex) {
-    return null;
-  }
-
-  // Get planting window start date
-  const plantingStartDate = getFirstDayOfMonth(plantingWindow.start, year);
-  if (!plantingStartDate) {
-    return null;
-  }
-
-  // Calculate maturityDaysTryAnyway: days from planting window start to harvest window start
-  const maturityDaysTryAnyway = Math.max(0, diffDays(harvestStartMonthIndex, plantingStartDate));
-
-  // Calculate sow date backwards: harvestDate - maturityDaysTryAnyway
-  const sowDate = subtractDays(harvestDate, maturityDaysTryAnyway);
-  sowDate.setHours(0, 0, 0, 0);
-
-  return sowDate;
-};
 
 /**
  * Get daysIndoorGrowth from plant or subcategory default.
@@ -187,8 +110,8 @@ export const generateRecommendations = (
     switch (plant.plantingMethod) {
       case "outdoor": {
         // Outdoor path: sow directly outdoors
-        // Calculate backwards using tryAnywaySowDate logic
-        const outdoorSowDate = calculateSowDateBackwards(harvestDate, plant);
+        // Calculate backwards using tryAnywaySowDate logic (shared with planner)
+        const outdoorSowDate = calculateTryAnywaySowDate(harvestDate, plant);
 
         if (!outdoorSowDate) {
           warnings.push("Kunde inte beräkna sådatum (saknar plantingWindows eller harvestTime)");
@@ -215,12 +138,12 @@ export const generateRecommendations = (
       case "indoor": {
         // Indoor path: must start indoors
         // Calculate ALL dates backwards from harvest date:
-        // 1. indoorSowDate = calculateSowDateBackwards (using tryAnywaySowDate logic - same as dateValidation)
+        // 1. indoorSowDate = calculateTryAnywaySowDate (shared function - same as planner)
         // 2. movePlantOutdoorDate = indoorSowDate + daysIndoorGrowth (forward from sow date)
         // 3. hardenStartDate = movePlantOutdoorDate - hardeningDays (backwards from move outdoor)
 
-        // Calculate indoorSowDate using tryAnywaySowDate logic (same as dateValidation)
-        const indoorSowDate = calculateSowDateBackwards(harvestDate, plant);
+        // Calculate indoorSowDate using tryAnywaySowDate logic (shared with planner)
+        const indoorSowDate = calculateTryAnywaySowDate(harvestDate, plant);
 
         if (!indoorSowDate) {
           warnings.push("Kunde inte beräkna sådatum (saknar plantingWindows eller harvestTime)");
