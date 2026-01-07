@@ -1,0 +1,61 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/mixins" as *;
+
+.calendar-month-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: $background-light;
+  border-radius: 0.5rem;
+  border: 1px solid $border-color;
+}
+
+.calendar-month-navigation__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid $border-color;
+  border-radius: 50%;
+  background-color: $background-color;
+  color: $text-color;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $primary-beige;
+    border-color: $primary-green;
+    color: $primary-green;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary-green;
+    outline-offset: 2px;
+  }
+}
+
+.calendar-month-navigation__month {
+  flex: 1;
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: $text-color;
+  text-align: center;
+}
+
+@include tablet {
+  .calendar-month-navigation__month {
+    font-size: 1.25rem;
+  }
+}
+

@@ -1,0 +1,45 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/mixins" as *;
+
+.calendar-legend {
+  padding: 1rem;
+  background-color: $background-light;
+  border-radius: 0.5rem;
+  border: 1px solid $border-color;
+}
+
+.calendar-legend__title {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text-color;
+}
+
+.calendar-legend__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.calendar-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.calendar-legend__label {
+  font-size: 0.875rem;
+  color: $text-color;
+}
+
+@include tablet {
+  .calendar-legend__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+

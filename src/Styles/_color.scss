@@ -30,6 +30,13 @@ $info-color: $primary-green;
 $border-color: #e0ddd4;       // Light beige-gray
 $divider-color: #d5d1c6;      // Medium beige-gray
 
+/* Calendar Colors */
+$calendar-event-sow-outdoor: #cc800f;
+$calendar-event-sow-indoor: #ffd102;
+$calendar-event-harden-start: #57cf11;
+$calendar-event-move-plant-outdoor: #3883f3;
+$calendar-event-harvest: #277214;
+
 /* Animations */
 @keyframes fadeIn {
   from {

@@ -1,0 +1,50 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/mixins" as *;
+
+.calendar-day {
+  position: relative;
+  min-height: 4rem;
+  padding: 0.5rem;
+  border: 1px solid $border-color;
+  background-color: $background-color;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  @include tablet {
+    min-height: 5rem;
+  }
+}
+
+.calendar-day--other-month {
+  opacity: 0.4;
+  background-color: $background-light;
+}
+
+.calendar-day--today {
+  background-color: $primary-beige;
+  font-weight: 600;
+}
+
+.calendar-day--has-events {
+  border-color: $primary-green;
+  border-width: 2px;
+}
+
+.calendar-day__number {
+  font-size: 0.875rem;
+  color: $text-color;
+}
+
+.calendar-day--today .calendar-day__number {
+  color: $primary-green;
+}
+
+.calendar-day__events {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: auto;
+}
+
