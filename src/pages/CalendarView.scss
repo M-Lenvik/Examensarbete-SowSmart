@@ -1,0 +1,16 @@
+@use '../Styles/color' as *;
+@use '../Styles/mixins' as *;
+
+.calendar-view {
+  @include container;
+  @include flex-column;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  @include tablet {
+    gap: 2rem;
+    padding-top: 3rem;
+  }
+}
+

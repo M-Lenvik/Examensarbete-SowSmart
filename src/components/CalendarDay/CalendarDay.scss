@@ -11,9 +11,15 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $background-light;
+  }
 
   @include tablet {
     min-height: 5rem;
+    padding: 0.75rem;
   }
 }
 
@@ -46,5 +52,31 @@
   flex-wrap: wrap;
   gap: 0.25rem;
   margin-top: auto;
+  align-items: center;
+}
+
+// Hide icons after the 3rd on mobile
+.calendar-day__events .calendar-event-icon:nth-child(n + 4) {
+  display: none;
+
+  @include tablet {
+    display: inline-block;
+  }
+}
+
+.calendar-day__more-indicator {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: $text-light;
+  padding: 0.125rem 0.25rem;
+  background-color: $background-light;
+  border-radius: 0.125rem;
+  line-height: 1;
+  min-width: 1.25rem;
+  text-align: center;
+
+  @include tablet {
+    display: none;
+  }
 }
 

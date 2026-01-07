@@ -9,6 +9,7 @@ import { PlanContext } from "../context/PlanContext";
 import { recommendationsToEvents } from "../helpers/calendar/events";
 import type { CalendarEvent } from "../helpers/calendar/events";
 import { getPlants } from "../services/plantsService";
+import "./CalendarView.scss";
 
 export const CalendarView = () => {
   const { state } = useContext(PlanContext);
@@ -80,7 +81,7 @@ export const CalendarView = () => {
 
   if (isLoading) {
     return (
-      <section>
+      <section className="calendar-view">
         <h1>Kalender</h1>
         <p>Laddar...</p>
       </section>
@@ -89,7 +90,7 @@ export const CalendarView = () => {
 
   if (recommendations.length === 0 || !harvestDateIso) {
     return (
-      <section>
+      <section className="calendar-view">
         <h1>Kalender</h1>
         <p>Ingen plan skapad än. Gå till planeraren för att skapa en plan.</p>
         <Link to="/planner">Gå till planeraren</Link>
@@ -98,7 +99,7 @@ export const CalendarView = () => {
   }
 
   return (
-    <section>
+    <section className="calendar-view">
       <h1>Kalender</h1>
       <CalendarMonthNavigation
         currentMonth={currentMonth}

@@ -29,6 +29,10 @@ export const CalendarDay = ({
   const dayEvents = events.filter((event) => event.date === dateIso);
   const hasEvents = dayEvents.length > 0;
 
+  // Show indicator if more than 3 events (will be hidden on tablet+)
+  const maxIconsMobile = 3;
+  const remainingCount = dayEvents.length > maxIconsMobile ? dayEvents.length - maxIconsMobile : 0;
+
   const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
     if (hasEvents) {
       const rect = event.currentTarget.getBoundingClientRect();
@@ -58,8 +62,17 @@ export const CalendarDay = ({
       {hasEvents && (
         <div className="calendar-day__events">
           {dayEvents.map((event, index) => (
-            <CalendarEventIcon key={`${event.type}-${event.plantId}-${index}`} eventType={event.type} size="small" />
+            <CalendarEventIcon 
+              key={`${event.type}-${event.plantId}-${index}`} 
+              eventType={event.type} 
+              size="small"
+            />
           ))}
+          {remainingCount > 0 && (
+            <span className="calendar-day__more-indicator" aria-label={`${remainingCount} fler aktiviteter`}>
+              +{remainingCount}
+            </span>
+          )}
         </div>
       )}
     </div>

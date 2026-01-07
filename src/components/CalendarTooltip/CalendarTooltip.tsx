@@ -88,15 +88,48 @@ export const CalendarTooltip = ({ events, position, isVisible }: CalendarTooltip
 
   const groupedEvents = groupEventsByType(events);
 
+  // Calculate tooltip position to avoid going off-screen
+  // Simple approach: position above by default, adjust if needed
+  const tooltipOffset = 8;
+  const estimatedTooltipWidth = 20 * 16; // max-width in px
+  const estimatedTooltipHeight = 10 * 16; // estimated height in px
+  
+  let tooltipLeft = position.x;
+  let tooltipTop = position.y;
+  let transformX = "-50%";
+  let transformY = "calc(-100% - 0.5rem)";
+
+  const viewportWidth = window.innerWidth;
+
+  // Adjust if tooltip would go off right edge
+  if (tooltipLeft + estimatedTooltipWidth / 2 > viewportWidth - 16) {
+    tooltipLeft = viewportWidth - estimatedTooltipWidth / 2 - 16;
+  }
+
+  // Adjust if tooltip would go off left edge
+  if (tooltipLeft - estimatedTooltipWidth / 2 < 16) {
+    tooltipLeft = estimatedTooltipWidth / 2 + 16;
+  }
+
+  // Check if tooltip would go above viewport
+  if (tooltipTop - estimatedTooltipHeight - tooltipOffset < 0) {
+    // Position below instead
+    tooltipTop = position.y + tooltipOffset;
+    transformY = "0.5rem";
+  }
+
+  const tooltipStyle = {
+    left: `${tooltipLeft}px`,
+    top: `${tooltipTop}px`,
+    transform: `translate(${transformX}, ${transformY})`,
+  };
+
   return (
     <div
       className="calendar-tooltip"
       role="tooltip"
       aria-live="polite"
-      style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-      }}
+      style={tooltipStyle}
     >
       {groupedEvents.map((group, groupIndex) => (
         <div key={`${group.date}-${group.type}-${groupIndex}`} className="calendar-tooltip__group">
