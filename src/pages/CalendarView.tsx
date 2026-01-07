@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { CalendarLegend } from "../components/CalendarLegend/CalendarLegend";
 import { CalendarMonth } from "../components/CalendarMonth/CalendarMonth";
 import { CalendarMonthNavigation } from "../components/CalendarMonthNavigation/CalendarMonthNavigation";
+import { CalendarTooltip } from "../components/CalendarTooltip/CalendarTooltip";
 import { PlanContext } from "../context/PlanContext";
 import { recommendationsToEvents } from "../helpers/calendar/events";
 import type { CalendarEvent } from "../helpers/calendar/events";
@@ -16,6 +17,11 @@ export const CalendarView = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [hoveredDay, setHoveredDay] = useState<{
+    date: Date;
+    events: CalendarEvent[];
+    position: { x: number; y: number };
+  } | null>(null);
 
   // Load plants
   useEffect(() => {
@@ -61,12 +67,15 @@ export const CalendarView = () => {
   };
 
   const handleDayHover = (
-    _date: Date,
-    _dayEvents: CalendarEvent[],
-    _position: { x: number; y: number }
+    date: Date,
+    dayEvents: CalendarEvent[],
+    position: { x: number; y: number }
   ) => {
-    // Tooltip will be implemented in F6
-    // For now, just handle the hover event
+    if (dayEvents.length > 0) {
+      setHoveredDay({ date, events: dayEvents, position });
+    } else {
+      setHoveredDay(null);
+    }
   };
 
   if (isLoading) {
@@ -98,6 +107,13 @@ export const CalendarView = () => {
       />
       <CalendarLegend />
       <CalendarMonth month={currentMonth} events={events} onDayHover={handleDayHover} />
+      {hoveredDay && (
+        <CalendarTooltip
+          events={hoveredDay.events}
+          position={hoveredDay.position}
+          isVisible={true}
+        />
+      )}
     </section>
   );
 };

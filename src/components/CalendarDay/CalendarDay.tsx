@@ -25,12 +25,14 @@ export const CalendarDay = ({
   onDayHover,
 }: CalendarDayProps) => {
   const dayNumber = date.getDate();
-  const hasEvents = events.length > 0;
+  const dateIso = formatDateIso(date);
+  const dayEvents = events.filter((event) => event.date === dateIso);
+  const hasEvents = dayEvents.length > 0;
 
   const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
     if (hasEvents) {
       const rect = event.currentTarget.getBoundingClientRect();
-      onDayHover(date, events, {
+      onDayHover(date, dayEvents, {
         x: rect.left + rect.width / 2,
         y: rect.top,
       });
@@ -38,11 +40,9 @@ export const CalendarDay = ({
   };
 
   const handleMouseLeave = () => {
-    // Tooltip will be hidden by parent component
+    // Call onDayHover with empty events to hide tooltip
+    onDayHover(date, [], { x: 0, y: 0 });
   };
-
-  const dateIso = formatDateIso(date);
-  const dayEvents = events.filter((event) => event.date === dateIso);
 
   return (
     <div
