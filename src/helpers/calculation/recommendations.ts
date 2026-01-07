@@ -4,15 +4,96 @@
  * Data sources:
  * - plants: From plants.json (selected plants from user)
  * - harvestDateIso: User input (selected harvest date in ISO format)
- * - Plant data: plantingWindows, harvestTime, plantingMethod, daysIndoorGrowth, hardeningDays from plants.json
+ * - Plant data: daysOutdoor, daysIndoorGrowth, hardeningDays, plantingMethod from plants.json
  * - Defaults: From plantDefaults.ts when plant-specific data is missing
+ * 
+ * All dates are calculated backwards from the harvest date to ensure
+ * the user's selected harvest date is always respected.
  */
 
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
-import { formatDateIso, parseDateIso, addDays } from "../date/date";
-import { calculateSowDate } from "./sowDate";
+import { formatDateIso, parseDateIso, subtractDays, addDays } from "../date/date";
+import { selectPlantingWindow } from "../plant/plantingWindow";
 import { DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY } from "../plant/plantDefaults";
+
+/**
+ * Get the first day of a month in a given year.
+ */
+const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
+  const monthOrderMap: Record<string, number> = {
+    jan: 0,
+    feb: 1,
+    mars: 2,
+    april: 3,
+    maj: 4,
+    juni: 5,
+    juli: 6,
+    aug: 7,
+    sept: 8,
+    sep: 8,
+    okt: 9,
+    nov: 10,
+    dec: 11,
+  };
+
+  const normalized = monthName.toLowerCase().trim();
+  const monthIndex = monthOrderMap[normalized];
+
+  if (monthIndex === undefined) {
+    return null;
+  }
+
+  return new Date(year, monthIndex, 1);
+};
+
+/**
+ * Calculate the number of days between two dates.
+ */
+const diffDays = (later: Date, earlier: Date): number => {
+  return Math.floor((later.getTime() - earlier.getTime()) / (1000 * 60 * 60 * 24));
+};
+
+/**
+ * Calculate sow date backwards from harvest date using the same logic as tryAnywaySowDate.
+ * This calculates: harvestDate - (harvestWindowStart - plantingWindowStart)
+ */
+const calculateSowDateBackwards = (
+  harvestDate: Date,
+  plant: Plant
+): Date | null => {
+  if (!plant.harvestTime) {
+    return null;
+  }
+
+  const plantingWindow = selectPlantingWindow(plant.plantingWindows, plant.plantingMethod);
+  if (!plantingWindow || !plantingWindow.start || !plantingWindow.end) {
+    return null;
+  }
+
+  const year = harvestDate.getFullYear();
+
+  // Get harvest window dates
+  const harvestStartMonthIndex = getFirstDayOfMonth(plant.harvestTime.start, year);
+  if (!harvestStartMonthIndex) {
+    return null;
+  }
+
+  // Get planting window start date
+  const plantingStartDate = getFirstDayOfMonth(plantingWindow.start, year);
+  if (!plantingStartDate) {
+    return null;
+  }
+
+  // Calculate maturityDaysTryAnyway: days from planting window start to harvest window start
+  const maturityDaysTryAnyway = Math.max(0, diffDays(harvestStartMonthIndex, plantingStartDate));
+
+  // Calculate sow date backwards: harvestDate - maturityDaysTryAnyway
+  const sowDate = subtractDays(harvestDate, maturityDaysTryAnyway);
+  sowDate.setHours(0, 0, 0, 0);
+
+  return sowDate;
+};
 
 /**
  * Get daysIndoorGrowth from plant or subcategory default.
@@ -46,20 +127,19 @@ const getHardeningDaysWithDefault = (plant: Plant, warnings: string[]): number =
 /**
  * Generate complete planting recommendations for selected plants based on harvest date.
  * 
- * This is the main orchestrator function that combines all calculation logic:
- * - Uses calculateSowDate() for relative sow date calculation
- * - Calculates hardening dates using daysIndoorGrowth and hardeningDays
- * - Calculates transplant dates
+ * All dates are calculated backwards from the harvest date:
+ * - Uses totalDaysFromSeed or daysOutdoorToHarvest to calculate backwards
+ * - All calculations start from the user's selected harvest date
  * - Handles indoor and outdoor planting methods
  * - Falls back to defaults when plant-specific data is missing
  * 
- * **Calculation order for indoor plants:**
- * 1. `indoorSowDate` = calculateSowDate() (relative calculation)
- * 2. `hardenStartDate` = indoorSowDate + (daysIndoorGrowth - hardeningDays)
- * 3. `movePlantOutdoorDate` = indoorSowDate + daysIndoorGrowth
- * 
  * **Calculation order for outdoor plants:**
- * 1. `outdoorSowDate` = calculateSowDate() (relative calculation)
+ * 1. `outdoorSowDate` = harvestDate - daysOutdoorToHarvest
+ * 
+ * **Calculation order for indoor plants:**
+ * 1. `movePlantOutdoorDate` = harvestDate - daysOutdoorToHarvest
+ * 2. `indoorSowDate` = movePlantOutdoorDate - daysIndoorGrowth (or harvestDate - totalDaysFromSeed)
+ * 3. `hardenStartDate` = movePlantOutdoorDate - hardeningDays
  * 
  * @param plants - Array of selected plants to generate recommendations
  * @param harvestDateIso - The target harvest date in ISO format (YYYY-MM-DD)
@@ -102,24 +182,29 @@ export const generateRecommendations = (
   return plants.map((plant) => {
     const warnings: string[] = [];
 
-    // Calculate dates based on planting method
+    // Calculate dates based on planting method (all backwards from harvest date)
+    // Uses the same logic as tryAnywaySowDate in dateValidation.ts
     switch (plant.plantingMethod) {
       case "outdoor": {
         // Outdoor path: sow directly outdoors
-        const outdoorSowDate = calculateSowDate(
-          harvestDate,
-          plant.plantingWindows,
-          plant.harvestTime ?? null,
-          "outdoor"
-        );
+        // Calculate backwards using tryAnywaySowDate logic
+        const outdoorSowDate = calculateSowDateBackwards(harvestDate, plant);
 
         if (!outdoorSowDate) {
           warnings.push("Kunde inte beräkna sådatum (saknar plantingWindows eller harvestTime)");
+          return {
+            plantId: plant.id,
+            outdoorSowDate: null,
+            indoorSowDate: null,
+            hardenStartDate: null,
+            movePlantOutdoorDate: null,
+            warnings,
+          };
         }
 
         return {
           plantId: plant.id,
-          outdoorSowDate: outdoorSowDate ? formatDateIso(outdoorSowDate) : null,
+          outdoorSowDate: formatDateIso(outdoorSowDate),
           indoorSowDate: null,
           hardenStartDate: null,
           movePlantOutdoorDate: null,
@@ -129,12 +214,13 @@ export const generateRecommendations = (
 
       case "indoor": {
         // Indoor path: must start indoors
-        const indoorSowDate = calculateSowDate(
-          harvestDate,
-          plant.plantingWindows,
-          plant.harvestTime ?? null,
-          "indoor"
-        );
+        // Calculate ALL dates backwards from harvest date:
+        // 1. indoorSowDate = calculateSowDateBackwards (using tryAnywaySowDate logic - same as dateValidation)
+        // 2. movePlantOutdoorDate = indoorSowDate + daysIndoorGrowth (forward from sow date)
+        // 3. hardenStartDate = movePlantOutdoorDate - hardeningDays (backwards from move outdoor)
+
+        // Calculate indoorSowDate using tryAnywaySowDate logic (same as dateValidation)
+        const indoorSowDate = calculateSowDateBackwards(harvestDate, plant);
 
         if (!indoorSowDate) {
           warnings.push("Kunde inte beräkna sådatum (saknar plantingWindows eller harvestTime)");
@@ -148,7 +234,7 @@ export const generateRecommendations = (
           };
         }
 
-        // Get daysIndoorGrowth (use from plant or default)
+        // Get daysIndoorGrowth (required for calculating movePlantOutdoorDate)
         const daysIndoorGrowth = getDaysIndoorGrowthWithDefault(plant);
         if (daysIndoorGrowth === null) {
           warnings.push("Saknar data för antal dagar inomhusväxt");
@@ -165,14 +251,15 @@ export const generateRecommendations = (
         // Get hardeningDays (use from plant or default)
         const hardeningDays = getHardeningDaysWithDefault(plant, warnings);
 
-        // Calculate hardenStartDate: indoorSowDate + (daysIndoorGrowth - hardeningDays)
-        // Hardening happens during the last hardeningDays of daysIndoorGrowth
-        const hardenStartDate = addDays(indoorSowDate, daysIndoorGrowth - hardeningDays);
-        hardenStartDate.setHours(0, 0, 0, 0);
-
-        // Calculate movePlantOutdoorDate: indoorSowDate + daysIndoorGrowth
+        // Calculate movePlantOutdoorDate forward from indoorSowDate
+        // movePlantOutdoorDate = indoorSowDate + daysIndoorGrowth
         const movePlantOutdoorDate = addDays(indoorSowDate, daysIndoorGrowth);
         movePlantOutdoorDate.setHours(0, 0, 0, 0);
+
+        // Calculate hardenStartDate backwards from movePlantOutdoorDate
+        // Hardening happens during the last hardeningDays before moving outdoors
+        const hardenStartDate = subtractDays(movePlantOutdoorDate, hardeningDays);
+        hardenStartDate.setHours(0, 0, 0, 0);
 
         return {
           plantId: plant.id,

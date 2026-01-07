@@ -36,8 +36,8 @@ export type CalendarEvent = {
  * and each date becomes a separate event in the calendar.
  * 
  * Example:
- * - A recommendation with indoorSowDate="2025-03-15" and movePlantOutdoorDate="2025-05-20"
- *   creates two events: one "sow-indoor" on 2025-03-15 and one "move-plant-outdoor" on 2025-05-20
+ * - A recommendation with indoorSowDate="2026-03-15" and movePlantOutdoorDate="2026-05-20"
+ *   creates two events: one "sow-indoor" on 2026-03-15 and one "move-plant-outdoor" on 2026-05-20
  * 
  * How it works:
  * 1. Creates a map of plantId -> plantName for quick lookup
@@ -54,15 +54,15 @@ export type CalendarEvent = {
  * 
  * @example
  * const recommendations = [
- *   { plantId: 1, indoorSowDate: "2025-03-15", movePlantOutdoorDate: "2025-05-20", ... }
+ *   { plantId: 1, indoorSowDate: "2026-03-15", movePlantOutdoorDate: "2026-05-20", ... }
  * ];
  * const plants = [{ id: 1, name: "Tomat" }];
- * const harvestDate = "2025-08-01";
+ * const harvestDate = "2026-08-01";
  * const events = recommendationsToEvents(recommendations, plants, harvestDate);
  * // Returns: [
- * //   { type: "sow-indoor", date: "2025-03-15", plantId: 1, plantName: "Tomat" },
- * //   { type: "move-plant-outdoor", date: "2025-05-20", plantId: 1, plantName: "Tomat" },
- * //   { type: "harvest", date: "2025-08-01", plantId: 1, plantName: "Tomat" }
+ * //   { type: "sow-indoor", date: "2026-03-15", plantId: 1, plantName: "Tomat" },
+ * //   { type: "move-plant-outdoor", date: "2026-05-20", plantId: 1, plantName: "Tomat" },
+ * //   { type: "harvest", date: "2026-08-01", plantId: 1, plantName: "Tomat" }
  * // ]
  */
 export const recommendationsToEvents = (
