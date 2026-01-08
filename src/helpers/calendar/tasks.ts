@@ -1,4 +1,4 @@
-import { formatDateIso, parseDateIso } from "../date/date";
+import { parseDateIso } from "../date/date";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 
@@ -15,9 +15,10 @@ export type Task = {
 };
 
 /**
- * Get label for task type.
+ * Get label for task/event type.
+ * Can be used for both Task and CalendarEvent types since they share the same type values.
  */
-const getTaskTypeLabel = (type: Task["type"]): string => {
+export const getTaskTypeLabel = (type: Task["type"]): string => {
   switch (type) {
     case "sow-outdoor":
       return "Så utomhus";
@@ -31,6 +32,27 @@ const getTaskTypeLabel = (type: Task["type"]): string => {
       return "Skörd";
     default:
       return type;
+  }
+};
+
+/**
+ * Map Task type to PlantWarning dateType.
+ * Used when checking if a task has a warning.
+ */
+export const taskTypeToDateType = (
+  taskType: Task["type"]
+): "outdoorSowDate" | "indoorSowDate" | "hardenStartDate" | "movePlantOutdoorDate" | "harvest" => {
+  switch (taskType) {
+    case "sow-outdoor":
+      return "outdoorSowDate";
+    case "sow-indoor":
+      return "indoorSowDate";
+    case "harden-start":
+      return "hardenStartDate";
+    case "move-plant-outdoor":
+      return "movePlantOutdoorDate";
+    case "harvest":
+      return "harvest";
   }
 };
 

@@ -70,7 +70,7 @@ const getLastDayOfMonth = (monthName: string, year: number): Date | null => {
   return date;
 };
 
-const getHarvestWindowDates = (
+export const getHarvestWindowDates = (
   harvestTime: HarvestTime | null,
   year: number
 ): { start: Date; end: Date } | null => {
@@ -93,7 +93,7 @@ const getHarvestWindowDates = (
   return { start, end };
 };
 
-const getPlantingWindowDates = (
+export const getPlantingWindowDates = (
   plant: Plant,
   year: number
 ): { start: Date; end: Date } | null => {

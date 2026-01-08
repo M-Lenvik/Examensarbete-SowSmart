@@ -1,0 +1,38 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/mixins" as *;
+
+.my-garden-task-list {
+  @include flex-column;
+  gap: 1.5rem;
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    @include flex-column;
+    gap: 1.5rem;
+  }
+
+  &__date-group {
+    @include flex-column;
+    gap: 0.75rem;
+  }
+
+  &__date-header {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $text-color;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__tasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    @include flex-column;
+    gap: 0.75rem;
+  }
+}
+

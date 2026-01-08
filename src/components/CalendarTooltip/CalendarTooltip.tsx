@@ -1,4 +1,5 @@
 import { parseDateIso } from "../../helpers/date/date";
+import { getTaskTypeLabel } from "../../helpers/calendar/tasks";
 import type { CalendarEvent } from "../../helpers/calendar/events";
 import "./CalendarTooltip.scss";
 
@@ -6,26 +7,6 @@ type CalendarTooltipProps = {
   events: CalendarEvent[];
   position: { x: number; y: number };
   isVisible: boolean;
-};
-
-/**
- * Get label for event type.
- */
-const getEventTypeLabel = (eventType: CalendarEvent["type"]): string => {
-  switch (eventType) {
-    case "sow-outdoor":
-      return "Så utomhus";
-    case "sow-indoor":
-      return "Så inomhus";
-    case "harden-start":
-      return "Starta avhärdning";
-    case "move-plant-outdoor":
-      return "Flytta ut";
-    case "harvest":
-      return "Skörd";
-    default:
-      return eventType;
-  }
 };
 
 /**
@@ -135,7 +116,7 @@ export const CalendarTooltip = ({ events, position, isVisible }: CalendarTooltip
         <div key={`${group.date}-${group.type}-${groupIndex}`} className="calendar-tooltip__group">
           <div className="calendar-tooltip__date">{formatDateSwedish(group.date)}</div>
           <div className="calendar-tooltip__event-type">
-            {getEventTypeLabel(group.type)}
+            {getTaskTypeLabel(group.type)}
             {group.plantNames.length > 1 ? " för:" : ""}
           </div>
           <ul className="calendar-tooltip__plant-list">
