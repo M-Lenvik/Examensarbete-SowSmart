@@ -78,7 +78,7 @@ export const MyGarden = () => {
   if (isLoading) {
     return (
       <section>
-        <h1>Min Trädgård</h1>
+        <h1>Min frösida</h1>
         <p>Laddar...</p>
       </section>
     );
@@ -88,7 +88,7 @@ export const MyGarden = () => {
   if (state.selectedPlantIds.length === 0) {
     return (
       <section>
-        <h1>Min Trädgård</h1>
+        <h1>Min frösida</h1>
         <Panel title="Valda frön">
           <p>
             Inga frön valda än.{" "}
@@ -103,7 +103,7 @@ export const MyGarden = () => {
   if (!state.harvestDateIso) {
     return (
       <section>
-        <h1>Min Trädgård</h1>
+        <h1>Min frösida</h1>
         <Panel title="Valda frön">
           <MyGardenSelectedPlants
             selectedPlants={selectedPlants}
@@ -130,7 +130,7 @@ export const MyGarden = () => {
   if (state.recommendations.length === 0) {
     return (
       <section>
-        <h1>Min Trädgård</h1>
+        <h1>Min frösida</h1>
         <Panel title="Valda frön">
           <MyGardenSelectedPlants
             selectedPlants={selectedPlants}
@@ -155,8 +155,8 @@ export const MyGarden = () => {
 
   return (
     <section>
-      <h1>Min Trädgård</h1>
-      <Panel title="Valda frön">
+      <h1>Min frösida</h1>
+      <Panel>
         <MyGardenSelectedPlants
           selectedPlants={selectedPlants}
           onRemovePlant={actions.toggleSelectedPlant}

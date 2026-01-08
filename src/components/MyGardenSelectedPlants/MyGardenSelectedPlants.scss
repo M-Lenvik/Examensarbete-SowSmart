@@ -5,6 +5,55 @@
   @include flex-column;
   gap: 1rem;
 
+  &__header-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: lighten($accent-green, 30%);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: left;
+    @include transition(background-color);
+
+    &:hover {
+      background-color: $primary-beige;
+    }
+
+    &:focus {
+      outline: 2px solid $primary-green;
+      outline-offset: 2px;
+      border-radius: 0.25rem;
+    }
+  }
+
+  &__header {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $text-color;
+  }
+
+  &__count {
+    font-size: 1rem;
+    font-weight: 400;
+    color: $text-light;
+  }
+
+  &__header-icon {
+    font-size: 0.75rem;
+    color: $text-light;
+    flex-shrink: 0;
+    @include transition(transform);
+
+    &--expanded {
+      transform: rotate(180deg);
+    }
+  }
+
   &__list {
     list-style: none;
     padding: 0;

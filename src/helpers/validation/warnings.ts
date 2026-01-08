@@ -103,7 +103,7 @@ export const getPlantWarnings = (
           plantId: recommendation.plantId,
           plantName: plant.name,
           warningType: result.isTooEarly ? "too-early" : "too-late",
-          message: `Utomhussådatum (${recommendation.outdoorSowDate}) ligger utanför optimalt såfönster för ${plant.name}`,
+          message: `${plant.name} bör sås utomhus tidigast ${recommendation.outdoorSowDate}`,
           date: recommendation.outdoorSowDate,
           dateType: "outdoorSowDate",
         });
@@ -123,7 +123,7 @@ export const getPlantWarnings = (
           plantId: recommendation.plantId,
           plantName: plant.name,
           warningType: result.isTooEarly ? "too-early" : "too-late",
-          message: `Inomhussådatum (${recommendation.indoorSowDate}) ligger utanför optimalt såfönster för ${plant.name}`,
+          message: `${plant.name} bör försås inomhus tidigast ${recommendation.indoorSowDate}`,
           date: recommendation.indoorSowDate,
           dateType: "indoorSowDate",
         });

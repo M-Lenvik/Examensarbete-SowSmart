@@ -29,7 +29,7 @@ export const PlannerSelectedPlants = ({
   };
 
   return (
-    <Panel title="Valda fröer">
+    <Panel title="Mina valda fröer">
       <section className="planner-selected-plants">
         <ul className="planner-selected-plants__list">
           {selectedPlants.map((plant) => {
