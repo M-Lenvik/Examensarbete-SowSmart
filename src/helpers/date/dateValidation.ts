@@ -1,6 +1,7 @@
 import { formatDateIso, parseDateIso } from "./date";
 import { calculateSowDate, calculateTryAnywaySowDate } from "../calculation/sowDate";
 import { selectPlantingWindow } from "../plant/plantingWindow";
+import { getDefaultMovePlantOutdoor } from "../plant/plantDefaults";
 import type { Plant, HarvestTime } from "../../models/Plant";
 
 type ValidationResult = {
@@ -106,6 +107,52 @@ export const getPlantingWindowDates = (
   const end = getLastDayOfMonth(plantingWindow.end, year);
   if (!start || !end) return null;
   if (end.getTime() < start.getTime()) return null;
+
+  return { start, end };
+};
+
+/**
+ * Get move plant outdoor window dates for a plant.
+ * 
+ * Uses plant.movePlantOutdoor if available, otherwise falls back to defaults
+ * based on frost tolerance and subcategory.
+ * 
+ * For frost-sensitive plants: May-June
+ * For frost-tolerant plants: April-May
+ * 
+ * @param plant - The plant to check
+ * @param year - The year to use for calculations
+ * @returns Object with start and end dates for move plant outdoor window, or null if can't determine
+ */
+export const getMovePlantOutdoorWindowDates = (
+  plant: Plant,
+  year: number
+): { start: Date; end: Date } | null => {
+  // Only check for indoor plants (they need to be moved outdoors)
+  if (plant.plantingMethod !== "indoor") {
+    return null;
+  }
+
+  // Get movePlantOutdoor from plant or defaults
+  let movePlantOutdoor = plant.movePlantOutdoor;
+  
+  // If null or if start/end are null, try to get default based on subcategory and frost tolerance
+  if (!movePlantOutdoor || !movePlantOutdoor.start || !movePlantOutdoor.end) {
+    movePlantOutdoor = getDefaultMovePlantOutdoor(plant.subcategory, plant.frostTolerant);
+  }
+  
+  if (!movePlantOutdoor || !movePlantOutdoor.start || !movePlantOutdoor.end) {
+    return null;
+  }
+
+  const startMonthIndex = getMonthIndex(movePlantOutdoor.start);
+  const endMonthIndex = getMonthIndex(movePlantOutdoor.end);
+  if (startMonthIndex === null || endMonthIndex === null) return null;
+
+  const start = new Date(year, startMonthIndex, 1);
+  const end = new Date(year, endMonthIndex + 1, 0); // last day of end month
+  start.setHours(0, 0, 0, 0);
+  end.setHours(0, 0, 0, 0);
 
   return { start, end };
 };

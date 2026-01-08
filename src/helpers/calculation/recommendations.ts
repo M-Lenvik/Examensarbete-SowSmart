@@ -14,6 +14,7 @@
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 import { formatDateIso, parseDateIso, subtractDays, addDays } from "../date/date";
+import { getMovePlantOutdoorWindowDates } from "../date/dateValidation";
 import { calculateTryAnywaySowDate } from "./sowDate";
 import { DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY } from "../plant/plantDefaults";
 
@@ -176,8 +177,17 @@ export const generateRecommendations = (
 
         // Calculate movePlantOutdoorDate forward from indoorSowDate
         // movePlantOutdoorDate = indoorSowDate + daysIndoorGrowth
-        const movePlantOutdoorDate = addDays(indoorSowDate, daysIndoorGrowth);
+        let movePlantOutdoorDate = addDays(indoorSowDate, daysIndoorGrowth);
         movePlantOutdoorDate.setHours(0, 0, 0, 0);
+
+        // For frost-sensitive plants, ensure movePlantOutdoorDate is not before the move outdoor window
+        // This ensures plants are not moved out before frost risk is over
+        const moveOutdoorWindow = getMovePlantOutdoorWindowDates(plant, harvestDate.getFullYear());
+        if (moveOutdoorWindow && movePlantOutdoorDate.getTime() < moveOutdoorWindow.start.getTime()) {
+          // Adjust to start of window if calculated date is too early
+          movePlantOutdoorDate = new Date(moveOutdoorWindow.start);
+          movePlantOutdoorDate.setHours(0, 0, 0, 0);
+        }
 
         // Calculate hardenStartDate backwards from movePlantOutdoorDate
         // Hardening happens during the last hardeningDays before moving outdoors

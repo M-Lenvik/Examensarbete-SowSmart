@@ -1,5 +1,5 @@
-import { parseDateIso } from "../date/date";
-import { getHarvestWindowDates, getPlantingWindowDates } from "../date/dateValidation";
+import { parseDateIso, subtractDays } from "../date/date";
+import { getHarvestWindowDates, getPlantingWindowDates, getMovePlantOutdoorWindowDates } from "../date/dateValidation";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 
@@ -137,16 +137,53 @@ export const getPlantWarnings = (
   if (recommendation.hardenStartDate) {
     try {
       const hardenDate = parseDateIso(recommendation.hardenStartDate);
-      const result = isDateOutsidePlantingWindow(hardenDate, plant, currentYear);
-      if (result) {
-        warnings.push({
-          plantId: recommendation.plantId,
-          plantName: plant.name,
-          warningType: result.isTooEarly ? "too-early" : "too-late",
-          message: `Avhärdningsstartdatum (${recommendation.hardenStartDate}) ligger utanför optimalt fönster för ${plant.name}`,
-          date: recommendation.hardenStartDate,
-          dateType: "hardenStartDate",
-        });
+      
+      // For indoor plants with movePlantOutdoor window, check against hardening window
+      // Hardening window = movePlantOutdoor window - hardeningDays
+      const moveOutdoorWindow = getMovePlantOutdoorWindowDates(plant, currentYear);
+      
+      if (moveOutdoorWindow && plant.plantingMethod === "indoor") {
+        // Get hardeningDays
+        const hardeningDays = plant.hardeningDays ?? 7;
+        
+        // Hardening window: from (moveOutdoorWindow.start - hardeningDays) to moveOutdoorWindow.end
+        // This allows hardening to start before the move outdoor window
+        const hardenWindowStart = subtractDays(moveOutdoorWindow.start, hardeningDays);
+        hardenWindowStart.setHours(0, 0, 0, 0);
+        const hardenWindowEnd = new Date(moveOutdoorWindow.end);
+        hardenWindowEnd.setHours(0, 0, 0, 0);
+        
+        // Check if hardenStartDate is outside the hardening window
+        const isWithinWindow = isDateWithinRange(
+          hardenDate,
+          hardenWindowStart,
+          hardenWindowEnd
+        );
+        
+        if (!isWithinWindow) {
+          const isTooEarly = hardenDate.getTime() < hardenWindowStart.getTime();
+          warnings.push({
+            plantId: recommendation.plantId,
+            plantName: plant.name,
+            warningType: isTooEarly ? "too-early" : "too-late",
+            message: `Avhärdningsstartdatum (${recommendation.hardenStartDate}) ligger utanför optimalt fönster för ${plant.name}`,
+            date: recommendation.hardenStartDate,
+            dateType: "hardenStartDate",
+          });
+        }
+      } else {
+        // Fallback to planting window check for other cases
+        const result = isDateOutsidePlantingWindow(hardenDate, plant, currentYear);
+        if (result) {
+          warnings.push({
+            plantId: recommendation.plantId,
+            plantName: plant.name,
+            warningType: result.isTooEarly ? "too-early" : "too-late",
+            message: `Avhärdningsstartdatum (${recommendation.hardenStartDate}) ligger utanför optimalt fönster för ${plant.name}`,
+            date: recommendation.hardenStartDate,
+            dateType: "hardenStartDate",
+          });
+        }
       }
     } catch {
       // Invalid date, skip
@@ -157,16 +194,41 @@ export const getPlantWarnings = (
   if (recommendation.movePlantOutdoorDate) {
     try {
       const moveDate = parseDateIso(recommendation.movePlantOutdoorDate);
-      const result = isDateOutsidePlantingWindow(moveDate, plant, currentYear);
-      if (result) {
-        warnings.push({
-          plantId: recommendation.plantId,
-          plantName: plant.name,
-          warningType: result.isTooEarly ? "too-early" : "too-late",
-          message: `Utplanteringsdatum (${recommendation.movePlantOutdoorDate}) ligger utanför optimalt fönster för ${plant.name}`,
-          date: recommendation.movePlantOutdoorDate,
-          dateType: "movePlantOutdoorDate",
-        });
+      
+      // For indoor plants, check against move outdoor window
+      const moveOutdoorWindow = getMovePlantOutdoorWindowDates(plant, currentYear);
+      
+      if (moveOutdoorWindow && plant.plantingMethod === "indoor") {
+        const isWithinWindow = isDateWithinRange(
+          moveDate,
+          moveOutdoorWindow.start,
+          moveOutdoorWindow.end
+        );
+        
+        if (!isWithinWindow) {
+          const isTooEarly = moveDate.getTime() < moveOutdoorWindow.start.getTime();
+          warnings.push({
+            plantId: recommendation.plantId,
+            plantName: plant.name,
+            warningType: isTooEarly ? "too-early" : "too-late",
+            message: `Utplanteringsdatum (${recommendation.movePlantOutdoorDate}) ligger utanför optimalt fönster för ${plant.name}`,
+            date: recommendation.movePlantOutdoorDate,
+            dateType: "movePlantOutdoorDate",
+          });
+        }
+      } else {
+        // Fallback to planting window check
+        const result = isDateOutsidePlantingWindow(moveDate, plant, currentYear);
+        if (result) {
+          warnings.push({
+            plantId: recommendation.plantId,
+            plantName: plant.name,
+            warningType: result.isTooEarly ? "too-early" : "too-late",
+            message: `Utplanteringsdatum (${recommendation.movePlantOutdoorDate}) ligger utanför optimalt fönster för ${plant.name}`,
+            date: recommendation.movePlantOutdoorDate,
+            dateType: "movePlantOutdoorDate",
+          });
+        }
       }
     } catch {
       // Invalid date, skip
