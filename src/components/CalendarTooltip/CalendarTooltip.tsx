@@ -1,4 +1,4 @@
-import { parseDateIso } from "../../helpers/date/date";
+import { formatDateSwedish } from "../../helpers/date/date";
 import { getTaskTypeLabel } from "../../helpers/calendar/tasks";
 import type { CalendarEvent } from "../../helpers/calendar/events";
 import "./CalendarTooltip.scss";
@@ -7,22 +7,6 @@ type CalendarTooltipProps = {
   events: CalendarEvent[];
   position: { x: number; y: number };
   isVisible: boolean;
-};
-
-/**
- * Format date to Swedish format (e.g., "15 mars 2026").
- */
-const formatDateSwedish = (dateIso: string): string => {
-  try {
-    const date = parseDateIso(dateIso);
-    return date.toLocaleDateString("sv-SE", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  } catch {
-    return dateIso;
-  }
 };
 
 /**

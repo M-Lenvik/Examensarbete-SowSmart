@@ -1,4 +1,4 @@
-import { parseDateIso } from "../date/date";
+import { formatDateSwedish, parseDateIso } from "../date/date";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 
@@ -53,22 +53,6 @@ export const taskTypeToDateType = (
       return "movePlantOutdoorDate";
     case "harvest":
       return "harvest";
-  }
-};
-
-/**
- * Format date to Swedish format (e.g., "1 februari 2026").
- */
-const formatDateSwedish = (dateIso: string): string => {
-  try {
-    const date = parseDateIso(dateIso);
-    return date.toLocaleDateString("sv-SE", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  } catch {
-    return dateIso;
   }
 };
 

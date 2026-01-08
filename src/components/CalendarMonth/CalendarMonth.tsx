@@ -1,6 +1,6 @@
 import { CalendarDay } from "../CalendarDay/CalendarDay";
 import { getCalendarDays, isToday } from "../../helpers/calendar/calendar";
-import { formatDateIso } from "../../helpers/date/date";
+import { formatDateIso, formatMonthYearSwedish } from "../../helpers/date/date";
 import type { CalendarEvent } from "../../helpers/calendar/events";
 import "./CalendarMonth.scss";
 
@@ -33,7 +33,7 @@ export const CalendarMonth = ({ month, events, onDayHover }: CalendarMonthProps)
   };
 
   return (
-    <div className="calendar-month" role="grid" aria-label={`Kalender för ${month.toLocaleDateString("sv-SE", { month: "long", year: "numeric" })}`}>
+    <div className="calendar-month" role="grid" aria-label={`Kalender för ${formatMonthYearSwedish(month)}`}>
       <div className="calendar-month__header" role="row">
         {weekDays.map((dayName) => (
           <div key={dayName} className="calendar-month__day-name" role="columnheader">

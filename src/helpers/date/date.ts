@@ -87,3 +87,37 @@ export const parseDateIso = (iso: string): Date => {
   return date;
 };
 
+/**
+ * Format a date to Swedish format (e.g., "15 mars 2026").
+ * 
+ * Takes an ISO date string and formats it as a full Swedish date.
+ * 
+ * @param dateIso - ISO date string (YYYY-MM-DD)
+ * @returns Formatted date string in Swedish (e.g., "15 mars 2026")
+ */
+export const formatDateSwedish = (dateIso: string): string => {
+  try {
+    const date = parseDateIso(dateIso);
+    return date.toLocaleDateString("sv-SE", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  } catch {
+    return dateIso;
+  }
+};
+
+/**
+ * Format a date to Swedish month and year format (e.g., "mars 2026").
+ * 
+ * @param date - Date object
+ * @returns Formatted month and year string in Swedish (e.g., "mars 2026")
+ */
+export const formatMonthYearSwedish = (date: Date): string => {
+  return date.toLocaleDateString("sv-SE", {
+    month: "long",
+    year: "numeric",
+  });
+};
+
