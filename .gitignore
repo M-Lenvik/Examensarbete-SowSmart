@@ -32,3 +32,4 @@ src/data/plants copy.json
 # Local documentation handoff (not for repo)
 docs/HANDOFF.md
 docs/SPRINT_STATUS.md
+docs/STRUCTURE_SCHEMA.md

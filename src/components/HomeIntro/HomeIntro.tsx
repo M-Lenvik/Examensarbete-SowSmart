@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 
 import { Button } from "../Button/Button";
 import { Panel } from "../Panel/Panel";
-import "./HomeIntro.scss";
 
 export const HomeIntro = () => {
   const navigate = useNavigate();
