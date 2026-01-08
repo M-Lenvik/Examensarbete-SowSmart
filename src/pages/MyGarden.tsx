@@ -90,9 +90,9 @@ export const MyGarden = () => {
       <section>
         <h1>Min frösida</h1>
         <Panel title="Valda frön">
+        <p>Du har inte valt några fröer ännu.</p>
           <p>
-            Inga frön valda än.{" "}
-            <Link to="/plants">Gå till fröbanken</Link> för att välja frön.
+            <Link to="/plants">Gå till fröbanken för att välja fröer.</Link>
           </p>
         </Panel>
       </section>
@@ -113,8 +113,9 @@ export const MyGarden = () => {
         </Panel>
         <Panel title="Händelser">
           <p>
-            Ingen skördedatum valt.{" "}
-            <Link to="/planner">Gå till planeraren</Link> för att välja datum och beräkna plan.
+            Du har inte valt skördedatum ännu. </p>
+          <p>
+            <Link to="/planner">Gå till planeraren</Link> för att välja skördedatum och beräkna plan.
           </p>
         </Panel>
         <PlantsDetailModal

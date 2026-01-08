@@ -2,6 +2,7 @@ import { Button } from "../Button/Button";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
 import type { Plant } from "../../models/Plant";
 import "./PlantsSelectedSummary.scss";
+import { Link } from "react-router-dom";
 
 type PlantsSelectedSummaryProps = {
   selectedPlants: Plant[];
@@ -25,7 +26,13 @@ export const PlantsSelectedSummary = ({
   return (
     <section className="plants-selected-summary">
       {selectedCount === 0 ? (
-        <p>Du har inte valt några fröer än.</p>
+        <>
+        <p>Du har inte valt några fröer ännu.</p>
+        <p>
+          <Link to="/plants" onClick={() => window.scrollTo(0, 0)}>
+            Välj fröer </Link> här i fröbanken.
+        </p>
+        </>
       ) : (
         <>
           <ul className="plants-selected-summary__list">

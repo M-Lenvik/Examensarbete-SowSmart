@@ -21,12 +21,10 @@ export const MyGardenSelectedPlants = ({
   if (selectedPlants.length === 0) {
     return (
       <div className="my-garden-selected-plants">
-        <p>
-          Inga frön valda än.{" "}
-          <Link to="/plants" className="my-garden-selected-plants__link">
-            Gå till fröbanken för att välja frön.
-          </Link>
-        </p>
+          <p>Du har inte valt några fröer ännu.</p>
+          <p>
+            <Link to="/plants">Gå till fröbanken för att välja fröer.</Link>
+          </p>
       </div>
     );
   }

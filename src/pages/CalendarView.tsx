@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
+import { Button } from "../components/Button/Button";
 import { CalendarLegend } from "../components/CalendarLegend/CalendarLegend";
 import { CalendarMonth } from "../components/CalendarMonth/CalendarMonth";
 import { CalendarMonthNavigation } from "../components/CalendarMonthNavigation/CalendarMonthNavigation";
@@ -12,6 +13,7 @@ import type { CalendarEvent } from "../helpers/calendar/events";
 import { getPlants } from "../services/plantsService";
 
 export const CalendarView = () => {
+  const navigate = useNavigate();
   const { state } = useContext(PlanContext);
   const { recommendations, harvestDateIso, selectedPlantIds } = state;
   const [plants, setPlants] = useState<Awaited<ReturnType<typeof getPlants>>>([]);
@@ -93,11 +95,19 @@ export const CalendarView = () => {
   }
 
   if (recommendations.length === 0 || !harvestDateIso) {
+    const hasPlants = selectedPlantIds.length > 0;
+    
     return (
       <section>
         <h1>Kalender</h1>
-        <p>Ingen plan skapad än. Gå till planeraren för att skapa en plan.</p>
-        <Link to="/planner">Gå till planeraren</Link>
+        <Panel>
+          <p>{hasPlants ? "Du har inte valt skördedatum ännu." : "Du har inte valt några fröer ännu. "}</p>
+          <p>
+            <Link to={hasPlants ? "/planner" : "/plants"}>
+              {hasPlants ? "Gå till planeraren för att välja skördedatum och beräkna plan." : "Gå till fröbanken för att välja fröer."}
+            </Link>
+          </p>
+        </Panel>
       </section>
     );
   }
@@ -113,6 +123,11 @@ export const CalendarView = () => {
         />
         <CalendarLegend />
         <CalendarMonth month={currentMonth} events={events} onDayHover={handleDayHover} />
+      </Panel>
+      <Panel>
+        <Button onClick={() => navigate("/my-garden")}>
+          Till min frösida
+        </Button>
       </Panel>
       {hoveredDay && (
         <CalendarTooltip

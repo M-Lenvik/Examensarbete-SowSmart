@@ -204,10 +204,12 @@ export const HarvestPlanner = () => {
     return (
       <section>
         <h1>Planeraren</h1>
-        <p>Du har inte valt några fröer ännu.</p>
-        <p>
-          <Link to="/plants">Gå tillbaka och välj fröer</Link>
-        </p>
+        <Panel>
+          <p>Du har inte valt några fröer ännu.</p>
+          <p>
+            <Link to="/plants">Gå till fröbanken för att välja fröer</Link>
+          </p>
+        </Panel>
       </section>
     );
   }
@@ -234,6 +236,7 @@ export const HarvestPlanner = () => {
         onCalculate={handleCalculate}
         disabled={isCalculateDisabled}
         isLoading={isCalculating}
+        hasHarvestDate={!!dateInputValue && validationError === null}
       />
       <PlantsDetailModal
         plant={selectedPlantForModal}
