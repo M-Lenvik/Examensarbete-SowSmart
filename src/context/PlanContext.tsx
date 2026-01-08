@@ -4,6 +4,7 @@ import type React from "react";
 
 import { initialPlanState, PLAN_ACTIONS, planReducer } from "../reducers/planReducer";
 import type { PlanAction, PlanState, Recommendation } from "../reducers/planReducer";
+import { clearPlanFromLocalStorage, loadPlanFromLocalStorage } from "../helpers/storage/localStorage";
 
 type PlanContextValue = {
   state: PlanState;
@@ -34,7 +35,19 @@ type PlanProviderProps = {
 };
 
 export const PlanProvider = ({ children }: PlanProviderProps) => {
-  const [state, dispatch] = useReducer(planReducer, initialPlanState);
+  // Load saved plan from localStorage on mount
+  const [state, dispatch] = useReducer(planReducer, initialPlanState, () => {
+    const savedPlan = loadPlanFromLocalStorage();
+    if (savedPlan) {
+      return {
+        selectedPlantIds: savedPlan.selectedPlantIds,
+        harvestDateIso: savedPlan.harvestDateIso,
+        recommendations: savedPlan.recommendations,
+      };
+    }
+    return initialPlanState;
+  });
+
 
   const actions = useMemo<PlanContextValue["actions"]>(() => {
     return {
@@ -54,7 +67,10 @@ export const PlanProvider = ({ children }: PlanProviderProps) => {
           type: PLAN_ACTIONS.SET_RECOMMENDATIONS,
           payload: { recommendations },
         }),
-      resetPlan: () => dispatch({ type: PLAN_ACTIONS.RESET_PLAN }),
+      resetPlan: () => {
+        dispatch({ type: PLAN_ACTIONS.RESET_PLAN });
+        clearPlanFromLocalStorage();
+      },
     };
   }, []);
 

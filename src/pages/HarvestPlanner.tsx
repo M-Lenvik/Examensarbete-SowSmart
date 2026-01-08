@@ -9,6 +9,8 @@ import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailM
 import { PlanContext } from "../context/PlanContext";
 import { getPlantSowResult, validateHarvestDate } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";
+import { calculateTryAnywaySowDate } from "../helpers/calculation/sowDate";
+import { formatDateIso, parseDateIso } from "../helpers/date/date";
 import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
@@ -36,6 +38,14 @@ export const HarvestPlanner = () => {
     void load();
   }, []);
 
+  // Load saved harvest date from context
+  useEffect(() => {
+
+    if (state.harvestDateIso) {
+      setDateInputValue(state.harvestDateIso);
+    }
+  }, [state.harvestDateIso]);
+
   // Filter and sort selected plants
   const selectedPlants = useMemo(() => {
     if (state.selectedPlantIds.length === 0) return [];
@@ -45,20 +55,61 @@ export const HarvestPlanner = () => {
   }, [plants, state.selectedPlantIds]);
 
   // Calculate sow result messages per plant
+  // Use recommendations if available, otherwise calculate from date input
   const plantMessages = useMemo(() => {
-    if (!dateInputValue || selectedPlants.length === 0) {
+    if (selectedPlants.length === 0) {
       return new Map<number, string>();
     }
 
     const results = new Map<number, string>();
-    for (const plant of selectedPlants) {
-      const sowResult = getPlantSowResult(dateInputValue, plant);
-      if (sowResult) {
-        results.set(plant.id, sowResult.message);
+
+    // If we have recommendations, use those dates
+    if (state.recommendations.length > 0 && dateInputValue) {
+      const recommendationMap = new Map(state.recommendations.map((rec) => [rec.plantId, rec]));
+      
+      for (const plant of selectedPlants) {
+        const recommendation = recommendationMap.get(plant.id);
+        if (recommendation) {
+          // Show the actual sow date from recommendations
+          const sowDate = recommendation.indoorSowDate || recommendation.outdoorSowDate;
+          if (sowDate) {
+            results.set(plant.id, `Sås på ${sowDate}`);
+          }
+        }
+      }
+    } else if (dateInputValue) {
+      // Use getPlantSowResult for detailed messages with warnings/comments
+      // But replace the sow date with calculateTryAnywaySowDate to match calendar
+      try {
+        const harvestDate = parseDateIso(dateInputValue);
+        for (const plant of selectedPlants) {
+          const sowResult = getPlantSowResult(dateInputValue, plant);
+          if (sowResult) {
+            // Get the correct sow date using same method as calendar
+            const correctSowDate = calculateTryAnywaySowDate(harvestDate, plant);
+            if (correctSowDate) {
+              const correctSowDateIso = formatDateIso(correctSowDate);
+              // Replace the sow date in the message with the correct one
+              // This keeps all the warnings/comments but ensures date matches calendar
+              let message = sowResult.message;
+              if (sowResult.sowDateIso) {
+                // Replace all occurrences of the old sow date with the correct one
+                message = message.split(sowResult.sowDateIso).join(correctSowDateIso);
+              }
+              results.set(plant.id, message);
+            } else {
+              // Fallback to original message if we can't calculate correct date
+              results.set(plant.id, sowResult.message);
+            }
+          }
+        }
+      } catch {
+        // Invalid date, skip calculation
       }
     }
+
     return results;
-  }, [dateInputValue, selectedPlants]);
+  }, [dateInputValue, selectedPlants, state.recommendations]);
 
 
   // Handle date input change and validate
@@ -68,6 +119,22 @@ export const HarvestPlanner = () => {
     // Validate basic rules (required, not in past)
     const validation = validateHarvestDate(value, null);
     setValidationError(validation.error);
+    
+    // Update harvestDateIso in context immediately if valid
+    if (validation.isValid) {
+      // Clear old recommendations if date changed (they're based on old date)
+      if (state.harvestDateIso !== value && state.recommendations.length > 0) {
+        actions.setRecommendations([]);
+      }
+      actions.setHarvestDateIso(value);
+    } else {
+      // Clear harvestDateIso and recommendations if invalid
+      actions.setHarvestDateIso(null);
+      if (state.recommendations.length > 0) {
+        actions.setRecommendations([]);
+      }
+    }
+    
     // Note: Per-plant sow result messages are calculated in useMemo (plantMessages)
     // and shown in the selected plants list
   };
@@ -176,3 +243,4 @@ export const HarvestPlanner = () => {
     </section>
   );
 };
+

@@ -1,3 +1,5 @@
+import { savePlanToLocalStorage, clearPlanFromLocalStorage } from "../helpers/storage/localStorage";
+
 export const PLAN_ACTIONS = {
   TOGGLE_SELECTED_PLANT: "TOGGLE_SELECTED_PLANT",
   CLEAR_SELECTION: "CLEAR_SELECTION",
@@ -65,36 +67,45 @@ export const planReducer = (state: PlanState, action: PlanAction): PlanState => 
       const { plantId } = action.payload;
       const isSelected = state.selectedPlantIds.includes(plantId);
 
-      return {
+      const newState = {
         ...state,
         selectedPlantIds: isSelected
           ? state.selectedPlantIds.filter((id) => id !== plantId)
           : [...state.selectedPlantIds, plantId],
       };
+      savePlanToLocalStorage(newState);
+      return newState;
     }
 
     case PLAN_ACTIONS.CLEAR_SELECTION: {
-      return {
+      const newState = {
         ...state,
         selectedPlantIds: [],
       };
+      savePlanToLocalStorage(newState);
+      return newState;
     }
 
     case PLAN_ACTIONS.SET_HARVEST_DATE: {
-      return {
+      const newState = {
         ...state,
         harvestDateIso: action.payload.harvestDateIso,
       };
+      savePlanToLocalStorage(newState);
+      return newState;
     }
 
     case PLAN_ACTIONS.SET_RECOMMENDATIONS: {
-      return {
+      const newState = {
         ...state,
         recommendations: action.payload.recommendations,
       };
+      savePlanToLocalStorage(newState);
+      return newState;
     }
 
     case PLAN_ACTIONS.RESET_PLAN: {
+      clearPlanFromLocalStorage();
       return initialPlanState;
     }
 

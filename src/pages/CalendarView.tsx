@@ -13,7 +13,7 @@ import { getPlants } from "../services/plantsService";
 
 export const CalendarView = () => {
   const { state } = useContext(PlanContext);
-  const { recommendations, harvestDateIso } = state;
+  const { recommendations, harvestDateIso, selectedPlantIds } = state;
   const [plants, setPlants] = useState<Awaited<ReturnType<typeof getPlants>>>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -42,7 +42,11 @@ export const CalendarView = () => {
   // Convert recommendations to events
   useEffect(() => {
     if (recommendations.length > 0 && harvestDateIso && plants.length > 0) {
-      const calendarEvents = recommendationsToEvents(recommendations, plants, harvestDateIso);
+      // Filter recommendations to only include selected plants
+      const selectedPlantSet = new Set(selectedPlantIds);
+      const filteredRecommendations = recommendations.filter((rec) => selectedPlantSet.has(rec.plantId));
+      
+      const calendarEvents = recommendationsToEvents(filteredRecommendations, plants, harvestDateIso);
       setEvents(calendarEvents);
 
       // Set current month to first month with events if available
@@ -53,7 +57,7 @@ export const CalendarView = () => {
     } else {
       setEvents([]);
     }
-  }, [recommendations, harvestDateIso, plants]);
+  }, [recommendations, harvestDateIso, plants, selectedPlantIds]);
 
   const handlePreviousMonth = () => {
     const newDate = new Date(currentMonth);
