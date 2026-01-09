@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "../components/Button/Button";
@@ -7,9 +7,11 @@ import { CalendarMonth } from "../components/CalendarMonth/CalendarMonth";
 import { CalendarMonthNavigation } from "../components/CalendarMonthNavigation/CalendarMonthNavigation";
 import { CalendarTooltip } from "../components/CalendarTooltip/CalendarTooltip";
 import { Panel } from "../components/Panel/Panel";
+import { FilterDropdown } from "../components/FilterDropdown/FilterDropdown";
 import { PlanContext } from "../context/PlanContext";
 import { recommendationsToEvents } from "../helpers/calendar/events";
 import type { CalendarEvent } from "../helpers/calendar/events";
+import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
 
 export const CalendarView = () => {
@@ -25,6 +27,7 @@ export const CalendarView = () => {
     events: CalendarEvent[];
     position: { x: number; y: number };
   } | null>(null);
+  const [selectedFilterIds, setSelectedFilterIds] = useState<string[]>([]);
 
   // Load plants
   useEffect(() => {
@@ -41,12 +44,61 @@ export const CalendarView = () => {
     loadPlants();
   }, []);
 
+  // Convert filterIds to plantIds that should be shown
+  const getFilteredPlantIds = useMemo(() => {
+    // If no filters selected, show all selected plants
+    if (selectedFilterIds.length === 0) {
+      return selectedPlantIds;
+    }
+
+    // If "all" is selected, show all selected plants
+    if (selectedFilterIds.includes("all")) {
+      return selectedPlantIds;
+    }
+
+    const filteredPlantIds = new Set<number>();
+
+    // Get selected plants for building filter options
+    const selectedSet = new Set(selectedPlantIds);
+    const selectedPlants = plants.filter((plant) => selectedSet.has(plant.id));
+
+    // Group by subcategory
+    const subcategoryMap = new Map<string, Plant[]>();
+    selectedPlants.forEach((plant) => {
+      const subcategory = plant.subcategory || "Övrigt";
+      if (!subcategoryMap.has(subcategory)) {
+        subcategoryMap.set(subcategory, []);
+      }
+      subcategoryMap.get(subcategory)!.push(plant);
+    });
+
+    // Process each selected filter
+    selectedFilterIds.forEach((filterId) => {
+      if (filterId.startsWith("subcategory-")) {
+        // Add all plants in this subcategory
+        const subcategory = filterId.replace("subcategory-", "");
+        const plantsInSubcategory = subcategoryMap.get(subcategory) || [];
+        plantsInSubcategory.forEach((plant) => {
+          filteredPlantIds.add(plant.id);
+        });
+      } else if (filterId.startsWith("plant-")) {
+        // Add this specific plant
+        const plantId = parseInt(filterId.replace("plant-", ""), 10);
+        if (!isNaN(plantId)) {
+          filteredPlantIds.add(plantId);
+        }
+      }
+    });
+
+    return Array.from(filteredPlantIds);
+  }, [selectedFilterIds, selectedPlantIds, plants]);
+
   // Convert recommendations to events
   useEffect(() => {
     if (recommendations.length > 0 && harvestDateIso && plants.length > 0) {
-      // Filter recommendations to only include selected plants
-      const selectedPlantSet = new Set(selectedPlantIds);
-      const filteredRecommendations = recommendations.filter((rec) => selectedPlantSet.has(rec.plantId));
+      // Filter recommendations to only include selected plants (from filter)
+      const filteredPlantSet = new Set(getFilteredPlantIds);
+      const filteredRecommendations = recommendations.filter((rec) => filteredPlantSet.has(rec.plantId));
       
       const calendarEvents = recommendationsToEvents(filteredRecommendations, plants, harvestDateIso);
       setEvents(calendarEvents);
@@ -59,7 +111,7 @@ export const CalendarView = () => {
     } else {
       setEvents([]);
     }
-  }, [recommendations, harvestDateIso, plants, selectedPlantIds]);
+  }, [recommendations, harvestDateIso, plants, getFilteredPlantIds]);
 
   const handlePreviousMonth = () => {
     const newDate = new Date(currentMonth);
@@ -116,6 +168,14 @@ export const CalendarView = () => {
     <section>
       <h1>Kalender</h1>
       <Panel>
+        <Panel title="Filtrera händelser" variant="nested">
+          <FilterDropdown
+            selectedPlantIds={selectedPlantIds}
+            plants={plants}
+            selectedFilterIds={selectedFilterIds}
+            onFilterChange={setSelectedFilterIds}
+          />
+        </Panel>
         <CalendarMonthNavigation
           currentMonth={currentMonth}
           onPreviousMonth={handlePreviousMonth}
