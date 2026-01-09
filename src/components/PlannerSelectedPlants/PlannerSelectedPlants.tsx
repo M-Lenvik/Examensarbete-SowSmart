@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { Panel } from "../Panel/Panel";
-import { RemoveButton } from "../RemoveButton/RemoveButton";
+import { SelectedPlantsList } from "../SelectedPlantsList/SelectedPlantsList";
 import type { Plant } from "../../models/Plant";
 import "./PlannerSelectedPlants.scss";
 
@@ -22,54 +22,15 @@ export const PlannerSelectedPlants = ({
     return null;
   }
 
-  const handlePlantClick = (plant: Plant) => {
-    if (onOpenDetails) {
-      onOpenDetails(plant);
-    }
-  };
-
   return (
-    <Panel title="Mina valda fröer">
+    <Panel title={`Mina valda fröer (${selectedPlants.length})`}>
       <section className="planner-selected-plants">
-        <ul className="planner-selected-plants__list">
-          {selectedPlants.map((plant) => {
-            const message = plantMessages?.get(plant.id);
-            return (
-              <li key={plant.id} className="planner-selected-plants__item">
-                <div className="planner-selected-plants__plant-info">
-                  {onOpenDetails ? (
-                    <button
-                      type="button"
-                      className="planner-selected-plants__plant-button"
-                      onClick={() => handlePlantClick(plant)}
-                      aria-label={`Visa detaljer för ${plant.name}`}
-                    >
-                      {plant.name}
-                    </button>
-                  ) : (
-                    <span className="planner-selected-plants__plant-name">
-                      {plant.name}
-                    </span>
-                  )}
-                  {message && (
-                    <span className="planner-selected-plants__message">
-                      {message}
-                    </span>
-                  )}
-                </div>
-                {onRemove && (
-                  <RemoveButton
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      onRemove(plant.id);
-                    }}
-                    ariaLabel={`Ta bort ${plant.name}`}
-                  />
-                )}
-              </li>
-            );
-          })}
-        </ul>
+        <SelectedPlantsList
+          selectedPlants={selectedPlants}
+          plantMessages={plantMessages}
+          onOpenDetails={onOpenDetails}
+          onRemove={onRemove}
+        />
         <div className="planner-selected-plants__actions">
           <Link to="/plants" className="planner-selected-plants__link">
             Ändra val

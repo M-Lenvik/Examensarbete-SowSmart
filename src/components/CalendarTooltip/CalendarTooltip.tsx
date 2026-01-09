@@ -10,6 +10,14 @@ type CalendarTooltipProps = {
 };
 
 /**
+ * Capitalize first letter of string.
+ */
+const capitalizeFirst = (str: string): string => {
+  if (str.length === 0) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+/**
  * Group events by type (all events are on the same date).
  * Returns an array of groups, each containing date, type, and plant names.
  */
@@ -30,7 +38,11 @@ const groupEventsByType = (events: CalendarEvent[]): Array<{
     if (!groups.has(event.type)) {
       groups.set(event.type, []);
     }
-    groups.get(event.type)!.push(event.plantName);
+    // Format: "Subcategory - plantname" with capitalized subcategory
+    const displayName = event.plantSubcategory 
+      ? `${capitalizeFirst(event.plantSubcategory)} - ${event.plantName}`
+      : event.plantName;
+    groups.get(event.type)!.push(displayName);
   });
 
   return Array.from(groups.entries()).map(([type, plantNames]) => ({
@@ -101,7 +113,7 @@ export const CalendarTooltip = ({ events, position, isVisible }: CalendarTooltip
           <div className="calendar-tooltip__date">{formatDateSwedish(group.date)}</div>
           <div className="calendar-tooltip__event-type">
             {getTaskTypeLabel(group.type)}
-            {group.plantNames.length > 1 ? " för:" : ""}
+            {group.plantNames.length > 1 ? ":" : ""}
           </div>
           <ul className="calendar-tooltip__plant-list">
             {group.plantNames.map((plantName, plantIndex) => (

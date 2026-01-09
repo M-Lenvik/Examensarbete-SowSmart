@@ -40,28 +40,28 @@ export const Header = () => {
             className="nav-link"
             onClick={() => setIsMenuOpen(false)}
           >
-            Planera
+            Planeraren
           </NavLink>
           <NavLink
             to="/calendar"
             className="nav-link"
             onClick={() => setIsMenuOpen(false)}
           >
-            Kalender
+            Kalendern
           </NavLink>
           <NavLink
             to="/my-garden"
             className="nav-link"
             onClick={() => setIsMenuOpen(false)}
           >
-            Min frösida
+            Min Frösida
           </NavLink>
           <NavLink
             to="/about"
             className="nav-link"
             onClick={() => setIsMenuOpen(false)}
           >
-            Om
+            Om SåSmart
           </NavLink>
         </nav>
       </div>

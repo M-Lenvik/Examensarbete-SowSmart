@@ -6,13 +6,30 @@
 }
 
 .plants-search__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.plants-search__label {
+  font-weight: 600;
+  color: $text-color;
+}
+
+.plants-search__help-text {
+  font-size: 0.875rem;
+  color: $text-light;
+  margin: 0;
+}
+
+.plants-search__input-wrapper {
   position: relative;
 }
 
 .plants-search__clear {
   position: absolute;
   right: 0.75rem;
-  top: 2.50rem;
+  top: 0.5rem;
   appearance: none;
   border: none;
   background: transparent;
@@ -21,11 +38,9 @@
   padding: 0.25rem 0.5rem;
   color: $text-light;
   cursor: pointer;
-  @include transition(color);
-
-  &:hover {
-    color: $text-color;
-  }
+  display: flex;
+  align-items: center;
+  height: calc(100% - 1rem);
 
   &:focus {
     outline: 2px solid $accent-green;

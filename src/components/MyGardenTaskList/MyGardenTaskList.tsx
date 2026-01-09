@@ -9,6 +9,7 @@ import "./MyGardenTaskList.scss";
 type MyGardenTaskListProps = {
   tasks: Task[];
   warnings: PlantWarning[];
+  onPlantClick?: (plantId: number) => void;
 };
 
 /**
@@ -73,9 +74,10 @@ type TaskGroupCardProps = {
   dateFormatted: string;
   isExpanded: boolean;
   onToggle: () => void;
+  onPlantClick?: (plantId: number) => void;
 };
 
-const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onToggle }: TaskGroupCardProps) => {
+const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onToggle, onPlantClick }: TaskGroupCardProps) => {
   const hasWarning = tasks.some((task) => getTaskWarning(task, warnings) !== null);
 
   return (
@@ -107,24 +109,81 @@ const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onTog
           {isExpanded && (
             <>
               <ul className="my-garden-task-list__plant-list" role="list">
-              {tasks.map((task, taskIndex) => {
-                const taskWarning = getTaskWarning(task, warnings);
-                return (
-                  <li key={`${task.plantId}-${taskIndex}`} className="my-garden-task-list__plant-item">
-                    <div className="my-garden-task-list__plant-row">
-                      <span className="my-garden-task-list__plant-name">{task.plantName}</span>
-                      {taskWarning && (
-                        <span className="my-garden-task-list__plant-warning" role="alert" aria-label="Varning: datum ligger utanför optimalt fönster">
-                          ⚠️
-                        </span>
-                      )}
-                    </div>
-                    {taskWarning && (
-                      <p className="my-garden-task-list__plant-warning-message">{taskWarning.message}</p>
-                    )}
-                  </li>
-                );
-              })}
+              {(() => {
+                // Sort tasks by subcategory and name
+                const sortedTasks = [...tasks].sort((a, b) => {
+                  const subcategoryA = (a.plantSubcategory || "").trim().toLowerCase();
+                  const subcategoryB = (b.plantSubcategory || "").trim().toLowerCase();
+                  
+                  if (subcategoryA.length === 0 && subcategoryB.length === 0) {
+                    return a.plantName.localeCompare(b.plantName, "sv");
+                  }
+                  
+                  if (subcategoryA.length === 0) return 1;
+                  if (subcategoryB.length === 0) return -1;
+                  
+                  const subcategoryCompare = subcategoryA.localeCompare(subcategoryB, "sv");
+                  if (subcategoryCompare !== 0) return subcategoryCompare;
+                  
+                  return a.plantName.localeCompare(b.plantName, "sv");
+                });
+
+                // Group by subcategory
+                const groupedTasks = sortedTasks.reduce((acc, task) => {
+                  const subcategory = task.plantSubcategory || "Övrigt";
+                  if (!acc[subcategory]) {
+                    acc[subcategory] = [];
+                  }
+                  acc[subcategory].push(task);
+                  return acc;
+                }, {} as Record<string, Task[]>);
+
+                const sortedSubcategories = Object.keys(groupedTasks).sort((a, b) => {
+                  if (a === "Övrigt") return 1;
+                  if (b === "Övrigt") return -1;
+                  return a.localeCompare(b, "sv");
+                });
+
+                const capitalizeFirst = (str: string): string => {
+                  if (str.length === 0) return str;
+                  return str.charAt(0).toUpperCase() + str.slice(1);
+                };
+
+                return sortedSubcategories.flatMap((subcategory) => [
+                  <li key={`subcategory-${subcategory}`} className="my-garden-task-list__subcategory-header">
+                    <h4 className="my-garden-task-list__subcategory-title">{capitalizeFirst(subcategory)}</h4>
+                  </li>,
+                  ...groupedTasks[subcategory].map((task, taskIndex) => {
+                    const taskWarning = getTaskWarning(task, warnings);
+                    return (
+                      <li key={`${task.plantId}-${taskIndex}`} className="my-garden-task-list__plant-item">
+                        <div className="my-garden-task-list__plant-row">
+                          {onPlantClick ? (
+                            <button
+                              type="button"
+                              className="my-garden-task-list__plant-name-button"
+                              onClick={() => onPlantClick(task.plantId)}
+                              aria-label={`Öppna detaljer för ${task.plantName}`}
+                            >
+                              {task.plantName}
+                            </button>
+                          ) : (
+                            <span className="my-garden-task-list__plant-name">{task.plantName}</span>
+                          )}
+                          {taskWarning && (
+                            <span className="my-garden-task-list__plant-warning" role="alert" aria-label="Varning: datum ligger utanför optimalt fönster">
+                              ⚠️
+                            </span>
+                          )}
+                        </div>
+                        {taskWarning && (
+                          <p className="my-garden-task-list__plant-warning-message">{taskWarning.message}</p>
+                        )}
+                      </li>
+                    );
+                  })
+                ]);
+              })()}
               </ul>
             </>
           )}
@@ -134,7 +193,7 @@ const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onTog
   );
 };
 
-export const MyGardenTaskList = ({ tasks, warnings }: MyGardenTaskListProps) => {
+export const MyGardenTaskList = ({ tasks, warnings, onPlantClick }: MyGardenTaskListProps) => {
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 
   if (tasks.length === 0) {
@@ -229,6 +288,7 @@ export const MyGardenTaskList = ({ tasks, warnings }: MyGardenTaskListProps) => 
                               dateFormatted={dateFormatted}
                               isExpanded={isExpanded}
                               onToggle={() => toggleGroup(date, group.type)}
+                              onPlantClick={onPlantClick}
                             />
                           );
                         })}

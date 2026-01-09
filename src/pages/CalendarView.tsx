@@ -121,8 +121,8 @@ export const CalendarView = () => {
           onPreviousMonth={handlePreviousMonth}
           onNextMonth={handleNextMonth}
         />
-        <CalendarLegend />
         <CalendarMonth month={currentMonth} events={events} onDayHover={handleDayHover} />
+        <CalendarLegend />
       </Panel>
       <Panel>
         <Button onClick={() => navigate("/my-garden")}>

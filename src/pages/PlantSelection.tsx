@@ -2,13 +2,11 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Panel } from "../components/Panel/Panel";
+import { PlantsCategoryButtons } from "../components/PlantsCategoryButtons/PlantsCategoryButtons";
 import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailModal";
 import { PlantsList } from "../components/PlantsList/PlantsList";
 import { PlantsSearch } from "../components/PlantsSearch/PlantsSearch";
 import { PlantsSelectedSummary } from "../components/PlantsSelectedSummary/PlantsSelectedSummary";
-import { PlantsSubcategoryFilter } from "../components/PlantsSubcategoryFilter/PlantsSubcategoryFilter";
-//TODO, remove debug component before production 
-import { PlantsSelectAllDebug } from "../components/PlantsSelectAllDebug/PlantsSelectAllDebug";
 import { PlanContext } from "../context/PlanContext";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
@@ -21,7 +19,8 @@ export const PlantSelection = () => {
   const [plants, setPlants] = useState<Plant[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [subcategoryFilter, setSubcategoryFilter] = useState("all");
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
+  const [selectedType, setSelectedType] = useState<string | null>(null);
   const [selectedPlantForModal, setSelectedPlantForModal] = useState<Plant | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -42,10 +41,38 @@ export const PlantSelection = () => {
     return sortPlantsBySubcategoryAndName(filtered);
   }, [plants, state.selectedPlantIds]);
 
+  const subcategoryOptions = useMemo(() => {
+    const unique = new Set<string>();
+    plants.forEach((plant) => {
+      if (plant.subcategory.trim().length > 0) unique.add(plant.subcategory);
+    });
+    return Array.from(unique).sort((a, b) => a.localeCompare(b, "sv"));
+  }, [plants]);
+
+  const typeOptions = useMemo(() => {
+    if (!selectedSubcategory) return [];
+    const unique = new Set<string>();
+    plants
+      .filter((plant) => plant.subcategory === selectedSubcategory)
+      .forEach((plant) => {
+        if (plant.type.trim().length > 0) unique.add(plant.type);
+      });
+    return Array.from(unique).sort((a, b) => a.localeCompare(b, "sv"));
+  }, [plants, selectedSubcategory]);
+
   const afterFilter = useMemo(() => {
-    if (subcategoryFilter === "all") return plants;
-    return plants.filter((plant) => plant.subcategory === subcategoryFilter);
-  }, [plants, subcategoryFilter]);
+    let result = plants;
+
+    if (selectedSubcategory) {
+      result = result.filter((plant) => plant.subcategory === selectedSubcategory);
+    }
+
+    if (selectedType) {
+      result = result.filter((plant) => plant.type === selectedType);
+    }
+
+    return result;
+  }, [plants, selectedSubcategory, selectedType]);
 
   const filteredPlants = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -55,20 +82,27 @@ export const PlantSelection = () => {
       result = afterFilter.filter(
         (plant) =>
           plant.name.toLowerCase().includes(query) ||
-          plant.subcategory.toLowerCase().includes(query)
+          plant.subcategory.toLowerCase().includes(query) ||
+          plant.type.toLowerCase().includes(query)
       );
     }
     
     return sortPlantsBySubcategoryAndName(result);
   }, [afterFilter, searchQuery]);
 
-  const subcategoryOptions = useMemo(() => {
-    const unique = new Set<string>();
-    plants.forEach((plant) => {
-      if (plant.subcategory.trim().length > 0) unique.add(plant.subcategory);
-    });
-    return Array.from(unique).sort((a, b) => a.localeCompare(b));
-  }, [plants]);
+  const handleSubcategorySelect = (subcategory: string | null) => {
+    setSelectedSubcategory(subcategory);
+    setSelectedType(null); // Reset type when subcategory changes
+  };
+
+  const handleTypeSelect = (type: string | null) => {
+    setSelectedType(type);
+  };
+
+  const handleBackToSubcategories = () => {
+    setSelectedSubcategory(null);
+    setSelectedType(null);
+  };
 
   const handleOpenDetails = (plant: Plant) => {
     setSelectedPlantForModal(plant);
@@ -84,38 +118,52 @@ export const PlantSelection = () => {
     <section>
       <h1>Fröbanken</h1>
 
-      <Panel title="Sök">
-        <PlantsSubcategoryFilter
-          options={subcategoryOptions}
-          value={subcategoryFilter}
-          onChange={setSubcategoryFilter}
-        />
+      <Panel title="Välj dina fröer">
+        <p>
+          Börja din odlingsresa här!
+          <br />
+          Sök reda på vad du vill odla och lägg till det ur fröbanken.
+        </p>
+      </Panel>
+
+      <Panel title="Fröer att välja bland">
+        {isLoading ? (
+          <p>Laddar kategorier...</p>
+        ) : selectedSubcategory ? (
+          <PlantsCategoryButtons
+            options={typeOptions}
+            selectedValue={selectedType}
+            onSelect={handleTypeSelect}
+            showBackButton={true}
+            onBack={handleBackToSubcategories}
+          />
+        ) : (
+          <PlantsCategoryButtons
+            options={subcategoryOptions}
+            selectedValue={selectedSubcategory}
+            onSelect={handleSubcategorySelect}
+          />
+        )}
         <PlantsSearch
           searchQuery={searchQuery}
           onSearchQueryChange={setSearchQuery}
         />
       </Panel>
 
-      <Panel title="Välj dina fröer">
-        {isLoading ? (
-          <p>Laddar fröer...</p>
-        ) : filteredPlants.length === 0 ? (
-          <p>Inga fröer hittades.</p>
-        ) : (
-
-          //TODO, remove debug component before production 
-          <>
-            <PlantsSelectAllDebug filteredPlants={filteredPlants} />
+      {selectedSubcategory && (
+        <Panel title={`Välj bland ${selectedSubcategory.charAt(0).toUpperCase() + selectedSubcategory.slice(1)}`}>
+          {filteredPlants.length === 0 ? (
+            <p>Inga fröer hittades.</p>
+          ) : (
             <PlantsList
               plants={filteredPlants}
               selectedPlantIds={state.selectedPlantIds}
               onToggleSelected={actions.toggleSelectedPlant}
               onOpenDetails={handleOpenDetails}
             />
-          </>
-          //TODO, remove debug component before production 
-        )}
-      </Panel>
+          )}
+        </Panel>
+      )}
 
       <Panel title={`Valda fröer (${state.selectedPlantIds.length})`}>
         <PlantsSelectedSummary

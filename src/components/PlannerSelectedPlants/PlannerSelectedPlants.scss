@@ -7,66 +7,6 @@
   gap: 1rem;
 }
 
-.planner-selected-plants__list {
-  margin: 0;
-  padding-left: 1.25rem;
-  list-style: disc;
-}
-
-.planner-selected-plants__item {
-  margin-bottom: 0.5rem;
-  color: $text-color;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.5rem;
-}
-
-.planner-selected-plants__plant-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  flex: 1;
-}
-
-.planner-selected-plants__plant-name {
-  display: block;
-}
-
-.planner-selected-plants__plant-button {
-  display: inline-block;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  color: $accent-green;
-  text-decoration: underline;
-  cursor: pointer;
-  font-size: inherit;
-  font-family: inherit;
-  text-align: left;
-  @include transition(color);
-
-  &:hover {
-    color: darken($accent-green, 10%);
-  }
-
-  &:focus {
-    outline: 2px solid $accent-green;
-    outline-offset: 2px;
-    border-radius: 0.25rem;
-  }
-}
-
-.planner-selected-plants__message {
-  display: block;
-  font-size: 0.875rem;
-  color: $warning-color;
-  font-style: italic;
-  margin-left: 0.5rem;
-  white-space: pre-line;
-}
-
 .planner-selected-plants__actions {
   margin-top: 0.5rem;
 }

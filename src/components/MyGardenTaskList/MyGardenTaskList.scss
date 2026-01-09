@@ -183,6 +183,19 @@
     padding-left: 0.5rem;
   }
 
+  &__subcategory-header {
+    list-style: none;
+    margin: 0.75rem 0 0.25rem 0;
+  }
+
+  &__subcategory-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $primary-green;
+    margin: 0;
+    padding: 0;
+  }
+
   &__plant-item {
     @include flex-column;
     gap: 0.25rem;
@@ -197,6 +210,18 @@
   &__plant-name {
     font-size: 0.875rem;
     color: $text-color;
+  }
+
+  &__plant-name-button {
+    font-size: 0.875rem;
+    color: $text-color;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
   }
 
   &__plant-warning {

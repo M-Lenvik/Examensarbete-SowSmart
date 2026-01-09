@@ -1,5 +1,5 @@
 import { Button } from "../Button/Button";
-import { RemoveButton } from "../RemoveButton/RemoveButton";
+import { SelectedPlantsList } from "../SelectedPlantsList/SelectedPlantsList";
 import type { Plant } from "../../models/Plant";
 import "./PlantsSelectedSummary.scss";
 import { Link } from "react-router-dom";
@@ -35,27 +35,11 @@ export const PlantsSelectedSummary = ({
         </>
       ) : (
         <>
-          <ul className="plants-selected-summary__list">
-            {selectedPlants.map((plant) => (
-              <li key={plant.id} className="plants-selected-summary__list-item">
-                <button
-                  type="button"
-                  className="plants-selected-summary__item"
-                  onClick={() => onOpenDetails(plant)}
-                  aria-label={`Öppna detaljer för ${plant.name}`}
-                >
-                  {plant.name}
-                </button>
-                <RemoveButton
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    onRemove(plant.id);
-                  }}
-                  ariaLabel={`Ta bort ${plant.name}`}
-                />
-              </li>
-            ))}
-          </ul>
+          <SelectedPlantsList
+            selectedPlants={selectedPlants}
+            onOpenDetails={onOpenDetails}
+            onRemove={onRemove}
+          />
           <Button 
             variant="secondary" 
             className="plants-selected-summary__button"

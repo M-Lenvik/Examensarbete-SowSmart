@@ -109,6 +109,26 @@ export const formatDateSwedish = (dateIso: string): string => {
 };
 
 /**
+ * Format a date to Swedish format without year (e.g., "5 mars").
+ * 
+ * Takes an ISO date string and formats it as a Swedish date without the year.
+ * 
+ * @param dateIso - ISO date string (YYYY-MM-DD)
+ * @returns Formatted date string in Swedish without year (e.g., "5 mars")
+ */
+export const formatDateSwedishWithoutYear = (dateIso: string): string => {
+  try {
+    const date = parseDateIso(dateIso);
+    return date.toLocaleDateString("sv-SE", {
+      day: "numeric",
+      month: "long",
+    });
+  } catch {
+    return dateIso;
+  }
+};
+
+/**
  * Format a date to Swedish month and year format (e.g., "mars 2026").
  * 
  * @param date - Date object

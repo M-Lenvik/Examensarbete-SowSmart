@@ -10,6 +10,7 @@ export type Task = {
   date: string; // ISO-format (YYYY-MM-DD)
   plantId: number;
   plantName: string;
+  plantSubcategory: string;
   dateFormatted: string; // Formaterat datum (t.ex. "1 februari 2026")
   taskLabel: string; // T.ex. "Så Black Cherry", "Plantera ut Paprika California Wonder"
 };
@@ -83,6 +84,7 @@ export const recommendationsToTasks = (
     }
 
     const plantName = plant.name;
+    const plantSubcategory = plant.subcategory || "";
 
     // Outdoor sow date
     if (recommendation.outdoorSowDate) {
@@ -91,6 +93,7 @@ export const recommendationsToTasks = (
         date: recommendation.outdoorSowDate,
         plantId: recommendation.plantId,
         plantName,
+        plantSubcategory,
         dateFormatted: formatDateSwedish(recommendation.outdoorSowDate),
         taskLabel: `${getTaskTypeLabel("sow-outdoor")} ${plantName}`,
       });
@@ -103,6 +106,7 @@ export const recommendationsToTasks = (
         date: recommendation.indoorSowDate,
         plantId: recommendation.plantId,
         plantName,
+        plantSubcategory,
         dateFormatted: formatDateSwedish(recommendation.indoorSowDate),
         taskLabel: `${getTaskTypeLabel("sow-indoor")} ${plantName}`,
       });
@@ -115,6 +119,7 @@ export const recommendationsToTasks = (
         date: recommendation.hardenStartDate,
         plantId: recommendation.plantId,
         plantName,
+        plantSubcategory,
         dateFormatted: formatDateSwedish(recommendation.hardenStartDate),
         taskLabel: `${getTaskTypeLabel("harden-start")} ${plantName}`,
       });
@@ -127,6 +132,7 @@ export const recommendationsToTasks = (
         date: recommendation.movePlantOutdoorDate,
         plantId: recommendation.plantId,
         plantName,
+        plantSubcategory,
         dateFormatted: formatDateSwedish(recommendation.movePlantOutdoorDate),
         taskLabel: `${getTaskTypeLabel("move-plant-outdoor")} ${plantName}`,
       });
@@ -139,6 +145,7 @@ export const recommendationsToTasks = (
         date: harvestDateIso,
         plantId: recommendation.plantId,
         plantName,
+        plantSubcategory,
         dateFormatted: formatDateSwedish(harvestDateIso),
         taskLabel: `${getTaskTypeLabel("harvest")} ${plantName}`,
       });

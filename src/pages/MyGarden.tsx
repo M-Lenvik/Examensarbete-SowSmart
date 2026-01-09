@@ -70,6 +70,13 @@ export const MyGarden = () => {
     setIsModalOpen(true);
   };
 
+  const handleOpenDetailsById = (plantId: number) => {
+    const plant = plants.find((p) => p.id === plantId);
+    if (plant) {
+      handleOpenDetails(plant);
+    }
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedPlantForModal(null);
@@ -109,9 +116,11 @@ export const MyGarden = () => {
             selectedPlants={selectedPlants}
             onRemovePlant={actions.toggleSelectedPlant}
             onPlantClick={handleOpenDetails}
+            recommendations={state.recommendations}
+            harvestDateIso={state.harvestDateIso}
           />
         </Panel>
-        <Panel title="Händelser">
+        <Panel title="Min odlingsplan">
           <p>
             Du har inte valt skördedatum ännu. </p>
           <p>
@@ -137,9 +146,11 @@ export const MyGarden = () => {
             selectedPlants={selectedPlants}
             onRemovePlant={actions.toggleSelectedPlant}
             onPlantClick={handleOpenDetails}
+            recommendations={state.recommendations}
+            harvestDateIso={state.harvestDateIso}
           />
         </Panel>
-        <Panel title="Händelser">
+        <Panel title="Min odlingsplan">
           <p>
             Ingen plan beräknad än.{" "}
             <Link to="/planner">Gå till planeraren</Link> för att beräkna plan.
@@ -162,10 +173,12 @@ export const MyGarden = () => {
           selectedPlants={selectedPlants}
           onRemovePlant={actions.toggleSelectedPlant}
           onPlantClick={handleOpenDetails}
+          recommendations={state.recommendations}
+          harvestDateIso={state.harvestDateIso}
         />
       </Panel>
-      <Panel title="Händelser">
-        <MyGardenTaskList tasks={tasks} warnings={warnings} />
+      <Panel title="Min odlingsplan">
+        <MyGardenTaskList tasks={tasks} warnings={warnings} onPlantClick={handleOpenDetailsById} />
       </Panel>
       <PlantsDetailModal
         isOpen={isModalOpen}

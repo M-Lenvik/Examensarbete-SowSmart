@@ -218,6 +218,7 @@ export const HarvestPlanner = () => {
     <section>
       <h1>Planeraren</h1>
       <Panel title="Välj skördedatum">
+      <p>Här väljer du ditt önskade skördedatum och beräknar din personliga odlingsplan.</p>
         <PlannerDateInput
           value={dateInputValue}
           onChange={handleDateChange}

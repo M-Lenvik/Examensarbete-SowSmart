@@ -1,0 +1,19 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/base" as *;
+
+.home-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.home-intro__actions {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.home-intro ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+

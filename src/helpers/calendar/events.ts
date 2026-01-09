@@ -24,6 +24,7 @@ export type CalendarEvent = {
   date: string; // ISO-format (YYYY-MM-DD)
   plantId: number;
   plantName: string;
+  plantSubcategory: string;
 };
 
 /**
@@ -72,15 +73,17 @@ export const recommendationsToEvents = (
 ): CalendarEvent[] => {
   const events: CalendarEvent[] = [];
 
-  // Create a map of plantId -> plantName for quick lookup
-  const plantMap = new Map<number, string>();
+  // Create a map of plantId -> plant for quick lookup
+  const plantMap = new Map<number, Plant>();
   plants.forEach((plant) => {
-    plantMap.set(plant.id, plant.name);
+    plantMap.set(plant.id, plant);
   });
 
   // Convert each recommendation to events
   recommendations.forEach((recommendation) => {
-    const plantName = plantMap.get(recommendation.plantId) ?? "Okänd planta";
+    const plant = plantMap.get(recommendation.plantId);
+    const plantName = plant?.name ?? "Okänd planta";
+    const plantSubcategory = plant?.subcategory ?? "";
 
     // Outdoor sow date
     if (recommendation.outdoorSowDate) {
@@ -89,6 +92,7 @@ export const recommendationsToEvents = (
         date: recommendation.outdoorSowDate,
         plantId: recommendation.plantId,
         plantName,
+        plantSubcategory,
       });
     }
 
@@ -99,6 +103,7 @@ export const recommendationsToEvents = (
         date: recommendation.indoorSowDate,
         plantId: recommendation.plantId,
         plantName,
+        plantSubcategory,
       });
     }
 
@@ -109,6 +114,7 @@ export const recommendationsToEvents = (
         date: recommendation.hardenStartDate,
         plantId: recommendation.plantId,
         plantName,
+        plantSubcategory,
       });
     }
 
@@ -119,6 +125,7 @@ export const recommendationsToEvents = (
         date: recommendation.movePlantOutdoorDate,
         plantId: recommendation.plantId,
         plantName,
+        plantSubcategory,
       });
     }
 
@@ -129,6 +136,7 @@ export const recommendationsToEvents = (
         date: harvestDateIso,
         plantId: recommendation.plantId,
         plantName,
+        plantSubcategory,
       });
     }
   });

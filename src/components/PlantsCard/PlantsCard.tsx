@@ -17,6 +17,12 @@ export const PlantsCard = ({
 }: PlantsCardProps) => {
   const checkboxId = `plant-checkbox-${plant.id}`;
 
+  // Capitalize first letter of string
+  const capitalizeFirst = (str: string): string => {
+    if (str.length === 0) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   return (
     <article className="plants-card">
       <img
@@ -35,8 +41,8 @@ export const PlantsCard = ({
         aria-label={`Öppna detaljer för ${plant.name}`}
       >
         <span className="plants-card__title">{plant.name}</span>
-        <span className="plants-card__meta">{plant.subcategory}</span>
-        <span className="plants-card__meta">{plant.type}</span>
+        <span className="plants-card__meta">{capitalizeFirst(plant.subcategory)}</span>
+        <span className="plants-card__meta">{capitalizeFirst(plant.type)}</span>
       </button>
       
       <span className="plants-card__checkbox">

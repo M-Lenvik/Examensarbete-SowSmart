@@ -1,0 +1,137 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/base" as *;
+
+.selected-plants-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.selected-plants-list__groups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.selected-plants-list__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.selected-plants-list__subcategory-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $primary-green;
+  margin: 0;
+  padding: 0;
+}
+
+.selected-plants-list__list {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.selected-plants-list__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.selected-plants-list__plant-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.selected-plants-list__plant-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.selected-plants-list__plant-name-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+
+  @include tablet {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.selected-plants-list__dates-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 0.25rem;
+
+  @include desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.selected-plants-list__date-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.selected-plants-list__date-text {
+  font-size: 0.875rem;
+  color: $text-color;
+}
+
+.selected-plants-list__plant-button {
+  flex: 1;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  @include transition(color);
+
+  &:hover {
+    color: $primary-green;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-green;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+}
+
+.selected-plants-list__name {
+  font-weight: 600;
+  color: $text-color;
+  text-decoration: underline;
+  @include transition(color);
+
+  .selected-plants-list__plant-button:hover & {
+    color: $primary-green;
+  }
+}
+
+.selected-plants-list__message {
+  display: block;
+  font-size: 0.875rem;
+  color: $warning-color;
+  font-style: italic;
+  margin-left: 0.5rem;
+  white-space: pre-line;
+}
+

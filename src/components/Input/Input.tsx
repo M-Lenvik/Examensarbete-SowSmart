@@ -4,7 +4,7 @@ import "./Input.scss";
 
 type InputProps = {
   id: string;
-  label: string;
+  label?: string;
   type?: "text" | "date";
   value: string;
   name?: string;
@@ -12,6 +12,7 @@ type InputProps = {
   required?: boolean;
   disabled?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  "aria-label"?: string;
 };
 
 export const Input = ({
@@ -24,12 +25,15 @@ export const Input = ({
   required = false,
   disabled = false,
   onChange,
+  "aria-label": ariaLabel,
 }: InputProps) => {
   return (
     <div className="input-field">
-      <label className="input-field__label" htmlFor={id}>
-        {label}
-      </label>
+      {label && (
+        <label className="input-field__label" htmlFor={id}>
+          {label}
+        </label>
+      )}
       <input
         id={id}
         className="input-field__input"
@@ -40,6 +44,7 @@ export const Input = ({
         required={required}
         disabled={disabled}
         onChange={onChange}
+        aria-label={ariaLabel || label}
       />
     </div>
   );

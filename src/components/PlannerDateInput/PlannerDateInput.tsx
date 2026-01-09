@@ -33,11 +33,11 @@ export const PlannerDateInput = ({
     <div className="planner-date-input">
       <Input
         id={inputId}
-        label="Välj skördedatum här"
-        type="date" //placeholder calendar icon
+        type="date"
         value={value}
         required={required}
         onChange={handleChange}
+        aria-label="Välj skördedatum"
         aria-describedby={describedBy}
       />
       {error && (
