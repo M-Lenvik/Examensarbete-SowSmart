@@ -65,13 +65,11 @@ export const taskTypeToDateType = (
  * 
  * @param recommendations - Array of recommendations from PlanContext
  * @param plants - Array of all plants (to get plant names)
- * @param harvestDateIso - Harvest date (used for harvest tasks)
  * @returns Array of tasks sorted by date (earliest first)
  */
 export const recommendationsToTasks = (
   recommendations: Recommendation[],
-  plants: Plant[],
-  harvestDateIso: string | null
+  plants: Plant[]
 ): Task[] => {
   const tasks: Task[] = [];
   const plantMap = new Map(plants.map((plant) => [plant.id, plant]));
@@ -138,15 +136,15 @@ export const recommendationsToTasks = (
       });
     }
 
-    // Harvest date (one per plant)
-    if (harvestDateIso) {
+    // Harvest date (one per plant) - use the harvest date from the recommendation itself
+    if (recommendation.harvestDateIso) {
       tasks.push({
         type: "harvest",
-        date: harvestDateIso,
+        date: recommendation.harvestDateIso,
         plantId: recommendation.plantId,
         plantName,
         plantSubcategory,
-        dateFormatted: formatDateSwedish(harvestDateIso),
+        dateFormatted: formatDateSwedish(recommendation.harvestDateIso),
         taskLabel: `${getTaskTypeLabel("harvest")} ${plantName}`,
       });
     }

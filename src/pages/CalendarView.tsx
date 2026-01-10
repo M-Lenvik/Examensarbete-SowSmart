@@ -17,7 +17,7 @@ import { getPlants } from "../services/plantsService";
 export const CalendarView = () => {
   const navigate = useNavigate();
   const { state } = useContext(PlanContext);
-  const { recommendations, harvestDateIso, selectedPlantIds } = state;
+  const { recommendations, selectedPlantIds } = state;
   const [plants, setPlants] = useState<Awaited<ReturnType<typeof getPlants>>>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -95,12 +95,12 @@ export const CalendarView = () => {
 
   // Convert recommendations to events
   useEffect(() => {
-    if (recommendations.length > 0 && harvestDateIso && plants.length > 0) {
+    if (recommendations.length > 0 && plants.length > 0) {
       // Filter recommendations to only include selected plants (from filter)
       const filteredPlantSet = new Set(getFilteredPlantIds);
       const filteredRecommendations = recommendations.filter((rec) => filteredPlantSet.has(rec.plantId));
       
-      const calendarEvents = recommendationsToEvents(filteredRecommendations, plants, harvestDateIso);
+      const calendarEvents = recommendationsToEvents(filteredRecommendations, plants);
       setEvents(calendarEvents);
 
       // Set current month to first month with events if available
@@ -111,7 +111,7 @@ export const CalendarView = () => {
     } else {
       setEvents([]);
     }
-  }, [recommendations, harvestDateIso, plants, getFilteredPlantIds]);
+  }, [recommendations, plants, getFilteredPlantIds]);
 
   const handlePreviousMonth = () => {
     const newDate = new Date(currentMonth);
@@ -146,7 +146,7 @@ export const CalendarView = () => {
     );
   }
 
-  if (recommendations.length === 0 || !harvestDateIso) {
+  if (recommendations.length === 0) {
     const hasPlants = selectedPlantIds.length > 0;
     
     return (
@@ -168,7 +168,7 @@ export const CalendarView = () => {
     <section>
       <h1>Kalender</h1>
       <Panel>
-        <Panel title="Filtrera händelser" variant="nested">
+        <Panel title="" variant="nested">
           <FilterDropdown
             selectedPlantIds={selectedPlantIds}
             plants={plants}

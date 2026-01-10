@@ -99,6 +99,7 @@ export const generateRecommendations = (
       indoorSowDate: null,
       hardenStartDate: null,
       movePlantOutdoorDate: null,
+      harvestDateIso: harvestDateIso,
       warnings: ["Ogiltigt skördedatum"],
     }));
   }
@@ -122,6 +123,7 @@ export const generateRecommendations = (
             indoorSowDate: null,
             hardenStartDate: null,
             movePlantOutdoorDate: null,
+            harvestDateIso: harvestDateIso,
             warnings,
           };
         }
@@ -132,6 +134,7 @@ export const generateRecommendations = (
           indoorSowDate: null,
           hardenStartDate: null,
           movePlantOutdoorDate: null,
+          harvestDateIso: harvestDateIso,
           warnings,
         };
       }
@@ -154,6 +157,7 @@ export const generateRecommendations = (
             indoorSowDate: null,
             hardenStartDate: null,
             movePlantOutdoorDate: null,
+            harvestDateIso: harvestDateIso,
             warnings,
           };
         }
@@ -168,6 +172,7 @@ export const generateRecommendations = (
             indoorSowDate: formatDateIso(indoorSowDate),
             hardenStartDate: null,
             movePlantOutdoorDate: null,
+            harvestDateIso: harvestDateIso,
             warnings,
           };
         }
@@ -200,6 +205,7 @@ export const generateRecommendations = (
           indoorSowDate: formatDateIso(indoorSowDate),
           hardenStartDate: formatDateIso(hardenStartDate),
           movePlantOutdoorDate: formatDateIso(movePlantOutdoorDate),
+          harvestDateIso: harvestDateIso,
           warnings,
         };
       }
@@ -213,6 +219,7 @@ export const generateRecommendations = (
           indoorSowDate: null,
           hardenStartDate: null,
           movePlantOutdoorDate: null,
+          harvestDateIso: harvestDateIso,
           warnings,
         };
       }

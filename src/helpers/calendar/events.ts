@@ -49,7 +49,6 @@ export type CalendarEvent = {
  * 
  * @param recommendations - Array of recommendations (one per selected plant)
  * @param plants - Array of all plants (to get plant names by ID)
- * @param harvestDateIso - The target harvest date in ISO format (YYYY-MM-DD) or null
  * 
  * @returns Array of calendar events, one per date and plant combination
  * 
@@ -68,8 +67,7 @@ export type CalendarEvent = {
  */
 export const recommendationsToEvents = (
   recommendations: Recommendation[],
-  plants: Plant[],
-  harvestDateIso: string | null
+  plants: Plant[]
 ): CalendarEvent[] => {
   const events: CalendarEvent[] = [];
 
@@ -129,11 +127,11 @@ export const recommendationsToEvents = (
       });
     }
 
-    // Harvest date (one per plant)
-    if (harvestDateIso) {
+    // Harvest date (one per plant) - use the harvest date from the recommendation itself
+    if (recommendation.harvestDateIso) {
       events.push({
         type: "harvest",
-        date: harvestDateIso,
+        date: recommendation.harvestDateIso,
         plantId: recommendation.plantId,
         plantName,
         plantSubcategory,

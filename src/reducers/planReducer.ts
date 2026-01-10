@@ -16,6 +16,7 @@ export type Recommendation = {
   indoorSowDate: string | null; // ISO-format
   hardenStartDate: string | null; // ISO-format
   movePlantOutdoorDate: string | null; // ISO-format
+  harvestDateIso: string; // ISO-format - the harvest date used for this recommendation
   warnings: string[]; // Varningar om saknad data
 };
 

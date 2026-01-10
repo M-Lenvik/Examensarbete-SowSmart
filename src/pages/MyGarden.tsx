@@ -40,11 +40,11 @@ export const MyGarden = () => {
 
   // Convert recommendations to tasks
   const tasks = useMemo(() => {
-    if (state.recommendations.length === 0 || !state.harvestDateIso) {
+    if (state.recommendations.length === 0) {
       return [];
     }
-    return recommendationsToTasks(state.recommendations, plants, state.harvestDateIso);
-  }, [state.recommendations, state.harvestDateIso, plants]);
+    return recommendationsToTasks(state.recommendations, plants);
+  }, [state.recommendations, plants]);
 
   // Calculate warnings for all recommendations
   const warnings = useMemo(() => {
@@ -57,13 +57,13 @@ export const MyGarden = () => {
     for (const recommendation of state.recommendations) {
       const plant = plantMap.get(recommendation.plantId);
       if (plant) {
-        const plantWarnings = getPlantWarnings(recommendation, plant, state.harvestDateIso);
+        const plantWarnings = getPlantWarnings(recommendation, plant);
         allWarnings.push(...plantWarnings);
       }
     }
 
     return allWarnings;
-  }, [state.recommendations, state.harvestDateIso, plants]);
+  }, [state.recommendations, plants]);
 
   const handleOpenDetails = (plant: Plant) => {
     setSelectedPlantForModal(plant);
@@ -106,8 +106,8 @@ export const MyGarden = () => {
     );
   }
 
-  // Show message if no harvest date
-  if (!state.harvestDateIso) {
+  // Show message if no recommendations
+  if (state.recommendations.length === 0) {
     return (
       <section>
         <h1>Min frösida</h1>
@@ -117,7 +117,7 @@ export const MyGarden = () => {
             onRemovePlant={actions.toggleSelectedPlant}
             onPlantClick={handleOpenDetails}
             recommendations={state.recommendations}
-            harvestDateIso={state.harvestDateIso}
+            harvestDateIso={null}
           />
         </Panel>
         <Panel title="Min odlingsplan">
@@ -147,7 +147,7 @@ export const MyGarden = () => {
             onRemovePlant={actions.toggleSelectedPlant}
             onPlantClick={handleOpenDetails}
             recommendations={state.recommendations}
-            harvestDateIso={state.harvestDateIso}
+            harvestDateIso={null}
           />
         </Panel>
         <Panel title="Min odlingsplan">

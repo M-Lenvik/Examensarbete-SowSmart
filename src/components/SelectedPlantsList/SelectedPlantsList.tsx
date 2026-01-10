@@ -11,7 +11,8 @@ type SelectedPlantsListProps = {
   onOpenDetails?: (plant: Plant) => void; // Callback to open plant detail modal
   onRemove?: (plantId: number) => void; // Callback to remove plant from selection
   recommendations?: Recommendation[]; // Recommendations for date display
-  harvestDateIso?: string | null; // Harvest date for date display
+  harvestDateIso?: string | null; // Harvest date for date display (fallback)
+  harvestDatesByPlant?: Map<number, string>; // Map of plantId -> harvest date ISO
 };
 
 export const SelectedPlantsList = ({
@@ -21,6 +22,7 @@ export const SelectedPlantsList = ({
   onRemove,
   recommendations,
   harvestDateIso,
+  harvestDatesByPlant,
 }: SelectedPlantsListProps) => {
   if (selectedPlants.length === 0) {
     return null;
@@ -110,11 +112,16 @@ export const SelectedPlantsList = ({
       });
     }
 
-    // Skörd: datum
-    if (harvestDateIso) {
+    // Skörd: datum - prioritize recommendation.harvestDateIso (most accurate source)
+    // Then fallback to harvestDatesByPlant, then global harvestDateIso
+    const plantHarvestDate = 
+      recommendation?.harvestDateIso || 
+      harvestDatesByPlant?.get(plant.id) || 
+      harvestDateIso;
+    if (plantHarvestDate) {
       dateInfos.push({
         label: "Skörd",
-        date: formatDateSwedishWithoutYear(harvestDateIso),
+        date: formatDateSwedishWithoutYear(plantHarvestDate),
         eventType: "harvest",
       });
     }

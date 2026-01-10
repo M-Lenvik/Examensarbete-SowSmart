@@ -185,14 +185,14 @@ export const FilterDropdown = ({
 
   const getDisplayText = () => {
     if (selectedFilterIds.length === 0) {
-      return "Välj filter...";
+      return "Välj dina fröer...";
     }
     if (selectedFilterIds.includes("all") && selectedFilterIds.length === filterOptions.length) {
       return "Alla";
     }
     if (selectedFilterIds.length === 1) {
       const option = filterOptions.find((opt) => opt.id === selectedFilterIds[0]);
-      return option?.label || "Välj filter...";
+      return option?.label || "Välj dina fröer...";
     }
     return `${selectedFilterIds.length} valda`;
   };

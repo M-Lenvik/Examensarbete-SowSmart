@@ -1,6 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { FilterDropdown } from "../components/FilterDropdown/FilterDropdown";
 import { Panel } from "../components/Panel/Panel";
 import { PlannerCalculateButton } from "../components/PlannerCalculateButton/PlannerCalculateButton";
 import { PlannerDateInput } from "../components/PlannerDateInput/PlannerDateInput";
@@ -26,6 +27,8 @@ export const HarvestPlanner = () => {
   const [selectedPlantForModal, setSelectedPlantForModal] = useState<Plant | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [selectedFilterIds, setSelectedFilterIds] = useState<string[]>([]);
+  const [harvestDatesByFilter, setHarvestDatesByFilter] = useState<Map<string, string>>(new Map());
 
   // Load all plants
   useEffect(() => {
@@ -38,13 +41,39 @@ export const HarvestPlanner = () => {
     void load();
   }, []);
 
-  // Load saved harvest date from context
-  useEffect(() => {
 
-    if (state.harvestDateIso) {
-      setDateInputValue(state.harvestDateIso);
+  // Update date input when filter selection changes
+  useEffect(() => {
+    let dateToShow = "";
+
+    if (selectedFilterIds.length === 0 || selectedFilterIds.includes("all")) {
+      // No filter or "all" selected - show global date
+      dateToShow = state.harvestDateIso || "";
+    } else if (selectedFilterIds.length === 1) {
+      // Single filter selected - show its saved date
+      const filterId = selectedFilterIds[0];
+      dateToShow = harvestDatesByFilter.get(filterId) || "";
+    } else {
+      // Multiple filters selected - show date only if all have the same date
+      const dates = selectedFilterIds
+        .map((id) => harvestDatesByFilter.get(id))
+        .filter((date): date is string => Boolean(date));
+      
+      if (dates.length > 0 && dates.every((date) => date === dates[0])) {
+        dateToShow = dates[0];
+      }
     }
-  }, [state.harvestDateIso]);
+
+    setDateInputValue(dateToShow);
+    
+    // Validate the date if one is shown
+    if (dateToShow) {
+      const validation = validateHarvestDate(dateToShow, null);
+      setValidationError(validation.error);
+    } else {
+      setValidationError(null);
+    }
+  }, [selectedFilterIds, harvestDatesByFilter, state.harvestDateIso]);
 
   // Filter and sort selected plants
   const selectedPlants = useMemo(() => {
@@ -54,8 +83,48 @@ export const HarvestPlanner = () => {
     return sortPlantsBySubcategoryAndName(filtered);
   }, [plants, state.selectedPlantIds]);
 
-  // Calculate sow result messages per plant
-  // Use recommendations if available, otherwise calculate from date input
+  // Get harvest date for a plant
+  // Priority: individual plant filter → subcategory filter → global date
+  const getHarvestDate = (plant: Plant): string | null => {
+    const plantFilterId = `plant-${plant.id}`;
+    const subcategory = plant.subcategory || "Övrigt";
+    const subcategoryFilterId = `subcategory-${subcategory}`;
+    
+    return (
+      harvestDatesByFilter.get(plantFilterId) ||
+      harvestDatesByFilter.get(subcategoryFilterId) ||
+      state.harvestDateIso ||
+      null
+    );
+  };
+
+  // Create map showing harvest date for each plant
+  // Use dates from recommendations if available (most accurate), otherwise use saved filter dates
+  const harvestDatesByPlant = useMemo(() => {
+    const datesMap = new Map<number, string>();
+
+    // If recommendations exist, use their harvest dates (most accurate)
+    if (state.recommendations.length > 0) {
+      for (const recommendation of state.recommendations) {
+        if (recommendation.harvestDateIso) {
+          datesMap.set(recommendation.plantId, recommendation.harvestDateIso);
+        }
+      }
+    } else {
+      // No recommendations yet - get dates from filters or global date
+      for (const plant of selectedPlants) {
+        const harvestDate = getHarvestDate(plant);
+        if (harvestDate) {
+          datesMap.set(plant.id, harvestDate);
+        }
+      }
+    }
+
+    return datesMap;
+  }, [selectedPlants, harvestDatesByFilter, state.harvestDateIso, state.recommendations]);
+
+  // Calculate sow date messages for each plant
+  // Use recommendations if available, otherwise calculate from harvest dates
   const plantMessages = useMemo(() => {
     if (selectedPlants.length === 0) {
       return new Map<number, string>();
@@ -63,53 +132,48 @@ export const HarvestPlanner = () => {
 
     const results = new Map<number, string>();
 
-    // If we have recommendations, use those dates
-    if (state.recommendations.length > 0 && dateInputValue) {
+    // If recommendations exist, show sow dates from them
+    if (state.recommendations.length > 0) {
       const recommendationMap = new Map(state.recommendations.map((rec) => [rec.plantId, rec]));
       
       for (const plant of selectedPlants) {
         const recommendation = recommendationMap.get(plant.id);
         if (recommendation) {
-          // Show the actual sow date from recommendations
           const sowDate = recommendation.indoorSowDate || recommendation.outdoorSowDate;
           if (sowDate) {
             results.set(plant.id, `Sås på ${sowDate}`);
           }
         }
       }
-    } else if (dateInputValue) {
-      // Use getPlantSowResult for detailed messages with warnings/comments
-      // But replace the sow date with calculateTryAnywaySowDate to match calendar
-      try {
-        const harvestDate = parseDateIso(dateInputValue);
-        for (const plant of selectedPlants) {
-          const sowResult = getPlantSowResult(dateInputValue, plant);
+    } else {
+      // No recommendations yet - calculate messages from harvest dates
+      for (const plant of selectedPlants) {
+        const harvestDate = getHarvestDate(plant);
+        if (!harvestDate) continue;
+
+        try {
+          const sowResult = getPlantSowResult(harvestDate, plant);
           if (sowResult) {
-            // Get the correct sow date using same method as calendar
-            const correctSowDate = calculateTryAnywaySowDate(harvestDate, plant);
-            if (correctSowDate) {
-              const correctSowDateIso = formatDateIso(correctSowDate);
-              // Replace the sow date in the message with the correct one
-              // This keeps all the warnings/comments but ensures date matches calendar
-              let message = sowResult.message;
-              if (sowResult.sowDateIso) {
-                // Replace all occurrences of the old sow date with the correct one
-                message = message.split(sowResult.sowDateIso).join(correctSowDateIso);
-              }
+            // Calculate actual sow date
+            const parsedHarvestDate = parseDateIso(harvestDate);
+            const calculatedSowDate = calculateTryAnywaySowDate(parsedHarvestDate, plant);
+            
+            if (calculatedSowDate) {
+              const calculatedSowDateIso = formatDateIso(calculatedSowDate);
+              const message = sowResult.message.replace(sowResult.sowDateIso || "", calculatedSowDateIso);
               results.set(plant.id, message);
             } else {
-              // Fallback to original message if we can't calculate correct date
               results.set(plant.id, sowResult.message);
             }
           }
+        } catch {
+          // Skip invalid dates
         }
-      } catch {
-        // Invalid date, skip calculation
       }
     }
 
     return results;
-  }, [dateInputValue, selectedPlants, state.recommendations]);
+  }, [selectedPlants, state.recommendations, harvestDatesByFilter, state.harvestDateIso]);
 
 
   // Handle date input change and validate
@@ -120,33 +184,77 @@ export const HarvestPlanner = () => {
     const validation = validateHarvestDate(value, null);
     setValidationError(validation.error);
     
-    // Update harvestDateIso in context immediately if valid
+    // Save date for selected filter(s)
     if (validation.isValid) {
-      // Clear old recommendations if date changed (they're based on old date)
-      if (state.harvestDateIso !== value && state.recommendations.length > 0) {
+      const newHarvestDates = new Map(harvestDatesByFilter);
+      
+      if (selectedFilterIds.length === 0) {
+        // No filter selected, update global date
+        actions.setHarvestDateIso(value);
+      } else {
+        // Save date for each selected filter
+        selectedFilterIds.forEach((filterId) => {
+          if (filterId !== "all") {
+            newHarvestDates.set(filterId, value);
+          }
+        });
+        setHarvestDatesByFilter(newHarvestDates);
+        
+        // Also update global date if "all" is selected
+        if (selectedFilterIds.includes("all")) {
+          actions.setHarvestDateIso(value);
+        } else {
+          // If no global date exists, set it as fallback for plants without filters
+          if (!state.harvestDateIso) {
+            actions.setHarvestDateIso(value);
+          }
+        }
+      }
+      
+      // Clear old recommendations if date changed
+      if (state.recommendations.length > 0) {
         actions.setRecommendations([]);
       }
-      actions.setHarvestDateIso(value);
     } else {
-      // Clear harvestDateIso and recommendations if invalid
-      actions.setHarvestDateIso(null);
+      // Clear dates for selected filters if invalid
+      if (selectedFilterIds.length > 0) {
+        const newHarvestDates = new Map(harvestDatesByFilter);
+        selectedFilterIds.forEach((filterId) => {
+          if (filterId !== "all") {
+            newHarvestDates.delete(filterId);
+          }
+        });
+        setHarvestDatesByFilter(newHarvestDates);
+      }
+      
+      // Don't clear global date if invalid - keep it for plants without filters
+      // Only clear if no filters are selected
+      if (selectedFilterIds.length === 0) {
+        actions.setHarvestDateIso(null);
+      }
       if (state.recommendations.length > 0) {
         actions.setRecommendations([]);
       }
     }
-    
-    // Note: Per-plant sow result messages are calculated in useMemo (plantMessages)
-    // and shown in the selected plants list
   };
 
   // Check if calculate button should be disabled
+  // Button is disabled if no plants selected or if any plant is missing a harvest date
   const isCalculateDisabled = useMemo(() => {
-    return (
-      state.selectedPlantIds.length === 0 ||
-      !dateInputValue ||
-      validationError !== null
-    );
-  }, [state.selectedPlantIds.length, dateInputValue, validationError]);
+    if (state.selectedPlantIds.length === 0) {
+      return true;
+    }
+
+    // Check that all selected plants have a harvest date
+    for (const plant of selectedPlants) {
+      const harvestDate = getHarvestDate(plant);
+      if (!harvestDate) {
+        return true;
+      }
+    }
+
+    return false;
+  }, [state.selectedPlantIds.length, selectedPlants, harvestDatesByFilter, state.harvestDateIso]);
 
   // Handle opening plant detail modal
   const handleOpenDetails = (plant: Plant) => {
@@ -160,27 +268,44 @@ export const HarvestPlanner = () => {
     setSelectedPlantForModal(null);
   };
 
+
   // Handle calculate button click
   const handleCalculate = () => {
-    // Validate date again (basic rules)
-    const validation = validateHarvestDate(dateInputValue, null);
-    if (!validation.isValid) {
-      setValidationError(validation.error);
+    // Validate that all selected plants have harvest dates
+    const missingDates: string[] = [];
+
+    for (const plant of selectedPlants) {
+      const harvestDate = getHarvestDate(plant);
+      if (!harvestDate) {
+        missingDates.push(plant.name);
+      }
+    }
+
+    if (missingDates.length > 0) {
+      setValidationError(`Välj skördedatum för: ${missingDates.join(", ")}`);
       return;
     }
 
-    // Set calculating state
     setIsCalculating(true);
 
     try {
-      // Generate recommendations for selected plants
-      const recommendations = generateRecommendations(selectedPlants, dateInputValue);
+      // Generate recommendations for each plant with its specific harvest date
+      const recommendations = selectedPlants.flatMap((plant) => {
+        const harvestDate = getHarvestDate(plant);
+        if (!harvestDate) return [];
+        return generateRecommendations([plant], harvestDate);
+      });
 
-      // Save to context
-      actions.setHarvestDateIso(dateInputValue);
+      // Save recommendations to context
+      // Also save first date as global date (for backward compatibility)
+      if (selectedPlants.length > 0) {
+        const firstDate = getHarvestDate(selectedPlants[0]) || dateInputValue;
+        if (firstDate) {
+          actions.setHarvestDateIso(firstDate);
+        }
+      }
+
       actions.setRecommendations(recommendations);
-
-      // Navigate to calendar
       navigate("/calendar");
     } catch (error) {
       console.error("Error generating recommendations:", error);
@@ -218,7 +343,13 @@ export const HarvestPlanner = () => {
     <section>
       <h1>Planeraren</h1>
       <Panel title="Välj skördedatum">
-      <p>Här väljer du ditt önskade skördedatum och beräknar din personliga odlingsplan.</p>
+        <p>Här väljer du ditt önskade skördedatum och beräknar din personliga odlingsplan. Om du vill kan du välja olika datum för olika fröer, eller välja samma datum för samtliga. Förvalt är samma datum för samtliga fröer.</p>
+        <FilterDropdown
+          selectedPlantIds={state.selectedPlantIds}
+          plants={plants}
+          selectedFilterIds={selectedFilterIds}
+          onFilterChange={setSelectedFilterIds}
+        />
         <PlannerDateInput
           value={dateInputValue}
           onChange={handleDateChange}
@@ -232,6 +363,9 @@ export const HarvestPlanner = () => {
         plantMessages={plantMessages}
         onOpenDetails={handleOpenDetails}
         onRemove={actions.toggleSelectedPlant}
+        harvestDatesByPlant={harvestDatesByPlant}
+        recommendations={state.recommendations}
+        harvestDateIso={state.harvestDateIso}
       />
       <PlannerCalculateButton
         onCalculate={handleCalculate}

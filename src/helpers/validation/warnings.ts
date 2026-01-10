@@ -82,16 +82,14 @@ const isDateOutsideHarvestWindow = (
  * 
  * @param recommendation - The recommendation to check
  * @param plant - The plant to validate against
- * @param harvestDateIso - The harvest date (used for harvest warnings)
  * @returns Array of warnings (can be empty)
  */
 export const getPlantWarnings = (
   recommendation: Recommendation,
-  plant: Plant,
-  harvestDateIso: string | null
+  plant: Plant
 ): PlantWarning[] => {
   const warnings: PlantWarning[] = [];
-  const currentYear = harvestDateIso ? parseDateIso(harvestDateIso).getFullYear() : new Date().getFullYear();
+  const currentYear = recommendation.harvestDateIso ? parseDateIso(recommendation.harvestDateIso).getFullYear() : new Date().getFullYear();
 
   // Check outdoor sow date
   if (recommendation.outdoorSowDate) {
@@ -236,17 +234,17 @@ export const getPlantWarnings = (
   }
 
   // Check harvest date
-  if (harvestDateIso) {
+  if (recommendation.harvestDateIso) {
     try {
-      const harvestDate = parseDateIso(harvestDateIso);
+      const harvestDate = parseDateIso(recommendation.harvestDateIso);
       const result = isDateOutsideHarvestWindow(harvestDate, plant, harvestDate.getFullYear());
       if (result) {
         warnings.push({
           plantId: recommendation.plantId,
           plantName: plant.name,
           warningType: result.isTooEarly ? "too-early" : "too-late",
-          message: `Skördedatum (${harvestDateIso}) ligger utanför optimalt skördefönster för ${plant.name}`,
-          date: harvestDateIso,
+          message: `Skördedatum (${recommendation.harvestDateIso}) ligger utanför optimalt skördefönster för ${plant.name}`,
+          date: recommendation.harvestDateIso,
           dateType: "harvest",
         });
       }
