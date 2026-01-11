@@ -68,3 +68,46 @@ export const clearPlanFromLocalStorage = (): void => {
   }
 };
 
+const HARVEST_DATES_FILTER_STORAGE_KEY = "sowsmart_harvest_dates_filter";
+
+/**
+ * Saves harvest dates by filter to localStorage
+ * @param harvestDatesByFilter - Map of filter ID to harvest date ISO string
+ */
+export const saveHarvestDatesByFilterToLocalStorage = (harvestDatesByFilter: Map<string, string>): void => {
+  try {
+    // Convert Map to object for JSON serialization
+    const obj = Object.fromEntries(harvestDatesByFilter);
+    localStorage.setItem(HARVEST_DATES_FILTER_STORAGE_KEY, JSON.stringify(obj));
+  } catch (error) {
+    console.error("Failed to save harvest dates by filter to localStorage:", error);
+  }
+};
+
+/**
+ * Loads harvest dates by filter from localStorage
+ * @returns Map of filter ID to harvest date ISO string, or empty Map if not found
+ */
+export const loadHarvestDatesByFilterFromLocalStorage = (): Map<string, string> => {
+  try {
+    const stored = localStorage.getItem(HARVEST_DATES_FILTER_STORAGE_KEY);
+    if (!stored) {
+      return new Map();
+    }
+
+    const parsed = JSON.parse(stored) as Record<string, string>;
+    
+    // Validate structure
+    if (!parsed || typeof parsed !== "object") {
+      console.error("Invalid harvest dates by filter data in localStorage");
+      return new Map();
+    }
+
+    // Convert object back to Map
+    return new Map(Object.entries(parsed));
+  } catch (error) {
+    console.error("Failed to load harvest dates by filter from localStorage:", error);
+    return new Map();
+  }
+};
+

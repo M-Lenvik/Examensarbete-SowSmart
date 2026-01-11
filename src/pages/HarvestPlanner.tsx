@@ -11,6 +11,7 @@ import { PlanContext } from "../context/PlanContext";
 import { validateHarvestDate, getPlantSowResult, type PlantSowResult } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";
 import { calculatePlantMessagesFromHarvestDates } from "../helpers/date/plantMessages";
+import { loadHarvestDatesByFilterFromLocalStorage, saveHarvestDatesByFilterToLocalStorage } from "../helpers/storage/localStorage";
 import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
@@ -27,7 +28,10 @@ export const HarvestPlanner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCalculating, setIsCalculating] = useState(false);
   const [selectedFilterIds, setSelectedFilterIds] = useState<string[]>([]);
-  const [harvestDatesByFilter, setHarvestDatesByFilter] = useState<Map<string, string>>(new Map());
+  const [harvestDatesByFilter, setHarvestDatesByFilter] = useState<Map<string, string>>(() => {
+    // Load harvest dates by filter from localStorage on mount
+    return loadHarvestDatesByFilterFromLocalStorage();
+  });
 
   // Load all plants
   useEffect(() => {
@@ -39,6 +43,11 @@ export const HarvestPlanner = () => {
 
     void load();
   }, []);
+
+  // Save harvestDatesByFilter to localStorage whenever it changes
+  useEffect(() => {
+    saveHarvestDatesByFilterToLocalStorage(harvestDatesByFilter);
+  }, [harvestDatesByFilter]);
 
 
   // Update date input when filter selection changes
