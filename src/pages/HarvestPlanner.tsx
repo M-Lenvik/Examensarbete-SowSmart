@@ -154,16 +154,24 @@ export const HarvestPlanner = () => {
         try {
           const sowResult = getPlantSowResult(harvestDate, plant);
           if (sowResult) {
-            // Calculate actual sow date
-            const parsedHarvestDate = parseDateIso(harvestDate);
-            const calculatedSowDate = calculateTryAnywaySowDate(parsedHarvestDate, plant);
-            
-            if (calculatedSowDate) {
-              const calculatedSowDateIso = formatDateIso(calculatedSowDate);
-              const message = sowResult.message.replace(sowResult.sowDateIso || "", calculatedSowDateIso);
-              results.set(plant.id, message);
-            } else {
+            // If sowResult.sowDateIso is already the correct nearestSowDateIso (from "too late" scenario),
+            // don't replace it with calculatedSowDate (which would be tryAnywaySowDate from last year).
+            // The message already contains the correct nearestSowDateIso.
+            if (sowResult.key === "harvestToClose" && sowResult.sowDateIso) {
+              // Message already contains correct nearestSowDateIso, use it as-is
               results.set(plant.id, sowResult.message);
+            } else {
+              // For other scenarios, calculate actual sow date and replace if needed
+              const parsedHarvestDate = parseDateIso(harvestDate);
+              const calculatedSowDate = calculateTryAnywaySowDate(parsedHarvestDate, plant);
+              
+              if (calculatedSowDate) {
+                const calculatedSowDateIso = formatDateIso(calculatedSowDate);
+                const message = sowResult.message.replace(sowResult.sowDateIso || "", calculatedSowDateIso);
+                results.set(plant.id, message);
+              } else {
+                results.set(plant.id, sowResult.message);
+              }
             }
           }
         } catch {
@@ -239,17 +247,34 @@ export const HarvestPlanner = () => {
   };
 
   // Check if calculate button should be disabled
-  // Button is disabled if no plants selected or if any plant is missing a harvest date
+  // Button is disabled if:
+  // - No plants selected
+  // - Any plant is missing a harvest date
+  // - Any plant's harvest date is too close in time to ripen (harvestToClose)
+  // Note: Dates outside harvest window but with enough time to mature are allowed
+  // (harvestDateBeforeHarvestWindow / harvestDateAfterHarvestWindow)
   const isCalculateDisabled = useMemo(() => {
     if (state.selectedPlantIds.length === 0) {
       return true;
     }
 
-    // Check that all selected plants have a harvest date
+    // Check that all selected plants have a harvest date and that none are too close
     for (const plant of selectedPlants) {
       const harvestDate = getHarvestDate(plant);
       if (!harvestDate) {
         return true;
+      }
+
+      // Check if harvest date is too close in time (harvestToClose)
+      // This is different from being outside harvest window - if there's enough time
+      // to mature, the user should be able to calculate even if outside the window
+      try {
+        const sowResult = getPlantSowResult(harvestDate, plant);
+        if (sowResult?.key === "harvestToClose") {
+          return true; // Disable button only if date is too close in time
+        }
+      } catch {
+        // If validation fails, allow button to be enabled (will show error on click)
       }
     }
 

@@ -1,4 +1,4 @@
-import { formatDateIso, parseDateIso } from "./date";
+import { formatDateIso, formatDateSwedish, parseDateIso } from "./date";
 import { calculateSowDate, calculateTryAnywaySowDate } from "../calculation/sowDate";
 import { selectPlantingWindow } from "../plant/plantingWindow";
 import { getDefaultMovePlantOutdoor } from "../plant/plantDefaults";
@@ -307,74 +307,117 @@ export const getPlantSowResult = (
   const tryAnywaySowDate = calculateTryAnywaySowDate(harvestDate, plant);
   const tryAnywaySowDateIso = tryAnywaySowDate ? formatDateIso(tryAnywaySowDate) : null;
 
-  // Rule: within harvest window and not too close (neither strict nor try-anyway)
+  // Perfect scenario: within window and not too close
   if (isWithinWindow && !isTooClose && !isTooCloseTryAnyway) {
     return {
       key: "harvestDate",
-      message: `Sås på ${sowDateIso}`,
+      message: `Sådatum: ${sowDateIso}`,
       sowDateIso,
     };
   }
 
   const messages: string[] = [];
 
-  // If outside harvest window, always show the corresponding message
-  if (isBeforeWindow) {
-    messages.push(
-      `Valt skördedatum är före skördefönstret. Rekommenderat första sådatum för att skörda ${plant.name} inom skördeperioden är: ${sowDateIso}`
-    );
-  } else if (isAfterWindow) {
-    const warningText = plant.plantingMethod === "indoor"
-      ? "Om du ändå vill försöka skörda då ligger det utanför skördefönstret och du kan behöva exempelvis ett tempererat växthus för att lyckas."
-      : "Om du ändå vill försöka skörda då ligger det utanför skördefönstret behöver du beakta väderförhållandena och kanske även använda ett växthus för att lyckas.";
-    messages.push(`Valt skördedatum är efter skördefönstret. För mognad till detta datum är teoretiskt sådatum: ${tryAnywaySowDateIso}. ${warningText} Rekommenderat första sådatum för att skörda inom skördeperioden för ${plant.name} är: ${sowDateIso}.`);
-  }
+  // Check if "too late to sow this year" message will be shown
+  const willShowTooLateMessage = 
+    isTooCloseTryAnyway && 
+    tryAnywaySowDateIso && 
+    tryAnywaySowDate && 
+    tryAnywaySowDate.getTime() < today.getTime();
 
-  // If too close, also show the too-close message (so user can see both when applicable)
-  if (isTooClose) {
-    const warningText = plant.plantingMethod === "indoor"
-      ? "Tänk dock på att du isåfall behöver exempelvis ett tempererat växthus för att lyckas."
-      : "Tänk dock på att hålla koll på om det beräknas bli frost eller använd ett växthus.";
+  // Check if outside harvest window - show warning if harvest date is outside window
+  // But skip if "too late to sow this year" message will be shown (to avoid duplicates)
+  if (!willShowTooLateMessage) {
     if (isBeforeWindow) {
       messages.push(
-        `Datumet ligger för nära i tid för att hinna mogna och före skördefönstret. Närmsta rekommenderade sådatum: ${sowDateIso}. Om du till ett annat år ändå vill försöka skörda till ${harvestDateIso} så är rekommenderat sådatum: ${tryAnywaySowDateIso}. ${warningText}`
+        `Valt skördedatum är före skördefönstret. Vi rekommenderar att du byter ditt skördedatum mot ett senare. Ditt uträknade sådatum (${tryAnywaySowDateIso}) är bara baserat på den tid som ${plant.name} behöver för att mogna. Om du ändå vill försöka skörda då så rekommenderar vi att du odlar i ett tempererat växthus och har koll på väderleken.`
       );
     } else if (isAfterWindow) {
+      // Both indoor and outdoor plants should get recommendation
       messages.push(
-        `Datumet ligger för nära i tid för att hinna mogna och efter skördefönstret. Rekommenderad såperiod för ${plant.name} är: ${plantingWindowDates?.start.toLocaleDateString()} - ${plantingWindowDates?.end.toLocaleDateString()}. Om du till ett annat år ändå vill försöka skörda till ${harvestDateIso} så är rekommenderat sådatum: ${tryAnywaySowDateIso}. ${warningText}`
-      );
-    } else {
-      messages.push(
-        `Datumet ligger för nära i tid för att hinna mogna. Rekommenderad såperiod för ${plant.name} är: ${plantingWindowDates?.start.toLocaleDateString()} - ${plantingWindowDates?.end.toLocaleDateString()}. Om du ändå vill försöka skörda till ${harvestDateIso} så är rekommenderat sådatum: ${tryAnywaySowDateIso}. ${warningText}`
+        `Valt skördedatum är efter skördefönstret. Ditt uträknade sådatum (${tryAnywaySowDateIso}) är bara baserat på den tid som ${plant.name} behöver för att mogna. Om du ändå vill försöka skörda då behöver du beakta väderförhållandena och kanske även använda ett tempererat växthus för att lyckas.`
       );
     }
   }
 
-
-
-    // If too close by theoretical maturity (try anyway), show the theoretical sow date
-  // Always show the "other year" message when isTooCloseTryAnyway is true
+  // Check if too close - show warning if time is too short
   if (isTooCloseTryAnyway && tryAnywaySowDateIso && tryAnywaySowDate) {
+    const warningText = plant.plantingMethod === "indoor"
+      ? "Tänk dock på att hålla koll på om det beräknas bli frost eller använd ett tempererat växthus för att lyckas."
+      : "Tänk dock på att hålla koll på om det beräknas bli frost eller använd ett växthus.";
+    
+    if (tryAnywaySowDate.getTime() < today.getTime()) {
+      // Sow date is in the past - need to try another year
+      
+      // Calculate nearest recommended sow date for THIS year (current year, not harvest date year)
+      // Get planting window for current year to find the next available sowing opportunity
+      const currentYear = today.getFullYear();
+      const currentYearPlantingWindow = getPlantingWindowDates(plant, currentYear);
+      
+      let nearestSowDateIso = "";
+      if (currentYearPlantingWindow) {
+        if (today.getTime() < currentYearPlantingWindow.start.getTime()) {
+          // Today is before planting window - recommend first day of planting window
+          nearestSowDateIso = formatDateIso(currentYearPlantingWindow.start);
+        } else if (today.getTime() >= currentYearPlantingWindow.start.getTime() && today.getTime() <= currentYearPlantingWindow.end.getTime()) {
+          // Today is within planting window - recommend today (nearest possible day)
+          nearestSowDateIso = formatDateIso(today);
+        } else {
+          // Today is after planting window - too late for this year, use first day of next year's window
+          const nextYearPlantingWindow = getPlantingWindowDates(plant, currentYear + 1);
+          if (nextYearPlantingWindow) {
+            nearestSowDateIso = formatDateIso(nextYearPlantingWindow.start);
+          } else {
+            nearestSowDateIso = formatDateIso(currentYearPlantingWindow.start);
+          }
+        }
+      } else {
+        // No planting window available, use today
+        nearestSowDateIso = formatDateIso(today);
+      }
+
+      // Calculate date for next year (+1 year from tryAnywaySowDate)
+      const nextYearSowDate = new Date(tryAnywaySowDate);
+      nextYearSowDate.setFullYear(nextYearSowDate.getFullYear() + 1);
+      const nextYearSowDateIso = formatDateIso(nextYearSowDate);
+
+      const harvestDateFormatted = formatDateSwedish(harvestDateIso);
+      messages.push(
+        `Datumet du valt (${harvestDateFormatted}) ligger för nära i tid för att hinna mogna. Närmsta rekommenderade sådatum för skörd i år är ${nearestSowDateIso}. Om du till nästa år ändå vill försöka skörda till ditt valda datum behöver du så: ${nextYearSowDateIso}. ${warningText}`
+      );
+      
+      // Return nearestSowDateIso as sowDateIso so HarvestPlanner doesn't replace it with wrong date
+      return {
+        key: "harvestToClose",
+        message: messages.join("\n"),
+        sowDateIso: nearestSowDateIso,
+      };
+    }
+  } else if (isTooClose) {
+    // Too close but not in try-anyway scenario
     const warningText = plant.plantingMethod === "indoor"
       ? "Tänk dock på att du isåfall behöver exempelvis ett tempererat växthus för att lyckas."
       : "Tänk dock på att hålla koll på om det beräknas bli frost eller använd ett växthus.";
-    // Show short message if sow date is in the future (theoretically possible this year)
-    if (tryAnywaySowDate.getTime() >= today.getTime()) {
-      messages.push(
-        `Du behöver så: ${tryAnywaySowDateIso}. ${warningText}`
-      );
-    } else {
-      // Show long message if sow date is in the past (need to try another year)
-      messages.push(
-        `Om du till ett annat år vill försöka ändå så skulle du behövt så: ${tryAnywaySowDateIso}. ${warningText}`
-      );
-    }
+    const harvestDateFormatted = formatDateSwedish(harvestDateIso);
+    messages.push(
+      `Datumet du valt (${harvestDateFormatted}) ligger för nära i tid för att hinna mogna. Närmsta rekommenderade sådatum: ${sowDateIso}. ${warningText}`
+    );
   }
-  
 
   if (messages.length > 0) {
+    // Determine the key based on priority:
+    // 1. If too close in time (harvestToClose) - this is the most critical
+    // 2. If outside harvest window but has time to mature (harvestDateBeforeHarvestWindow / harvestDateAfterHarvestWindow)
+    // Note: When outside harvest window, we use tryAnywaySowDate to determine if there's enough time.
+    // If tryAnywaySowDate is in the past, it's too close (already handled by early return above).
+    // If tryAnywaySowDate is in the future, there's time to mature even if outside window.
+    // Only consider it "too close" if:
+    // - We're within the harvest window AND isTooClose is true, OR
+    // - tryAnywaySowDate is in the past (but this is already handled by early return)
+    const isActuallyTooClose = isTooClose && isWithinWindow;
+    
     return {
-      key: isTooClose
+      key: isActuallyTooClose
         ? "harvestToClose"
         : isBeforeWindow
           ? "harvestDateBeforeHarvestWindow"
@@ -386,4 +429,5 @@ export const getPlantSowResult = (
 
   return null;
 };
+
 
