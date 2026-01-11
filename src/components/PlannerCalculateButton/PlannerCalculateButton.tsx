@@ -8,6 +8,7 @@ type PlannerCalculateButtonProps = {
   disabled: boolean;
   isLoading?: boolean;
   hasHarvestDate?: boolean;
+  disabledReason?: string | null;
 };
 
 export const PlannerCalculateButton = ({
@@ -15,6 +16,7 @@ export const PlannerCalculateButton = ({
   disabled,
   isLoading = false,
   hasHarvestDate = false,
+  disabledReason = null,
 }: PlannerCalculateButtonProps) => {
   return (
     <Panel title="Beräkna ditt sådatum">
@@ -26,6 +28,11 @@ export const PlannerCalculateButton = ({
             Du väljer ditt skördedatum</Link> här i planeraren.
         </p>
         </>
+      )}
+      {disabled && disabledReason && (
+        <p className="planner-calculate-button__disabled-reason" aria-label={disabledReason}>
+          {disabledReason}
+        </p>
       )}
       <Button
         type="button"

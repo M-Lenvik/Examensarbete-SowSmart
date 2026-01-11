@@ -1,3 +1,5 @@
+@use '../../Styles/color' as *;
+
 .planner-calculate-button__scroll-link {
   background: none;
   border: none;
@@ -10,4 +12,13 @@
   &:hover {
     opacity: 0.8;
   }
+}
+
+.planner-calculate-button__disabled-reason {
+  margin: 0 0 0.25rem 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: $warning-color;
+  font-style: italic;
+  line-height: 1.5;
 }

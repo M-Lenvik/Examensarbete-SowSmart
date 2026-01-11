@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { SelectedPlantsList } from "../SelectedPlantsList/SelectedPlantsList";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
+import type { PlantSowResult } from "../../helpers/date/dateValidation";
 import "./MyGardenSelectedPlants.scss";
 
 type MyGardenSelectedPlantsProps = {
@@ -12,6 +13,7 @@ type MyGardenSelectedPlantsProps = {
   onPlantClick: (plant: Plant) => void;
   recommendations?: Recommendation[];
   harvestDateIso?: string | null;
+  plantMessages?: Map<number, PlantSowResult>;
 };
 
 export const MyGardenSelectedPlants = ({
@@ -20,6 +22,7 @@ export const MyGardenSelectedPlants = ({
   onPlantClick,
   recommendations,
   harvestDateIso,
+  plantMessages,
 }: MyGardenSelectedPlantsProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
@@ -60,6 +63,8 @@ export const MyGardenSelectedPlants = ({
           onRemove={onRemovePlant}
           recommendations={recommendations}
           harvestDateIso={harvestDateIso}
+          plantMessages={plantMessages}
+          showWarningsInline={true}
         />
       )}
     </div>

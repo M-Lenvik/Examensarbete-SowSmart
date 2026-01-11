@@ -1,18 +1,21 @@
+import { useState } from "react";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
 import { CalendarEventIcon } from "../CalendarEventIcon/CalendarEventIcon";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
+import type { PlantSowResult, PlantSowResultKey } from "../../helpers/date/dateValidation";
 import { formatDateSwedishWithoutYear } from "../../helpers/date/date";
 import "./SelectedPlantsList.scss";
 
 type SelectedPlantsListProps = {
   selectedPlants: Plant[];
-  plantMessages?: Map<number, string>; // Map of plantId -> sow result message
+  plantMessages?: Map<number, PlantSowResult>; // Map of plantId -> sow result
   onOpenDetails?: (plant: Plant) => void; // Callback to open plant detail modal
   onRemove?: (plantId: number) => void; // Callback to remove plant from selection
   recommendations?: Recommendation[]; // Recommendations for date display
   harvestDateIso?: string | null; // Harvest date for date display (fallback)
   harvestDatesByPlant?: Map<number, string>; // Map of plantId -> harvest date ISO
+  showWarningsInline?: boolean; // If true, show all warnings inline under each plant. If false, show informative warnings in expandable section (default)
 };
 
 export const SelectedPlantsList = ({
@@ -23,7 +26,10 @@ export const SelectedPlantsList = ({
   recommendations,
   harvestDateIso,
   harvestDatesByPlant,
+  showWarningsInline = false,
 }: SelectedPlantsListProps) => {
+  const [isWarningsExpanded, setIsWarningsExpanded] = useState(false);
+
   if (selectedPlants.length === 0) {
     return null;
   }
@@ -80,6 +86,7 @@ export const SelectedPlantsList = ({
     const dateInfos: DateInfo[] = [];
 
     // Sådd: datum (indoor eller outdoor)
+    // Prioritize recommendation if available, otherwise use sowDate from plantMessages if it's a valid date (harvestDate key)
     if (recommendation?.indoorSowDate) {
       dateInfos.push({
         label: "Sådd",
@@ -92,6 +99,23 @@ export const SelectedPlantsList = ({
         date: formatDateSwedishWithoutYear(recommendation.outdoorSowDate),
         eventType: "sow-outdoor",
       });
+    } else {
+      // No recommendation yet - try to get sow date from plantMessages if it has a sow date
+      // Show sow date for harvestDate (within window), harvestDateBeforeHarvestWindow, and harvestDateAfterHarvestWindow
+      const sowResult = plantMessages?.get(plant.id);
+      if (sowResult?.sowDateIso && (
+        sowResult.key === "harvestDate" ||
+        sowResult.key === "harvestDateBeforeHarvestWindow" ||
+        sowResult.key === "harvestDateAfterHarvestWindow"
+      )) {
+        // Use sow date from plantMessages - assume indoor if plant uses indoor method
+        const eventType = plant.plantingMethod === "indoor" ? "sow-indoor" : "sow-outdoor";
+        dateInfos.push({
+          label: "Sådd",
+          date: formatDateSwedishWithoutYear(sowResult.sowDateIso),
+          eventType,
+        });
+      }
     }
 
     // Avhärdning: datum
@@ -129,6 +153,25 @@ export const SelectedPlantsList = ({
     return dateInfos;
   };
 
+  // Check if a message key is an informative warning (should be in expandable section)
+  const isInformativeWarning = (key: PlantSowResultKey): boolean => {
+    return key === "harvestDateBeforeHarvestWindow" || key === "harvestDateAfterHarvestWindow";
+  };
+
+  // Separate messages into important (direct display) and informative warnings (expandable)
+  // Only collect informative warnings if showWarningsInline is false (they'll be shown inline otherwise)
+  const informativeWarnings: Array<{ plant: Plant; message: PlantSowResult }> = [];
+  
+  if (!showWarningsInline) {
+    // Collect all informative warnings for expandable section
+    selectedPlants.forEach((plant) => {
+      const sowResult = plantMessages?.get(plant.id);
+      if (sowResult && isInformativeWarning(sowResult.key)) {
+        informativeWarnings.push({ plant, message: sowResult });
+      }
+    });
+  }
+
   return (
     <div className="selected-plants-list">
       <div className="selected-plants-list__groups">
@@ -139,8 +182,15 @@ export const SelectedPlantsList = ({
             </h3>
             <ul className="selected-plants-list__list">
               {groupedPlants[subcategory].map((plant) => {
-                const message = plantMessages?.get(plant.id);
+                const sowResult = plantMessages?.get(plant.id);
                 const dateInfos = getPlantDateInfo(plant);
+                // Show messages based on showWarningsInline prop
+                // If showWarningsInline is true, show all warnings inline (including informative)
+                // If showWarningsInline is false, only show important messages directly (not informative warnings)
+                // Also don't show message if sow date is already displayed in date list (when key is "harvestDate")
+                const hasSowDateInList = dateInfos.some((info) => info.eventType === "sow-indoor" || info.eventType === "sow-outdoor");
+                const shouldHideMessage = sowResult?.key === "harvestDate" && hasSowDateInList;
+                const showMessage = sowResult && !shouldHideMessage && (showWarningsInline || !isInformativeWarning(sowResult.key));
                 return (
                   <li key={plant.id} className="selected-plants-list__item">
                     <div className="selected-plants-list__plant-info">
@@ -181,9 +231,9 @@ export const SelectedPlantsList = ({
                           ))}
                         </div>
                       )}
-                      {message && (
+                      {showMessage && (
                         <span className="selected-plants-list__message">
-                          {message}
+                          {sowResult.message}
                         </span>
                       )}
                     </div>
@@ -194,6 +244,47 @@ export const SelectedPlantsList = ({
           </div>
         ))}
       </div>
+      {informativeWarnings.length > 0 && (
+        <div className="selected-plants-list__warnings">
+          <button
+            type="button"
+            className="selected-plants-list__warnings-button"
+            onClick={() => setIsWarningsExpanded(!isWarningsExpanded)}
+            aria-expanded={isWarningsExpanded}
+            aria-label={`${isWarningsExpanded ? "Dölj" : "Visa"} varningar`}
+          >
+            <span className="selected-plants-list__warnings-title">
+              Varningar ({informativeWarnings.length})
+            </span>
+            <span className={`selected-plants-list__warnings-icon ${isWarningsExpanded ? "selected-plants-list__warnings-icon--expanded" : ""}`}>
+              ▼
+            </span>
+          </button>
+          {isWarningsExpanded && (
+            <ul className="selected-plants-list__warnings-list">
+              {informativeWarnings.map(({ plant, message }) => (
+                <li key={plant.id} className="selected-plants-list__warning-item">
+                  <div className="selected-plants-list__warning-plant-name">
+                    {onOpenDetails ? (
+                      <button
+                        type="button"
+                        className="selected-plants-list__warning-plant-button"
+                        onClick={() => handlePlantClick(plant)}
+                        aria-label={`Öppna detaljer för ${plant.name}`}
+                      >
+                        {plant.name}
+                      </button>
+                    ) : (
+                      <span>{plant.name}</span>
+                    )}
+                  </div>
+                  <p className="selected-plants-list__warning-message">{message.message}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </div>
   );
 };

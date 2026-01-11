@@ -8,10 +8,9 @@ import { PlannerDateInput } from "../components/PlannerDateInput/PlannerDateInpu
 import { PlannerSelectedPlants } from "../components/PlannerSelectedPlants/PlannerSelectedPlants";
 import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailModal";
 import { PlanContext } from "../context/PlanContext";
-import { getPlantSowResult, validateHarvestDate } from "../helpers/date/dateValidation";
+import { validateHarvestDate, getPlantSowResult, type PlantSowResult } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";
-import { calculateTryAnywaySowDate } from "../helpers/calculation/sowDate";
-import { formatDateIso, parseDateIso } from "../helpers/date/date";
+import { calculatePlantMessagesFromHarvestDates } from "../helpers/date/plantMessages";
 import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
@@ -127,12 +126,12 @@ export const HarvestPlanner = () => {
   // Use recommendations if available, otherwise calculate from harvest dates
   const plantMessages = useMemo(() => {
     if (selectedPlants.length === 0) {
-      return new Map<number, string>();
+      return new Map<number, PlantSowResult>();
     }
 
-    const results = new Map<number, string>();
+    const results = new Map<number, PlantSowResult>();
 
-    // If recommendations exist, show sow dates from them
+    // If recommendations exist, show sow dates from them (giltigt datum)
     if (state.recommendations.length > 0) {
       const recommendationMap = new Map(state.recommendations.map((rec) => [rec.plantId, rec]));
       
@@ -141,43 +140,24 @@ export const HarvestPlanner = () => {
         if (recommendation) {
           const sowDate = recommendation.indoorSowDate || recommendation.outdoorSowDate;
           if (sowDate) {
-            results.set(plant.id, `Sås på ${sowDate}`);
+            results.set(plant.id, {
+              key: "harvestDate",
+              message: `Sås på ${sowDate}`,
+              sowDateIso: sowDate,
+            });
           }
         }
       }
     } else {
       // No recommendations yet - calculate messages from harvest dates
+      const harvestDatesMap = new Map<number, string>();
       for (const plant of selectedPlants) {
         const harvestDate = getHarvestDate(plant);
-        if (!harvestDate) continue;
-
-        try {
-          const sowResult = getPlantSowResult(harvestDate, plant);
-          if (sowResult) {
-            // If sowResult.sowDateIso is already the correct nearestSowDateIso (from "too late" scenario),
-            // don't replace it with calculatedSowDate (which would be tryAnywaySowDate from last year).
-            // The message already contains the correct nearestSowDateIso.
-            if (sowResult.key === "harvestToClose" && sowResult.sowDateIso) {
-              // Message already contains correct nearestSowDateIso, use it as-is
-              results.set(plant.id, sowResult.message);
-            } else {
-              // For other scenarios, calculate actual sow date and replace if needed
-              const parsedHarvestDate = parseDateIso(harvestDate);
-              const calculatedSowDate = calculateTryAnywaySowDate(parsedHarvestDate, plant);
-              
-              if (calculatedSowDate) {
-                const calculatedSowDateIso = formatDateIso(calculatedSowDate);
-                const message = sowResult.message.replace(sowResult.sowDateIso || "", calculatedSowDateIso);
-                results.set(plant.id, message);
-              } else {
-                results.set(plant.id, sowResult.message);
-              }
-            }
-          }
-        } catch {
-          // Skip invalid dates
+        if (harvestDate) {
+          harvestDatesMap.set(plant.id, harvestDate);
         }
       }
+      return calculatePlantMessagesFromHarvestDates(harvestDatesMap, selectedPlants);
     }
 
     return results;
@@ -246,40 +226,55 @@ export const HarvestPlanner = () => {
     }
   };
 
-  // Check if calculate button should be disabled
-  // Button is disabled if:
-  // - No plants selected
-  // - Any plant is missing a harvest date
-  // - Any plant's harvest date is too close in time to ripen (harvestToClose)
-  // Note: Dates outside harvest window but with enough time to mature are allowed
-  // (harvestDateBeforeHarvestWindow / harvestDateAfterHarvestWindow)
-  const isCalculateDisabled = useMemo(() => {
+  // Get reason why calculate button is disabled (returns null if enabled)
+  const getDisabledReason = useMemo((): string | null => {
     if (state.selectedPlantIds.length === 0) {
-      return true;
+      return "Du har inte valt några fröer ännu.";
     }
 
-    // Check that all selected plants have a harvest date and that none are too close
+    // Check for missing harvest dates
+    const plantsWithoutDate: string[] = [];
+    const plantsTooClose: string[] = [];
+
     for (const plant of selectedPlants) {
       const harvestDate = getHarvestDate(plant);
       if (!harvestDate) {
-        return true;
+        plantsWithoutDate.push(plant.name);
+        continue;
       }
 
       // Check if harvest date is too close in time (harvestToClose)
-      // This is different from being outside harvest window - if there's enough time
-      // to mature, the user should be able to calculate even if outside the window
       try {
         const sowResult = getPlantSowResult(harvestDate, plant);
         if (sowResult?.key === "harvestToClose") {
-          return true; // Disable button only if date is too close in time
+          plantsTooClose.push(plant.name);
         }
       } catch {
         // If validation fails, allow button to be enabled (will show error on click)
       }
     }
 
-    return false;
+    if (plantsTooClose.length > 0) {
+      if (plantsTooClose.length === 1) {
+        return `Skördedatumet för ${plantsTooClose[0]} ligger för nära i tid. Välj ett senare datum.`;
+      }
+      return `Skördedatum för ${plantsTooClose.length} fröer ligger för nära i tid. Välj senare datum.`;
+    }
+
+    if (plantsWithoutDate.length > 0) {
+      if (plantsWithoutDate.length === 1) {
+        return `Välj skördedatum för ${plantsWithoutDate[0]}.`;
+      }
+      return `Välj skördedatum för ${plantsWithoutDate.length} fröer.`;
+    }
+
+    return null;
   }, [state.selectedPlantIds.length, selectedPlants, harvestDatesByFilter, state.harvestDateIso]);
+
+  // Check if calculate button should be disabled
+  const isCalculateDisabled = useMemo(() => {
+    return getDisabledReason !== null;
+  }, [getDisabledReason]);
 
   // Handle opening plant detail modal
   const handleOpenDetails = (plant: Plant) => {
@@ -397,6 +392,7 @@ export const HarvestPlanner = () => {
         disabled={isCalculateDisabled}
         isLoading={isCalculating}
         hasHarvestDate={!!dateInputValue && validationError === null}
+        disabledReason={getDisabledReason}
       />
       <PlantsDetailModal
         plant={selectedPlantForModal}

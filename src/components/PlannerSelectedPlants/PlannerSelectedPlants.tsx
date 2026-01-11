@@ -4,11 +4,12 @@ import { Panel } from "../Panel/Panel";
 import { SelectedPlantsList } from "../SelectedPlantsList/SelectedPlantsList";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
+import type { PlantSowResult } from "../../helpers/date/dateValidation";
 import "./PlannerSelectedPlants.scss";
 
 type PlannerSelectedPlantsProps = {
   selectedPlants: Plant[];
-  plantMessages?: Map<number, string>; // Map of plantId -> sow result message
+  plantMessages?: Map<number, PlantSowResult>; // Map of plantId -> sow result
   onOpenDetails?: (plant: Plant) => void; // Callback to open plant detail modal
   onRemove?: (plantId: number) => void; // Callback to remove plant from selection
   harvestDatesByPlant?: Map<number, string>; // Map of plantId -> harvest date ISO

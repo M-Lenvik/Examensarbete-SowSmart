@@ -135,3 +135,104 @@
   white-space: pre-line;
 }
 
+.selected-plants-list__warnings {
+  margin-top: 1.5rem;
+  border-top: 1px solid $border-color;
+  padding-top: 1rem;
+}
+
+.selected-plants-list__warnings-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem;
+  background: lighten($warning-color, 40%);
+  border: 1px solid lighten($warning-color, 30%);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-align: left;
+  @include transition(background-color);
+
+  &:hover {
+    background: lighten($warning-color, 35%);
+  }
+
+  &:focus {
+    outline: 2px solid $warning-color;
+    outline-offset: 2px;
+  }
+}
+
+.selected-plants-list__warnings-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text-color;
+}
+
+.selected-plants-list__warnings-icon {
+  font-size: 0.75rem;
+  color: $text-light;
+  flex-shrink: 0;
+  @include transition(transform);
+
+  &--expanded {
+    transform: rotate(180deg);
+  }
+}
+
+.selected-plants-list__warnings-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0 0;
+  @include flex-column;
+  gap: 1rem;
+}
+
+.selected-plants-list__warning-item {
+  @include flex-column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: lighten($warning-color, 42%);
+  border-left: 0.25rem solid $warning-color;
+  border-radius: 0.25rem;
+}
+
+.selected-plants-list__warning-plant-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: $text-color;
+}
+
+.selected-plants-list__warning-plant-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  color: $text-color;
+  text-align: left;
+  @include transition(color);
+
+  &:hover {
+    color: $primary-green;
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-green;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+}
+
+.selected-plants-list__warning-message {
+  margin: 0;
+  font-size: 0.875rem;
+  color: $text-color;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+

@@ -383,7 +383,7 @@ export const getPlantSowResult = (
 
       const harvestDateFormatted = formatDateSwedish(harvestDateIso);
       messages.push(
-        `Datumet du valt (${harvestDateFormatted}) ligger för nära i tid för att hinna mogna. Närmsta rekommenderade sådatum för skörd i år är ${nearestSowDateIso}. Om du till nästa år ändå vill försöka skörda till ditt valda datum behöver du så: ${nextYearSowDateIso}. ${warningText}`
+        `Datumet du valt (${harvestDateFormatted}) ligger för nära i tid för att hinna mogna. Närmsta rekommenderade sådatum för skörd i år är ${nearestSowDateIso}.\nOm du till nästa år ändå vill försöka skörda till ditt valda datum behöver du så: ${nextYearSowDateIso}. ${warningText}`
       );
       
       // Return nearestSowDateIso as sowDateIso so HarvestPlanner doesn't replace it with wrong date

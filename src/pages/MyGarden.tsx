@@ -8,6 +8,7 @@ import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailM
 import { PlanContext } from "../context/PlanContext";
 import { recommendationsToTasks } from "../helpers/calendar/tasks";
 import { getPlantWarnings } from "../helpers/validation/warnings";
+import { calculatePlantMessagesFromRecommendations } from "../helpers/date/plantMessages";
 import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
@@ -65,6 +66,11 @@ export const MyGarden = () => {
     return allWarnings;
   }, [state.recommendations, plants]);
 
+  // Calculate plantMessages from recommendations harvest dates
+  const plantMessages = useMemo(() => {
+    return calculatePlantMessagesFromRecommendations(state.recommendations, plants);
+  }, [state.recommendations, plants]);
+
   const handleOpenDetails = (plant: Plant) => {
     setSelectedPlantForModal(plant);
     setIsModalOpen(true);
@@ -118,6 +124,7 @@ export const MyGarden = () => {
             onPlantClick={handleOpenDetails}
             recommendations={state.recommendations}
             harvestDateIso={null}
+            plantMessages={plantMessages}
           />
         </Panel>
         <Panel title="Min odlingsplan">
@@ -125,35 +132,6 @@ export const MyGarden = () => {
             Du har inte valt skördedatum ännu. </p>
           <p>
             <Link to="/planner">Gå till planeraren</Link> för att välja skördedatum och beräkna plan.
-          </p>
-        </Panel>
-        <PlantsDetailModal
-          isOpen={isModalOpen}
-          plant={selectedPlantForModal}
-          onClose={handleCloseModal}
-        />
-      </section>
-    );
-  }
-
-  // Show message if no recommendations
-  if (state.recommendations.length === 0) {
-    return (
-      <section>
-        <h1>Min frösida</h1>
-        <Panel title="Valda frön">
-          <MyGardenSelectedPlants
-            selectedPlants={selectedPlants}
-            onRemovePlant={actions.toggleSelectedPlant}
-            onPlantClick={handleOpenDetails}
-            recommendations={state.recommendations}
-            harvestDateIso={null}
-          />
-        </Panel>
-        <Panel title="Min odlingsplan">
-          <p>
-            Ingen plan beräknad än.{" "}
-            <Link to="/planner">Gå till planeraren</Link> för att beräkna plan.
           </p>
         </Panel>
         <PlantsDetailModal
@@ -175,6 +153,7 @@ export const MyGarden = () => {
           onPlantClick={handleOpenDetails}
           recommendations={state.recommendations}
           harvestDateIso={state.harvestDateIso}
+          plantMessages={plantMessages}
         />
       </Panel>
       <Panel title="Min odlingsplan">
