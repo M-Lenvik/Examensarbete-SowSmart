@@ -78,11 +78,9 @@ type TaskGroupCardProps = {
 };
 
 const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onToggle, onPlantClick }: TaskGroupCardProps) => {
-  const hasWarning = tasks.some((task) => getTaskWarning(task, warnings) !== null);
-
   return (
     <li className="my-garden-task-list__task-group">
-      <div className={`my-garden-task-list__task-card my-garden-task-list__task-card--${type}${hasWarning ? " my-garden-task-list__task-card--has-warning" : ""}`}>
+      <div className={`my-garden-task-list__task-card my-garden-task-list__task-card--${type}`}>
         <div className="my-garden-task-list__task-icon">
           <CalendarEventIcon eventType={type} size="medium" />
         </div>

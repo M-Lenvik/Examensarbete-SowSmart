@@ -2,6 +2,9 @@
 @use '../../Styles/base' as *;
 
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background-color: $header-background;
   color: $header-text;
   padding: 1rem;

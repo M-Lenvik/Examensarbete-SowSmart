@@ -88,10 +88,6 @@
       border-left-color: $calendar-event-harvest;
     }
 
-    &--has-warning {
-      border-left-color: $warning-color;
-    }
-
     &:hover {
       background-color: $primary-beige;
     }

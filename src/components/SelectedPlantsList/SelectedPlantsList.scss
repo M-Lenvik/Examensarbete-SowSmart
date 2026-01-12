@@ -126,6 +126,12 @@
   }
 }
 
+.selected-plants-list__info-asterisk {
+  color: $warning-color;
+  font-weight: 800;
+  margin-left: 0.25rem;
+}
+
 .selected-plants-list__message {
   display: block;
   font-size: 0.875rem;
@@ -135,13 +141,13 @@
   white-space: pre-line;
 }
 
-.selected-plants-list__warnings {
+.selected-plants-list__information {
   margin-top: 1.5rem;
   border-top: 1px solid $border-color;
   padding-top: 1rem;
 }
 
-.selected-plants-list__warnings-button {
+.selected-plants-list__information-button {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -164,13 +170,21 @@
   }
 }
 
-.selected-plants-list__warnings-title {
+.selected-plants-list__information-title {
   font-size: 1rem;
   font-weight: 600;
   color: $text-color;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  .selected-plants-list__info-asterisk {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
-.selected-plants-list__warnings-icon {
+.selected-plants-list__information-icon {
   font-size: 0.75rem;
   color: $text-light;
   flex-shrink: 0;
@@ -181,7 +195,7 @@
   }
 }
 
-.selected-plants-list__warnings-list {
+.selected-plants-list__information-list {
   list-style: none;
   padding: 0;
   margin: 0.75rem 0 0 0;
@@ -189,7 +203,7 @@
   gap: 1rem;
 }
 
-.selected-plants-list__warning-item {
+.selected-plants-list__information-item {
   @include flex-column;
   gap: 0.5rem;
   padding: 0.75rem;
@@ -198,13 +212,13 @@
   border-radius: 0.25rem;
 }
 
-.selected-plants-list__warning-plant-name {
+.selected-plants-list__information-plant-name {
   font-weight: 600;
   font-size: 0.875rem;
   color: $text-color;
 }
 
-.selected-plants-list__warning-plant-button {
+.selected-plants-list__information-plant-button {
   background: none;
   border: none;
   padding: 0;
@@ -228,7 +242,7 @@
   }
 }
 
-.selected-plants-list__warning-message {
+.selected-plants-list__information-message {
   margin: 0;
   font-size: 0.875rem;
   color: $text-color;

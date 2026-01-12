@@ -15,7 +15,7 @@ type SelectedPlantsListProps = {
   recommendations?: Recommendation[]; // Recommendations for date display
   harvestDateIso?: string | null; // Harvest date for date display (fallback)
   harvestDatesByPlant?: Map<number, string>; // Map of plantId -> harvest date ISO
-  showWarningsInline?: boolean; // If true, show all warnings inline under each plant. If false, show informative warnings in expandable section (default)
+  showWarningsInline?: boolean; // If true, show all messages inline under each plant. If false, show informative date information in expandable section (default)
 };
 
 export const SelectedPlantsList = ({
@@ -28,7 +28,7 @@ export const SelectedPlantsList = ({
   harvestDatesByPlant,
   showWarningsInline = false,
 }: SelectedPlantsListProps) => {
-  const [isWarningsExpanded, setIsWarningsExpanded] = useState(false);
+  const [isInformationExpanded, setIsInformationExpanded] = useState(false);
 
   if (selectedPlants.length === 0) {
     return null;
@@ -153,21 +153,21 @@ export const SelectedPlantsList = ({
     return dateInfos;
   };
 
-  // Check if a message key is an informative warning (should be in expandable section)
-  const isInformativeWarning = (key: PlantSowResultKey): boolean => {
+  // Check if a message key is informative date information (should be in expandable section)
+  const isInformativeDateInfo = (key: PlantSowResultKey): boolean => {
     return key === "harvestDateBeforeHarvestWindow" || key === "harvestDateAfterHarvestWindow";
   };
 
-  // Separate messages into important (direct display) and informative warnings (expandable)
-  // Only collect informative warnings if showWarningsInline is false (they'll be shown inline otherwise)
-  const informativeWarnings: Array<{ plant: Plant; message: PlantSowResult }> = [];
+  // Separate messages into important (direct display) and informative date information (expandable)
+  // Only collect informative date information if showWarningsInline is false (they'll be shown inline otherwise)
+  const informativeDateInfo: Array<{ plant: Plant; message: PlantSowResult }> = [];
   
   if (!showWarningsInline) {
-    // Collect all informative warnings for expandable section
+    // Collect all informative date information for expandable section
     selectedPlants.forEach((plant) => {
       const sowResult = plantMessages?.get(plant.id);
-      if (sowResult && isInformativeWarning(sowResult.key)) {
-        informativeWarnings.push({ plant, message: sowResult });
+      if (sowResult && isInformativeDateInfo(sowResult.key)) {
+        informativeDateInfo.push({ plant, message: sowResult });
       }
     });
   }
@@ -185,12 +185,14 @@ export const SelectedPlantsList = ({
                 const sowResult = plantMessages?.get(plant.id);
                 const dateInfos = getPlantDateInfo(plant);
                 // Show messages based on showWarningsInline prop
-                // If showWarningsInline is true, show all warnings inline (including informative)
-                // If showWarningsInline is false, only show important messages directly (not informative warnings)
+                // If showWarningsInline is true, show all messages inline (including informative)
+                // If showWarningsInline is false, only show important messages directly (not informative date information)
                 // Also don't show message if sow date is already displayed in date list (when key is "harvestDate")
                 const hasSowDateInList = dateInfos.some((info) => info.eventType === "sow-indoor" || info.eventType === "sow-outdoor");
                 const shouldHideMessage = sowResult?.key === "harvestDate" && hasSowDateInList;
-                const showMessage = sowResult && !shouldHideMessage && (showWarningsInline || !isInformativeWarning(sowResult.key));
+                const showMessage = sowResult && !shouldHideMessage && (showWarningsInline || !isInformativeDateInfo(sowResult.key));
+                // Check if this plant has informative date information (should show asterisk)
+                const hasInformativeDateInfo = sowResult && isInformativeDateInfo(sowResult.key);
                 return (
                   <li key={plant.id} className="selected-plants-list__item">
                     <div className="selected-plants-list__plant-info">
@@ -204,9 +206,13 @@ export const SelectedPlantsList = ({
                               aria-label={`Öppna detaljer för ${plant.name}`}
                             >
                               <span className="selected-plants-list__name">{plant.name}</span>
+                              {hasInformativeDateInfo && <span className="selected-plants-list__info-asterisk" aria-label="Information om valt datum">*</span>}
                             </button>
                           ) : (
-                            <span className="selected-plants-list__name">{plant.name}</span>
+                            <>
+                              <span className="selected-plants-list__name">{plant.name}</span>
+                              {hasInformativeDateInfo && <span className="selected-plants-list__info-asterisk" aria-label="Information om valt datum">*</span>}
+                            </>
                           )}
                         </div>
                         {onRemove && (
@@ -244,31 +250,32 @@ export const SelectedPlantsList = ({
           </div>
         ))}
       </div>
-      {informativeWarnings.length > 0 && (
-        <div className="selected-plants-list__warnings">
+      {informativeDateInfo.length > 0 && (
+        <div className="selected-plants-list__information">
           <button
             type="button"
-            className="selected-plants-list__warnings-button"
-            onClick={() => setIsWarningsExpanded(!isWarningsExpanded)}
-            aria-expanded={isWarningsExpanded}
-            aria-label={`${isWarningsExpanded ? "Dölj" : "Visa"} varningar`}
+            className="selected-plants-list__information-button"
+            onClick={() => setIsInformationExpanded(!isInformationExpanded)}
+            aria-expanded={isInformationExpanded}
+            aria-label={`${isInformationExpanded ? "Dölj" : "Visa"} information om några av dina valda datum`}
           >
-            <span className="selected-plants-list__warnings-title">
-              Varningar ({informativeWarnings.length})
+            <span className="selected-plants-list__information-title">
+              <span className="selected-plants-list__info-asterisk" aria-label="Information om valt datum">*</span>
+              Information om några av dina valda datum ({informativeDateInfo.length})
             </span>
-            <span className={`selected-plants-list__warnings-icon ${isWarningsExpanded ? "selected-plants-list__warnings-icon--expanded" : ""}`}>
+            <span className={`selected-plants-list__information-icon ${isInformationExpanded ? "selected-plants-list__information-icon--expanded" : ""}`}>
               ▼
             </span>
           </button>
-          {isWarningsExpanded && (
-            <ul className="selected-plants-list__warnings-list">
-              {informativeWarnings.map(({ plant, message }) => (
-                <li key={plant.id} className="selected-plants-list__warning-item">
-                  <div className="selected-plants-list__warning-plant-name">
+          {isInformationExpanded && (
+            <ul className="selected-plants-list__information-list">
+              {informativeDateInfo.map(({ plant, message }) => (
+                <li key={plant.id} className="selected-plants-list__information-item">
+                  <div className="selected-plants-list__information-plant-name">
                     {onOpenDetails ? (
                       <button
                         type="button"
-                        className="selected-plants-list__warning-plant-button"
+                        className="selected-plants-list__information-plant-button"
                         onClick={() => handlePlantClick(plant)}
                         aria-label={`Öppna detaljer för ${plant.name}`}
                       >
@@ -278,7 +285,7 @@ export const SelectedPlantsList = ({
                       <span>{plant.name}</span>
                     )}
                   </div>
-                  <p className="selected-plants-list__warning-message">{message.message}</p>
+                  <p className="selected-plants-list__information-message">{message.message}</p>
                 </li>
               ))}
             </ul>
