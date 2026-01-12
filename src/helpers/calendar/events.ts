@@ -19,13 +19,67 @@ import type { Recommendation } from "../../reducers/planReducer";
  * Each event represents one action (sow, harden, move, harvest) for one plant
  * on a specific date. Multiple events can occur on the same date.
  */
+export type CalendarEventType = "sow-outdoor" | "sow-indoor" | "harden-start" | "move-plant-outdoor" | "harvest";
+
 export type CalendarEvent = {
-  type: "sow-outdoor" | "sow-indoor" | "harden-start" | "move-plant-outdoor" | "harvest";
+  type: CalendarEventType;
   date: string; // ISO-format (YYYY-MM-DD)
   plantId: number;
   plantName: string;
   plantSubcategory: string;
 };
+
+/**
+ * Icon size options for event icons.
+ */
+export type EventIconSize = "small" | "medium" | "large";
+
+/**
+ * Configuration for calendar event types.
+ * 
+ * Contains labels and metadata for each event type that can be used
+ * in both CalendarLegend and EventIcon components.
+ */
+export const CALENDAR_EVENT_CONFIG: Record<CalendarEventType, { label: string }> = {
+  "sow-outdoor": {
+    label: "Så direkt ute",
+  },
+  "sow-indoor": {
+    label: "Så inne",
+  },
+  "harden-start": {
+    label: "Starta avhärdning",
+  },
+  "move-plant-outdoor": {
+    label: "Flytta ut plantan",
+  },
+  "harvest": {
+    label: "Skörd",
+  },
+};
+
+/**
+ * Icon size configuration for different contexts.
+ * 
+ * This allows central control of icon sizes across all components.
+ * Change these values to control icon sizes throughout the application.
+ */
+export const CALENDAR_ICON_SIZES = {
+  small: "small" as EventIconSize,
+  medium: "medium" as EventIconSize,
+  large: "large" as EventIconSize,
+} as const;
+
+/**
+ * Get all event types in a consistent order.
+ */
+export const ALL_CALENDAR_EVENT_TYPES: CalendarEventType[] = [
+  "sow-outdoor",
+  "sow-indoor",
+  "harden-start",
+  "move-plant-outdoor",
+  "harvest",
+];
 
 /**
  * Convert recommendations to calendar events.

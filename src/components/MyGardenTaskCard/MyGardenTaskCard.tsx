@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CalendarEventIcon } from "../CalendarEventIcon/CalendarEventIcon";
+import { EventIcon } from "../EventIcon/EventIcon";
 import type { Task } from "../../helpers/calendar/tasks";
 import type { PlantWarning } from "../../helpers/validation/warnings";
 import "./MyGardenTaskCard.scss";
@@ -26,7 +26,7 @@ export const MyGardenTaskCard = ({ task, warning }: MyGardenTaskCardProps) => {
       aria-label={`${task.taskLabel} den ${task.dateFormatted}${hasWarning ? " - varning: datum ligger utanför optimalt fönster" : ""}`}
     >
       <div className="my-garden-task-card__icon">
-        <CalendarEventIcon eventType={task.type} size="medium" />
+        <EventIcon eventType={task.type} size="medium" />
       </div>
       <div className="my-garden-task-card__content">
         <div className="my-garden-task-card__header">

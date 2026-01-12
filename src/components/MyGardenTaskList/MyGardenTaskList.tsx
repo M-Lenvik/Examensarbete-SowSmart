@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CalendarEventIcon } from "../CalendarEventIcon/CalendarEventIcon";
+import { EventIcon } from "../EventIcon/EventIcon";
 import { getTaskTypeLabel, taskTypeToDateType } from "../../helpers/calendar/tasks";
 import type { Task } from "../../helpers/calendar/tasks";
 import type { PlantWarning } from "../../helpers/validation/warnings";
@@ -82,7 +82,7 @@ const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onTog
     <li className="my-garden-task-list__task-group">
       <div className={`my-garden-task-list__task-card my-garden-task-list__task-card--${type}`}>
         <div className="my-garden-task-list__task-icon">
-          <CalendarEventIcon eventType={type} size="medium" />
+          <EventIcon eventType={type} size="medium" />
         </div>
         <div className="my-garden-task-list__task-content">
           <button

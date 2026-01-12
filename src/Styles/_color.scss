@@ -14,7 +14,7 @@ $accent-dark-green: #3a5f47;  // Dark green for emphasis
 $text-color: #2d2d2d;         // Dark charcoal for text
 $text-light: #5a5a5a;         // Light gray for secondary text
 $background-color: #fdf8f2;   // White background
-$background-light: #E9F8EF;   // Very light gray
+$background-light: #cbdfbf;   // Light green
 
 /* Header & Navigation */
 $header-background: $primary-green;
@@ -22,7 +22,7 @@ $header-text: #ffffff;
 
 /* Semantic Colors */
 $success-color: $accent-green;
-$warning-color: #dd241d;      // Alarm red
+$warning-color: #c5211b;      // Alarm red
 $error-color: #c45c4e;        // Muted red
 $info-color: $primary-green;
 
@@ -57,6 +57,25 @@ $calendar-event-sow-indoor: #ffd102;
 $calendar-event-harden-start: #67bde6;
 $calendar-event-move-plant-outdoor: #116df8;
 $calendar-event-harvest: #277214;
+
+/* CSS Custom Properties for JavaScript access */
+:root {
+  --calendar-event-sow-outdoor: #{$calendar-event-sow-outdoor};
+  --calendar-event-sow-indoor: #{$calendar-event-sow-indoor};
+  --calendar-event-harden-start: #{$calendar-event-harden-start};
+  --calendar-event-move-plant-outdoor: #{$calendar-event-move-plant-outdoor};
+  --calendar-event-harvest: #{$calendar-event-harvest};
+  
+  /* Icon sizes - can be changed here to control all icon sizes */
+  --calendar-icon-size-small: 2rem;
+  --calendar-icon-size-medium: 4rem;
+  --calendar-icon-size-large: 5rem;
+  
+  /* Icon sizes specifically for calendar day view - can be overridden separately */
+  --calendar-day-icon-size-small: var(--calendar-icon-size-small);
+  --calendar-day-icon-size-medium: var(--calendar-icon-size-medium);
+  --calendar-day-icon-size-large: var(--calendar-icon-size-large);
+}
 
 /* Animations */
 @keyframes fadeIn {

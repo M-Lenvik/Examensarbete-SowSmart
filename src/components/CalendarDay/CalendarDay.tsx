@@ -1,6 +1,7 @@
-import { CalendarEventIcon } from "../CalendarEventIcon/CalendarEventIcon";
+import { EventIcon } from "../EventIcon/EventIcon";
 import { formatDateIso } from "../../helpers/date/date";
-import type { CalendarEvent } from "../../helpers/calendar/events";
+import type { CalendarEvent, CalendarEventType } from "../../helpers/calendar/events";
+import { CALENDAR_ICON_SIZES } from "../../helpers/calendar/events";
 import "./CalendarDay.scss";
 
 type CalendarDayProps = {
@@ -29,9 +30,20 @@ export const CalendarDay = ({
   const dayEvents = events.filter((event) => event.date === dateIso);
   const hasEvents = dayEvents.length > 0;
 
-  // Show indicator if more than 3 events (will be hidden on tablet+)
-  const maxIconsMobile = 3;
-  const remainingCount = dayEvents.length > maxIconsMobile ? dayEvents.length - maxIconsMobile : 0;
+  // Group events by type and count them
+  const eventsByType = dayEvents.reduce((eventsByTypeMap, event) => {
+    if (!eventsByTypeMap.has(event.type)) {
+      eventsByTypeMap.set(event.type, []);
+    }
+    eventsByTypeMap.get(event.type)!.push(event);
+    return eventsByTypeMap;
+  }, new Map<CalendarEventType, CalendarEvent[]>());
+
+  // Convert to array of { type, count } for display
+  const eventTypesToShow = Array.from(eventsByType.entries()).map(([type, eventsOfType]) => ({
+    type,
+    count: eventsOfType.length,
+  }));
 
   const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
     if (hasEvents) {
@@ -61,19 +73,20 @@ export const CalendarDay = ({
       <span className="calendar-day__number">{dayNumber}</span>
       {hasEvents && (
         <div className="calendar-day__events">
-          {dayEvents.map((event, index) => (
-            <CalendarEventIcon 
-              key={`${event.type}-${event.plantId}-${index}`} 
-              eventType={event.type} 
-              size="small"
+          {eventTypesToShow.map(({ type }, index) => (
+            <div key={`${type}-${index}`} className="calendar-day__event-group">
+            <EventIcon 
+                eventType={type} 
+                size={CALENDAR_ICON_SIZES.medium}
             />
+            </div>
           ))}
-          {remainingCount > 0 && (
-            <span className="calendar-day__more-indicator" aria-label={`${remainingCount} fler aktiviteter`}>
-              +{remainingCount}
-            </span>
-          )}
         </div>
+      )}
+      {hasEvents && dayEvents.length > eventTypesToShow.length && (
+        <span className="calendar-day__event-count" aria-label={`${dayEvents.length - eventTypesToShow.length} fler aktiviteter`}>
+          +{dayEvents.length - eventTypesToShow.length}
+        </span>
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 import { formatDateSwedish } from "../../helpers/date/date";
 import { getTaskTypeLabel } from "../../helpers/calendar/tasks";
-import type { CalendarEvent } from "../../helpers/calendar/events";
+import type { CalendarEvent, CalendarEventType } from "../../helpers/calendar/events";
 import "./CalendarTooltip.scss";
 
 type CalendarTooltipProps = {
@@ -23,7 +23,7 @@ const capitalizeFirst = (str: string): string => {
  */
 const groupEventsByType = (events: CalendarEvent[]): Array<{
   date: string;
-  type: CalendarEvent["type"];
+  type: CalendarEventType;
   plantNames: string[];
 }> => {
   if (events.length === 0) {
@@ -32,7 +32,7 @@ const groupEventsByType = (events: CalendarEvent[]): Array<{
 
   // All events are on the same date (same day)
   const date = events[0].date;
-  const groups = new Map<CalendarEvent["type"], string[]>();
+  const groups = new Map<CalendarEventType, string[]>();
 
   events.forEach((event) => {
     if (!groups.has(event.type)) {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
-import { CalendarEventIcon } from "../CalendarEventIcon/CalendarEventIcon";
+import { EventIcon } from "../EventIcon/EventIcon";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 import type { PlantSowResult, PlantSowResultKey } from "../../helpers/date/dateValidation";
@@ -229,7 +229,7 @@ export const SelectedPlantsList = ({
                         <div className="selected-plants-list__dates-grid">
                           {dateInfos.map((dateInfo, index) => (
                             <div key={index} className="selected-plants-list__date-item">
-                              <CalendarEventIcon eventType={dateInfo.eventType} size="small" />
+                              <EventIcon eventType={dateInfo.eventType} size="small" />
                               <span className="selected-plants-list__date-text">
                                 {dateInfo.label} {dateInfo.date}
                               </span>
