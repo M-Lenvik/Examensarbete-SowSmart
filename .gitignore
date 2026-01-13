@@ -23,6 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
+# Deployment
+deploy.yml
+
 # Cursor workspace files (project-local plans/rules/terminals)
 .cursor/
 
