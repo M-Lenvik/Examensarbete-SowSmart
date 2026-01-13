@@ -88,7 +88,6 @@
   font-size: 0.875rem;
   color: $text-color;
 }
-
 .selected-plants-list__plant-button {
   flex: 1;
   appearance: none;
@@ -97,12 +96,6 @@
   padding: 0;
   text-align: left;
   cursor: pointer;
-  font: inherit;
-  @include transition(color);
-
-  &:hover {
-    color: $primary-green;
-  }
 
   &:focus {
     outline: 2px solid $primary-green;
@@ -114,7 +107,6 @@
 .selected-plants-list__name {
   font-weight: 600;
   color: $text-color;
-  text-decoration: underline;
   @include transition(color);
 
   .selected-plants-list__plant-button:hover & {
@@ -220,16 +212,9 @@
   padding: 0;
   margin: 0;
   cursor: pointer;
-  font: inherit;
-  font-weight: 600;
-  color: $text-color;
   text-align: left;
   @include transition(color);
 
-  &:hover {
-    color: $primary-green;
-    text-decoration: underline;
-  }
 
   &:focus {
     outline: 2px solid $primary-green;

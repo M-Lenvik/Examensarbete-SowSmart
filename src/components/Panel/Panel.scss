@@ -12,11 +12,6 @@
   box-shadow: $panel-shadow;
 }
 
-.panel__title {
-  margin: 0 0 0.75rem;
-  color: $text-color;
-}
-
 .panel__content {
   display: flex;
   flex-direction: column;

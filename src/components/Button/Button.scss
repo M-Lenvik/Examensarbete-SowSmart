@@ -11,8 +11,6 @@
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   border: 1px solid transparent;
-  font-weight: 600;
-  line-height: 1.1;
   margin: 0 auto;
   @include shadow-sm;
 
@@ -36,23 +34,13 @@
 }
 
 .button--secondary {
-  background-color: $background-light;
+  background-color: $primary-beige;
   color: $text-color;
-  border-color: $border-color;
+  border-color: $border-dark-color;
 
   &:hover:not(:disabled) {
-    background-color: $primary-beige;
+    background-color: $error-color;
   }
 }
 
-.button--text {
-  background-color: transparent;
-  color: $primary-green;
-  border-color: transparent;
-  box-shadow: none;
-  padding: 0.5rem 0.25rem;
 
-  &:hover:not(:disabled) {
-    text-decoration: underline;
-  }
-}

@@ -11,6 +11,7 @@ import { PlanContext } from "../context/PlanContext";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
 import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
+import "./PlantSelection.scss";
 
 export const PlantSelection = () => {
   const navigate = useNavigate();
@@ -76,19 +77,28 @@ export const PlantSelection = () => {
 
   const filteredPlants = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    let result = afterFilter;
+    let result = plants;
     
     if (query.length > 0) {
-      result = afterFilter.filter(
+      // When searching, search in all plants regardless of category filter
+      result = plants.filter(
         (plant) =>
           plant.name.toLowerCase().includes(query) ||
           plant.subcategory.toLowerCase().includes(query) ||
           plant.type.toLowerCase().includes(query)
       );
+    } else {
+      // When not searching, use category filters
+      result = afterFilter;
+    }
+    
+    // Apply type filter if selected (when not searching)
+    if (selectedType && query.length === 0) {
+      result = result.filter((plant) => plant.type === selectedType);
     }
     
     return sortPlantsBySubcategoryAndName(result);
-  }, [afterFilter, searchQuery]);
+  }, [plants, afterFilter, searchQuery, selectedType]);
 
   const handleSubcategorySelect = (subcategory: string | null) => {
     setSelectedSubcategory(subcategory);
@@ -124,9 +134,10 @@ export const PlantSelection = () => {
           <br />
           Sök reda på vad du vill odla och lägg till det ur fröbanken.
         </p>
-      </Panel>
 
-      <Panel title="Fröer att välja bland">
+      <h3 className="plant-selection__subheading">
+        Fröer att välja bland
+      </h3>
         {isLoading ? (
           <p>Laddar kategorier...</p>
         ) : selectedSubcategory ? (
@@ -150,8 +161,8 @@ export const PlantSelection = () => {
         />
       </Panel>
 
-      {selectedSubcategory && (
-        <Panel title={`Välj bland ${selectedSubcategory.charAt(0).toUpperCase() + selectedSubcategory.slice(1)}`}>
+      {(selectedSubcategory || searchQuery.trim().length > 0) && (
+        <Panel title={selectedSubcategory ? `Välj bland ${selectedSubcategory.charAt(0).toUpperCase() + selectedSubcategory.slice(1)}` : "Sökresultat"}>
           {filteredPlants.length === 0 ? (
             <p>Inga fröer hittades.</p>
           ) : (
