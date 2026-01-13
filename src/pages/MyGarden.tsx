@@ -159,7 +159,7 @@ export const MyGarden = () => {
       <Panel title="Min odlingsplan">
         <MyGardenTaskList tasks={tasks} warnings={warnings} onPlantClick={handleOpenDetailsById} />
       </Panel>
-      <PlantsDetailModal
+      <ModalPlantDetails
         isOpen={isModalOpen}
         plant={selectedPlantForModal}
         onClose={handleCloseModal}
