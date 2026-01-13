@@ -28,7 +28,6 @@ export const CalendarMonthNavigation = ({
         onClick={onPreviousMonth}
         aria-label="Föregående månad"
       >
-        ←
       </button>
       <h2 className="calendar-month-navigation__month">{monthYear}</h2>
       <button
@@ -37,7 +36,6 @@ export const CalendarMonthNavigation = ({
         onClick={onNextMonth}
         aria-label="Nästa månad"
       >
-        →
       </button>
     </nav>
   );
