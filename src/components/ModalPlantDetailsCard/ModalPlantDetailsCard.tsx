@@ -1,8 +1,8 @@
 import type { Plant } from "../../models/Plant";
 import { FALLBACK_PLANT_IMAGE_SRC, handleImageError } from "../../helpers/utils/image";
-import "./PlantsDetailCard.scss";
+import "./ModalPlantDetailsCard.scss";
 
-type PlantsDetailCardProps = {
+type ModalPlantDetailsCardProps = {
   plant: Plant;
 };
 
@@ -39,7 +39,7 @@ const formatPlantingMethod = (method: Plant["plantingMethod"]) => {
   }
 };
 
-export const PlantsDetailCard = ({ plant }: PlantsDetailCardProps) => {
+export const ModalPlantDetailsCard = ({ plant }: ModalPlantDetailsCardProps) => {
   const hasIndoorsWindow = hasRange(
     plant.plantingWindows.indoors.start,
     plant.plantingWindows.indoors.end
@@ -56,62 +56,70 @@ export const PlantsDetailCard = ({ plant }: PlantsDetailCardProps) => {
     : false;
 
   return (
-    <article className="plants-detail-card">
+    <article className="modal-plant-details-card">
       {plant.imageUrl ? (
         <img
-          className="plants-detail-card__image"
+          className="modal-plant-details-card__image"
           src={plant.imageUrl}
           alt={`Bild på ${plant.name}`}
           loading="lazy"
           onError={(event) => handleImageError(event, FALLBACK_PLANT_IMAGE_SRC)}
         />
       ) : null}
-      <dl className="plants-detail-card__definition-list">
+      <dl className="modal-plant-details-card__definition-list">
 
-        <dt>Såmetod</dt>
-        <dd>{formatPlantingMethod(plant.plantingMethod)}</dd>
+        <div className="modal-plant-details-card__item">
+          <h3 className="modal-plant-details-card__term">Såmetod</h3>
+          <dd className="modal-plant-details-card__definition">{formatPlantingMethod(plant.plantingMethod)}</dd>
+        </div>
 
         {hasIndoorsWindow ? (
-          <>
-            <dt>Såfönster (inne)</dt>
-            <dd>
+          <div className="modal-plant-details-card__item">
+            <h3 className="modal-plant-details-card__term">Såfönster (inne)</h3>
+            <dd className="modal-plant-details-card__definition">
               {formatRange(plant.plantingWindows.indoors.start, plant.plantingWindows.indoors.end)}
             </dd>
-          </>
+          </div>
         ) : null}
 
         {hasOutdoorsWindow ? (
-          <>
-            <dt>Såfönster (ute)</dt>
-            <dd>
+          <div className="modal-plant-details-card__item">
+            <h3 className="modal-plant-details-card__term">Såfönster (ute)</h3>
+            <dd className="modal-plant-details-card__definition">
               {formatRange(plant.plantingWindows.outdoors.start, plant.plantingWindows.outdoors.end)}
             </dd>
-          </>
+          </div>
         ) : null}
 
         {hasRange(plant.harvestTime?.start, plant.harvestTime?.end) ? (
-          <>
-            <dt>Skördefönster</dt>
-            <dd>
+          <div className="modal-plant-details-card__item">
+            <h3 className="modal-plant-details-card__term">Skördefönster</h3>
+            <dd className="modal-plant-details-card__definition">
               {formatRange(plant.harvestTime?.start, plant.harvestTime?.end)}
             </dd>
-          </>
+          </div>
         ) : null}
 
-        <dt>Totalt antal dagar från sådd till skörd</dt>
-        <dd>{formatDaysOrMissing(plant.totalDaysFromSeed)}</dd>
+        <div className="modal-plant-details-card__item">
+          <h3 className="modal-plant-details-card__term">Totalt antal dagar från sådd till skörd</h3>
+          <dd className="modal-plant-details-card__definition">{formatDaysOrMissing(plant.totalDaysFromSeed)}</dd>
+        </div>
 
-        <dt>Dagar inomhus (till utplantering)</dt>
-        <dd>{formatDaysOrMissing(plant.daysIndoorGrowth)}</dd>
+        <div className="modal-plant-details-card__item">
+          <h3 className="modal-plant-details-card__term">Dagar inomhus (till utplantering)</h3>
+          <dd className="modal-plant-details-card__definition">{formatDaysOrMissing(plant.daysIndoorGrowth)}</dd>
+        </div>
 
-        <dt>Avhärdning</dt>
-        <dd>{formatDaysOrMissing(plant.hardeningDays)}</dd>
+        <div className="modal-plant-details-card__item">
+          <h3 className="modal-plant-details-card__term">Avhärdning</h3>
+          <dd className="modal-plant-details-card__definition">{formatDaysOrMissing(plant.hardeningDays)}</dd>
+        </div>
 
         {plant.movePlantOutdoor &&
         (hasMovePlantOutdoorRange || hasMovePlantOutdoorDescription) ? (
-          <>
-            <dt>Utplantering</dt>
-            <dd>
+          <div className="modal-plant-details-card__item">
+            <h3 className="modal-plant-details-card__term">Utplantering</h3>
+            <dd className="modal-plant-details-card__definition">
               {hasMovePlantOutdoorRange ? (
                 <>{formatRange(plant.movePlantOutdoor.start, plant.movePlantOutdoor.end)}</>
               ) : null}
@@ -119,33 +127,32 @@ export const PlantsDetailCard = ({ plant }: PlantsDetailCardProps) => {
               {hasMovePlantOutdoorDescription ? (
                 <>
                   {hasMovePlantOutdoorRange ? <br /> : null}
-                  <span className="plants-detail-card__description">
+                  <span className="modal-plant-details-card__description">
                     {plant.movePlantOutdoor.description}
                   </span>
                 </>
               ) : null}
             </dd>
-          </>
+          </div>
         ) : null}
 
         {plant.url ? (
-          <>
-            <dt>Källa</dt>
-            <dd>
+          <div className="modal-plant-details-card__item">
+            <h3 className="modal-plant-details-card__term">Källa</h3>
+            <dd className="modal-plant-details-card__definition">
               <a
                 href={plant.url}
                 target="_blank"
                 rel="noreferrer"
-                className="plants-detail-card__link"
+                className="modal-plant-details-card__link"
               >
                 Öppna på Impecta
               </a>
             </dd>
-          </>
+          </div>
         ) : null}
       </dl>
     </article>
   );
 };
-
 

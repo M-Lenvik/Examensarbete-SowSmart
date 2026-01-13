@@ -1,26 +1,25 @@
 import { Modal } from "../Modal/Modal";
 import type { Plant } from "../../models/Plant";
-import { PlantsDetailCard } from "../PlantsDetailCard/PlantsDetailCard";
+import { ModalPlantDetailsCard } from "../ModalPlantDetailsCard/ModalPlantDetailsCard";
 
-type PlantsDetailModalProps = {
+type ModalPlantDetailsProps = {
   plant: Plant | null;
   isOpen: boolean;
   onClose: () => void;
 };
 
-export const PlantsDetailModal = ({
+export const ModalPlantDetails = ({
   plant,
   isOpen,
   onClose,
-}: PlantsDetailModalProps) => {
+}: ModalPlantDetailsProps) => {
   if (!isOpen || plant === null) return null;
 
   return (
-    // Modal with title of plant name and content of PlantsDetailCard
+    // Modal with title of plant name and content of ModalPlantDetailsCard
     <Modal isOpen={isOpen} title={plant.type + " " + plant.name} onClose={onClose}>
-      <PlantsDetailCard plant={plant} />
+      <ModalPlantDetailsCard plant={plant} />
     </Modal>
   );
 };
-
 

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 import type React from "react";
 
@@ -25,7 +26,7 @@ export const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
 
   if (!isOpen) return null;
 
-  return (
+  const modalContent = (
     <div
       className="modal-overlay"
       onMouseDown={(event) => {
@@ -39,7 +40,7 @@ export const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
         aria-label={title ?? "Dialog"}
       >
         <header className="modal__header">
-          <h3 className="modal__title">{title}</h3>
+          <h2 className="modal__title">{title}</h2>
           <button
             type="button"
             className="modal__close"
@@ -54,4 +55,6 @@ export const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
