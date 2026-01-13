@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { MyGardenSelectedPlants } from "../components/MyGardenSelectedPlants/MyGardenSelectedPlants";
 import { MyGardenTaskList } from "../components/MyGardenTaskList/MyGardenTaskList";
 import { Panel } from "../components/Panel/Panel";
-import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailModal";
+import { ModalPlantDetails } from "../components/ModalPlantDetails/ModalPlantDetails";
 import { PlanContext } from "../context/PlanContext";
 import { recommendationsToTasks } from "../helpers/calendar/tasks";
 import { getPlantWarnings } from "../helpers/validation/warnings";
@@ -134,7 +134,7 @@ export const MyGarden = () => {
             <Link to="/planner">Gå till planeraren</Link> för att välja skördedatum och beräkna plan.
           </p>
         </Panel>
-        <PlantsDetailModal
+        <ModalPlantDetails
           isOpen={isModalOpen}
           plant={selectedPlantForModal}
           onClose={handleCloseModal}

@@ -47,15 +47,7 @@
 .calendar-month-navigation__month {
   flex: 1;
   margin: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
   color: $text-color;
   text-align: center;
-}
-
-@include tablet {
-  .calendar-month-navigation__month {
-    font-size: 1.25rem;
-  }
 }
 

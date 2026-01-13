@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Panel } from "../components/Panel/Panel";
 import { PlantsCategoryButtons } from "../components/PlantsCategoryButtons/PlantsCategoryButtons";
-import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailModal";
+import { ModalPlantDetails } from "../components/ModalPlantDetails/ModalPlantDetails";
 import { PlantsList } from "../components/PlantsList/PlantsList";
 import { PlantsSearch } from "../components/PlantsSearch/PlantsSearch";
 import { PlantsSelectedSummary } from "../components/PlantsSelectedSummary/PlantsSelectedSummary";
@@ -177,7 +177,7 @@ export const PlantSelection = () => {
         />
       </Panel>
 
-      <PlantsDetailModal
+      <ModalPlantDetails
         isOpen={isModalOpen}
         plant={selectedPlantForModal}
         onClose={handleCloseModal}

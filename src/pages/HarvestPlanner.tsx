@@ -6,7 +6,7 @@ import { Panel } from "../components/Panel/Panel";
 import { PlannerCalculateButton } from "../components/PlannerCalculateButton/PlannerCalculateButton";
 import { PlannerDateInput } from "../components/PlannerDateInput/PlannerDateInput";
 import { PlannerSelectedPlants } from "../components/PlannerSelectedPlants/PlannerSelectedPlants";
-import { PlantsDetailModal } from "../components/PlantsDetailModal/PlantsDetailModal";
+import { ModalPlantDetails } from "../components/ModalPlantDetails/ModalPlantDetails";
 import { PlanContext } from "../context/PlanContext";
 import { validateHarvestDate, getPlantSowResult, type PlantSowResult } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";
@@ -403,7 +403,7 @@ export const HarvestPlanner = () => {
         hasHarvestDate={!!dateInputValue && validationError === null}
         disabledReason={getDisabledReason}
       />
-      <PlantsDetailModal
+      <ModalPlantDetails
         plant={selectedPlantForModal}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
