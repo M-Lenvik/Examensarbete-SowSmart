@@ -52,7 +52,6 @@ export const ScrollToBottom = () => {
       onClick={scrollToBottom}
       aria-label="Scrolla till botten"
     >
-      ↓
     </button>
   );
 };

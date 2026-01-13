@@ -32,7 +32,6 @@ export const ScrollToTop = () => {
       onClick={scrollToTop}
       aria-label="Scrolla till toppen"
     >
-      ↑
     </button>
   );
 };
