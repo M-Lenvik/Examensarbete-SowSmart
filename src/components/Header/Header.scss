@@ -51,7 +51,7 @@
 .header-title-link {
   color: $header-text;
   text-decoration: none;
-  font-family: 'Combo', cursive;
+  font-family: 'Combo', sans-serif;
 }
 
 .header-menu-button {
@@ -61,7 +61,7 @@
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
   color: $header-text;
-  font: 1.25rem 'Combo', cursive;
+  font: 1.25rem 'Combo', sans-serif;
   cursor: pointer;
   @include transition(background-color);
 
@@ -99,7 +99,7 @@
 .nav-link {
   color: $header-text;
   font-weight: 500;
-  font-family: 'Combo', cursive;
+  font-family: 'Combo', sans-serif;
   font-size: 1.25rem;
   padding: 0.5rem 0.75rem;
   border-radius: 0.25rem;

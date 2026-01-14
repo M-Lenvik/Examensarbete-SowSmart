@@ -113,7 +113,7 @@ section {
 }
 
 h1 {
-  font-family: 'Combo', cursive;
+  font-family: 'Combo', sans-serif;
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -130,7 +130,7 @@ h1 {
 }
 
 h2 {
-  font-family: 'Sour Gummy', cursive;
+  font-family: 'Sour Gummy', sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
   margin-bottom: 0.75rem;
@@ -143,7 +143,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'Sour Gummy', cursive;
+  font-family: 'Sour Gummy', sans-serif;
   font-size: 1.25rem;
   font-weight: 400;
   margin-bottom: 0.5rem;
@@ -160,7 +160,7 @@ p {
 }
 
 a {
-  font-family: 'Sour Gummy', cursive;
+  font-family: 'Sour Gummy', sans-serif;
   @include transition(color);
 
   &:hover {
@@ -171,7 +171,7 @@ a {
 button {
   @include transition(all);
   cursor: pointer;
-  font-family: 'Sour Gummy', cursive;
+  font-family: 'Sour Gummy', sans-serif;
   font-weight: 400;
   font-size: 1rem;
   
