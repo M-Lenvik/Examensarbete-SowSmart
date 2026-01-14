@@ -16,7 +16,7 @@ type CarouselProps = {
  * 
  * Displays event icons in an auto-rotating carousel.
  * When multiple event types are provided, they rotate automatically
- * (1.5 seconds per icon with 0.8s smooth transition).
+ * (2 seconds per icon with 0.8s smooth transition).
  * 
  * Based on slide-in animation from right (left: 100% -> left: 0).
  */
@@ -66,7 +66,7 @@ export const Carousel = ({
         // Add active to next immediately
         return new Set([nextActive]);
       });
-    }, 1500); // Match 1500ms interval
+     }, 2000); // 2 seconds per icon
 
     return () => {
       clearInterval(interval);
