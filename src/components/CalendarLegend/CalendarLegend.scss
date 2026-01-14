@@ -61,5 +61,11 @@
     flex-wrap: wrap;
     gap: 1rem;
   }
+
+  // Increase icon size for tablet and desktop
+  .calendar-legend__item .calendar-event-icon {
+    width: var(--calendar-icon-size-medium) !important;
+    height: var(--calendar-icon-size-medium) !important;
+  }
 }
 
