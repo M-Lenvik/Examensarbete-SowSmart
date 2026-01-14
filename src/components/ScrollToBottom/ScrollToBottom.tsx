@@ -5,32 +5,25 @@ export const ScrollToBottom = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const checkScrollPosition = () => {
+    const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
+      const scrollThreshold = windowHeight * 0.75; // 150vh from top
       const distanceFromBottom = documentHeight - (scrollTop + windowHeight);
-      const threshold = windowHeight * 0.25; // 25vh from bottom
+      const hideThreshold = windowHeight * 0.75; // 75vh from bottom
       
-      // Show button if we're more than 25vh from bottom
-      setIsVisible(distanceFromBottom > threshold);
+      // Show button if we've scrolled more than 150vh from top
+      // Hide button when we're less than 75vh from bottom
+      setIsVisible(scrollTop >= scrollThreshold && distanceFromBottom > hideThreshold);
     };
 
-    checkScrollPosition();
-    window.addEventListener("scroll", checkScrollPosition);
-    window.addEventListener("resize", checkScrollPosition);
-
-    // Use MutationObserver to check when DOM changes
-    const observer = new MutationObserver(checkScrollPosition);
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
     return () => {
-      window.removeEventListener("scroll", checkScrollPosition);
-      window.removeEventListener("resize", checkScrollPosition);
-      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 

@@ -6,12 +6,23 @@ export const ScrollToTop = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollThreshold = window.innerHeight; // 100vh
-      setIsVisible(window.scrollY > scrollThreshold);
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const scrollThreshold = windowHeight * 1.25; // Show after scrolling 75vh
+      const topHideThreshold = windowHeight * 0.095; // Hide when 9.5vh from top
+      
+      // Show button if we've scrolled more than threshold from top
+      // Hide button only when near top (9.5vh)
+      setIsVisible(scrollTop > topHideThreshold && scrollTop >= scrollThreshold);
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   const scrollToTop = () => {
