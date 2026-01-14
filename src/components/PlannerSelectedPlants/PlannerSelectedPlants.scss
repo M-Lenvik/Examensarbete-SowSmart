@@ -1,5 +1,6 @@
 @use "../../Styles/color" as *;
 @use "../../Styles/base" as *;
+@use "../Button/Button.scss";
 
 .planner-selected-plants {
   display: flex;
@@ -9,21 +10,5 @@
 
 .planner-selected-plants__actions {
   margin-top: 0.5rem;
-}
-
-.planner-selected-plants__link {
-  color: $accent-green;
-  text-decoration: underline;
-  @include transition(color);
-
-  &:hover {
-    color: darken($accent-green, 10%);
-  }
-
-  &:focus {
-    outline: 2px solid $accent-green;
-    outline-offset: 2px;
-    border-radius: 0.25rem;
-  }
 }
 

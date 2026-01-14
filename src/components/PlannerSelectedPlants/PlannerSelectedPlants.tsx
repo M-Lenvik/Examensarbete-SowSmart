@@ -43,7 +43,7 @@ export const PlannerSelectedPlants = ({
           harvestDateIso={harvestDateIso}
         />
         <div className="planner-selected-plants__actions">
-          <Link to="/plants" className="planner-selected-plants__link">
+          <Link to="/plants" className="button button--secondary">
             Ändra val
           </Link>
         </div>

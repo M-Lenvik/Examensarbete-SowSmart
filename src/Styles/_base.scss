@@ -160,6 +160,7 @@ p {
 }
 
 a {
+  font-family: 'Sour Gummy', cursive;
   @include transition(color);
 
   &:hover {
