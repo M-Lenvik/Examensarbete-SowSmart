@@ -1,7 +1,6 @@
-import { EventIcon } from "../EventIcon/EventIcon";
 import { formatDateIso } from "../../helpers/date/date";
 import type { CalendarEvent, CalendarEventType } from "../../helpers/calendar/events";
-import { CALENDAR_ICON_SIZES } from "../../helpers/calendar/events";
+import { Carousel } from "../Carousel/Carousel";
 import "./CalendarDay.scss";
 
 type CalendarDayProps = {
@@ -72,16 +71,10 @@ export const CalendarDay = ({
     >
       <span className="calendar-day__number">{dayNumber}</span>
       {hasEvents && (
-        <div className="calendar-day__events">
-          {eventTypesToShow.map(({ type }, index) => (
-            <div key={`${type}-${index}`} className="calendar-day__event-group">
-            <EventIcon 
-                eventType={type} 
-                size={CALENDAR_ICON_SIZES.medium}
-            />
-            </div>
-          ))}
-        </div>
+        <Carousel
+          eventTypes={eventTypesToShow.map(({ type }) => type)}
+          resetKey={dateIso}
+        />
       )}
       {hasEvents && dayEvents.length > eventTypesToShow.length && (
         <span className="calendar-day__event-count" aria-label={`${dayEvents.length - eventTypesToShow.length} fler aktiviteter`}>
