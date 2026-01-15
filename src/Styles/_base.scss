@@ -81,6 +81,8 @@ body {
 main {
   min-height: calc(100vh - 3.75rem); // 60px header
   padding: 0.5rem;
+  font-family: 'Noto Sans', sans-serif;
+  
 
   @include tablet {
     padding: 1.5rem;
@@ -156,7 +158,9 @@ h3 {
 
 p {
   margin-bottom: 1rem;
-  line-height: 1.6;
+  line-height: 1.5;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1rem;
 }
 
 a {
