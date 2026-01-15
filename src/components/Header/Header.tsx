@@ -9,17 +9,19 @@ export const Header = () => {
   return (
     <header className="header">
       <div className="header-content">
-        <h1 className="header-title">
-          <img 
-            src={sowsmartImage} 
-            alt="" 
-            className="header-title-image"
-            aria-hidden="true"
-          />
-          <NavLink to="/" className="header-title-link">
-            SåSmart
-          </NavLink>
-        </h1>
+        <div className="header-title-wrapper">
+          <h1 className="header-title">
+            <NavLink to="/" className="header-title-link">
+              <img 
+                src={sowsmartImage} 
+                alt="" 
+                className="header-title-image"
+                aria-hidden="true"
+              />
+              <span>SåSmart</span>
+            </NavLink>
+          </h1>
+        </div>
 
         <button
           type="button"
