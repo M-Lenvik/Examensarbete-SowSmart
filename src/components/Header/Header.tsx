@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import sowsmartImage from "../../assets/sowsmart.png";
 import "./Header.scss";
 
 export const Header = () => {
@@ -9,6 +10,12 @@ export const Header = () => {
     <header className="header">
       <div className="header-content">
         <h1 className="header-title">
+          <img 
+            src={sowsmartImage} 
+            alt="" 
+            className="header-title-image"
+            aria-hidden="true"
+          />
           <NavLink to="/" className="header-title-link">
             SåSmart
           </NavLink>
