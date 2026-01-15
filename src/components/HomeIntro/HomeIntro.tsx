@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Button } from "../Button/Button";
 import { Panel } from "../Panel/Panel";
+import greenImage from "../../assets/green.png";
 import "./HomeIntro.scss";
 
 export const HomeIntro = () => {
@@ -20,9 +21,23 @@ export const HomeIntro = () => {
           <li>Se dina datum i Kalendern.</li>
           <li>Se alla dina val och hela din plan på Min Frösida.</li>
         </ol>
-        <Button className="home-intro__actions" onClick={() => navigate("/plants")}>
-          Börja i Fröbanken
-        </Button>
+        <div className="home-intro__actions">
+          <img 
+            src={greenImage} 
+            alt="" 
+            className="home-intro__arrow home-intro__arrow--right"
+            aria-hidden="true"
+          />
+          <Button onClick={() => navigate("/plants")}>
+            Börja i Fröbanken
+          </Button>
+          <img 
+            src={greenImage} 
+            alt="" 
+            className="home-intro__arrow home-intro__arrow--left"
+            aria-hidden="true"
+          />
+        </div>
       </div>
     </Panel>
   );

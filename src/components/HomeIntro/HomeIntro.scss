@@ -8,8 +8,48 @@
 }
 
 .home-intro__actions {
-  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   margin-top: 0.5rem;
+  align-self: center;
+}
+
+@keyframes arrow-pulse-left {
+  0%, 100% {
+    transform: scaleX(-1) translateX(0);
+  }
+  50% {
+    transform: scaleX(-1) translateX(0.5rem);
+  }
+}
+
+@keyframes arrow-pulse-right {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0.5rem);
+  }
+}
+
+.home-intro__arrow {
+  width: 7rem;
+  height: 2.5rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  
+  &--left {
+    animation-name: arrow-pulse-left;
+  }
+  
+  &--right {
+    animation-name: arrow-pulse-right;
+  }
 }
 
 .home-intro ol {
