@@ -143,35 +143,3 @@ export const isToday = (date: Date): boolean => {
   return isSameDay(date, today);
 };
 
-/**
- * Format a date as month and year in Swedish.
- * 
- * Example: A date for January 2026 becomes "januari 2026".
- * 
- * How it works:
- * Uses Swedish month names and formats as "month year".
- * 
- * @param date - The date to format
- * @returns Formatted string (e.g., "januari 2026")
- */
-export const formatMonthYear = (date: Date): string => {
-  const months = [
-    "Januari",
-    "Februari",
-    "Mars",
-    "April",
-    "Maj",
-    "Juni",
-    "Juli",
-    "Augusti",
-    "September",
-    "Oktober",
-    "November",
-    "December",
-  ];
-  
-  const month = months[date.getMonth()];
-  const year = date.getFullYear();
-  
-  return `${month} ${year}`;
-};

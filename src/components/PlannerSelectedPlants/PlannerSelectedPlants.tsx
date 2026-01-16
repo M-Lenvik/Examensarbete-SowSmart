@@ -44,7 +44,7 @@ export const PlannerSelectedPlants = ({
         />
         <div className="planner-selected-plants__actions">
           <Link to="/plants" className="button button--secondary">
-            Ändra val
+            Ändra dina fröval
           </Link>
         </div>
       </section>

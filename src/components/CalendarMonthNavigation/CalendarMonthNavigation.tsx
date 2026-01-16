@@ -1,4 +1,3 @@
-import { formatMonthYear } from "../../helpers/calendar/calendar";
 import "./CalendarMonthNavigation.scss";
 
 type CalendarMonthNavigationProps = {
@@ -18,7 +17,23 @@ export const CalendarMonthNavigation = ({
   onPreviousMonth,
   onNextMonth,
 }: CalendarMonthNavigationProps) => {
-  const monthYear = formatMonthYear(currentMonth);
+  const months = [
+    "Januari",
+    "Februari",
+    "Mars",
+    "April",
+    "Maj",
+    "Juni",
+    "Juli",
+    "Augusti",
+    "September",
+    "Oktober",
+    "November",
+    "December",
+  ];
+  
+  const month = months[currentMonth.getMonth()];
+  const year = currentMonth.getFullYear();
 
   return (
     <nav className="calendar-month-navigation" aria-label="Månadsnavigation">
@@ -29,7 +44,10 @@ export const CalendarMonthNavigation = ({
         aria-label="Föregående månad"
       >
       </button>
-      <h2 className="calendar-month-navigation__month">{monthYear}</h2>
+      <h2 className="calendar-month-navigation__month">
+        <span className="calendar-month-navigation__month-name">{month}</span>
+        <span className="calendar-month-navigation__year">{year}</span>
+      </h2>
       <button
         type="button"
         className="calendar-month-navigation__button calendar-month-navigation__button--next"

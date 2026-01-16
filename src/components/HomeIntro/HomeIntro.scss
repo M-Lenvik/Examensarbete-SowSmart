@@ -14,6 +14,16 @@
   gap: 1rem;
   margin-top: 0.5rem;
   align-self: center;
+
+  @media (max-width: 370px) {
+    gap: 0.5rem;
+    
+    .button {
+      min-width: auto;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+    }
+  }
 }
 
 @keyframes arrow-pulse-left {
@@ -35,13 +45,18 @@
 }
 
 .home-intro__arrow {
-  width: 7rem;
-  height: 2.5rem;
+  width: 4rem;
+  height: 1.5rem;
   object-fit: contain;
   flex-shrink: 0;
   animation-duration: 2s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+  
+  @include tablet {
+    width: 7rem;
+    height: 2.5rem;
+  }
   
   &--left {
     animation-name: arrow-pulse-left;
