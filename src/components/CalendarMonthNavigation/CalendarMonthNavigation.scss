@@ -35,7 +35,11 @@
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  
+  @include tablet {
+    transition: opacity 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+  }
   flex-shrink: 0;
 
   @include tablet {
@@ -59,16 +63,20 @@
   }
 
   &--previous {
-    transform: scaleX(-1);
+    transform: scaleX(-1) !important;
 
     @include tablet {
       &:hover {
-        transform: scaleX(-1) scale(1.15);
+        transform: scaleX(-1) scale(1.15) !important;
       }
     }
 
     &:active {
-      transform: scaleX(-1);
+      transform: scaleX(-1) !important;
+    }
+    
+    &:focus {
+      transform: scaleX(-1) !important;
     }
   }
 }
