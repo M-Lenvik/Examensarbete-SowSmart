@@ -26,18 +26,20 @@
   width: 100%;
   height: 100%;
   top: 0;
-  left: 100%; // Start off-screen to the right
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  opacity: 0; // Start invisible for fade effect
+  opacity: 0;
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+  transition: opacity 0.8s ease-in-out, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 
-  // Active state - slide in from right with fade
+  // Active state - rotate to visible
   &.carousel__item--active {
-    left: 0;
     opacity: 1;
-    transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease-in-out;
+    transform: rotateY(0deg);
   }
 }
 
