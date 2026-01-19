@@ -586,7 +586,7 @@ export const HarvestPlanner = () => {
         title="Bekräfta datum"
         message={getConfirmationMessage()}
         confirmText="Ja, lägg till"
-        cancelText="Avbryt"
+        cancelText="Nej"
         variant="success"
         onConfirm={handleConfirmDate}
         onCancel={() => {

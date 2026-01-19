@@ -36,46 +36,50 @@
   @include transition(background-color);
 }
 
-// Danger variant (default): cancel=green hover, confirm=red
 .confirm-dialog--danger {
   .confirm-dialog__cancel-button {
-    background-color: $background-light;
-    color: $text-color;
-    border-color: $border-color;
-
-    &:hover:not(:disabled) {
-      background-color: $primary-green;
-      color: #ffffff;
-    }
-  }
-
-  .confirm-dialog__confirm-button {
     background-color: $warning-color;
     color: #ffffff;
+    border-color: $warning-color;
 
     &:hover:not(:disabled) {
       background-color: #991b1b;
-    }
-  }
-}
-
-// Success variant: cancel=red, confirm=green
-.confirm-dialog--success {
-  .confirm-dialog__cancel-button {
-    background-color: $warning-color;
-    color: #ffffff;
-
-    &:hover:not(:disabled) {
-      background-color: #991b1b;
+      border-color: #991b1b;
     }
   }
 
   .confirm-dialog__confirm-button {
     background-color: $primary-green;
     color: #ffffff;
+    border-color: $primary-green;
 
     &:hover:not(:disabled) {
       background-color: darken($primary-green, 10%);
+      border-color: darken($primary-green, 10%);
+    }
+  }
+}
+
+.confirm-dialog--success {
+  .confirm-dialog__cancel-button {
+    background-color: $warning-color;
+    color: #ffffff;
+    border-color: $warning-color;
+
+    &:hover:not(:disabled) {
+      background-color: #991b1b;
+      border-color: #991b1b;
+    }
+  }
+
+  .confirm-dialog__confirm-button {
+    background-color: $primary-green;
+    color: #ffffff;
+    border-color: $primary-green;
+
+    &:hover:not(:disabled) {
+      background-color: darken($primary-green, 10%);
+      border-color: darken($primary-green, 10%);
     }
   }
 }

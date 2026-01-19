@@ -360,8 +360,8 @@ export const SelectedPlantsList = ({
           isOpen={!!plantToRemove}
           title="Ta bort frösort"
           message={`Är du säker på att du vill ta bort ${plantToRemove.name}?`}
-          confirmText="Ta bort"
-          cancelText="Avbryt"
+          confirmText="Ja, ta bort"
+          cancelText="Nej"
           onConfirm={() => {
             if (plantToRemove && onRemove) {
               onRemove(plantToRemove.id);
