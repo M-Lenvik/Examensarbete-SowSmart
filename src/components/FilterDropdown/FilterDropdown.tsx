@@ -111,10 +111,10 @@ export const FilterDropdown = ({
       if (selectedFilterIds.includes("all")) {
         onFilterChange([]);
       } else {
-        onFilterChange(filterOptions.map((opt) => opt.id));
+        onFilterChange(filterOptions.map((filterOption) => filterOption.id));
       }
     } else {
-      const option = filterOptions.find((opt) => opt.id === optionId);
+      const option = filterOptions.find((filterOption) => filterOption.id === optionId);
       if (!option) return;
 
       let newFilterIds: string[];
@@ -123,9 +123,9 @@ export const FilterDropdown = ({
         // Toggle subcategory - select/deselect all plants in this subcategory
         const subcategory = option.subcategory!;
         const plantsInSubcategory = filterOptions.filter(
-          (opt) => opt.type === "plant" && opt.parentSubcategory === subcategory
+          (filterOption) => filterOption.type === "plant" && filterOption.parentSubcategory === subcategory
         );
-        const plantIds = plantsInSubcategory.map((opt) => opt.id);
+        const plantIds = plantsInSubcategory.map((filterOption) => filterOption.id);
         const subcategoryId = `subcategory-${subcategory}`;
 
         const isSubcategorySelected = selectedFilterIds.includes(subcategoryId);
@@ -155,9 +155,9 @@ export const FilterDropdown = ({
         if (option.parentSubcategory) {
           const subcategoryId = `subcategory-${option.parentSubcategory}`;
           const plantsInSubcategory = filterOptions.filter(
-            (opt) => opt.type === "plant" && opt.parentSubcategory === option.parentSubcategory
+            (filterOption) => filterOption.type === "plant" && filterOption.parentSubcategory === option.parentSubcategory
           );
-          const plantIds = plantsInSubcategory.map((opt) => opt.id);
+          const plantIds = plantsInSubcategory.map((filterOption) => filterOption.id);
           const allPlantsSelected = plantIds.every((id) => newFilterIds.includes(id));
 
           if (allPlantsSelected) {
@@ -173,8 +173,8 @@ export const FilterDropdown = ({
       }
 
       // If all non-"all" options are selected, also select "all"
-      const nonAllOptions = filterOptions.filter((opt) => opt.id !== "all");
-      if (nonAllOptions.every((opt) => newFilterIds.includes(opt.id))) {
+      const nonAllOptions = filterOptions.filter((filterOption) => filterOption.id !== "all");
+      if (nonAllOptions.every((filterOption) => newFilterIds.includes(filterOption.id))) {
         newFilterIds.push("all");
       }
 
@@ -190,11 +190,21 @@ export const FilterDropdown = ({
     if (selectedFilterIds.includes("all") && selectedFilterIds.length === filterOptions.length) {
       return "Alla";
     }
-    if (selectedFilterIds.length === 1) {
-      const option = filterOptions.find((opt) => opt.id === selectedFilterIds[0]);
+    
+    // Count only plants, exclude subcategories and "all"
+    const selectedPlantCount = selectedFilterIds.filter(
+      (id) => id !== "all" && id.startsWith("plant-")
+    ).length;
+    
+    if (selectedPlantCount === 0) {
+      return "Välj dina fröer...";
+    }
+    if (selectedPlantCount === 1) {
+      const plantId = selectedFilterIds.find((id) => id.startsWith("plant-"));
+      const option = filterOptions.find((filterOption) => filterOption.id === plantId);
       return option?.label || "Välj dina fröer...";
     }
-    return `${selectedFilterIds.length} valda`;
+    return `${selectedPlantCount} valda`;
   };
 
   return (
@@ -220,9 +230,9 @@ export const FilterDropdown = ({
             if (option.type === "subcategory") {
               // Subcategory is selected if all its plants are selected
               const plantsInSubcategory = filterOptions.filter(
-                (opt) => opt.type === "plant" && opt.parentSubcategory === option.subcategory
+                (filterOption) => filterOption.type === "plant" && filterOption.parentSubcategory === option.subcategory
               );
-              const plantIds = plantsInSubcategory.map((opt) => opt.id);
+              const plantIds = plantsInSubcategory.map((filterOption) => filterOption.id);
               isSelected = plantIds.length > 0 && plantIds.every((id) => selectedFilterIds.includes(id));
             } else {
               isSelected = selectedFilterIds.includes(option.id);

@@ -274,7 +274,7 @@ export const HarvestPlanner = () => {
     }
     
     // Get selected plants/subcategories
-    const selectedPlantsList: string[] = [];
+    const plantsBySubcategory = new Map<string, string[]>();
     const selectedSubcategories = new Set<string>();
     
     selectedFilterIds.forEach((filterId) => {
@@ -282,7 +282,11 @@ export const HarvestPlanner = () => {
         const plantId = parseInt(filterId.replace("plant-", ""));
         const plant = plants.find((currentPlant) => currentPlant.id === plantId);
         if (plant) {
-          selectedPlantsList.push(plant.name);
+          const subcategory = plant.subcategory || "Övrigt";
+          if (!plantsBySubcategory.has(subcategory)) {
+            plantsBySubcategory.set(subcategory, []);
+          }
+          plantsBySubcategory.get(subcategory)!.push(plant.name);
         }
       } else if (filterId.startsWith("subcategory-")) {
         const subcategory = filterId.replace("subcategory-", "");
@@ -290,13 +294,33 @@ export const HarvestPlanner = () => {
       }
     });
     
+    // Build items list: subcategories without plants first, then grouped plants
     const items: string[] = [];
-    if (selectedSubcategories.size > 0) {
-      items.push(...Array.from(selectedSubcategories).map((subcategory) => subcategory.charAt(0).toUpperCase() + subcategory.slice(1)));
+    
+    // Add subcategories that don't have any individual plants selected
+    const subcategoriesWithoutPlants = Array.from(selectedSubcategories).filter(
+      (subcategory) => !plantsBySubcategory.has(subcategory)
+    );
+    if (subcategoriesWithoutPlants.length > 0) {
+      items.push(...subcategoriesWithoutPlants.map((subcategory) => subcategory.charAt(0).toUpperCase() + subcategory.slice(1)));
     }
-    if (selectedPlantsList.length > 0) {
-      items.push(...selectedPlantsList);
-    }
+    
+    // Add plants grouped by subcategory
+    const sortedSubcategories = Array.from(plantsBySubcategory.keys()).sort((subcategoryA, subcategoryB) => {
+      if (subcategoryA === "Övrigt") return 1;
+      if (subcategoryB === "Övrigt") return -1;
+      return subcategoryA.localeCompare(subcategoryB, "sv");
+    });
+    
+    sortedSubcategories.forEach((subcategory) => {
+      const plantNames = plantsBySubcategory.get(subcategory)!;
+      const capitalizedSubcategory = subcategory.charAt(0).toUpperCase() + subcategory.slice(1);
+      if (plantNames.length === 1) {
+        items.push(`${capitalizedSubcategory}: ${plantNames[0]}`);
+      } else {
+        items.push(`${capitalizedSubcategory}: ${plantNames.join(", ")}`);
+      }
+    });
     
     if (items.length === 0) {
       return `Du har valt att skörda den ${dateFormatted}. Vill du lägga till detta i din plan?`;
