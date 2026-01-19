@@ -45,7 +45,7 @@ export const PlantsCard = ({
         <span className="plants-card__meta">{capitalizeFirst(plant.type)}</span>
       </button>
       
-      <span className="plants-card__checkbox">
+      <label htmlFor={checkboxId} className="plants-card__checkbox">
         <input
           id={checkboxId}
           type="checkbox"
@@ -53,7 +53,7 @@ export const PlantsCard = ({
           onChange={() => onToggleSelected()}
           aria-label={`Välj ${plant.name}`}
         />
-      </span>
+      </label>
     </article>
   );
 };
