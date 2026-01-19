@@ -2,6 +2,7 @@ import { useState } from "react";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
 import { EventIcon } from "../EventIcon/EventIcon";
 import { Input } from "../Input/Input";
+import { ConfirmDialog } from "../ConfirmDialog/ConfirmDialog";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 import type { PlantSowResult, PlantSowResultKey } from "../../helpers/date/dateValidation";
@@ -33,6 +34,7 @@ export const SelectedPlantsList = ({
 }: SelectedPlantsListProps) => {
   const [isInformationExpanded, setIsInformationExpanded] = useState(false);
   const [editingHarvestDateFor, setEditingHarvestDateFor] = useState<number | null>(null);
+  const [plantToRemove, setPlantToRemove] = useState<Plant | null>(null);
 
   if (selectedPlants.length === 0) {
     return null;
@@ -223,7 +225,7 @@ export const SelectedPlantsList = ({
                           <RemoveButton
                             onClick={(event) => {
                               event.stopPropagation();
-                              onRemove(plant.id);
+                              setPlantToRemove(plant);
                             }}
                             ariaLabel={`Ta bort ${plant.name}`}
                           />
@@ -346,6 +348,22 @@ export const SelectedPlantsList = ({
             </ul>
           )}
         </div>
+      )}
+      {plantToRemove && (
+        <ConfirmDialog
+          isOpen={!!plantToRemove}
+          title="Ta bort frösort"
+          message={`Är du säker på att du vill ta bort ${plantToRemove.name}?`}
+          confirmText="Ta bort"
+          cancelText="Avbryt"
+          onConfirm={() => {
+            if (plantToRemove && onRemove) {
+              onRemove(plantToRemove.id);
+            }
+            setPlantToRemove(null);
+          }}
+          onCancel={() => setPlantToRemove(null)}
+        />
       )}
     </div>
   );
