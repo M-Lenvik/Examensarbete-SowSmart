@@ -138,6 +138,11 @@ export const PlantSelection = () => {
       <h3 className="plant-selection__subheading">
         Fröer att välja bland
       </h3>
+      <PlantsSearch
+          searchQuery={searchQuery}
+          onSearchQueryChange={setSearchQuery}
+        />
+        <p>Annars kan du välja bland kategorierna här</p>
         {isLoading ? (
           <p>Laddar kategorier...</p>
         ) : selectedSubcategory ? (
@@ -155,10 +160,6 @@ export const PlantSelection = () => {
             onSelect={handleSubcategorySelect}
           />
         )}
-        <PlantsSearch
-          searchQuery={searchQuery}
-          onSearchQueryChange={setSearchQuery}
-        />
       </Panel>
 
       {(selectedSubcategory || searchQuery.trim().length > 0) && (

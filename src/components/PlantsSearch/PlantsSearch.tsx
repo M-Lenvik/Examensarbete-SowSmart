@@ -17,11 +17,8 @@ export const PlantsSearch = ({
   return (
     <div className="plants-search">
       <div className="plants-search__wrapper">
-        <label className="plants-search__label" htmlFor="plants-search">
-          Sök
-        </label>
-        <p className="plants-search__help-text">
-          Om du vet precis vad du vill ha kan du söka efter det här.
+        <p>
+          Om du vet precis vad du vill ha kan du söka efter sortnamnet eller kategorin här.
         </p>
         <div className="plants-search__input-wrapper">
           <Input
