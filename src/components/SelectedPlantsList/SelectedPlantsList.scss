@@ -120,6 +120,73 @@
   margin-left: 0.25rem;
 }
 
+.selected-plants-list__harvest-date-control {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.selected-plants-list__harvest-date-button {
+  appearance: none;
+  border: 1px solid $border-color;
+  background: $background-color;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-align: center;
+  width: 50%;
+  font-size: 0.875rem;
+  color: $text-color;
+  @include transition(background-color, border-color);
+
+  @include tablet {
+    width: 30%;
+  }
+
+  &:hover {
+    background: $background-light;
+    border-color: $primary-green;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-green;
+    outline-offset: 2px;
+  }
+}
+
+.selected-plants-list__harvest-date-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+
+  .input-field {
+    flex: 1;
+  }
+}
+
+.selected-plants-list__harvest-date-cancel {
+  appearance: none;
+  border: 1px solid $border-dark-color;
+  background-color: $primary-beige;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: $text-color;
+  @include transition(background-color);
+
+  &:hover:not(:disabled) {
+    background-color: $error-color;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-green;
+    outline-offset: 2px;
+  }
+}
+
 .selected-plants-list__message {
   display: block;
   font-size: 0.875rem;

@@ -297,6 +297,34 @@ export const HarvestPlanner = () => {
     setSelectedPlantForModal(null);
   };
 
+  // Handle changing harvest date for a specific plant
+  const handleChangeHarvestDate = (plantId: number, dateIso: string) => {
+    // Validate the date
+    const validation = validateHarvestDate(dateIso, null);
+    if (!validation.isValid) {
+      setValidationError(validation.error);
+      return;
+    }
+
+    // Find the plant to get its subcategory
+    const plant = plants.find((p) => p.id === plantId);
+    if (!plant) return;
+
+    // Clear old recommendations first so plantMessages will recalculate from harvest dates
+    if (state.recommendations.length > 0) {
+      actions.setRecommendations([]);
+    }
+
+    // Save date for the specific plant filter
+    const plantFilterId = `plant-${plantId}`;
+    const newHarvestDates = new Map(harvestDatesByFilter);
+    newHarvestDates.set(plantFilterId, dateIso);
+    setHarvestDatesByFilter(newHarvestDates);
+
+    // Clear validation error if date is valid
+    setValidationError(null);
+  };
+
 
   // Handle calculate button click
   const handleCalculate = () => {
@@ -392,6 +420,7 @@ export const HarvestPlanner = () => {
         plantMessages={plantMessages}
         onOpenDetails={handleOpenDetails}
         onRemove={actions.toggleSelectedPlant}
+        onChangeHarvestDate={handleChangeHarvestDate}
         harvestDatesByPlant={harvestDatesByPlant}
         recommendations={state.recommendations}
         harvestDateIso={state.harvestDateIso}

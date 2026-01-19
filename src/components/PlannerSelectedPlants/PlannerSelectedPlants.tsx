@@ -12,6 +12,7 @@ type PlannerSelectedPlantsProps = {
   plantMessages?: Map<number, PlantSowResult>; // Map of plantId -> sow result
   onOpenDetails?: (plant: Plant) => void; // Callback to open plant detail modal
   onRemove?: (plantId: number) => void; // Callback to remove plant from selection
+  onChangeHarvestDate?: (plantId: number, dateIso: string) => void; // Callback to change harvest date for a specific plant
   harvestDatesByPlant?: Map<number, string>; // Map of plantId -> harvest date ISO
   recommendations?: Recommendation[]; // Recommendations for date display
   harvestDateIso?: string | null; // Global harvest date (fallback)
@@ -22,6 +23,7 @@ export const PlannerSelectedPlants = ({
   plantMessages,
   onOpenDetails,
   onRemove,
+  onChangeHarvestDate,
   harvestDatesByPlant,
   recommendations,
   harvestDateIso,
@@ -38,6 +40,7 @@ export const PlannerSelectedPlants = ({
           plantMessages={plantMessages}
           onOpenDetails={onOpenDetails}
           onRemove={onRemove}
+          onChangeHarvestDate={onChangeHarvestDate}
           harvestDatesByPlant={harvestDatesByPlant}
           recommendations={recommendations}
           harvestDateIso={harvestDateIso}

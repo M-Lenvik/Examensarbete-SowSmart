@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
 import { EventIcon } from "../EventIcon/EventIcon";
+import { Input } from "../Input/Input";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 import type { PlantSowResult, PlantSowResultKey } from "../../helpers/date/dateValidation";
@@ -12,6 +13,7 @@ type SelectedPlantsListProps = {
   plantMessages?: Map<number, PlantSowResult>; // Map of plantId -> sow result
   onOpenDetails?: (plant: Plant) => void; // Callback to open plant detail modal
   onRemove?: (plantId: number) => void; // Callback to remove plant from selection
+  onChangeHarvestDate?: (plantId: number, dateIso: string) => void; // Callback to change harvest date for a specific plant
   recommendations?: Recommendation[]; // Recommendations for date display
   harvestDateIso?: string | null; // Harvest date for date display (fallback)
   harvestDatesByPlant?: Map<number, string>; // Map of plantId -> harvest date ISO
@@ -23,12 +25,14 @@ export const SelectedPlantsList = ({
   plantMessages,
   onOpenDetails,
   onRemove,
+  onChangeHarvestDate,
   recommendations,
   harvestDateIso,
   harvestDatesByPlant,
   showWarningsInline = false,
 }: SelectedPlantsListProps) => {
   const [isInformationExpanded, setIsInformationExpanded] = useState(false);
+  const [editingHarvestDateFor, setEditingHarvestDateFor] = useState<number | null>(null);
 
   if (selectedPlants.length === 0) {
     return null;
@@ -235,6 +239,57 @@ export const SelectedPlantsList = ({
                               </span>
                             </div>
                           ))}
+                        </div>
+                      )}
+                      {onChangeHarvestDate && (
+                        <div className="selected-plants-list__harvest-date-control">
+                          {(() => {
+                            const plantHarvestDate = 
+                              harvestDatesByPlant?.get(plant.id) || 
+                              harvestDateIso;
+                            const isEditing = editingHarvestDateFor === plant.id;
+                            
+                            if (isEditing) {
+                              return (
+                                <div className="selected-plants-list__harvest-date-input-wrapper">
+                                  <Input
+                                    id={`harvest-date-${plant.id}`}
+                                    type="date"
+                                    value={plantHarvestDate || ""}
+                                    onChange={(event) => {
+                                      const newDate = event.target.value;
+                                      if (newDate) {
+                                        onChangeHarvestDate(plant.id, newDate);
+                                      }
+                                    }}
+                                    aria-label={`Välj skördedatum för ${plant.name}`}
+                                  />
+                                  <button
+                                    type="button"
+                                    className="selected-plants-list__harvest-date-cancel"
+                                    onClick={() => setEditingHarvestDateFor(null)}
+                                    aria-label="Avbryt"
+                                  >
+                                    Avbryt
+                                  </button>
+                                </div>
+                              );
+                            }
+                            
+                            return (
+                              <button
+                                type="button"
+                                className="selected-plants-list__harvest-date-button"
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  setEditingHarvestDateFor(plant.id);
+                                }}
+                                aria-label={plantHarvestDate ? `Ändra skördedatum för ${plant.name}` : `Sätt skördedatum för ${plant.name}`}
+                              >
+                                {plantHarvestDate ? "Ändra skördedatum" : "Sätt skördedatum"}
+                              </button>
+                            );
+                          })()}
                         </div>
                       )}
                       {showMessage && (
