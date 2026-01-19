@@ -24,7 +24,7 @@ export const MyGardenSelectedPlants = ({
   harvestDateIso,
   plantMessages,
 }: MyGardenSelectedPlantsProps) => {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   if (selectedPlants.length === 0) {
     return (
