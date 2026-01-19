@@ -16,8 +16,10 @@ export const RemoveButton = ({ onClick, ariaLabel }: RemoveButtonProps) => {
       className="remove-button"
       onClick={onClick}
       aria-label={ariaLabel}
+      title="Ta bort"
     >
-      ×
+      <span className="remove-button__text">Ta bort frösort</span>
+      <span className="remove-button__icon" aria-hidden="true">×</span>
     </button>
   );
 };
