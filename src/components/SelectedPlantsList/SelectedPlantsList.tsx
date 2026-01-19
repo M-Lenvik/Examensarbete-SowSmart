@@ -262,7 +262,13 @@ export const SelectedPlantsList = ({
                                       const newDate = event.target.value;
                                       if (newDate) {
                                         onChangeHarvestDate(plant.id, newDate);
+                                        // Close edit mode when a date is selected
+                                        setEditingHarvestDateFor(null);
                                       }
+                                    }}
+                                    onBlur={() => {
+                                      // Close edit mode when date picker closes
+                                      setEditingHarvestDateFor(null);
                                     }}
                                     aria-label={`Välj skördedatum för ${plant.name}`}
                                   />
