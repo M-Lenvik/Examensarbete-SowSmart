@@ -35,7 +35,7 @@ export const Header = () => {
 
         <nav className={`header-nav ${isMenuOpen ? "header-nav--open" : ""}`}>
           <NavLink to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-            Startsida
+            Så fungerar SåSmart
           </NavLink>
           <NavLink
             to="/plants"

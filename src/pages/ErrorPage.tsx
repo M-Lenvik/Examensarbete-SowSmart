@@ -9,13 +9,13 @@ export const ErrorPage = () => {
 
   const message = isRouteErrorResponse(error)
     ? error.data?.message ?? "Sidan kunde inte visas."
-    : "Något gick fel. Försök igen eller gå tillbaka till startsidan.";
+    : "Något gick fel. Försök igen eller gå tillbaka till SåSmarts startsida.";
 
   return (
     <main>
       <h1>{title}</h1>
       <p>{message}</p>
-      <Link to="/">Till startsidan</Link>
+      <Link to="/">Till SåSmarts startsida</Link>
     </main>
   );
 };
