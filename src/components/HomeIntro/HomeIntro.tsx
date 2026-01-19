@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 import { Button } from "../Button/Button";
 import { Panel } from "../Panel/Panel";
@@ -18,10 +18,10 @@ export const HomeIntro = () => {
           
           <h3>Du gör såhär:</h3>
         <ol>
-          <li>Välj dina fröer i Fröbanken.</li>
-          <li>Välj skördedatum i Planeraren.</li>
-          <li>Se dina datum i Kalendern.</li>
-          <li>Se alla dina val och hela din plan på Min Frösida.</li>
+          <li>Välj dina fröer i <NavLink to="/plants" className="home-intro__link">Fröbanken</NavLink>.</li>
+          <li>Välj skördedatum i <NavLink to="/planner" className="home-intro__link">Planeraren</NavLink>.</li>
+          <li>Se dina datum i <NavLink to="/calendar" className="home-intro__link">Kalendern</NavLink>.</li>
+          <li>Se alla dina val och hela din plan på <NavLink to="/my-garden" className="home-intro__link">Min Frösida</NavLink>.</li>
         </ol>
         <div className="home-intro__actions">
           <img 

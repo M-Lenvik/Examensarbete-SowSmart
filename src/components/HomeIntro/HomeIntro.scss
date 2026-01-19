@@ -107,3 +107,13 @@
   }
 }
 
+.home-intro__link {
+  color: $primary-green;
+  text-decoration: none;
+  text-decoration-color: $primary-green;
+ 
+  &:hover {
+    text-decoration-color: $accent-green;
+  }
+}
+
