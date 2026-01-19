@@ -30,3 +30,24 @@ main {
     z-index: 1;
   }
 }
+
+/* Toast styles */
+:global(.toast-success) {
+  background-color: $primary-green !important;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+:global(.toast-error) {
+  background-color: $warning-color !important;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}

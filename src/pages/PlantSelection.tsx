@@ -1,5 +1,6 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { Panel } from "../components/Panel/Panel";
 import { PlantsCategoryButtons } from "../components/PlantsCategoryButtons/PlantsCategoryButtons";
@@ -24,6 +25,8 @@ export const PlantSelection = () => {
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [selectedPlantForModal, setSelectedPlantForModal] = useState<Plant | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const previousSelectedPlantIdsRef = useRef<number[]>([]);
+  const skipToastRef = useRef<boolean>(false);
 
   useEffect(() => {
     const load = async () => {
@@ -34,6 +37,48 @@ export const PlantSelection = () => {
 
     void load();
   }, []);
+
+  // Initialize ref on mount
+  useEffect(() => {
+    previousSelectedPlantIdsRef.current = state.selectedPlantIds;
+  }, []);
+
+  // Show toast when a plant is added or removed
+  useEffect(() => {
+    const previousIds = previousSelectedPlantIdsRef.current;
+    const currentIds = state.selectedPlantIds;
+
+    // Skip toast if it was triggered by "Ta bort" button
+    if (skipToastRef.current) {
+      skipToastRef.current = false;
+      previousSelectedPlantIdsRef.current = currentIds;
+      return;
+    }
+
+    // Check if a new plant was added (current has more items than previous)
+    if (currentIds.length > previousIds.length) {
+      const addedPlantId = currentIds.find((id) => !previousIds.includes(id));
+      if (addedPlantId) {
+        const addedPlant = plants.find((plant) => plant.id === addedPlantId);
+        if (addedPlant) {
+          toast.success(`${addedPlant.name} tillagd till dina valda fröer`);
+        }
+      }
+    }
+    // Check if a plant was removed (current has fewer items than previous)
+    else if (currentIds.length < previousIds.length) {
+      const removedPlantId = previousIds.find((id) => !currentIds.includes(id));
+      if (removedPlantId) {
+        const removedPlant = plants.find((plant) => plant.id === removedPlantId);
+        if (removedPlant) {
+          toast.error(`${removedPlant.name} borttagen från dina valda fröer`);
+        }
+      }
+    }
+
+    // Update ref for next comparison
+    previousSelectedPlantIdsRef.current = currentIds;
+  }, [state.selectedPlantIds, plants]);
 
   const selectedPlants = useMemo(() => {
     if (state.selectedPlantIds.length === 0) return [];
@@ -185,7 +230,10 @@ export const PlantSelection = () => {
           onClear={actions.clearSelection}
           onContinue={() => navigate("/planner")}
           onOpenDetails={handleOpenDetails}
-          onRemove={actions.toggleSelectedPlant}
+          onRemove={(plantId) => {
+            skipToastRef.current = true;
+            actions.toggleSelectedPlant(plantId);
+          }}
         />
       </Panel>
 
