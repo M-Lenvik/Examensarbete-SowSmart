@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { FilterDropdown } from "../components/FilterDropdown/FilterDropdown";
@@ -7,10 +7,12 @@ import { PlannerCalculateButton } from "../components/PlannerCalculateButton/Pla
 import { PlannerDateInput } from "../components/PlannerDateInput/PlannerDateInput";
 import { PlannerSelectedPlants } from "../components/PlannerSelectedPlants/PlannerSelectedPlants";
 import { ModalPlantDetails } from "../components/ModalPlantDetails/ModalPlantDetails";
+import { ConfirmDialog } from "../components/ConfirmDialog/ConfirmDialog";
 import { PlanContext } from "../context/PlanContext";
 import { validateHarvestDate, getPlantSowResult, type PlantSowResult } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";
 import { calculatePlantMessagesFromHarvestDates } from "../helpers/date/plantMessages";
+import { formatDateSwedish } from "../helpers/date/date";
 import { loadHarvestDatesByFilterFromLocalStorage, saveHarvestDatesByFilterToLocalStorage } from "../helpers/storage/localStorage";
 import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
 import type { Plant } from "../models/Plant";
@@ -28,6 +30,11 @@ export const HarvestPlanner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCalculating, setIsCalculating] = useState(false);
   const [selectedFilterIds, setSelectedFilterIds] = useState<string[]>([]);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [userHasInteractedWithDate, setUserHasInteractedWithDate] = useState(false);
+  const previousDateValueRef = useRef<string>("");
+  const currentDateValueRef = useRef<string>("");
+  const dateChangeTimeoutRef = useRef<number | null>(null);
   const [harvestDatesByFilter, setHarvestDatesByFilter] = useState<Map<string, string>>(() => {
     // Load harvest dates by filter from localStorage on mount
     return loadHarvestDatesByFilterFromLocalStorage();
@@ -82,6 +89,31 @@ export const HarvestPlanner = () => {
       setValidationError(null);
     }
   }, [selectedFilterIds, harvestDatesByFilter, state.harvestDateIso]);
+
+  // Auto-open confirmation dialog when both date and filters are selected
+  // Use longer delay to avoid triggering when user is just navigating in date picker
+  useEffect(() => {
+    if (
+      userHasInteractedWithDate &&
+      dateInputValue && 
+      !validationError && 
+      selectedFilterIds.length > 0 && 
+      !showConfirmDialog
+    ) {
+      const validation = validateHarvestDate(dateInputValue, null);
+      if (validation.isValid) {
+        // Longer delay to allow date picker navigation (changing months) without triggering dialog
+        const timer = setTimeout(() => {
+          // Double-check that date hasn't changed during the delay (user might still be navigating)
+          const currentValidation = validateHarvestDate(dateInputValue, null);
+          if (currentValidation.isValid && !showConfirmDialog) {
+            setShowConfirmDialog(true);
+          }
+        }, 100); // 0.5 seconds - total ~1 second after user selects date
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [userHasInteractedWithDate, dateInputValue, validationError, selectedFilterIds, showConfirmDialog]);
 
   // Filter and sort selected plants
   const selectedPlants = useMemo(() => {
@@ -173,66 +205,153 @@ export const HarvestPlanner = () => {
   }, [selectedPlants, state.recommendations, harvestDatesByFilter, state.harvestDateIso]);
 
 
-  // Handle date input change and validate
+  // Handle date input change - only validate, don't save yet
+  // Use short debounce to filter out month navigation
   const handleDateChange = (value: string) => {
     setDateInputValue(value);
+    currentDateValueRef.current = value; // Keep ref in sync with state
     
     // Validate basic rules (required, not in past)
     const validation = validateHarvestDate(value, null);
     setValidationError(validation.error);
-    
-    // Save date for selected filter(s)
-    if (validation.isValid) {
-      const newHarvestDates = new Map(harvestDatesByFilter);
+
+    // Clear any existing timeout - this is key for filtering month navigation
+    // Each month navigation triggers onChange, clearing the previous timeout
+    if (dateChangeTimeoutRef.current) {
+      clearTimeout(dateChangeTimeoutRef.current);
+    }
+
+    // Only mark as interacted if date actually changed to a new valid value
+    if (value && value !== previousDateValueRef.current && validation.isValid) {
+      const stableValue = value;
       
-      if (selectedFilterIds.length === 0) {
-        // No filter selected, update global date
-        actions.setHarvestDateIso(value);
-      } else {
-        // Save date for each selected filter
-        selectedFilterIds.forEach((filterId) => {
-          if (filterId !== "all") {
-            newHarvestDates.set(filterId, value);
-          }
-        });
-        setHarvestDatesByFilter(newHarvestDates);
-        
-        // Also update global date if "all" is selected
-        if (selectedFilterIds.includes("all")) {
-          actions.setHarvestDateIso(value);
-        } else {
-          // If no global date exists, set it as fallback for plants without filters
-          if (!state.harvestDateIso) {
-            actions.setHarvestDateIso(value);
+      // If user clicks month arrows, date changes rapidly and timeout keeps resetting
+      // If user selects a date, no more changes happen and timeout fires after 1000ms
+      dateChangeTimeoutRef.current = setTimeout(() => {
+        if (currentDateValueRef.current === stableValue) {
+          const currentValidation = validateHarvestDate(stableValue, null);
+          if (currentValidation.isValid) {
+            setUserHasInteractedWithDate(true);
+            previousDateValueRef.current = stableValue;
           }
         }
-      }
-      
-      // Clear old recommendations if date changed
-      if (state.recommendations.length > 0) {
-        actions.setRecommendations([]);
-      }
-    } else {
-      // Clear dates for selected filters if invalid
-      if (selectedFilterIds.length > 0) {
-        const newHarvestDates = new Map(harvestDatesByFilter);
-        selectedFilterIds.forEach((filterId) => {
-          if (filterId !== "all") {
-            newHarvestDates.delete(filterId);
-          }
-        });
-        setHarvestDatesByFilter(newHarvestDates);
-      }
-      
-      // Don't clear global date if invalid - keep it for plants without filters
-      // Only clear if no filters are selected
-      if (selectedFilterIds.length === 0) {
-        actions.setHarvestDateIso(null);
-      }
-      if (state.recommendations.length > 0) {
-        actions.setRecommendations([]);
+      }, 1000);
+    }
+  };
+
+  // Handle date input blur - mark interaction when user clicks outside
+  // This provides faster feedback than waiting for timeout
+  const handleDateBlur = () => {
+    // Only mark as interacted if date actually changed to a new valid value
+    const currentValue = currentDateValueRef.current;
+    if (currentValue && currentValue !== previousDateValueRef.current) {
+      const validation = validateHarvestDate(currentValue, null);
+      if (validation.isValid) {
+        // Clear any pending timeout since we're handling it here
+        if (dateChangeTimeoutRef.current) {
+          clearTimeout(dateChangeTimeoutRef.current);
+          dateChangeTimeoutRef.current = null;
+        }
+        // Mark interaction immediately - date picker closed after date was selected
+        setUserHasInteractedWithDate(true);
+        previousDateValueRef.current = currentValue;
       }
     }
+  };
+
+  // Build confirmation message based on selected filters and date
+  const getConfirmationMessage = (): string => {
+    if (!dateInputValue) return "";
+    
+    const dateFormatted = formatDateSwedish(dateInputValue);
+    
+    if (selectedFilterIds.length === 0) {
+      return `Du har valt att skörda alla dina fröer den ${dateFormatted}. Vill du lägga till detta i din plan?`;
+    }
+    
+    if (selectedFilterIds.includes("all")) {
+      return `Du har valt att skörda alla dina fröer den ${dateFormatted}. Vill du lägga till detta i din plan?`;
+    }
+    
+    // Get selected plants/subcategories
+    const selectedPlantsList: string[] = [];
+    const selectedSubcategories = new Set<string>();
+    
+    selectedFilterIds.forEach((filterId) => {
+      if (filterId.startsWith("plant-")) {
+        const plantId = parseInt(filterId.replace("plant-", ""));
+        const plant = plants.find((currentPlant) => currentPlant.id === plantId);
+        if (plant) {
+          selectedPlantsList.push(plant.name);
+        }
+      } else if (filterId.startsWith("subcategory-")) {
+        const subcategory = filterId.replace("subcategory-", "");
+        selectedSubcategories.add(subcategory);
+      }
+    });
+    
+    const items: string[] = [];
+    if (selectedSubcategories.size > 0) {
+      items.push(...Array.from(selectedSubcategories).map((subcategory) => subcategory.charAt(0).toUpperCase() + subcategory.slice(1)));
+    }
+    if (selectedPlantsList.length > 0) {
+      items.push(...selectedPlantsList);
+    }
+    
+    if (items.length === 0) {
+      return `Du har valt att skörda den ${dateFormatted}. Vill du lägga till detta i din plan?`;
+    }
+    
+    let itemsText = "";
+    if (items.length === 1) {
+      itemsText = items[0];
+    } else if (items.length === 2) {
+      itemsText = `${items[0]} och ${items[1]}`;
+    } else {
+      itemsText = `${items.slice(0, -1).join(", ")}, och ${items[items.length - 1]}`;
+    }
+    
+    return `Du har valt att skörda ${itemsText} den ${dateFormatted}. Vill du lägga till detta i din plan?`;
+  };
+
+  // Handle confirming the date selection
+  const handleConfirmDate = () => {
+    // Save date for selected filter(s)
+    const newHarvestDates = new Map(harvestDatesByFilter);
+    
+    if (selectedFilterIds.length === 0) {
+      // No filter selected, update global date
+      actions.setHarvestDateIso(dateInputValue);
+    } else {
+      // Save date for each selected filter
+      selectedFilterIds.forEach((filterId) => {
+        if (filterId !== "all") {
+          newHarvestDates.set(filterId, dateInputValue);
+        }
+      });
+      setHarvestDatesByFilter(newHarvestDates);
+      
+      // Also update global date if "all" is selected
+      if (selectedFilterIds.includes("all")) {
+        actions.setHarvestDateIso(dateInputValue);
+      } else {
+        // If no global date exists, set it as fallback for plants without filters
+        if (!state.harvestDateIso) {
+          actions.setHarvestDateIso(dateInputValue);
+        }
+      }
+    }
+    
+    // Clear old recommendations if date changed
+    if (state.recommendations.length > 0) {
+      actions.setRecommendations([]);
+    }
+
+    // Clear dropdown selection after date is confirmed
+    setSelectedFilterIds([]);
+    setValidationError(null);
+    setShowConfirmDialog(false);
+    setUserHasInteractedWithDate(false); // Reset interaction flag
   };
 
   // Get reason why calculate button is disabled (returns null if enabled)
@@ -307,7 +426,7 @@ export const HarvestPlanner = () => {
     }
 
     // Find the plant to get its subcategory
-    const plant = plants.find((p) => p.id === plantId);
+    const plant = plants.find((currentPlant) => currentPlant.id === plantId);
     if (!plant) return;
 
     // Clear old recommendations first so plantMessages will recalculate from harvest dates
@@ -410,6 +529,7 @@ export const HarvestPlanner = () => {
         <PlannerDateInput
           value={dateInputValue}
           onChange={handleDateChange}
+          onBlur={handleDateBlur}
           error={validationError}
           warning={null}
           required={true}
@@ -436,6 +556,19 @@ export const HarvestPlanner = () => {
         plant={selectedPlantForModal}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
+      />
+      <ConfirmDialog
+        isOpen={showConfirmDialog}
+        title="Bekräfta datum"
+        message={getConfirmationMessage()}
+        confirmText="Ja, lägg till"
+        cancelText="Avbryt"
+        variant="success"
+        onConfirm={handleConfirmDate}
+        onCancel={() => {
+          setShowConfirmDialog(false);
+          setUserHasInteractedWithDate(false); // Reset so dialog doesn't reopen immediately
+        }}
       />
     </section>
   );

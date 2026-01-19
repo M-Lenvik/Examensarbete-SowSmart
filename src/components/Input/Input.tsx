@@ -12,6 +12,8 @@ type InputProps = {
   required?: boolean;
   disabled?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   "aria-label"?: string;
 };
 
@@ -25,6 +27,8 @@ export const Input = ({
   required = false,
   disabled = false,
   onChange,
+  onBlur,
+  onFocus,
   "aria-label": ariaLabel,
 }: InputProps) => {
   return (
@@ -44,6 +48,8 @@ export const Input = ({
         required={required}
         disabled={disabled}
         onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
         aria-label={ariaLabel || label}
       />
     </div>

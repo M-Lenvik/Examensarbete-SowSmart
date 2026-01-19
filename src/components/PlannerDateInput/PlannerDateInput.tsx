@@ -6,6 +6,8 @@ import "./PlannerDateInput.scss";
 type PlannerDateInputProps = {
   value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
+  onFocus?: () => void;
   error: string | null;
   warning?: string | null;
   required?: boolean;
@@ -14,12 +16,26 @@ type PlannerDateInputProps = {
 export const PlannerDateInput = ({
   value,
   onChange,
+  onBlur,
+  onFocus,
   error,
   warning,
   required = true,
 }: PlannerDateInputProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
+  };
+
+  const handleBlur = () => {
+    if (onBlur) {
+      onBlur();
+    }
+  };
+
+  const handleFocus = () => {
+    if (onFocus) {
+      onFocus();
+    }
   };
 
   const inputId = "harvest-date-input";
@@ -37,6 +53,8 @@ export const PlannerDateInput = ({
         value={value}
         required={required}
         onChange={handleChange}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
         aria-label="Välj skördedatum"
         aria-describedby={describedBy}
       />

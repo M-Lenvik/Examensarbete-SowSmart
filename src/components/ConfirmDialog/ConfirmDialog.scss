@@ -19,24 +19,13 @@
   gap: 1rem;
   justify-content: flex-end;
   flex-wrap: wrap;
-
-  .button {
-    min-width: 8rem;
-  }
 }
 
-.confirm-dialog__cancel-button {
-  &:hover:not(:disabled) {
-    background-color: $primary-green !important;
-    color: #ffffff !important;
-  }
-}
-
+// Base button styles for both buttons
+.confirm-dialog__cancel-button,
 .confirm-dialog__confirm-button {
   appearance: none;
   border: 1px solid transparent;
-  background-color: $warning-color;
-  color: #ffffff;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -45,10 +34,49 @@
   min-width: 8rem;
   @include shadow-sm;
   @include transition(background-color);
+}
 
-  &:hover:not(:disabled) {
-    background-color: #991b1b;
+// Danger variant (default): cancel=green hover, confirm=red
+.confirm-dialog--danger {
+  .confirm-dialog__cancel-button {
+    background-color: $background-light;
+    color: $text-color;
+    border-color: $border-color;
+
+    &:hover:not(:disabled) {
+      background-color: $primary-green;
+      color: #ffffff;
+    }
   }
 
+  .confirm-dialog__confirm-button {
+    background-color: $warning-color;
+    color: #ffffff;
+
+    &:hover:not(:disabled) {
+      background-color: #991b1b;
+    }
+  }
+}
+
+// Success variant: cancel=red, confirm=green
+.confirm-dialog--success {
+  .confirm-dialog__cancel-button {
+    background-color: $warning-color;
+    color: #ffffff;
+
+    &:hover:not(:disabled) {
+      background-color: #991b1b;
+    }
+  }
+
+  .confirm-dialog__confirm-button {
+    background-color: $primary-green;
+    color: #ffffff;
+
+    &:hover:not(:disabled) {
+      background-color: darken($primary-green, 10%);
+    }
+  }
 }
 

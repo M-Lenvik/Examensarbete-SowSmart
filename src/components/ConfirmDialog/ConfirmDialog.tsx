@@ -1,5 +1,4 @@
 import { Modal } from "../Modal/Modal";
-import { Button } from "../Button/Button";
 import "./ConfirmDialog.scss";
 
 type ConfirmDialogProps = {
@@ -10,6 +9,7 @@ type ConfirmDialogProps = {
   cancelText?: string;
   onConfirm: () => void;
   onCancel: () => void;
+  variant?: "danger" | "success";
 };
 
 export const ConfirmDialog = ({
@@ -20,17 +20,24 @@ export const ConfirmDialog = ({
   cancelText = "Avbryt",
   onConfirm,
   onCancel,
+  variant = "danger",
 }: ConfirmDialogProps) => {
   if (!isOpen) return null;
 
+  const dialogClass = `confirm-dialog confirm-dialog--${variant}`;
+
   return (
     <Modal isOpen={isOpen} title={title} onClose={onCancel}>
-      <div className="confirm-dialog">
+      <div className={dialogClass}>
         <p className="confirm-dialog__message">{message}</p>
         <div className="confirm-dialog__actions">
-          <Button variant="secondary" className="confirm-dialog__cancel-button" onClick={onCancel}>
+          <button
+            type="button"
+            className="confirm-dialog__cancel-button"
+            onClick={onCancel}
+          >
             {cancelText}
-          </Button>
+          </button>
           <button
             type="button"
             className="confirm-dialog__confirm-button"
