@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "../components/Button/Button";
@@ -28,6 +28,7 @@ export const CalendarView = () => {
     position: { x: number; y: number };
   } | null>(null);
   const [selectedFilterIds, setSelectedFilterIds] = useState<string[]>([]);
+  const tooltipHideTimeoutRef = useRef<number | null>(null);
 
   // Load plants
   useEffect(() => {
@@ -130,10 +131,22 @@ export const CalendarView = () => {
     dayEvents: CalendarEvent[],
     position: { x: number; y: number }
   ) => {
+    if (tooltipHideTimeoutRef.current) {
+      clearTimeout(tooltipHideTimeoutRef.current);
+    }
+
     if (dayEvents.length > 0) {
       setHoveredDay({ date, events: dayEvents, position });
     } else {
-      setHoveredDay(null);
+      tooltipHideTimeoutRef.current = setTimeout(() => {
+        setHoveredDay(null);
+      }, 200);
+    }
+  };
+
+  const handleTooltipMouseEnter = () => {
+    if (tooltipHideTimeoutRef.current) {
+      clearTimeout(tooltipHideTimeoutRef.current);
     }
   };
 
@@ -194,6 +207,7 @@ export const CalendarView = () => {
           events={hoveredDay.events}
           position={hoveredDay.position}
           isVisible={true}
+          onMouseEnter={handleTooltipMouseEnter}
         />
       )}
     </section>

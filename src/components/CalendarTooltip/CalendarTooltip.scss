@@ -11,10 +11,13 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   min-width: 12rem;
   max-width: 20rem;
+  max-height: 80vh;
   width: max-content;
-  pointer-events: none;
+  pointer-events: auto;
   opacity: 1;
   visibility: visible;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   @include tablet {
     max-width: 24rem;
