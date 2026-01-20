@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { EventIcon } from "../EventIcon/EventIcon";
-import { getTaskTypeLabel, taskTypeToDateType } from "../../helpers/calendar/tasks";
+import { CALENDAR_EVENT_CONFIG } from "../../helpers/calendar/events";
+import { taskTypeToDateType } from "../../helpers/calendar/tasks";
 import type { Task } from "../../helpers/calendar/tasks";
 import type { PlantWarning } from "../../helpers/validation/warnings";
 import { parseDateIso, formatMonthYearSwedish } from "../../helpers/date/date";
@@ -90,14 +91,14 @@ const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onTog
             className="my-garden-task-list__task-header-button"
             onClick={onToggle}
             aria-expanded={isExpanded}
-            aria-label={`${isExpanded ? "Dölj" : "Visa"} plantor för ${getTaskTypeLabel(type)} den ${dateFormatted}`}
+            aria-label={`${isExpanded ? "Dölj" : "Visa"} plantor för ${CALENDAR_EVENT_CONFIG[type].label} den ${dateFormatted}`}
           >
             <div className="my-garden-task-list__task-header-content">
               <h3 className="my-garden-task-list__task-date">
                 {dateFormatted}<span className="my-garden-task-list__task-count">, {tasks.length} {tasks.length === 1 ? "händelse" : "händelser"}</span>
               </h3>
               <h4 className={`my-garden-task-list__task-label ${isExpanded ? "my-garden-task-list__task-label--expanded" : ""}`}>
-                {getTaskTypeLabel(type)}
+                {CALENDAR_EVENT_CONFIG[type].label}
               </h4>
             </div>
             <span className={`my-garden-task-list__task-header-icon ${isExpanded ? "my-garden-task-list__task-header-icon--expanded" : ""}`}>

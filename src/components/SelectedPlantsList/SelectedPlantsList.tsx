@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
-import { EventIcon } from "../EventIcon/EventIcon";
+import { EventIconWithLabel } from "../EventIconWithLabel/EventIconWithLabel";
 import { Input } from "../Input/Input";
 import { ConfirmDialog } from "../ConfirmDialog/ConfirmDialog";
 import type { Plant } from "../../models/Plant";
@@ -81,7 +81,6 @@ export const SelectedPlantsList = ({
 
   // Date info type
   type DateInfo = {
-    label: string;
     date: string;
     eventType: "sow-indoor" | "sow-outdoor" | "harden-start" | "move-plant-outdoor" | "harvest";
   };
@@ -95,13 +94,11 @@ export const SelectedPlantsList = ({
     // Prioritize recommendation if available, otherwise use sowDate from plantMessages if it's a valid date (harvestDate key)
     if (recommendation?.indoorSowDate) {
       dateInfos.push({
-        label: "Sådd",
         date: formatDateSwedishWithoutYear(recommendation.indoorSowDate),
         eventType: "sow-indoor",
       });
     } else if (recommendation?.outdoorSowDate) {
       dateInfos.push({
-        label: "Sådd",
         date: formatDateSwedishWithoutYear(recommendation.outdoorSowDate),
         eventType: "sow-outdoor",
       });
@@ -117,7 +114,6 @@ export const SelectedPlantsList = ({
         // Use sow date from plantMessages - assume indoor if plant uses indoor method
         const eventType = plant.plantingMethod === "indoor" ? "sow-indoor" : "sow-outdoor";
         dateInfos.push({
-          label: "Sådd",
           date: formatDateSwedishWithoutYear(sowResult.sowDateIso),
           eventType,
         });
@@ -127,7 +123,6 @@ export const SelectedPlantsList = ({
     // Avhärdning: datum
     if (recommendation?.hardenStartDate) {
       dateInfos.push({
-        label: "Avhärdning",
         date: formatDateSwedishWithoutYear(recommendation.hardenStartDate),
         eventType: "harden-start",
       });
@@ -136,7 +131,6 @@ export const SelectedPlantsList = ({
     // Utplantering: datum
     if (recommendation?.movePlantOutdoorDate) {
       dateInfos.push({
-        label: "Utplantering",
         date: formatDateSwedishWithoutYear(recommendation.movePlantOutdoorDate),
         eventType: "move-plant-outdoor",
       });
@@ -150,7 +144,6 @@ export const SelectedPlantsList = ({
       harvestDateIso;
     if (plantHarvestDate) {
       dateInfos.push({
-        label: "Skörd",
         date: formatDateSwedishWithoutYear(plantHarvestDate),
         eventType: "harvest",
       });
@@ -234,12 +227,14 @@ export const SelectedPlantsList = ({
                       {dateInfos.length > 0 && (
                         <div className="selected-plants-list__dates-grid">
                           {dateInfos.map((dateInfo, index) => (
-                            <div key={index} className="selected-plants-list__date-item">
-                              <EventIcon eventType={dateInfo.eventType} size="small" />
-                              <span className="selected-plants-list__date-text">
-                                {dateInfo.label} {dateInfo.date}
-                              </span>
-                            </div>
+                            <EventIconWithLabel
+                              key={index}
+                              eventType={dateInfo.eventType}
+                              size="small"
+                              showDate={true}
+                              date={dateInfo.date}
+                              className="selected-plants-list__date-item"
+                            />
                           ))}
                         </div>
                       )}

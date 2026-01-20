@@ -1,4 +1,5 @@
 import { formatDateSwedish, parseDateIso } from "../date/date";
+import { CALENDAR_EVENT_CONFIG } from "./events";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 
@@ -18,22 +19,12 @@ export type Task = {
 /**
  * Get label for task/event type.
  * Can be used for both Task and CalendarEvent types since they share the same type values.
+ * 
+ * @deprecated Use CALENDAR_EVENT_CONFIG[type].label instead for consistency with calendar legend.
+ * This function is kept for backward compatibility but now uses CALENDAR_EVENT_CONFIG internally.
  */
 export const getTaskTypeLabel = (type: Task["type"]): string => {
-  switch (type) {
-    case "sow-outdoor":
-      return "Så utomhus";
-    case "sow-indoor":
-      return "Så inomhus";
-    case "harden-start":
-      return "Starta avhärdning";
-    case "move-plant-outdoor":
-      return "Flytta ut";
-    case "harvest":
-      return "Skörd";
-    default:
-      return type;
-  }
+  return CALENDAR_EVENT_CONFIG[type].label;
 };
 
 /**
@@ -93,7 +84,7 @@ export const recommendationsToTasks = (
         plantName,
         plantSubcategory,
         dateFormatted: formatDateSwedish(recommendation.outdoorSowDate),
-        taskLabel: `${getTaskTypeLabel("sow-outdoor")} ${plantName}`,
+        taskLabel: `${CALENDAR_EVENT_CONFIG["sow-outdoor"].label} ${plantName}`,
       });
     }
 
@@ -106,7 +97,7 @@ export const recommendationsToTasks = (
         plantName,
         plantSubcategory,
         dateFormatted: formatDateSwedish(recommendation.indoorSowDate),
-        taskLabel: `${getTaskTypeLabel("sow-indoor")} ${plantName}`,
+        taskLabel: `${CALENDAR_EVENT_CONFIG["sow-indoor"].label} ${plantName}`,
       });
     }
 
@@ -119,7 +110,7 @@ export const recommendationsToTasks = (
         plantName,
         plantSubcategory,
         dateFormatted: formatDateSwedish(recommendation.hardenStartDate),
-        taskLabel: `${getTaskTypeLabel("harden-start")} ${plantName}`,
+        taskLabel: `${CALENDAR_EVENT_CONFIG["harden-start"].label} ${plantName}`,
       });
     }
 
@@ -132,7 +123,7 @@ export const recommendationsToTasks = (
         plantName,
         plantSubcategory,
         dateFormatted: formatDateSwedish(recommendation.movePlantOutdoorDate),
-        taskLabel: `${getTaskTypeLabel("move-plant-outdoor")} ${plantName}`,
+        taskLabel: `${CALENDAR_EVENT_CONFIG["move-plant-outdoor"].label} ${plantName}`,
       });
     }
 
@@ -145,7 +136,7 @@ export const recommendationsToTasks = (
         plantName,
         plantSubcategory,
         dateFormatted: formatDateSwedish(recommendation.harvestDateIso),
-        taskLabel: `${getTaskTypeLabel("harvest")} ${plantName}`,
+        taskLabel: `${CALENDAR_EVENT_CONFIG["harvest"].label} ${plantName}`,
       });
     }
   }

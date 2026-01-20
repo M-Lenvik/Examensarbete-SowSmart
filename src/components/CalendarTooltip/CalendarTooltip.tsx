@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { formatDateSwedish } from "../../helpers/date/date";
-import { getTaskTypeLabel } from "../../helpers/calendar/tasks";
+import { CALENDAR_EVENT_CONFIG } from "../../helpers/calendar/events";
 import type { CalendarEvent, CalendarEventType } from "../../helpers/calendar/events";
 import "./CalendarTooltip.scss";
 
@@ -153,7 +153,7 @@ export const CalendarTooltip = ({ events, position, isVisible, onMouseEnter }: C
         <div key={`${group.date}-${group.type}-${groupIndex}`} className="calendar-tooltip__group">
           <div className="calendar-tooltip__date">{formatDateSwedish(group.date)}</div>
           <div className="calendar-tooltip__event-type">
-            {getTaskTypeLabel(group.type)}
+            {CALENDAR_EVENT_CONFIG[group.type].label}
             {group.plantNames.length > 1 ? ":" : ""}
           </div>
           <ul className="calendar-tooltip__plant-list">

@@ -78,16 +78,6 @@
   }
 }
 
-.selected-plants-list__date-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.selected-plants-list__date-text {
-  font-size: 0.875rem;
-  color: $text-color;
-}
 .selected-plants-list__plant-button {
   flex: 1;
   appearance: none;
