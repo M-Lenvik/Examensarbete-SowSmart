@@ -1,0 +1,24 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/base" as *;
+
+.event-icon-interactive {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus {
+    outline: 2px solid $primary-green;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+}
+

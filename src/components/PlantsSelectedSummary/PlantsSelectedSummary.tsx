@@ -39,6 +39,7 @@ export const PlantsSelectedSummary = ({
             selectedPlants={selectedPlants}
             onOpenDetails={onOpenDetails}
             onRemove={onRemove}
+            interactiveIcons={true}
           />
           <Button 
             variant="secondary" 

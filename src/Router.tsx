@@ -3,6 +3,7 @@ import { Layout } from "./components/Layout/Layout";
 import { About } from "./pages/About";
 import { CalendarView } from "./pages/CalendarView";
 import { ErrorPage } from "./pages/ErrorPage";
+import { GrowingTips } from "./pages/GrowingTips";
 import { HarvestPlanner } from "./pages/HarvestPlanner";
 import { Home } from "./pages/Home";
 import { MyGarden } from "./pages/MyGarden";
@@ -37,6 +38,10 @@ export const router = createHashRouter([
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "growing-tips",
+        element: <GrowingTips />,
       },
     ],
   },

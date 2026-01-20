@@ -19,6 +19,7 @@ type SelectedPlantsListProps = {
   harvestDateIso?: string | null; // Harvest date for date display (fallback)
   harvestDatesByPlant?: Map<number, string>; // Map of plantId -> harvest date ISO
   showWarningsInline?: boolean; // If true, show all messages inline under each plant. If false, show informative date information in expandable section (default)
+  interactiveIcons?: boolean; // If true, event icons are interactive (tooltip + modal). Default false.
 };
 
 export const SelectedPlantsList = ({
@@ -31,6 +32,7 @@ export const SelectedPlantsList = ({
   harvestDateIso,
   harvestDatesByPlant,
   showWarningsInline = false,
+  interactiveIcons = false,
 }: SelectedPlantsListProps) => {
   const [isInformationExpanded, setIsInformationExpanded] = useState(false);
   const [editingHarvestDateFor, setEditingHarvestDateFor] = useState<number | null>(null);
@@ -234,6 +236,7 @@ export const SelectedPlantsList = ({
                               showDate={true}
                               date={dateInfo.date}
                               className="selected-plants-list__date-item"
+                              interactive={interactiveIcons}
                             />
                           ))}
                         </div>

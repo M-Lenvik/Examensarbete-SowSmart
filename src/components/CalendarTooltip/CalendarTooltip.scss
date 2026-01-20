@@ -1,28 +1,12 @@
 @use "../../Styles/color" as *;
 @use "../../Styles/base" as *;
+@use "../../Styles/tooltip" as *;
 
 .calendar-tooltip {
-  position: fixed;
-  z-index: 1000;
-  background-color: $primary-beige;
-  border: 1px solid $border-color;
-  border-radius: 0.25rem;
-  padding: 0.75rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  min-width: 12rem;
-  max-width: 20rem;
+  @extend %tooltip-base;
+  
   max-height: 80vh;
-  width: max-content;
-  pointer-events: auto;
-  opacity: 1;
-  visibility: visible;
   overflow-y: auto;
-  overflow-x: hidden;
-
-  @include tablet {
-    max-width: 24rem;
-    padding: 1rem;
-  }
 
   &__group {
     padding: 0.75rem 0;

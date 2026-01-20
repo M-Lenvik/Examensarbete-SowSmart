@@ -44,6 +44,7 @@ export const PlannerSelectedPlants = ({
           harvestDatesByPlant={harvestDatesByPlant}
           recommendations={recommendations}
           harvestDateIso={harvestDateIso}
+          interactiveIcons={true}
         />
         <div className="planner-selected-plants__actions">
           <Link to="/plants" className="button button--secondary">

@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import { formatDateSwedish } from "../../helpers/date/date";
 import { CALENDAR_EVENT_CONFIG } from "../../helpers/calendar/events";
 import type { CalendarEvent, CalendarEventType } from "../../helpers/calendar/events";
+import { TOOLTIP_PADDING_PX, TOOLTIP_OFFSET_PX } from "../EventTooltip/EventTooltip";
 import "./CalendarTooltip.scss";
 
 type CalendarTooltipProps = {
@@ -75,8 +76,8 @@ export const CalendarTooltip = ({ events, position, isVisible, onMouseEnter }: C
     const tooltipRect = tooltip.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    const padding = 16;
-    const tooltipOffset = 8;
+    const padding = TOOLTIP_PADDING_PX;
+    const tooltipOffset = TOOLTIP_OFFSET_PX;
 
     let left = position.x;
     let top = position.y;

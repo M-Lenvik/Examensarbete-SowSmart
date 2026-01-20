@@ -1,0 +1,26 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/base" as *;
+
+.event-info-modal {
+  @include flex-column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.event-info-modal__icon {
+  @include flex-center;
+}
+
+.event-info-modal__content {
+  width: 100%;
+}
+
+.event-info-modal__text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: $text-color;
+  margin: 0;
+  text-align: left;
+}
+

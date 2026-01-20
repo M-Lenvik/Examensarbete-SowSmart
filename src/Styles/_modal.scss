@@ -1,0 +1,97 @@
+@use "color" as *;
+@use "base" as *;
+
+/**
+ * Shared modal styling.
+ * 
+ * Base styles for modals used across the application.
+ * All modals should use these styles for consistency.
+ */
+%modal-overlay-base {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+
+  // Less padding on mobile to maximize modal space
+  @media (max-width: 425px) {
+    padding: 0.5rem;
+  }
+}
+
+%modal-base {
+  max-height: calc(100vh - 2rem);
+  width: 100%;
+  max-width: 40rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  border: 1px solid $border-color;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.2s ease-out;
+  @include shadow-lg;
+
+  // Better sizing for mobile
+  @media (max-width: 425px) {
+    max-height: calc(100vh - 1rem);
+    border-radius: 0.5rem;
+  }
+}
+
+%modal-header-base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid $border-color;
+  background-color: $background-light;
+}
+
+%modal-close-base {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.5rem;
+  min-width: 2.75rem; // 44px - minimum touch target for iOS
+  min-height: 2.75rem; // 44px - minimum touch target for iOS
+  border-radius: 0.5rem;
+  color: $text-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  // Larger touch target and font size on mobile
+  @media (max-width: 425px) {
+    font-size: 2rem;
+    min-width: 3rem; // 48px for better visibility on small screens
+    min-height: 3rem; // 48px for better visibility on small screens
+    padding: 0.75rem;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: none;
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+%modal-content-base {
+  padding: 1rem;
+  overflow-y: auto;
+}
+

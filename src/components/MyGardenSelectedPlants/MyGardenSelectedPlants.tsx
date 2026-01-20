@@ -65,6 +65,7 @@ export const MyGardenSelectedPlants = ({
           harvestDateIso={harvestDateIso}
           plantMessages={plantMessages}
           showWarningsInline={true}
+          interactiveIcons={true}
         />
       )}
     </div>

@@ -27,7 +27,7 @@ $error-color: #c45c4e;        // Muted red
 $info-color: $primary-green;
 
 /* Border & Divider */
-$border-color: #e0ddd4;       // Light beige-gray
+$border-color: #d4e0d6;       // Light beige-gray
 $border-dark-color: #c5c3ba;       // Light beige-gray
 $divider-color: #d5d1c6;      // Medium beige-gray
 
@@ -76,6 +76,10 @@ $calendar-event-harvest: #277214;
   --calendar-day-icon-size-small: var(--calendar-icon-size-small);
   --calendar-day-icon-size-medium: var(--calendar-icon-size-medium);
   --calendar-day-icon-size-large: var(--calendar-icon-size-large);
+  
+  /* Tooltip positioning - used for dynamic positioning calculations */
+  --tooltip-padding: 1rem; // 16px
+  --tooltip-offset: 0.5rem; // 8px
 }
 
 /* Animations */

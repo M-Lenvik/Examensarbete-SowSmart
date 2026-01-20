@@ -1,0 +1,13 @@
+@use "../../Styles/color" as *;
+@use "../../Styles/base" as *;
+@use "../../Styles/tooltip" as *;
+
+.event-tooltip {
+  @extend %tooltip-base;
+  
+  color: $text-color;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  pointer-events: none;
+}
+

@@ -37,24 +37,44 @@ export type EventIconSize = "small" | "medium" | "large";
 /**
  * Configuration for calendar event types.
  * 
- * Contains labels and metadata for each event type that can be used
- * in both CalendarLegend and EventIcon components.
+ * Contains labels, tooltip text, and detailed modal content for each event type.
+ * Used in CalendarLegend, EventIcon, tooltips, and modals.
  */
-export const CALENDAR_EVENT_CONFIG: Record<CalendarEventType, { label: string }> = {
+export const CALENDAR_EVENT_CONFIG: Record<CalendarEventType, {
+  label: string;
+  tooltip: string;
+  modalTitle: string;
+  modalContent: string;
+}> = {
   "sow-outdoor": {
     label: "Så direkt ute",
+    tooltip: "Så frön direkt i jorden utomhus",
+    modalTitle: "Så direkt ute",
+    modalContent: "När du sår direkt ute lägger du fröna i jorden där plantorna ska växa. Detta passar för växter som tål kyla och kan hantera utomhusmiljön från början. Vissa växter behöver varmare temperaturer och börjar därför inomhus, medan andra kan sås direkt utomhus när jorden är tillräckligt varm.",
   },
   "sow-indoor": {
     label: "Så inne",
+    tooltip: "Så frön inomhus i kruka eller låda",
+    modalTitle: "Så inne",
+    modalContent: "När du sår inne startar du plantorna i en kontrollerad miljö inomhus. Detta ger plantorna en bättre start och skydd mot kyla och väder. Efter att plantorna har vuxit tillräckligt och väderleken blir varmare, flyttar du ut dem. Detta är vanligt för växter som behöver längre växtid eller är känsliga för kyla.",
   },
   "harden-start": {
     label: "Starta avhärdning",
+    tooltip: "Börja vänja plantan vid utomhusmiljön",
+    modalTitle: "Starta avhärdning",
+    modalContent: "Avhärdning är processen att gradvis vänja plantor som har vuxit inomhus vid utomhusmiljön. Detta görs genom att placera plantorna utomhus i allt längre perioder varje dag, börjande med skugga och skyddade platser. Avhärdning hjälper plantorna att anpassa sig till skillnader i temperatur, vind och solljus, vilket minskar risken för chock och skador när de flyttas ut permanent.",
   },
   "move-plant-outdoor": {
     label: "Flytta ut plantan",
+    tooltip: "Flytta plantan från inomhus till utomhus permanent",
+    modalTitle: "Flytta ut plantan",
+    modalContent: "När plantorna har blivit avhärdade och väderleken är tillräckligt varm, är det dags att flytta ut dem permanent. Detta innebär att plantera dem i sin slutgiltiga plats i trädgården eller i krukor som står utomhus. Se till att jorden är varm nog och att risken för frost är förbi innan du flyttar ut plantorna.",
   },
   "harvest": {
     label: "Skörd",
+    tooltip: "Skörda dina växter när de är mogna",
+    modalTitle: "Skörd",
+    modalContent: "Skörd är när du plockar dina växter när de är mogna och redo att ätas. Olika växter har olika tecken på mognad - vissa ska plockas när de är unga och mjuka, medan andra ska vara fullt utvecklade. Skörda regelbundet för att få bäst smak och för att uppmuntra plantorna att fortsätta producera.",
   },
 };
 
@@ -126,10 +146,19 @@ export const recommendationsToEvents = (
   const events: CalendarEvent[] = [];
 
   // Create a map of plantId -> plant for quick lookup
-  const plantMap = new Map<number, Plant>();
-  plants.forEach((plant) => {
-    plantMap.set(plant.id, plant);
-  });
+  const plantMap = new Map(plants.map((plant) => [plant.id, plant]));
+
+  // Mapping from recommendation date fields to event types
+  const dateFieldToEventType: Array<{
+    field: keyof Recommendation;
+    type: CalendarEventType;
+  }> = [
+    { field: "outdoorSowDate", type: "sow-outdoor" },
+    { field: "indoorSowDate", type: "sow-indoor" },
+    { field: "hardenStartDate", type: "harden-start" },
+    { field: "movePlantOutdoorDate", type: "move-plant-outdoor" },
+    { field: "harvestDateIso", type: "harvest" },
+  ];
 
   // Convert each recommendation to events
   recommendations.forEach((recommendation) => {
@@ -137,60 +166,19 @@ export const recommendationsToEvents = (
     const plantName = plant?.name ?? "Okänd planta";
     const plantSubcategory = plant?.subcategory ?? "";
 
-    // Outdoor sow date
-    if (recommendation.outdoorSowDate) {
-      events.push({
-        type: "sow-outdoor",
-        date: recommendation.outdoorSowDate,
-        plantId: recommendation.plantId,
-        plantName,
-        plantSubcategory,
-      });
-    }
-
-    // Indoor sow date
-    if (recommendation.indoorSowDate) {
-      events.push({
-        type: "sow-indoor",
-        date: recommendation.indoorSowDate,
-        plantId: recommendation.plantId,
-        plantName,
-        plantSubcategory,
-      });
-    }
-
-    // Harden start date
-    if (recommendation.hardenStartDate) {
-      events.push({
-        type: "harden-start",
-        date: recommendation.hardenStartDate,
-        plantId: recommendation.plantId,
-        plantName,
-        plantSubcategory,
-      });
-    }
-
-    // Move plant outdoor date
-    if (recommendation.movePlantOutdoorDate) {
-      events.push({
-        type: "move-plant-outdoor",
-        date: recommendation.movePlantOutdoorDate,
-        plantId: recommendation.plantId,
-        plantName,
-        plantSubcategory,
-      });
-    }
-
-    // Harvest date (one per plant) - use the harvest date from the recommendation itself
-    if (recommendation.harvestDateIso) {
-      events.push({
-        type: "harvest",
-        date: recommendation.harvestDateIso,
-        plantId: recommendation.plantId,
-        plantName,
-        plantSubcategory,
-      });
-    }
+    // Create events for each date field that has a value
+    dateFieldToEventType.forEach(({ field, type }) => {
+      const date = recommendation[field];
+      if (date) {
+        events.push({
+          type,
+          date: date as string,
+          plantId: recommendation.plantId,
+          plantName,
+          plantSubcategory,
+        });
+      }
+    });
   });
 
   return events;

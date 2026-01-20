@@ -63,7 +63,14 @@ export const Header = () => {
             className="nav-link"
             onClick={() => setIsMenuOpen(false)}
           >
-            Min Frösida
+            Min frösida
+          </NavLink>
+          <NavLink
+            to="/growing-tips"
+            className="nav-link"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Odlingsråd
           </NavLink>
           <NavLink
             to="/about"

@@ -1,4 +1,4 @@
-import { EventIcon } from "../EventIcon/EventIcon";
+import { EventIconInteractive } from "../EventIconInteractive/EventIconInteractive";
 import { ALL_CALENDAR_EVENT_TYPES, CALENDAR_EVENT_CONFIG, CALENDAR_ICON_SIZES, type CalendarEventType } from "../../helpers/calendar/events";
 import "./CalendarLegend.scss";
 
@@ -27,7 +27,7 @@ export const CalendarLegend = () => {
       <ul className="calendar-legend__list calendar-legend__list--mobile">
         {mobileOrder.map((eventType) => (
           <li key={eventType} className="calendar-legend__item">
-            <EventIcon eventType={eventType} size={CALENDAR_ICON_SIZES.small} />
+            <EventIconInteractive eventType={eventType} size={CALENDAR_ICON_SIZES.small} />
             <span className="calendar-legend__label">{CALENDAR_EVENT_CONFIG[eventType].label}</span>
           </li>
         ))}
@@ -35,7 +35,7 @@ export const CalendarLegend = () => {
       <ul className="calendar-legend__list calendar-legend__list--desktop">
         {desktopOrder.map((eventType) => (
           <li key={eventType} className="calendar-legend__item">
-            <EventIcon eventType={eventType} size={CALENDAR_ICON_SIZES.small} />
+            <EventIconInteractive eventType={eventType} size={CALENDAR_ICON_SIZES.small} />
             <span className="calendar-legend__label">{CALENDAR_EVENT_CONFIG[eventType].label}</span>
           </li>
         ))}
