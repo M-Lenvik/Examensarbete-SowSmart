@@ -12,10 +12,20 @@
 
 .modal__header {
   @extend %modal-header-base;
+  position: relative;
+}
+
+.modal__title {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  padding-right: 2.75rem; // Compensate for close button width
 }
 
 .modal__close {
   @extend %modal-close-base;
+  position: absolute;
+  right: 0.75rem;
 }
 
 .modal__content {

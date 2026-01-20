@@ -314,6 +314,12 @@ export const normalizePlant = (raw: RawPlant): Plant => {
     raw.name
   );
 
+  // soilMix, transplantingInstructions, careInstructions, description: use raw value or null
+  const soilMix = raw.soilMix?.trim() || null;
+  const transplantingInstructions = raw.transplantingInstructions?.trim() || null;
+  const careInstructions = raw.careInstructions?.trim() || null;
+  const description = raw.description?.trim() || null;
+
   return {
     ...raw,
     daysOutdoor,
@@ -326,6 +332,10 @@ export const normalizePlant = (raw: RawPlant): Plant => {
     growingTemperature,
     frostTolerant,
     totalDaysFromSeed,
+    soilMix,
+    transplantingInstructions,
+    careInstructions,
+    description,
   };
 };
 

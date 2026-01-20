@@ -59,9 +59,10 @@ export type RawPlant = {
   growingTemperature?: string;
   frostTolerant?: boolean | null;
   source?: string;
-
-  // todo ta bort kommentar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // Enrichment fields (may be missing until migration is done)
+  soilMix?: string;
+  transplantingInstructions?: string;
+  careInstructions?: string;
+  description?: string;
   daysOutdoor?: number | null;
   daysIndoorGrowth?: number | null;
   hardeningDays?: number | null;
@@ -76,7 +77,7 @@ export type RawPlant = {
  */
 export type Plant = Omit<
   RawPlant,
-  "daysToHarvest" | "daysOutdoor" | "plantingMethod" | "movePlantOutdoor" | "germinationTime" | "germinationTemperature" | "growingTemperature" | "frostTolerant" | "totalDaysFromSeed"
+  "daysToHarvest" | "daysOutdoor" | "plantingMethod" | "movePlantOutdoor" | "germinationTime" | "germinationTemperature" | "growingTemperature" | "frostTolerant" | "totalDaysFromSeed" | "soilMix" | "transplantingInstructions" | "careInstructions" | "description"
 > & {
   daysOutdoor: number | null;
   daysIndoorGrowth: number | null;
@@ -88,6 +89,10 @@ export type Plant = Omit<
   growingTemperature: string | null;
   frostTolerant: boolean | null;
   totalDaysFromSeed: number | null;
+  soilMix: string | null;
+  transplantingInstructions: string | null;
+  careInstructions: string | null;
+  description: string | null;
 
   // Keep legacy raw fields optional for traceability/debugging.
   daysToHarvest?: number | string;
