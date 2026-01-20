@@ -129,9 +129,17 @@
   }
 
   &__task-count {
+    display: block;
+    margin-top: 0.25rem;
     font-size: 0.875rem;
     font-weight: 400;
     color: $text-light;
+    
+    // Display inline on tablet and desktop
+    @include tablet {
+      display: inline;
+      margin-top: 0;
+    }
   }
 
   &__task-label {

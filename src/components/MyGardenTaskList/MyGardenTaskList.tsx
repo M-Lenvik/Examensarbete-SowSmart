@@ -95,7 +95,7 @@ const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onTog
           >
             <div className="my-garden-task-list__task-header-content">
               <h3 className="my-garden-task-list__task-date">
-                {dateFormatted}<span className="my-garden-task-list__task-count">, {tasks.length} {tasks.length === 1 ? "händelse" : "händelser"}</span>
+                {dateFormatted}<span className="my-garden-task-list__task-count"> {tasks.length} {tasks.length === 1 ? "händelse" : "händelser"}</span>
               </h3>
               <h4 className={`my-garden-task-list__task-label ${isExpanded ? "my-garden-task-list__task-label--expanded" : ""}`}>
                 {CALENDAR_EVENT_CONFIG[type].label}
