@@ -31,6 +31,10 @@ export const EventIconInteractive = ({
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const iconRef = useRef<HTMLSpanElement>(null);
   const hoverTimeoutRef = useRef<number | undefined>(undefined);
+  
+  // Only bind mouse events on devices that support hover (desktop/tablet)
+  const supportsHover = typeof window !== "undefined" && 
+    window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 768px)").matches;
 
   const showTooltip = () => {
     if (!iconRef.current) return;
@@ -55,8 +59,11 @@ export const EventIconInteractive = ({
   };
 
   const handleClick = () => {
-    setIsModalOpen(true);
+    if (hoverTimeoutRef.current !== undefined) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
     setIsTooltipVisible(false);
+    setIsModalOpen(true);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -73,8 +80,8 @@ export const EventIconInteractive = ({
       <span
         ref={iconRef}
         className={`event-icon-interactive ${className}`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={supportsHover ? handleMouseEnter : undefined}
+        onMouseLeave={supportsHover ? handleMouseLeave : undefined}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         role="button"
