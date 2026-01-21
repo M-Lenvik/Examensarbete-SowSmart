@@ -3,6 +3,7 @@ import { RemoveButton } from "../RemoveButton/RemoveButton";
 import { EventIconWithLabel } from "../EventIconWithLabel/EventIconWithLabel";
 import { Input } from "../Input/Input";
 import { ConfirmDialog } from "../ConfirmDialog/ConfirmDialog";
+import { CollapsibleSection } from "../CollapsibleSection/CollapsibleSection";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 import type { PlantSowResult, PlantSowResultKey } from "../../helpers/date/dateValidation";
@@ -34,7 +35,6 @@ export const SelectedPlantsList = ({
   showWarningsInline = false,
   interactiveIcons = false,
 }: SelectedPlantsListProps) => {
-  const [isInformationExpanded, setIsInformationExpanded] = useState(false);
   const [editingHarvestDateFor, setEditingHarvestDateFor] = useState<number | null>(null);
   const [plantToRemove, setPlantToRemove] = useState<Plant | null>(null);
 
@@ -312,46 +312,38 @@ export const SelectedPlantsList = ({
         ))}
       </div>
       {informativeDateInfo.length > 0 && (
-        <div className="selected-plants-list__information">
-          <button
-            type="button"
-            className="selected-plants-list__information-button"
-            onClick={() => setIsInformationExpanded(!isInformationExpanded)}
-            aria-expanded={isInformationExpanded}
-            aria-label={`${isInformationExpanded ? "Dölj" : "Visa"} information om några av dina valda datum`}
-          >
-            <span className="selected-plants-list__information-title">
+        <CollapsibleSection
+          title={
+            <>
               <span className="selected-plants-list__info-asterisk" aria-label="Information om valt datum">*</span>
-              Information om några av dina valda datum ({informativeDateInfo.length})
-            </span>
-            <span className={`selected-plants-list__information-icon ${isInformationExpanded ? "selected-plants-list__information-icon--expanded" : ""}`}>
-              ▼
-            </span>
-          </button>
-          {isInformationExpanded && (
-            <ul className="selected-plants-list__information-list">
-              {informativeDateInfo.map(({ plant, message }) => (
-                <li key={plant.id} className="selected-plants-list__information-item">
-                  <div className="selected-plants-list__information-plant-name">
-                    {onOpenDetails ? (
-                      <button
-                        type="button"
-                        className="selected-plants-list__information-plant-button"
-                        onClick={() => handlePlantClick(plant)}
-                        aria-label={`Öppna detaljer för ${plant.name}`}
-                      >
-                        {plant.name}
-                      </button>
-                    ) : (
-                      <span>{plant.name}</span>
-                    )}
-                  </div>
-                  <p className="selected-plants-list__information-message">{message.message}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+              {" "}Information om några av dina valda datum ({informativeDateInfo.length})
+            </>
+          }
+          defaultExpanded={false}
+          ariaLabel="Visa information om några av dina valda datum"
+        >
+          <ul className="selected-plants-list__information-list">
+            {informativeDateInfo.map(({ plant, message }) => (
+              <li key={plant.id} className="selected-plants-list__information-item">
+                <div className="selected-plants-list__information-plant-name">
+                  {onOpenDetails ? (
+                    <button
+                      type="button"
+                      className="selected-plants-list__information-plant-button"
+                      onClick={() => handlePlantClick(plant)}
+                      aria-label={`Öppna detaljer för ${plant.name}`}
+                    >
+                      {plant.name}
+                    </button>
+                  ) : (
+                    <span>{plant.name}</span>
+                  )}
+                </div>
+                <p className="selected-plants-list__information-message">{message.message}</p>
+              </li>
+            ))}
+          </ul>
+        </CollapsibleSection>
       )}
       {plantToRemove && (
         <ConfirmDialog

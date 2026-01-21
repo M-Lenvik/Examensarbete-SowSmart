@@ -6,7 +6,6 @@ type PlantsCategoryButtonsProps = {
   onSelect: (value: string | null) => void;
   showBackButton?: boolean;
   onBack?: () => void;
-  backButtonCategory?: string;
 };
 
 export const PlantsCategoryButtons = ({
@@ -15,7 +14,6 @@ export const PlantsCategoryButtons = ({
   onSelect,
   showBackButton = false,
   onBack,
-  backButtonCategory,
 }: PlantsCategoryButtonsProps) => {
   // Capitalize first letter of string
   const capitalizeFirst = (str: string): string => {
@@ -50,9 +48,9 @@ export const PlantsCategoryButtons = ({
           type="button"
           className="plants-category-buttons__back-button"
           onClick={onBack}
-          aria-label={backButtonCategory ? `Tillbaka till ${backButtonCategory}` : "Tillbaka till kategorier"}
+          aria-label="Tillbaka till kategorier"
         >
-          ← {backButtonCategory ? `Tillbaka till ${capitalizeFirst(backButtonCategory)}` : "Tillbaka till kategorier"}
+          ← Tillbaka till kategorier
         </button>
       )}
     </div>

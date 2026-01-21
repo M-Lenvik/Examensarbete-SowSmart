@@ -156,7 +156,7 @@ export const MyGarden = () => {
           plantMessages={plantMessages}
         />
       </Panel>
-      <Panel title="Min odlingsplan">
+      <Panel title="Min odlingsplan" collapsible defaultExpanded={true}>
         <MyGardenTaskList tasks={tasks} warnings={warnings} onPlantClick={handleOpenDetailsById} />
       </Panel>
       <ModalPlantDetails

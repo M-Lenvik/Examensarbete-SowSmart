@@ -197,7 +197,6 @@ export const PlantSelection = () => {
             onSelect={handleTypeSelect}
             showBackButton={true}
             onBack={handleBackToSubcategories}
-            backButtonCategory={selectedSubcategory}
           />
         ) : (
           <PlantsCategoryButtons

@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { CollapsibleSection } from "../CollapsibleSection/CollapsibleSection";
 import { SelectedPlantsList } from "../SelectedPlantsList/SelectedPlantsList";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
@@ -24,8 +24,6 @@ export const MyGardenSelectedPlants = ({
   harvestDateIso,
   plantMessages,
 }: MyGardenSelectedPlantsProps) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   if (selectedPlants.length === 0) {
     return (
       <div className="my-garden-selected-plants">
@@ -39,24 +37,11 @@ export const MyGardenSelectedPlants = ({
 
   return (
     <div className="my-garden-selected-plants">
-      <button
-        type="button"
-        className="my-garden-selected-plants__header-button"
-        onClick={() => setIsExpanded(!isExpanded)}
-        aria-expanded={isExpanded}
-        aria-label={`${isExpanded ? "Dölj" : "Visa"} Mina valda fröer`}
+      <CollapsibleSection
+        title={`Mina valda fröer (${selectedPlants.length})`}
+        defaultExpanded={false}
+        ariaLabel={`Visa Mina valda fröer`}
       >
-        <h2 className="my-garden-selected-plants__header">
-          Mina valda fröer
-          <span className="my-garden-selected-plants__count">
-            {" "}({selectedPlants.length})
-          </span>
-        </h2>
-        <span className={`my-garden-selected-plants__header-icon ${isExpanded ? "my-garden-selected-plants__header-icon--expanded" : ""}`}>
-          ▼
-        </span>
-      </button>
-      {isExpanded && (
         <SelectedPlantsList
           selectedPlants={selectedPlants}
           onOpenDetails={onPlantClick}
@@ -67,7 +52,7 @@ export const MyGardenSelectedPlants = ({
           showWarningsInline={true}
           interactiveIcons={true}
         />
-      )}
+      </CollapsibleSection>
     </div>
   );
 };
