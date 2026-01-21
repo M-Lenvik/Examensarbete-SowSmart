@@ -15,6 +15,7 @@ import { calculatePlantMessagesFromHarvestDates } from "../helpers/date/plantMes
 import { formatDateSwedish } from "../helpers/date/date";
 import { loadHarvestDatesByFilterFromLocalStorage, saveHarvestDatesByFilterToLocalStorage } from "../helpers/storage/localStorage";
 import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
+import { capitalizeFirst } from "../helpers/utils/text";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
 
@@ -302,7 +303,7 @@ export const HarvestPlanner = () => {
       (subcategory) => !plantsBySubcategory.has(subcategory)
     );
     if (subcategoriesWithoutPlants.length > 0) {
-      items.push(...subcategoriesWithoutPlants.map((subcategory) => subcategory.charAt(0).toUpperCase() + subcategory.slice(1)));
+      items.push(...subcategoriesWithoutPlants.map((subcategory) => capitalizeFirst(subcategory)));
     }
     
     // Add plants grouped by subcategory
@@ -314,7 +315,7 @@ export const HarvestPlanner = () => {
     
     sortedSubcategories.forEach((subcategory) => {
       const plantNames = plantsBySubcategory.get(subcategory)!;
-      const capitalizedSubcategory = subcategory.charAt(0).toUpperCase() + subcategory.slice(1);
+      const capitalizedSubcategory = capitalizeFirst(subcategory);
       if (plantNames.length === 1) {
         items.push(`${capitalizedSubcategory}: ${plantNames[0]}`);
       } else {

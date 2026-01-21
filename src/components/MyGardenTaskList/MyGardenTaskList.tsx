@@ -5,6 +5,7 @@ import { taskTypeToDateType } from "../../helpers/calendar/tasks";
 import type { Task } from "../../helpers/calendar/tasks";
 import type { PlantWarning } from "../../helpers/validation/warnings";
 import { parseDateIso, formatMonthYearSwedish } from "../../helpers/date/date";
+import { capitalizeFirst } from "../../helpers/utils/text";
 import "./MyGardenTaskList.scss";
 
 type MyGardenTaskListProps = {
@@ -143,10 +144,6 @@ const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onTog
                   return a.localeCompare(b, "sv");
                 });
 
-                const capitalizeFirst = (str: string): string => {
-                  if (str.length === 0) return str;
-                  return str.charAt(0).toUpperCase() + str.slice(1);
-                };
 
                 return sortedSubcategories.flatMap((subcategory) => [
                   <li key={`subcategory-${subcategory}`} className="my-garden-task-list__subcategory-header">
@@ -262,7 +259,7 @@ export const MyGardenTaskList = ({ tasks, warnings, onPlantClick }: MyGardenTask
           const isLastMonth = monthIndex === sortedMonths.length - 1;
           
           // Capitalize first letter of month name
-          const capitalizedMonth = monthKey.charAt(0).toUpperCase() + monthKey.slice(1);
+          const capitalizedMonth = capitalizeFirst(monthKey);
           
           return (
             <li key={monthKey} className="my-garden-task-list__month-group">

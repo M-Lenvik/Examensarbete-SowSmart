@@ -1,3 +1,4 @@
+import { capitalizeFirst } from "../../helpers/utils/text";
 import "./PlantsCategoryButtons.scss";
 
 type PlantsCategoryButtonsProps = {
@@ -15,12 +16,6 @@ export const PlantsCategoryButtons = ({
   showBackButton = false,
   onBack,
 }: PlantsCategoryButtonsProps) => {
-  // Capitalize first letter of string
-  const capitalizeFirst = (str: string): string => {
-    if (str.length === 0) return str;
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
-
   return (
     <div className="plants-category-buttons">
 

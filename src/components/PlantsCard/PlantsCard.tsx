@@ -1,5 +1,6 @@
 import { FALLBACK_PLANT_IMAGE_SRC, handleImageError } from "../../helpers/utils/image";
 import type { Plant } from "../../models/Plant";
+import { capitalizeFirst } from "../../helpers/utils/text";
 import "./PlantsCard.scss";
 
 type PlantsCardProps = {
@@ -17,11 +18,6 @@ export const PlantsCard = ({
 }: PlantsCardProps) => {
   const checkboxId = `plant-checkbox-${plant.id}`;
 
-  // Capitalize first letter of string
-  const capitalizeFirst = (str: string): string => {
-    if (str.length === 0) return str;
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
 
   return (
     <article className="plants-card">

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Plant } from "../../models/Plant";
+import { capitalizeFirst } from "../../helpers/utils/text";
 import "./FilterDropdown.scss";
 
 type FilterOption = {
@@ -83,7 +84,7 @@ export const FilterDropdown = ({
       options.push({
         id: `subcategory-${subcategory}`,
         type: "subcategory",
-        label: subcategory.charAt(0).toUpperCase() + subcategory.slice(1),
+        label: capitalizeFirst(subcategory),
         subcategory,
       });
 

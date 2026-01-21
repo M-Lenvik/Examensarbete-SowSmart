@@ -4,6 +4,7 @@ import { formatDateSwedish } from "../../helpers/date/date";
 import { CALENDAR_EVENT_CONFIG } from "../../helpers/calendar/events";
 import type { CalendarEvent, CalendarEventType } from "../../helpers/calendar/events";
 import { TOOLTIP_PADDING_PX, TOOLTIP_OFFSET_PX } from "../EventTooltip/EventTooltip";
+import { capitalizeFirst } from "../../helpers/utils/text";
 import "./CalendarTooltip.scss";
 
 type CalendarTooltipProps = {
@@ -11,14 +12,6 @@ type CalendarTooltipProps = {
   position: { x: number; y: number };
   isVisible: boolean;
   onMouseEnter?: () => void;
-};
-
-/**
- * Capitalize first letter of string.
- */
-const capitalizeFirst = (str: string): string => {
-  if (str.length === 0) return str;
-  return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 /**

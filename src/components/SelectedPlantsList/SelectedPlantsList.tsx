@@ -8,6 +8,7 @@ import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
 import type { PlantSowResult, PlantSowResultKey } from "../../helpers/date/dateValidation";
 import { formatDateSwedishWithoutYear } from "../../helpers/date/date";
+import { capitalizeFirst } from "../../helpers/utils/text";
 import "./SelectedPlantsList.scss";
 
 type SelectedPlantsListProps = {
@@ -42,11 +43,6 @@ export const SelectedPlantsList = ({
     return null;
   }
 
-  // Capitalize first letter of string
-  const capitalizeFirst = (str: string): string => {
-    if (str.length === 0) return str;
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
 
   // Group plants by subcategory
   const groupedPlants = selectedPlants.reduce((acc, plant) => {
