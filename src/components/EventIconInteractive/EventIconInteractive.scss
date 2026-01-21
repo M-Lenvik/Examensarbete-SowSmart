@@ -7,8 +7,11 @@
   position: relative;
   transition: transform 0.2s ease;
 
-  &:hover {
-    transform: scale(1.1);
+  // Only show hover effect on devices that support hover (not touch devices)
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   &:active {
