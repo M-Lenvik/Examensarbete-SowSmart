@@ -1,0 +1,12 @@
+@use "../Styles/color" as *;
+
+.about__link {
+  color: $accent-green;
+  text-decoration: underline;
+}
+
+// Reduce spacing between paragraph and list
+.panel__content > p:has(+ ul) {
+  margin-bottom: 0;
+  font-weight: 600;
+}

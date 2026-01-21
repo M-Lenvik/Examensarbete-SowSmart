@@ -1,11 +1,71 @@
+import { Panel } from "../components/Panel/Panel";
+import "./About.scss";
+
 export const About = () => {
   return (
     <section>
       <h1>Om SåSmart</h1>
-      <p>Info om appen och datakällor. (Kommer i Milstolpe G.)</p>
-      <p>http://localhost:5173/#/about</p>
+      <Panel title="Om projektet">
+        <p>
+          SåSmart är ett examensarbete från Frontend-utbildningen på Medieinstitutet.
+          Applikationen är utvecklad för att hjälpa svenska trädgårdsentusiaster att planera sin odling
+          så att de kan få optimal skörd innan hösten och vintern. Genom att ta hänsyn till svenska klimatförhållanden 
+          och växtspecifika tillväxtcykler ger appen personliga rekommendationer för när frön ska sår.
+        </p>
+        <p>
+          Projektet växte fram ur personliga utmaningar med att planera och underhålla en svensk trädgård.
+          Många hobbyodlare stöter på problem som förlorade fröpåsar med viktiga instruktioner, manuella beräkningar
+          av sådatum och spridd information över flera källor. SåSmart löser dessa utmaningar genom att samla all
+          information på ett ställe och automatiskt beräkna optimala sådatum baserat på önskat skördedatum.
+        </p>
+
+      <h2>Data och källor</h2>
+        <p>
+          All information om växter, såfönster, skördetider och odlingsinstruktioner kommer från{" "}
+          <a 
+            href="https://www.impecta.se" 
+            target="_blank" 
+            rel="noreferrer"
+            className="about__link"
+          >
+            Impecta
+          </a>
+          , en svensk leverantör av ekologiska frön.
+        </p>
+        <p>
+          Data har normaliserats och beräknats för att ge bästa möjliga vägledning för odlingen,
+          men det är alltid viktigt att anpassa odlingen efter lokala förhållanden och klimat.
+        </p>
+
+        <h2>Hur det fungerar</h2>
+        <p>
+          SåSmart hjälper dig att planera din odling från början till slut. Processen börjar med att du väljer
+          vilka grönsaker du vill odla från vår fröbank. Sedan anger du när du vill skörda – antingen ett specifikt
+          datum eller så kan du välja att appen automatiskt beräknar säkra datum före första frosten.
+        </p>
+        <p>
+          Appen beräknar sedan automatiskt när varje växt ska sås, både för inomhus- och utomhussådd.
+          Du får också rekommendationer för när plantorna ska avhärdas och planteras ut, allt anpassat efter
+          svenska klimatförhållanden. Alla dina odlingsuppgifter visas i en översiktlig kalender
+          och en lista, så du alltid vet vad som ska göras och när.
+        </p>
+        <p>
+          Genom hela säsongen kan du enkelt hålla koll på dina planer och läsa mer om olika odlingsmetoder
+          och termer direkt i appen. All information om varje växt, inklusive såfönster, skördetider och
+          odlingsinstruktioner, finns samlad på ett ställe så att du inte behöver leta efter förlorade fröpåsar
+          eller spridd information.
+        </p>
+        <p className="about__intro-text">
+          Appen riktar sig till hobbyodlare och stadsodlare som vill:
+        </p>
+        <ul>
+          <li>Spara tid genom automatiska beräkningar istället för manuell planering</li>
+          <li>Förbättra skörderesultatet med rekommendationer anpassade för svenska klimatförhållanden</li>
+          <li>Ha all odlingsinformation samlad på ett ställe och spara viktiga instruktioner digitalt</li>
+          <li>Planera sin odling baserat på önskat skördedatum eller före första frosten</li>
+          <li>Få tydlig vägledning om när olika växter ska sår, planteras ut och skördas</li>
+        </ul>
+      </Panel>
     </section>
   );
 };
-
-
