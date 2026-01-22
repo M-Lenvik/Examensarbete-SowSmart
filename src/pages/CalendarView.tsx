@@ -1,13 +1,13 @@
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { Button } from "../components/Button/Button";
-import { CalendarLegend } from "../components/CalendarLegend/CalendarLegend";
-import { CalendarMonth } from "../components/CalendarMonth/CalendarMonth";
-import { CalendarMonthNavigation } from "../components/CalendarMonthNavigation/CalendarMonthNavigation";
-import { CalendarTooltip } from "../components/CalendarTooltip/CalendarTooltip";
-import { Panel } from "../components/Panel/Panel";
-import { FilterDropdown } from "../components/FilterDropdown/FilterDropdown";
+import { Button } from "../components/shared/Button/Button";
+import { CalendarLegend } from "../components/calendar/CalendarLegend/CalendarLegend";
+import { CalendarMonth } from "../components/calendar/CalendarMonth/CalendarMonth";
+import { CalendarMonthNavigation } from "../components/calendar/CalendarMonthNavigation/CalendarMonthNavigation";
+import { CalendarTooltip } from "../components/calendar/CalendarTooltip/CalendarTooltip";
+import { Panel } from "../components/shared/Panel/Panel";
+import { FilterDropdown } from "../components/shared/FilterDropdown/FilterDropdown";
 import { PlanContext } from "../context/PlanContext";
 import { recommendationsToEvents } from "../helpers/calendar/events";
 import type { CalendarEvent } from "../helpers/calendar/events";

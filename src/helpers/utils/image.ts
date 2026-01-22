@@ -18,6 +18,21 @@ export const FALLBACK_PLANT_IMAGE_SRC = `data:image/svg+xml,${encodeURIComponent
   </svg>`
 )}`;
 
+/**
+ * Handle image loading errors by replacing with fallback image.
+ * 
+ * Prevents infinite error loops by checking if fallback has already been applied.
+ * Uses a data attribute to track whether fallback has been set.
+ * 
+ * @param event - React synthetic event from image onError handler
+ * @param fallbackSrc - URL or data URI to use as fallback image
+ * 
+ * @example
+ * <img 
+ *   src={plant.imageUrl} 
+ *   onError={(e) => handleImageError(e, FALLBACK_PLANT_IMAGE_SRC)}
+ * />
+ */
 export const handleImageError = (
   event: React.SyntheticEvent<HTMLImageElement, Event>,
   fallbackSrc: string

@@ -1,4 +1,4 @@
-import { Panel } from "../components/Panel/Panel";
+import { Panel } from "../components/shared/Panel/Panel";
 import "./About.scss";
 
 export const About = () => {

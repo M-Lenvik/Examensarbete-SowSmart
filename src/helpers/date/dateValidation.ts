@@ -71,6 +71,16 @@ const getLastDayOfMonth = (monthName: string, year: number): Date | null => {
   return date;
 };
 
+/**
+ * Get harvest window dates for a given year.
+ * 
+ * Converts month names (e.g., "juni", "augusti") to actual Date objects
+ * representing the first and last day of the harvest window.
+ * 
+ * @param harvestTime - Plant's harvest time window (start/end month names) or null
+ * @param year - Year to calculate dates for
+ * @returns Object with start and end dates, or null if harvestTime is invalid
+ */
 export const getHarvestWindowDates = (
   harvestTime: HarvestTime | null,
   year: number
@@ -94,6 +104,16 @@ export const getHarvestWindowDates = (
   return { start, end };
 };
 
+/**
+ * Get planting window dates for a plant in a given year.
+ * 
+ * Selects the appropriate planting window (indoor or outdoor) based on
+ * the plant's plantingMethod, then converts month names to Date objects.
+ * 
+ * @param plant - The plant to get planting window for
+ * @param year - Year to calculate dates for
+ * @returns Object with start and end dates, or null if planting window is invalid
+ */
 export const getPlantingWindowDates = (
   plant: Plant,
   year: number

@@ -1,0 +1,47 @@
+@use "../../../Styles/color" as *;
+@use "../../../Styles/base" as *;
+
+.event-icon-interactive {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  transform: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: none;
+  outline: none;
+
+  // Disable hover effect on mobile screens
+  @media (max-width: 767px) {
+    transition: none;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+
+  // Desktop/Tablet: enable hover effect only on devices with hover support
+  @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus {
+    outline: 2px solid $primary-green;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+}
+

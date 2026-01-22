@@ -1,0 +1,58 @@
+@use "../../../Styles/color" as *;
+
+.modal-plant-details-card__image {
+  width: 50%;
+  height: auto;
+  max-height: 14rem;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  border: 1px solid $border-color;
+  background-color: $background-light;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.modal-plant-details-card__guide {
+  margin-bottom: 1.5rem;
+}
+
+.modal-plant-details-card__guide-title {
+  margin: 0;
+  color: $primary-green;
+}
+
+.modal-plant-details-card__definition-list {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem 0;
+}
+
+.modal-plant-details-card__item {
+  display: contents;
+}
+
+.modal-plant-details-card__term {
+  font-weight: 700;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.modal-plant-details-card__item:first-child .modal-plant-details-card__term {
+  margin-top: 0;
+}
+
+.modal-plant-details-card__definition {
+  margin: 0;
+}
+
+.modal-plant-details-card__description {
+  color: $text-light;
+}
+
+.modal-plant-details-card__link {
+  color: $accent-green;
+  text-decoration: underline;
+}
+

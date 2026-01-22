@@ -1,0 +1,104 @@
+@use "../../../Styles/color" as *;
+@use "../../../Styles/base" as *;
+
+.calendar-month-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-color;
+
+  @include tablet {
+    justify-content: center;
+    gap: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.calendar-month-navigation__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 1.25rem;
+  border: none;
+  background: none;
+  background-image: url('@/assets/green.png');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  
+  @include tablet {
+    transition: opacity 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+  }
+  flex-shrink: 0;
+
+  @include tablet {
+    width: 5rem;
+    height: 2rem;
+  }
+
+  @include tablet {
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+
+  &:active {
+    filter: brightness(0.6);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary-green;
+    outline-offset: 2px;
+  }
+
+  &--previous {
+    transform: scaleX(-1) !important;
+
+    @include tablet {
+      &:hover {
+        transform: scaleX(-1) scale(1.15) !important;
+      }
+    }
+
+    &:active {
+      transform: scaleX(-1) !important;
+    }
+    
+    &:focus {
+      transform: scaleX(-1) !important;
+    }
+  }
+}
+
+.calendar-month-navigation__month {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  @include tablet {
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+}
+
+.calendar-month-navigation__month-name {
+  white-space: nowrap;
+}
+
+.calendar-month-navigation__year {
+  white-space: nowrap;
+}
+

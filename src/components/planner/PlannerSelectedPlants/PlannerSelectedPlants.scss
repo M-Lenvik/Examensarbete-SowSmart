@@ -1,0 +1,14 @@
+@use "../../../Styles/color" as *;
+@use "../../../Styles/base" as *;
+@use "../../shared/Button/Button.scss";
+
+.planner-selected-plants {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.planner-selected-plants__actions {
+  margin-top: 0.5rem;
+}
+

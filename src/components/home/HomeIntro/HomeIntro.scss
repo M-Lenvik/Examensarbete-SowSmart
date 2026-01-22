@@ -1,0 +1,117 @@
+@use "../../../Styles/color" as *;
+@use "../../../Styles/base" as *;
+
+.home-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.home-intro__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  align-self: center;
+
+  @media (max-width: 370px) {
+    gap: 0.5rem;
+    
+    .button {
+      min-width: auto;
+      padding: 0.5rem 0.75rem;
+      font-size: $font-size-smaller;
+    }
+  }
+}
+
+@keyframes arrow-pulse-left {
+  0%, 100% {
+    transform: scaleX(-1) translateX(0);
+  }
+  50% {
+    transform: scaleX(-1) translateX(0.5rem);
+  }
+}
+
+@keyframes arrow-pulse-right {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0.5rem);
+  }
+}
+
+.home-intro__arrow {
+  width: 4rem;
+  height: 1.5rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  
+  @include tablet {
+    width: 7rem;
+    height: 2.5rem;
+  }
+  
+  &--left {
+    animation-name: arrow-pulse-left;
+  }
+  
+  &--right {
+    animation-name: arrow-pulse-right;
+  }
+}
+
+.home-intro ol {
+  list-style: none;
+}
+
+.home-intro ol li {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 0.75rem;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  &:nth-child(1)::before {
+    background-image: url("@/assets/tomato.png");
+  }
+  
+  &:nth-child(2)::before {
+    background-image: url("@/assets/chili.png");
+  }
+  
+  &:nth-child(3)::before {
+    background-image: url("@/assets/aubergin.png");
+  }
+  
+  &:nth-child(4)::before {
+    background-image: url("@/assets/cucumber.png");
+  }
+}
+
+.home-intro__link {
+  color: $primary-green;
+  text-decoration: none;
+  text-decoration-color: $primary-green;
+ 
+  &:hover {
+    text-decoration-color: $accent-green;
+  }
+}
+

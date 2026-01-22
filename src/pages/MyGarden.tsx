@@ -1,10 +1,10 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { MyGardenSelectedPlants } from "../components/MyGardenSelectedPlants/MyGardenSelectedPlants";
-import { MyGardenTaskList } from "../components/MyGardenTaskList/MyGardenTaskList";
-import { Panel } from "../components/Panel/Panel";
-import { ModalPlantDetails } from "../components/ModalPlantDetails/ModalPlantDetails";
+import { MyGardenSelectedPlants } from "../components/myGarden/MyGardenSelectedPlants/MyGardenSelectedPlants";
+import { MyGardenTaskList } from "../components/myGarden/MyGardenTaskList/MyGardenTaskList";
+import { Panel } from "../components/shared/Panel/Panel";
+import { ModalPlantDetails } from "../components/modal/ModalPlantDetails/ModalPlantDetails";
 import { PlanContext } from "../context/PlanContext";
 import { recommendationsToTasks } from "../helpers/calendar/tasks";
 import { getPlantWarnings } from "../helpers/validation/warnings";

@@ -1,0 +1,23 @@
+@use "../../../Styles/color" as *;
+@use "../../../Styles/base" as *;
+
+.my-garden-selected-plants {
+  @include flex-column;
+  gap: 1rem;
+
+  &__link {
+    color: $primary-green;
+    text-decoration: underline;
+    @include transition(color);
+
+    &:hover {
+      color: $accent-green;
+    }
+
+    &:focus {
+      outline: 2px solid $primary-green;
+      outline-offset: 2px;
+      border-radius: 0.25rem;
+    }
+  }
+}

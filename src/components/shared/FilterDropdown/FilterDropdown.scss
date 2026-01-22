@@ -1,0 +1,112 @@
+@use "../../../Styles/color" as *;
+@use "../../../Styles/base" as *;
+
+.filter-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.filter-dropdown__trigger {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  @include transition(all);
+
+  &:hover {
+    border-color: $primary-green;
+  }
+
+  &:focus {
+    outline: 2px solid $accent-green;
+    outline-offset: 2px;
+  }
+}
+
+.filter-dropdown__arrow {
+  font-size: 0.75rem;
+  color: $text-light;
+  @include transition(transform);
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+.filter-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  max-height: 20rem;
+  overflow-y: auto;
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  border-radius: 0.5rem;
+  box-shadow: $panel-shadow;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-dropdown__option {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: $font-size-smaller;
+  @include transition(background-color);
+
+  &:hover {
+    background-color: $background-light;
+  }
+
+  &:focus {
+    outline: 2px solid $accent-green;
+    outline-offset: -2px;
+  }
+
+  &--selected {
+    background-color: $background-light;
+    font-weight: 600;
+  }
+
+  &--plant {
+    padding-left: 2.5rem; // Indent plants under their subcategory
+  }
+}
+
+.filter-dropdown__checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $border-color;
+  border-radius: 0.25rem;
+  flex-shrink: 0;
+  color: $primary-green;
+  font-weight: bold;
+}
+
+.filter-dropdown__option--selected .filter-dropdown__checkbox {
+  background-color: $primary-green;
+  border-color: $primary-green;
+  color: white;
+}
+
+.filter-dropdown__label {
+  flex: 1;
+}
+

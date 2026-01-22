@@ -1,13 +1,13 @@
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { FilterDropdown } from "../components/FilterDropdown/FilterDropdown";
-import { Panel } from "../components/Panel/Panel";
-import { PlannerCalculateButton } from "../components/PlannerCalculateButton/PlannerCalculateButton";
-import { PlannerDateInput } from "../components/PlannerDateInput/PlannerDateInput";
-import { PlannerSelectedPlants } from "../components/PlannerSelectedPlants/PlannerSelectedPlants";
-import { ModalPlantDetails } from "../components/ModalPlantDetails/ModalPlantDetails";
-import { ConfirmDialog } from "../components/ConfirmDialog/ConfirmDialog";
+import { FilterDropdown } from "../components/shared/FilterDropdown/FilterDropdown";
+import { Panel } from "../components/shared/Panel/Panel";
+import { PlannerCalculateButton } from "../components/planner/PlannerCalculateButton/PlannerCalculateButton";
+import { PlannerDateInput } from "../components/planner/PlannerDateInput/PlannerDateInput";
+import { PlannerSelectedPlants } from "../components/planner/PlannerSelectedPlants/PlannerSelectedPlants";
+import { ModalPlantDetails } from "../components/modal/ModalPlantDetails/ModalPlantDetails";
+import { ConfirmDialog } from "../components/modal/ConfirmDialog/ConfirmDialog";
 import { PlanContext } from "../context/PlanContext";
 import { validateHarvestDate, getPlantSowResult, type PlantSowResult } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";

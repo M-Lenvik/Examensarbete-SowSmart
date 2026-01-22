@@ -1,5 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import { Layout } from "./components/Layout/Layout";
+import { Layout } from "./components/shared/Layout/Layout";
 import { About } from "./pages/About";
 import { CalendarView } from "./pages/CalendarView";
 import { ErrorPage } from "./pages/ErrorPage";

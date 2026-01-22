@@ -1,0 +1,189 @@
+@use "../../../Styles/color" as *;
+@use "../../../Styles/base" as *;
+
+.my-garden-task-list {
+  @include flex-column;
+  gap: 1.5rem;
+
+  &__list {
+    list-style: none;
+    @include flex-column;
+    gap: 1.5rem;
+  }
+
+  &__month-group {
+    @include flex-column;
+    gap: 1rem;
+  }
+
+  &__month-tasks {
+    list-style: none;
+    @include flex-column;
+    gap: 0.75rem;
+  }
+
+  &__month-divider {
+    height: 1px;
+    background-color: $border-color;
+    margin: 1.5rem 0;
+  }
+
+  &__date-group {
+    @include flex-column;
+    gap: 0;
+  }
+
+  &__tasks {
+    list-style: none;
+    @include flex-column;
+    gap: 0.75rem;
+  }
+
+  &__task-group {
+    list-style: none;
+  }
+
+  &__task-card {
+    .collapsible-section {
+      background-color: $border-color;
+      border-radius: 0.5rem;
+    }
+
+    .collapsible-section__header-button {
+      background-color: $border-color;
+    }
+
+    .collapsible-section__content {
+      background-color: $border-color;
+      padding-left: 6rem; // Match text start position: 1rem (header padding) + 4rem (icon width) + 1rem (gap)
+    }
+
+    // Color coding based on task type
+    &--sow-outdoor {
+      .collapsible-section__header-button {
+        border-left: 0.25rem solid $calendar-event-sow-outdoor;
+      }
+    }
+
+    &--sow-indoor {
+      .collapsible-section__header-button {
+        border-left: 0.25rem solid $calendar-event-sow-indoor;
+      }
+    }
+
+    &--harden-start {
+      .collapsible-section__header-button {
+        border-left: 0.25rem solid $calendar-event-harden-start;
+      }
+    }
+
+    &--move-plant-outdoor {
+      .collapsible-section__header-button {
+        border-left: 0.25rem solid $calendar-event-move-plant-outdoor;
+      }
+    }
+
+    &--harvest {
+      .collapsible-section__header-button {
+        border-left: 0.25rem solid $calendar-event-harvest;
+      }
+    }
+  }
+
+  &__task-icon {
+    flex-shrink: 0;
+  }
+
+  &__task-header-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  &__task-date {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  &__task-count {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: $font-size-smaller;
+    color: $text-light;
+    
+    // Display inline on tablet and desktop
+    @include tablet {
+      display: inline;
+      margin-top: 0;
+    }
+  }
+
+  &__task-label {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+
+
+  &__plant-list {
+    list-style: none;
+    @include flex-column;
+    gap: 0.5rem;
+  }
+
+  &__subcategory-header {
+    list-style: none;
+    margin: 0.25rem 0;
+  }
+
+  &__subcategory-title {
+    font-family: 'Sour Gummy', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $primary-green;
+  }
+
+  &__plant-item {
+    @include flex-column;
+    gap: 0.25rem;
+  }
+
+  &__plant-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__plant-name {
+    font-size: $font-size-smaller;
+    color: $text-color;
+  }
+
+  &__plant-name-button {
+    background: none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  &__plant-warning {
+    font-size: 1rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  &__plant-warning-message {
+    margin: 0;
+    font-size: 0.75rem;
+    color: $text-light;
+    line-height: 1.4;
+    padding-left: 0.5rem;
+    padding-top: 0.25rem;
+    border-left: 2px solid $warning-color;
+  }
+
+}
+

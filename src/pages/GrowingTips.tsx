@@ -1,5 +1,5 @@
-import { Panel } from "../components/Panel/Panel";
-import { GrowingTipsList } from "../components/GrowingTipsList/GrowingTipsList";
+import { Panel } from "../components/shared/Panel/Panel";
+import { GrowingTipsList } from "../components/growingTips/GrowingTipsList/GrowingTipsList";
 
 export const GrowingTips = () => {
   return (

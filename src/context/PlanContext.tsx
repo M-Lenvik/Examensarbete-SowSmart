@@ -51,22 +51,42 @@ export const PlanProvider = ({ children }: PlanProviderProps) => {
 
   const actions = useMemo<PlanContextValue["actions"]>(() => {
     return {
+      /**
+       * Toggle a plant's selection status.
+       * Dispatches TOGGLE_SELECTED_PLANT action to add/remove plant from selection.
+       */
       toggleSelectedPlant: (plantId) =>
         dispatch({
           type: PLAN_ACTIONS.TOGGLE_SELECTED_PLANT,
           payload: { plantId },
         }),
+      /**
+       * Clear all selected plants.
+       * Dispatches CLEAR_SELECTION action to reset selectedPlantIds to empty array.
+       */
       clearSelection: () => dispatch({ type: PLAN_ACTIONS.CLEAR_SELECTION }),
+      /**
+       * Set the global harvest date.
+       * Dispatches SET_HARVEST_DATE action to update harvestDateIso in state.
+       */
       setHarvestDateIso: (harvestDateIso) =>
         dispatch({
           type: PLAN_ACTIONS.SET_HARVEST_DATE,
           payload: { harvestDateIso },
         }),
+      /**
+       * Set the calculated recommendations.
+       * Dispatches SET_RECOMMENDATIONS action to replace recommendations array with new calculations.
+       */
       setRecommendations: (recommendations) =>
         dispatch({
           type: PLAN_ACTIONS.SET_RECOMMENDATIONS,
           payload: { recommendations },
         }),
+      /**
+       * Reset the entire plan to initial state.
+       * Dispatches RESET_PLAN action and clears localStorage.
+       */
       resetPlan: () => {
         dispatch({ type: PLAN_ACTIONS.RESET_PLAN });
         clearPlanFromLocalStorage();

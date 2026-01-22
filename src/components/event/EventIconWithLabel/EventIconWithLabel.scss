@@ -1,0 +1,13 @@
+@use "../../../Styles/color" as *;
+@use "../../../Styles/base" as *;
+
+.event-icon-with-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-icon-with-label__text {
+  font-size: $font-size-smaller;
+}
+

@@ -1,0 +1,49 @@
+@use "../../../Styles/color" as *;
+@use "../../../Styles/base" as *;
+
+.scroll-to-bottom {
+  display: none; // Hidden on mobile
+
+  @include tablet {
+    display: flex;
+    position: fixed;
+    bottom: 3rem;
+    right: -1.3rem;
+    width: 7rem;
+    height: 2.5rem;
+    border: none;
+    background: none;
+    background-image: url('@/assets/green.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transform: rotate(90deg);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+
+    @include desktop {
+      right: 0rem;
+    }
+  }
+
+  @include tablet {
+    &:hover {
+      opacity: 0.7;
+      transform: rotate(90deg) translateY(-0.125rem);
+    }
+
+    &:focus {
+      outline: 2px solid $primary-green;
+      outline-offset: 2px;
+    }
+
+    &:active {
+      opacity: 0.5;
+      transform: rotate(90deg);
+    }
+  }
+}
+

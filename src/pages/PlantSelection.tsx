@@ -1,12 +1,12 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Panel } from "../components/Panel/Panel";
-import { PlantsCategoryButtons } from "../components/PlantsCategoryButtons/PlantsCategoryButtons";
-import { ModalPlantDetails } from "../components/ModalPlantDetails/ModalPlantDetails";
-import { PlantsList } from "../components/PlantsList/PlantsList";
-import { PlantsSearch } from "../components/PlantsSearch/PlantsSearch";
-import { PlantsSelectedSummary } from "../components/PlantsSelectedSummary/PlantsSelectedSummary";
+import { Panel } from "../components/shared/Panel/Panel";
+import { PlantsCategoryButtons } from "../components/plantSelection/PlantsCategoryButtons/PlantsCategoryButtons";
+import { ModalPlantDetails } from "../components/modal/ModalPlantDetails/ModalPlantDetails";
+import { PlantsList } from "../components/plantSelection/PlantsList/PlantsList";
+import { PlantsSearch } from "../components/plantSelection/PlantsSearch/PlantsSearch";
+import { PlantsSelectedSummary } from "../components/plantSelection/PlantsSelectedSummary/PlantsSelectedSummary";
 import { PlanContext } from "../context/PlanContext";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
