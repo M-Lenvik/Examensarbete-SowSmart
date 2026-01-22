@@ -162,6 +162,39 @@ const diffDays = (later: Date, earlier: Date): number => {
 };
 
 /**
+ * Calculate the nearest recommended sow date for a plant based on current date and planting window.
+ * Used when the calculated sow date is in the past and we need to recommend the next available opportunity.
+ */
+const calculateNearestSowDateIso = (
+  plant: Plant,
+  today: Date
+): string => {
+  const currentYear = today.getFullYear();
+  const currentYearPlantingWindow = getPlantingWindowDates(plant, currentYear);
+  
+  if (!currentYearPlantingWindow) {
+    return formatDateIso(today);
+  }
+
+  if (today.getTime() < currentYearPlantingWindow.start.getTime()) {
+    return formatDateIso(currentYearPlantingWindow.start);
+  }
+
+  if (today.getTime() >= currentYearPlantingWindow.start.getTime() && 
+      today.getTime() <= currentYearPlantingWindow.end.getTime()) {
+    return formatDateIso(today);
+  }
+
+  // Today is after planting window - too late for this year
+  const nextYearPlantingWindow = getPlantingWindowDates(plant, currentYear + 1);
+  if (nextYearPlantingWindow) {
+    return formatDateIso(nextYearPlantingWindow.start);
+  }
+
+  return formatDateIso(currentYearPlantingWindow.start);
+};
+
+/**
  * Validate the harvest date input (basic rules only).
  *
  * Notes:
@@ -348,33 +381,7 @@ export const getPlantSowResult = (
     
     if (tryAnywaySowDate.getTime() < today.getTime()) {
       // Sow date is in the past - need to try another year
-      
-      // Calculate nearest recommended sow date for THIS year (current year, not harvest date year)
-      // Get planting window for current year to find the next available sowing opportunity
-      const currentYear = today.getFullYear();
-      const currentYearPlantingWindow = getPlantingWindowDates(plant, currentYear);
-      
-      let nearestSowDateIso = "";
-      if (currentYearPlantingWindow) {
-        if (today.getTime() < currentYearPlantingWindow.start.getTime()) {
-          // Today is before planting window - recommend first day of planting window
-          nearestSowDateIso = formatDateIso(currentYearPlantingWindow.start);
-        } else if (today.getTime() >= currentYearPlantingWindow.start.getTime() && today.getTime() <= currentYearPlantingWindow.end.getTime()) {
-          // Today is within planting window - recommend today (nearest possible day)
-          nearestSowDateIso = formatDateIso(today);
-        } else {
-          // Today is after planting window - too late for this year, use first day of next year's window
-          const nextYearPlantingWindow = getPlantingWindowDates(plant, currentYear + 1);
-          if (nextYearPlantingWindow) {
-            nearestSowDateIso = formatDateIso(nextYearPlantingWindow.start);
-          } else {
-            nearestSowDateIso = formatDateIso(currentYearPlantingWindow.start);
-          }
-        }
-      } else {
-        // No planting window available, use today
-        nearestSowDateIso = formatDateIso(today);
-      }
+      const nearestSowDateIso = calculateNearestSowDateIso(plant, today);
 
       // Calculate date for next year (+1 year from tryAnywaySowDate)
       const nextYearSowDate = new Date(tryAnywaySowDate);

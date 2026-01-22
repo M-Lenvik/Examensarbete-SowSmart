@@ -155,6 +155,61 @@ export const SelectedPlantsList = ({
     return key === "harvestDateBeforeHarvestWindow" || key === "harvestDateAfterHarvestWindow";
   };
 
+  // Render harvest date control (edit mode or button)
+  const renderHarvestDateControl = (plant: Plant) => {
+    if (!onChangeHarvestDate) return null;
+
+    const plantHarvestDate = 
+      harvestDatesByPlant?.get(plant.id) || 
+      harvestDateIso;
+    const isEditing = editingHarvestDateFor === plant.id;
+    
+    if (isEditing) {
+      return (
+        <div className="selected-plants-list__harvest-date-input-wrapper">
+          <Input
+            id={`harvest-date-${plant.id}`}
+            type="date"
+            value={plantHarvestDate || ""}
+            onChange={(event) => {
+              const newDate = event.target.value;
+              if (newDate) {
+                onChangeHarvestDate(plant.id, newDate);
+                setEditingHarvestDateFor(null);
+              }
+            }}
+            onBlur={() => {
+              setEditingHarvestDateFor(null);
+            }}
+            aria-label={`Välj skördedatum för ${plant.name}`}
+          />
+          <button
+            type="button"
+            className="selected-plants-list__harvest-date-cancel"
+            onClick={() => setEditingHarvestDateFor(null)}
+            aria-label="Avbryt"
+          >
+            Avbryt
+          </button>
+        </div>
+      );
+    }
+    
+    return (
+      <button
+        type="button"
+        className="selected-plants-list__harvest-date-button"
+        onClick={(event) => {
+          event.stopPropagation();
+          setEditingHarvestDateFor(plant.id);
+        }}
+        aria-label={plantHarvestDate ? `Ändra skördedatum för ${plant.name}` : `Sätt skördedatum för ${plant.name}`}
+      >
+        {plantHarvestDate ? "Ändra skördedatum" : "Sätt skördedatum"}
+      </button>
+    );
+  };
+
   // Separate messages into important (direct display) and informative date information (expandable)
   // Only collect informative date information if showWarningsInline is false (they'll be shown inline otherwise)
   const informativeDateInfo: Array<{ plant: Plant; message: PlantSowResult }> = [];
@@ -239,59 +294,7 @@ export const SelectedPlantsList = ({
                       )}
                       {onChangeHarvestDate && (
                         <div className="selected-plants-list__harvest-date-control">
-                          {(() => {
-                            const plantHarvestDate = 
-                              harvestDatesByPlant?.get(plant.id) || 
-                              harvestDateIso;
-                            const isEditing = editingHarvestDateFor === plant.id;
-                            
-                            if (isEditing) {
-                              return (
-                                <div className="selected-plants-list__harvest-date-input-wrapper">
-                                  <Input
-                                    id={`harvest-date-${plant.id}`}
-                                    type="date"
-                                    value={plantHarvestDate || ""}
-                                    onChange={(event) => {
-                                      const newDate = event.target.value;
-                                      if (newDate) {
-                                        onChangeHarvestDate(plant.id, newDate);
-                                        // Close edit mode when a date is selected
-                                        setEditingHarvestDateFor(null);
-                                      }
-                                    }}
-                                    onBlur={() => {
-                                      // Close edit mode when date picker closes
-                                      setEditingHarvestDateFor(null);
-                                    }}
-                                    aria-label={`Välj skördedatum för ${plant.name}`}
-                                  />
-                                  <button
-                                    type="button"
-                                    className="selected-plants-list__harvest-date-cancel"
-                                    onClick={() => setEditingHarvestDateFor(null)}
-                                    aria-label="Avbryt"
-                                  >
-                                    Avbryt
-                                  </button>
-                                </div>
-                              );
-                            }
-                            
-                            return (
-                              <button
-                                type="button"
-                                className="selected-plants-list__harvest-date-button"
-                                onClick={(event) => {
-                                  event.stopPropagation();
-                                  setEditingHarvestDateFor(plant.id);
-                                }}
-                                aria-label={plantHarvestDate ? `Ändra skördedatum för ${plant.name}` : `Sätt skördedatum för ${plant.name}`}
-                              >
-                                {plantHarvestDate ? "Ändra skördedatum" : "Sätt skördedatum"}
-                              </button>
-                            );
-                          })()}
+                          {renderHarvestDateControl(plant)}
                         </div>
                       )}
                       {showMessage && (
