@@ -5,8 +5,7 @@
 .event-tooltip {
   @extend %tooltip-base;
   
-  color: $text-color;
-  font-size: 0.875rem;
+  font-size: $font-size-smaller;
   line-height: 1.4;
   pointer-events: none;
 }

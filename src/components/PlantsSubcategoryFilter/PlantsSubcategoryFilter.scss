@@ -9,7 +9,6 @@
 
 .plants-subcategory-filter__label {
   font-weight: 600;
-  color: $text-color;
 }
 
 .plants-subcategory-filter__select {
@@ -17,8 +16,7 @@
   padding: 0.75rem 0.75rem;
   border-radius: 0.5rem;
   border: 1px solid $border-color;
-  background-color: #ffffff;
-  color: $text-color;
+  background-color: $background-color;
 
   &:focus {
     outline: 2px solid $accent-green;

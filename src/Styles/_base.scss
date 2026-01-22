@@ -163,6 +163,9 @@ p {
   font-size: 1rem;
 }
 
+/* Font Sizes */
+$font-size-smaller: 0.875rem; // 14px
+
 a {
   font-family: 'Sour Gummy', sans-serif;
   @include transition(color);

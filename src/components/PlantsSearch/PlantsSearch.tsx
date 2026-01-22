@@ -23,10 +23,10 @@ export const PlantsSearch = ({
         <div className="plants-search__input-wrapper">
           <Input
             id="plants-search"
+            label="Sök frö"
             value={searchQuery}
             placeholder="Sök frö..."
             onChange={(event) => onSearchQueryChange(event.target.value)}
-            aria-label="Sök"
           />
           {searchQuery.length > 0 && (
             <button

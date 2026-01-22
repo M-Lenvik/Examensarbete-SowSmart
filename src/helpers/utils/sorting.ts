@@ -35,3 +35,15 @@ export const sortPlantsBySubcategoryAndName = (plants: Plant[]): Plant[] => {
     return a.name.localeCompare(b.name, "sv");
   });
 };
+
+/**
+ * Sort subcategories alphabetically with "Övrigt" placed last.
+ * Used for consistent sorting of subcategory lists across the application.
+ */
+export const sortSubcategories = (subcategories: string[]): string[] => {
+  return [...subcategories].sort((a, b) => {
+    if (a === "Övrigt") return 1;
+    if (b === "Övrigt") return -1;
+    return a.localeCompare(b, "sv");
+  });
+};

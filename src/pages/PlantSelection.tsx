@@ -1,6 +1,5 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 
 import { Panel } from "../components/Panel/Panel";
 import { PlantsCategoryButtons } from "../components/PlantsCategoryButtons/PlantsCategoryButtons";
@@ -13,8 +12,17 @@ import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
 import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
 import { capitalizeFirst } from "../helpers/utils/text";
+import { usePlantSelectionToasts } from "../hooks/usePlantSelectionToasts";
 import "./PlantSelection.scss";
 
+/**
+ * PlantSelection component - allows users to browse and select plants.
+ * 
+ * Uses custom hook:
+ * - usePlantSelectionToasts (src/hooks/usePlantSelectionToasts.ts)
+ *   Handles toast notifications when plants are added/removed from selection.
+ *   Provides skipToast() function to suppress toast when user manually removes a plant.
+ */
 export const PlantSelection = () => {
   const navigate = useNavigate();
   const { state, actions } = useContext(PlanContext);
@@ -26,8 +34,8 @@ export const PlantSelection = () => {
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [selectedPlantForModal, setSelectedPlantForModal] = useState<Plant | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const previousSelectedPlantIdsRef = useRef<number[]>([]);
-  const skipToastRef = useRef<boolean>(false);
+
+  const { skipToast } = usePlantSelectionToasts(state.selectedPlantIds, plants);
 
   useEffect(() => {
     const load = async () => {
@@ -38,48 +46,6 @@ export const PlantSelection = () => {
 
     void load();
   }, []);
-
-  // Initialize ref on mount
-  useEffect(() => {
-    previousSelectedPlantIdsRef.current = state.selectedPlantIds;
-  }, []);
-
-  // Show toast when a plant is added or removed
-  useEffect(() => {
-    const previousIds = previousSelectedPlantIdsRef.current;
-    const currentIds = state.selectedPlantIds;
-
-    // Skip toast if it was triggered by "Ta bort" button
-    if (skipToastRef.current) {
-      skipToastRef.current = false;
-      previousSelectedPlantIdsRef.current = currentIds;
-      return;
-    }
-
-    // Check if a new plant was added (current has more items than previous)
-    if (currentIds.length > previousIds.length) {
-      const addedPlantId = currentIds.find((id) => !previousIds.includes(id));
-      if (addedPlantId) {
-        const addedPlant = plants.find((plant) => plant.id === addedPlantId);
-        if (addedPlant) {
-          toast.success(`${addedPlant.name} tillagd till dina valda fröer`);
-        }
-      }
-    }
-    // Check if a plant was removed (current has fewer items than previous)
-    else if (currentIds.length < previousIds.length) {
-      const removedPlantId = previousIds.find((id) => !currentIds.includes(id));
-      if (removedPlantId) {
-        const removedPlant = plants.find((plant) => plant.id === removedPlantId);
-        if (removedPlant) {
-          toast.error(`${removedPlant.name} borttagen från dina valda fröer`);
-        }
-      }
-    }
-
-    // Update ref for next comparison
-    previousSelectedPlantIdsRef.current = currentIds;
-  }, [state.selectedPlantIds, plants]);
 
   const selectedPlants = useMemo(() => {
     if (state.selectedPlantIds.length === 0) return [];
@@ -209,7 +175,10 @@ export const PlantSelection = () => {
       </Panel>
 
       {(selectedSubcategory || searchQuery.trim().length > 0) && (
-        <Panel title={selectedSubcategory ? `Välj bland ${capitalizeFirst(selectedSubcategory)}` : "Sökresultat"}>
+        <Panel 
+          title={selectedSubcategory ? `Välj bland ${capitalizeFirst(selectedSubcategory)}` : "Sökresultat"}
+          titleHeadingLevel="h3"
+        >
           {filteredPlants.length === 0 ? (
             <p>Inga fröer hittades.</p>
           ) : (
@@ -232,7 +201,7 @@ export const PlantSelection = () => {
           onContinue={() => navigate("/planner")}
           onOpenDetails={handleOpenDetails}
           onRemove={(plantId) => {
-            skipToastRef.current = true;
+            skipToast();
             actions.toggleSelectedPlant(plantId);
           }}
         />

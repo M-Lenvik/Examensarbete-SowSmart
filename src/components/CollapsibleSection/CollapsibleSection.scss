@@ -12,7 +12,7 @@
     gap: 1rem;
     width: 100%;
     padding: 1rem;
-    background-color: lighten($accent-green, 30%);
+    background-color: lighten($primary-green, 8%);
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -32,10 +32,8 @@
 
   &__title {
     flex: 1;
-    margin: 0;
     font-size: 1.25rem;
     font-weight: 600;
-    color: $text-color;
   }
 
   &__icon {

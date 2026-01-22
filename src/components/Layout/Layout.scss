@@ -4,8 +4,6 @@
 main {
   position: relative;
 
-  //background-color: $background-color;
-
   // Background image with blur and reduced contrast
   &::before {
     content: '';

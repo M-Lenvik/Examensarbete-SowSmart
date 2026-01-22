@@ -29,7 +29,7 @@ export const EventIconInteractive = ({
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-  const iconRef = useRef<HTMLSpanElement>(null);
+  const iconRef = useRef<HTMLButtonElement>(null);
   const hoverTimeoutRef = useRef<number | undefined>(undefined);
   
   // Only bind mouse events on devices that support hover (desktop/tablet)
@@ -77,19 +77,18 @@ export const EventIconInteractive = ({
 
   return (
     <>
-      <span
+      <button
         ref={iconRef}
+        type="button"
         className={`event-icon-interactive ${className}`}
         onMouseEnter={supportsHover ? handleMouseEnter : undefined}
         onMouseLeave={supportsHover ? handleMouseLeave : undefined}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        role="button"
-        tabIndex={0}
         aria-label={`${eventLabel} - Klicka för mer information`}
       >
         <EventIcon eventType={eventType} size={size} />
-      </span>
+      </button>
       {isTooltipVisible &&
         createPortal(
           <EventTooltip

@@ -1,9 +1,9 @@
 @use '../../Styles/color' as *;
+@use '../../Styles/base' as *;
 
 .planner-calculate-button__scroll-link {
   background: none;
   border: none;
-  padding: 0;
   color: inherit;
   text-decoration: underline;
   cursor: pointer;
@@ -17,8 +17,7 @@
 .planner-calculate-button__disabled-reason {
   margin: 0 0 0.25rem 0;
   text-align: center;
-  font-size: 0.875rem;
+  font-size: $font-size-smaller;
   color: $warning-color;
   font-style: italic;
-  line-height: 1.5;
 }

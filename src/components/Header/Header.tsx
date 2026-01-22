@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import sowsmartImage from "../../assets/sowsmart.png";
 import "./Header.scss";
 
@@ -33,7 +33,10 @@ export const Header = () => {
           Meny
         </button>
 
-        <nav className={`header-nav ${isMenuOpen ? "header-nav--open" : ""}`}>
+        <nav 
+          className={`header-nav ${isMenuOpen ? "header-nav--open" : ""}`}
+          aria-label="Huvudnavigation"
+        >
           <NavLink to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>
             Så fungerar SåSmart
           </NavLink>

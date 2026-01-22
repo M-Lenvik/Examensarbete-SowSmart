@@ -11,12 +11,12 @@
   padding: 0.25rem 0.5rem;
   color: $warning-color;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: $font-size-smaller;
   font-family: 'Noto Sans', sans-serif;
   @include transition(color, transform);
 
   &:hover {
-    color: #991b1b;
+    color: darken($warning-color, 10%);
     transform: scale(1.05);
   }
 
@@ -35,6 +35,5 @@
 
 .remove-button__text {
   font-size: 0.75rem;
-  font-weight: 400;
 }
 

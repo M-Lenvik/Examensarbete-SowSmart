@@ -3,19 +3,15 @@
 
 .calendar-legend {
   padding: 1rem;
-  background-color: $background-light;
   border-radius: 0.5rem;
   border: 1px solid $border-color;
 }
 
 .calendar-legend__title {
   margin: 0 0 0.75rem 0;
-  color: $text-color;
 }
 
 .calendar-legend__list {
-  margin: 0;
-  padding: 0;
   list-style: none;
 }
 
@@ -36,8 +32,7 @@
 }
 
 .calendar-legend__label {
-  font-size: 0.875rem;
-  color: $text-color;
+  font-size: $font-size-smaller;
 }
 
 // Mobile: group items in pairs

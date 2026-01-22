@@ -9,6 +9,7 @@ import type { Recommendation } from "../../reducers/planReducer";
 import type { PlantSowResult, PlantSowResultKey } from "../../helpers/date/dateValidation";
 import { formatDateSwedishWithoutYear } from "../../helpers/date/date";
 import { capitalizeFirst } from "../../helpers/utils/text";
+import { sortSubcategories } from "../../helpers/utils/sorting";
 import "./SelectedPlantsList.scss";
 
 type SelectedPlantsListProps = {
@@ -60,11 +61,7 @@ export const SelectedPlantsList = ({
   });
 
   // Sort subcategories alphabetically
-  const sortedSubcategories = Object.keys(groupedPlants).sort((a, b) => {
-    if (a === "Övrigt") return 1;
-    if (b === "Övrigt") return -1;
-    return a.localeCompare(b, "sv");
-  });
+  const sortedSubcategories = sortSubcategories(Object.keys(groupedPlants));
 
   const handlePlantClick = (plant: Plant) => {
     if (onOpenDetails) {

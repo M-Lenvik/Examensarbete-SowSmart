@@ -19,28 +19,24 @@
 
   &__date {
     font-weight: 600;
-    color: $text-color;
-    font-size: 0.875rem;
+    font-size: $font-size-smaller;
     margin-bottom: 0.5rem;
   }
 
   &__event-type {
     font-weight: 600;
-    color: $text-color;
-    font-size: 0.875rem;
+    font-size: $font-size-smaller;
     margin-bottom: 0.5rem;
   }
 
   &__plant-list {
     list-style: none;
-    margin: 0;
-    padding: 0;
     padding-left: 0.75rem;
   }
 
   &__plant-item {
     color: $text-light;
-    font-size: 0.875rem;
+    font-size: $font-size-smaller;
     padding: 0.25rem 0;
   }
 }

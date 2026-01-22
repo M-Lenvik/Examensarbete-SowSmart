@@ -14,7 +14,7 @@ import { generateRecommendations } from "../helpers/calculation/recommendations"
 import { calculatePlantMessagesFromHarvestDates } from "../helpers/date/plantMessages";
 import { formatDateSwedish } from "../helpers/date/date";
 import { loadHarvestDatesByFilterFromLocalStorage, saveHarvestDatesByFilterToLocalStorage } from "../helpers/storage/localStorage";
-import { sortPlantsBySubcategoryAndName } from "../helpers/utils/sorting";
+import { sortPlantsBySubcategoryAndName, sortSubcategories } from "../helpers/utils/sorting";
 import { capitalizeFirst } from "../helpers/utils/text";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
@@ -307,11 +307,7 @@ export const HarvestPlanner = () => {
     }
     
     // Add plants grouped by subcategory
-    const sortedSubcategories = Array.from(plantsBySubcategory.keys()).sort((subcategoryA, subcategoryB) => {
-      if (subcategoryA === "Övrigt") return 1;
-      if (subcategoryB === "Övrigt") return -1;
-      return subcategoryA.localeCompare(subcategoryB, "sv");
-    });
+    const sortedSubcategories = sortSubcategories(Array.from(plantsBySubcategory.keys()));
     
     sortedSubcategories.forEach((subcategory) => {
       const plantNames = plantsBySubcategory.get(subcategory)!;

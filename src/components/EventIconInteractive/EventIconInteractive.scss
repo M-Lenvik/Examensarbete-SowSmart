@@ -6,6 +6,15 @@
   cursor: pointer;
   position: relative;
   transform: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: none;
+  outline: none;
 
   // Disable hover effect on mobile screens
   @media (max-width: 767px) {

@@ -9,9 +9,6 @@
 
 .confirm-dialog__message {
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: $text-color;
 }
 
 .confirm-dialog__actions {
@@ -39,18 +36,18 @@
 .confirm-dialog--danger {
   .confirm-dialog__cancel-button {
     background-color: $warning-color;
-    color: #ffffff;
+    color: $header-text;
     border-color: $warning-color;
 
     &:hover:not(:disabled) {
-      background-color: #991b1b;
-      border-color: #991b1b;
+      background-color: darken($warning-color, 10%);
+      border-color: darken($warning-color, 10%);
     }
   }
 
   .confirm-dialog__confirm-button {
     background-color: $primary-green;
-    color: #ffffff;
+    color: $header-text;
     border-color: $primary-green;
 
     &:hover:not(:disabled) {
@@ -63,18 +60,18 @@
 .confirm-dialog--success {
   .confirm-dialog__cancel-button {
     background-color: $warning-color;
-    color: #ffffff;
+    color: $header-text;
     border-color: $warning-color;
 
     &:hover:not(:disabled) {
-      background-color: #991b1b;
-      border-color: #991b1b;
+      background-color: darken($warning-color, 10%);
+      border-color: darken($warning-color, 10%);
     }
   }
 
   .confirm-dialog__confirm-button {
     background-color: $primary-green;
-    color: #ffffff;
+    color: $header-text;
     border-color: $primary-green;
 
     &:hover:not(:disabled) {

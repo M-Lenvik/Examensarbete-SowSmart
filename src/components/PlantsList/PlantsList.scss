@@ -3,8 +3,6 @@
 
 .plants-list {
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -20,8 +18,5 @@
   }
 }
 
-.plants-list__item {
-  margin: 0;
-}
 
 

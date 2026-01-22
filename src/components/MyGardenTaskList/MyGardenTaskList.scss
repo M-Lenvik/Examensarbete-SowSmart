@@ -7,8 +7,6 @@
 
   &__list {
     list-style: none;
-    padding: 0;
-    margin: 0;
     @include flex-column;
     gap: 1.5rem;
   }
@@ -20,8 +18,6 @@
 
   &__month-tasks {
     list-style: none;
-    padding: 0;
-    margin: 0;
     @include flex-column;
     gap: 0.75rem;
   }
@@ -39,8 +35,6 @@
 
   &__tasks {
     list-style: none;
-    padding: 0;
-    margin: 0;
     @include flex-column;
     gap: 0.75rem;
   }
@@ -50,38 +44,49 @@
   }
 
   &__task-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem;
-    background-color: lighten($accent-green, 30%);
-    border-radius: 0.5rem;
-    border-left: 0.25rem solid transparent;
-    @include transition(background-color);
+    .collapsible-section {
+      background-color: $border-color;
+      border-radius: 0.5rem;
+    }
+
+    .collapsible-section__header-button {
+      background-color: $border-color;
+    }
+
+    .collapsible-section__content {
+      background-color: $border-color;
+      padding-left: 6rem; // Match text start position: 1rem (header padding) + 4rem (icon width) + 1rem (gap)
+    }
 
     // Color coding based on task type
     &--sow-outdoor {
-      border-left-color: $calendar-event-sow-outdoor;
+      .collapsible-section__header-button {
+        border-left: 0.25rem solid $calendar-event-sow-outdoor;
+      }
     }
 
     &--sow-indoor {
-      border-left-color: $calendar-event-sow-indoor;
+      .collapsible-section__header-button {
+        border-left: 0.25rem solid $calendar-event-sow-indoor;
+      }
     }
 
     &--harden-start {
-      border-left-color: $calendar-event-harden-start;
+      .collapsible-section__header-button {
+        border-left: 0.25rem solid $calendar-event-harden-start;
+      }
     }
 
     &--move-plant-outdoor {
-      border-left-color: $calendar-event-move-plant-outdoor;
+      .collapsible-section__header-button {
+        border-left: 0.25rem solid $calendar-event-move-plant-outdoor;
+      }
     }
 
     &--harvest {
-      border-left-color: $calendar-event-harvest;
-    }
-
-    &:hover {
-      background-color: $primary-beige;
+      .collapsible-section__header-button {
+        border-left: 0.25rem solid $calendar-event-harvest;
+      }
     }
   }
 
@@ -89,35 +94,10 @@
     flex-shrink: 0;
   }
 
-  &__task-content {
-    flex: 1;
-    @include flex-column;
-    gap: 0;
-  }
-
-  &__task-header-button {
+  &__task-header-content {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
     gap: 1rem;
-    width: 100%;
-    padding: 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-
-    &:focus {
-      outline: 2px solid $primary-green;
-      outline-offset: 2px;
-      border-radius: 0.25rem;
-    }
-  }
-
-  &__task-header-content {
-    flex: 1;
-    @include flex-column;
-    gap: 0;
     width: 100%;
   }
 
@@ -125,14 +105,12 @@
     margin: 0 0 0.5rem 0;
     font-size: 1.125rem;
     font-weight: 600;
-    color: $text-color;
   }
 
   &__task-count {
     display: block;
     margin-top: 0.25rem;
-    font-size: 0.875rem;
-    font-weight: 400;
+    font-size: $font-size-smaller;
     color: $text-light;
     
     // Display inline on tablet and desktop
@@ -143,45 +121,21 @@
   }
 
   &__task-label {
-    margin: 0;
     font-size: 1rem;
     font-weight: 600;
-    color: $text-color;
-    padding-bottom: 0;
-
-    &--expanded {
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid $border-color;
-    }
-  }
-
-  &__task-header-icon {
-    font-size: 0.75rem;
-    color: $text-light;
-    flex-shrink: 0;
-    align-self: flex-start;
-    margin-top: 0.25rem;
-    @include transition(transform);
-
-    &--expanded {
-      transform: rotate(180deg);
-    }
   }
 
 
 
   &__plant-list {
     list-style: none;
-    padding: 0;
-    margin: 0;
     @include flex-column;
     gap: 0.5rem;
-    padding-left: 0.5rem;
   }
 
   &__subcategory-header {
     list-style: none;
-    margin: 0.75rem 0 0.25rem 0;
+    margin: 0.25rem 0;
   }
 
   &__subcategory-title {
@@ -189,8 +143,6 @@
     font-size: 1.125rem;
     font-weight: 600;
     color: $primary-green;
-    margin: 0;
-    padding: 0;
   }
 
   &__plant-item {
@@ -205,14 +157,13 @@
   }
 
   &__plant-name {
-    font-size: 0.875rem;
+    font-size: $font-size-smaller;
     color: $text-color;
   }
 
   &__plant-name-button {
     background: none;
     border: none;
-    padding: 0;
     margin: 0;
     cursor: pointer;
     text-align: left;

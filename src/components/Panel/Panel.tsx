@@ -9,6 +9,7 @@ type PanelProps = {
   variant?: "default" | "nested"; // nested removes border and shadow
   collapsible?: boolean;
   defaultExpanded?: boolean;
+  titleHeadingLevel?: "h2" | "h3"; // Heading level for title (default: h2)
 };
 
 export const Panel = ({ 
@@ -17,6 +18,7 @@ export const Panel = ({
   variant = "default",
   collapsible = false,
   defaultExpanded = true,
+  titleHeadingLevel = "h2",
 }: PanelProps) => {
   if (collapsible && title) {
     return (
@@ -35,12 +37,14 @@ export const Panel = ({
     );
   }
 
+  const TitleTag = titleHeadingLevel === "h3" ? "h3" : "h2";
+
   return (
     <section 
       className={`panel ${variant === "nested" ? "panel--nested" : ""}`} 
       aria-label={title || "Panel"}
     >
-      {title && <h2 className="panel__title">{title}</h2>}
+      {title && <TitleTag className="panel__title">{title}</TitleTag>}
       <div className="panel__content">{children}</div>
     </section>
   );

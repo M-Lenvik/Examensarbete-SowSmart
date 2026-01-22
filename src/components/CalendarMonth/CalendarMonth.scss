@@ -9,14 +9,12 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 0;
-  margin-bottom: 0rem;
 }
 
 .calendar-month__day-name {
   text-align: center;
-  font-size: 0.875rem;
+  font-size: $font-size-smaller;
   font-weight: 600;
-  color: $text-color;
   background-color: $background-light;
   border: 1px solid $border-color;
 }

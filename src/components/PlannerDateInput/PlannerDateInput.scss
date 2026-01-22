@@ -1,4 +1,5 @@
 @use "../../Styles/color" as *;
+@use "../../Styles/base" as *;
 
 .planner-date-input {
   width: 100%;
@@ -7,12 +8,12 @@
 .planner-date-input__error {
   margin-top: 0.5rem;
   color: $error-color;
-  font-size: 0.875rem;
+  font-size: $font-size-smaller;
 }
 
 .planner-date-input__warning {
   margin-top: 0.5rem;
   color: $warning-color;
-  font-size: 0.875rem;
+  font-size: $font-size-smaller;
 }
 

@@ -1,11 +1,12 @@
-import { useState } from "react";
 import { EventIcon } from "../EventIcon/EventIcon";
+import { CollapsibleSection } from "../CollapsibleSection/CollapsibleSection";
 import { CALENDAR_EVENT_CONFIG } from "../../helpers/calendar/events";
 import { taskTypeToDateType } from "../../helpers/calendar/tasks";
 import type { Task } from "../../helpers/calendar/tasks";
 import type { PlantWarning } from "../../helpers/validation/warnings";
 import { parseDateIso, formatMonthYearSwedish } from "../../helpers/date/date";
 import { capitalizeFirst } from "../../helpers/utils/text";
+import { sortSubcategories } from "../../helpers/utils/sorting";
 import "./MyGardenTaskList.scss";
 
 type MyGardenTaskListProps = {
@@ -74,41 +75,35 @@ type TaskGroupCardProps = {
   tasks: Task[];
   warnings: PlantWarning[];
   dateFormatted: string;
-  isExpanded: boolean;
-  onToggle: () => void;
   onPlantClick?: (plantId: number) => void;
 };
 
-const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onToggle, onPlantClick }: TaskGroupCardProps) => {
+const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, onPlantClick }: TaskGroupCardProps) => {
+  const title = (
+    <div className="my-garden-task-list__task-header-content">
+      <div className="my-garden-task-list__task-icon">
+        <EventIcon eventType={type} size="medium" />
+      </div>
+      <div>
+        <h3 className="my-garden-task-list__task-date">
+          {dateFormatted}<span className="my-garden-task-list__task-count"> {tasks.length} {tasks.length === 1 ? "händelse" : "händelser"}</span>
+        </h3>
+        <h4 className="my-garden-task-list__task-label">
+          {CALENDAR_EVENT_CONFIG[type].label}
+        </h4>
+      </div>
+    </div>
+  );
+
   return (
     <li className="my-garden-task-list__task-group">
       <div className={`my-garden-task-list__task-card my-garden-task-list__task-card--${type}`}>
-        <div className="my-garden-task-list__task-icon">
-          <EventIcon eventType={type} size="medium" />
-        </div>
-        <div className="my-garden-task-list__task-content">
-          <button
-            type="button"
-            className="my-garden-task-list__task-header-button"
-            onClick={onToggle}
-            aria-expanded={isExpanded}
-            aria-label={`${isExpanded ? "Dölj" : "Visa"} plantor för ${CALENDAR_EVENT_CONFIG[type].label} den ${dateFormatted}`}
-          >
-            <div className="my-garden-task-list__task-header-content">
-              <h3 className="my-garden-task-list__task-date">
-                {dateFormatted}<span className="my-garden-task-list__task-count"> {tasks.length} {tasks.length === 1 ? "händelse" : "händelser"}</span>
-              </h3>
-              <h4 className={`my-garden-task-list__task-label ${isExpanded ? "my-garden-task-list__task-label--expanded" : ""}`}>
-                {CALENDAR_EVENT_CONFIG[type].label}
-              </h4>
-            </div>
-            <span className={`my-garden-task-list__task-header-icon ${isExpanded ? "my-garden-task-list__task-header-icon--expanded" : ""}`}>
-              ▼
-            </span>
-          </button>
-          {isExpanded && (
-            <>
-              <ul className="my-garden-task-list__plant-list" role="list">
+        <CollapsibleSection
+          title={title}
+          defaultExpanded={false}
+          ariaLabel={`Visa plantor för ${CALENDAR_EVENT_CONFIG[type].label} den ${dateFormatted}`}
+        >
+          <ul className="my-garden-task-list__plant-list" role="list">
               {(() => {
                 // Sort tasks by subcategory and name
                 const sortedTasks = [...tasks].sort((a, b) => {
@@ -138,11 +133,7 @@ const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onTog
                   return acc;
                 }, {} as Record<string, Task[]>);
 
-                const sortedSubcategories = Object.keys(groupedTasks).sort((a, b) => {
-                  if (a === "Övrigt") return 1;
-                  if (b === "Övrigt") return -1;
-                  return a.localeCompare(b, "sv");
-                });
+                const sortedSubcategories = sortSubcategories(Object.keys(groupedTasks));
 
 
                 return sortedSubcategories.flatMap((subcategory) => [
@@ -180,17 +171,14 @@ const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, isExpanded, onTog
                   })
                 ]);
               })()}
-              </ul>
-            </>
-          )}
-        </div>
+          </ul>
+        </CollapsibleSection>
       </div>
     </li>
   );
 };
 
 export const MyGardenTaskList = ({ tasks, warnings, onPlantClick }: MyGardenTaskListProps) => {
-  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 
   if (tasks.length === 0) {
     return (
@@ -238,19 +226,6 @@ export const MyGardenTaskList = ({ tasks, warnings, onPlantClick }: MyGardenTask
     }
   });
 
-  const toggleGroup = (date: string, type: Task["type"]) => {
-    const groupKey = `${date}-${type}`;
-    setExpandedGroups((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(groupKey)) {
-        newSet.delete(groupKey);
-      } else {
-        newSet.add(groupKey);
-      }
-      return newSet;
-    });
-  };
-
   return (
     <div className="my-garden-task-list">
       <ul className="my-garden-task-list__list" role="list">
@@ -272,22 +247,16 @@ export const MyGardenTaskList = ({ tasks, warnings, onPlantClick }: MyGardenTask
                   return (
                     <li key={date} className="my-garden-task-list__date-group">
                       <ul className="my-garden-task-list__tasks" role="list">
-                        {dateGroups.map((group, groupIndex) => {
-                          const groupKey = `${date}-${group.type}`;
-                          const isExpanded = expandedGroups.has(groupKey);
-                          return (
-                            <TaskGroupCard
-                              key={`${date}-${group.type}-${groupIndex}`}
-                              type={group.type}
-                              tasks={group.tasks}
-                              warnings={warnings}
-                              dateFormatted={dateFormatted}
-                              isExpanded={isExpanded}
-                              onToggle={() => toggleGroup(date, group.type)}
-                              onPlantClick={onPlantClick}
-                            />
-                          );
-                        })}
+                        {dateGroups.map((group, groupIndex) => (
+                          <TaskGroupCard
+                            key={`${date}-${group.type}-${groupIndex}`}
+                            type={group.type}
+                            tasks={group.tasks}
+                            warnings={warnings}
+                            dateFormatted={dateFormatted}
+                            onPlantClick={onPlantClick}
+                          />
+                        ))}
                       </ul>
                     </li>
                   );

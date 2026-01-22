@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Plant } from "../../models/Plant";
 import { capitalizeFirst } from "../../helpers/utils/text";
+import { sortSubcategories } from "../../helpers/utils/sorting";
 import "./FilterDropdown.scss";
 
 type FilterOption = {
@@ -73,11 +74,7 @@ export const FilterDropdown = ({
     });
 
     // Add subcategory options
-    const sortedSubcategories = Array.from(subcategoryMap.keys()).sort((a, b) => {
-      if (a === "Övrigt") return 1;
-      if (b === "Övrigt") return -1;
-      return a.localeCompare(b, "sv");
-    });
+    const sortedSubcategories = sortSubcategories(Array.from(subcategoryMap.keys()));
 
     sortedSubcategories.forEach((subcategory) => {
       // Add subcategory option

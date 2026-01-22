@@ -15,7 +15,7 @@
   color: $primary-green;
   border-radius: 0.25rem;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: $font-size-smaller;
   @include transition(all);
 
   &:hover {
@@ -51,7 +51,7 @@
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: $font-size-smaller;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;

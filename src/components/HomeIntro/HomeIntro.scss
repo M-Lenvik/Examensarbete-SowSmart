@@ -21,7 +21,7 @@
     .button {
       min-width: auto;
       padding: 0.5rem 0.75rem;
-      font-size: 0.875rem;
+      font-size: $font-size-smaller;
     }
   }
 }
@@ -68,8 +68,6 @@
 }
 
 .home-intro ol {
-  margin: 0;
-  padding-left: 0;
   list-style: none;
 }
 

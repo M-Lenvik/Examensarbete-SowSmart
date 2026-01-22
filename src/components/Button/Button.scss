@@ -22,6 +22,11 @@
   &:hover {
     transform: none;
   }
+
+  &:focus {
+    outline: 2px solid $primary-green;
+    outline-offset: 2px;
+  }
 }
 
 .button--primary {
