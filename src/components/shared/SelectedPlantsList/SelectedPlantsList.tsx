@@ -172,11 +172,7 @@ export const SelectedPlantsList = ({
               const newDate = event.target.value;
               if (newDate) {
                 onChangeHarvestDate(plant.id, newDate);
-                setEditingHarvestDateFor(null);
               }
-            }}
-            onBlur={() => {
-              setEditingHarvestDateFor(null);
             }}
             aria-label={`Välj skördedatum för ${plant.name}`}
           />
@@ -269,6 +265,10 @@ export const SelectedPlantsList = ({
                             onClick={(event) => {
                               event.stopPropagation();
                               setPlantToRemove(plant);
+                            }}
+                            onMouseDown={(event) => {
+                              // Prevent blur on date input when clicking remove button
+                              event.preventDefault();
                             }}
                             ariaLabel={`Ta bort ${plant.name}`}
                           />

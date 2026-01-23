@@ -5,6 +5,36 @@
   width: 100%;
 }
 
+.planner-date-input__actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.planner-date-input__confirm-button {
+  background-color: $primary-green;
+  color: $header-text;
+  border-color: $primary-green;
+
+  &:hover:not(:disabled) {
+    background-color: darken($primary-green, 10%);
+    border-color: darken($primary-green, 10%);
+  }
+}
+
+.planner-date-input__cancel-button {
+  background-color: $warning-color;
+  color: $header-text;
+  border-color: $warning-color;
+
+  &:hover:not(:disabled) {
+    background-color: darken($warning-color, 10%);
+    border-color: darken($warning-color, 10%);
+  }
+}
+
 .planner-date-input__error {
   margin-top: 0.5rem;
   color: $error-color;

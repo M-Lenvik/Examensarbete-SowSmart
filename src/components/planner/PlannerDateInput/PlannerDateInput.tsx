@@ -5,7 +5,7 @@ import "./PlannerDateInput.scss";
 
 type PlannerDateInputProps = {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (value: string, event?: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: () => void;
   onFocus?: () => void;
   error: string | null;
@@ -23,7 +23,7 @@ export const PlannerDateInput = ({
   required = true,
 }: PlannerDateInputProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
+    onChange(event.target.value, event);
   };
 
   const handleBlur = () => {

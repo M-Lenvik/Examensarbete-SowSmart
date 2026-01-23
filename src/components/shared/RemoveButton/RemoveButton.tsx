@@ -3,18 +3,20 @@ import "./RemoveButton.scss";
 type RemoveButtonProps = {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   ariaLabel: string;
+  onMouseDown?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 /**
  * Reusable remove button component with × symbol.
  * Used for removing items from lists (plants, etc.).
  */
-export const RemoveButton = ({ onClick, ariaLabel }: RemoveButtonProps) => {
+export const RemoveButton = ({ onClick, ariaLabel, onMouseDown }: RemoveButtonProps) => {
   return (
     <button
       type="button"
       className="remove-button"
       onClick={onClick}
+      onMouseDown={onMouseDown}
       aria-label={ariaLabel}
       title="Ta bort"
     >
