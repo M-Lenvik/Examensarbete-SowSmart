@@ -149,10 +149,6 @@ export const DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY: Record<string, number> =
 
 
 /**
- * Get default movePlantOutdoor based on subcategory and frost tolerance.
- * Returns a generic "when frost risk is over" rule for frost-sensitive plants.
- */
-/**
  * Get movePlantOutdoor configuration for frost-tolerant plants.
  */
 const getFrostTolerantMovePlantOutdoor = (): MovePlantOutdoor => ({
@@ -170,6 +166,33 @@ const getFrostSensitiveMovePlantOutdoor = (): MovePlantOutdoor => ({
   end: "juni",
 });
 
+/**
+ * Get default movePlantOutdoor configuration based on subcategory and frost tolerance.
+ * 
+ * Returns a MovePlantOutdoor object with description and month range for when to move
+ * plants outdoors. Uses explicit frost tolerance if available, otherwise falls back
+ * to subcategory defaults.
+ * 
+ * **Frost-tolerant plants:** April-May ("när frosten släpper")
+ * **Frost-sensitive plants:** May-June ("efter avhärdning när frostrisken är över")
+ * 
+ * @param subcategory - Plant subcategory (e.g., "tomat", "gurka", "ärter")
+ * @param frostTolerant - Explicit frost tolerance value, or null to use subcategory default
+ * @returns MovePlantOutdoor configuration, or null if no default can be determined
+ * 
+ * @example
+ * // Frost-sensitive plant
+ * getDefaultMovePlantOutdoor("tomat", false)
+ * // Returns: { description: "efter avhärdning när frostrisken är över", start: "maj", end: "juni" }
+ * 
+ * // Frost-tolerant plant
+ * getDefaultMovePlantOutdoor("ärter", true)
+ * // Returns: { description: "när frosten släpper", start: "april", end: "maj" }
+ * 
+ * // Uses subcategory default when frostTolerant is null
+ * getDefaultMovePlantOutdoor("tomat", null)
+ * // Returns: { description: "efter avhärdning när frostrisken är över", start: "maj", end: "juni" }
+ */
 export const getDefaultMovePlantOutdoor = (
   subcategory: string,
   frostTolerant: boolean | null

@@ -226,4 +226,3 @@ export const calculateTryAnywaySowDate = (
   const sowDate = subtractDays(harvestDate, maturityDaysTryAnyway);
   return normalizeToStartOfDay(sowDate);
 };
-
