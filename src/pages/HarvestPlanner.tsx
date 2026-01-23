@@ -7,7 +7,7 @@ import { Panel } from "../components/shared/Panel/Panel";
 import { PlannerCalculateButton } from "../components/planner/PlannerCalculateButton/PlannerCalculateButton";
 import { PlannerDateInput } from "../components/planner/PlannerDateInput/PlannerDateInput";
 import { PlannerSelectedPlants } from "../components/planner/PlannerSelectedPlants/PlannerSelectedPlants";
-import { ModalPlantDetails } from "../components/modal/ModalPlantDetails/ModalPlantDetails";
+import { ModalPlantDetails } from "../components/Modal/ModalPlantDetails/ModalPlantDetails";
 import { PlanContext } from "../context/PlanContext";
 import { validateHarvestDate, getPlantSowResult, type PlantSowResult } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";

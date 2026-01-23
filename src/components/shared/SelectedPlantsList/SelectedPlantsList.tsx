@@ -2,7 +2,7 @@ import { useState } from "react";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
 import { EventIconWithLabel } from "../../event/EventIconWithLabel/EventIconWithLabel";
 import { Input } from "../Input/Input";
-import { ConfirmDialog } from "../../modal/ConfirmDialog/ConfirmDialog";
+import { ConfirmDialog } from "../../Modal/ConfirmDialog/ConfirmDialog";
 import { CollapsibleSection } from "../CollapsibleSection/CollapsibleSection";
 import type { Plant } from "../../../models/Plant";
 import type { Recommendation } from "../../../reducers/planReducer";

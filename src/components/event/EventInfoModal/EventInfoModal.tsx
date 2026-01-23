@@ -1,4 +1,4 @@
-import { Modal } from "../../modal/Modal";
+import { Modal } from "../../Modal/Modal";
 import { EventIcon } from "../EventIcon/EventIcon";
 import { CALENDAR_EVENT_CONFIG, CALENDAR_ICON_SIZES } from "../../../helpers/calendar/events";
 import type { CalendarEventType } from "../../../helpers/calendar/events";

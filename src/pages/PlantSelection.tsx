@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Panel } from "../components/shared/Panel/Panel";
 import { PlantsCategoryButtons } from "../components/plantSelection/PlantsCategoryButtons/PlantsCategoryButtons";
-import { ModalPlantDetails } from "../components/modal/ModalPlantDetails/ModalPlantDetails";
+import { ModalPlantDetails } from "../components/Modal/ModalPlantDetails/ModalPlantDetails";
 import { PlantsList } from "../components/plantSelection/PlantsList/PlantsList";
 import { PlantsSearch } from "../components/plantSelection/PlantsSearch/PlantsSearch";
 import { PlantsSelectedSummary } from "../components/plantSelection/PlantsSelectedSummary/PlantsSelectedSummary";

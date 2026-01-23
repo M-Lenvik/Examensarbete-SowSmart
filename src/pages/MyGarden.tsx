@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { MyGardenSelectedPlants } from "../components/myGarden/MyGardenSelectedPlants/MyGardenSelectedPlants";
 import { MyGardenTaskList } from "../components/myGarden/MyGardenTaskList/MyGardenTaskList";
 import { Panel } from "../components/shared/Panel/Panel";
-import { ModalPlantDetails } from "../components/modal/ModalPlantDetails/ModalPlantDetails";
+import { ModalPlantDetails } from "../components/Modal/ModalPlantDetails/ModalPlantDetails";
 import { PlanContext } from "../context/PlanContext";
 import { recommendationsToTasks } from "../helpers/calendar/tasks";
 import { getPlantWarnings } from "../helpers/validation/warnings";
