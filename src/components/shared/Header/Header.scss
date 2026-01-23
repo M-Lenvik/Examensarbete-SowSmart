@@ -55,7 +55,6 @@
 
 .header-title {
   font-size: 3rem !important;
-  font-weight: 400;
 
   // Very small screens (< 360px)
   @media (max-width: 359px) {
@@ -72,8 +71,6 @@
   align-items: center;
   gap: 0.75rem;
   color: $header-text;
-  text-decoration: none;
-  cursor: pointer;
   font-size: 3rem;
   font-family: 'Combo', sans-serif;
   @include transition(opacity);
@@ -115,7 +112,6 @@
   padding: 0.5rem 0.75rem;
   color: $header-text;
   font: 1.25rem 'Combo', sans-serif;
-  cursor: pointer;
   @include transition(background-color);
 
   // Very small screens (< 360px)

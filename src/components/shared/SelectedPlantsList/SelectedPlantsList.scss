@@ -83,7 +83,6 @@
   border: none;
   background: transparent;
   text-align: left;
-  cursor: pointer;
 
   &:focus {
     outline: 2px solid $primary-green;
@@ -194,7 +193,6 @@
 }
 
 .selected-plants-list__information-list {
-  list-style: none;
   margin: 0.75rem 0 0 0;
   @include flex-column;
   gap: 1rem;
@@ -212,16 +210,11 @@
 .selected-plants-list__information-plant-name {
   font-weight: 600;
   font-size: $font-size-smaller;
-  color: $text-color;
 }
 
 .selected-plants-list__information-plant-button {
-  background: none;
   border: none;
-  cursor: pointer;
-  text-align: left;
   @include transition(color);
-
 
   &:focus {
     outline: 2px solid $primary-green;

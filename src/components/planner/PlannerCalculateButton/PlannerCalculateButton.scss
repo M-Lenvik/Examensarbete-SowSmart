@@ -2,12 +2,8 @@
 @use '../../../Styles/base' as *;
 
 .planner-calculate-button__scroll-link {
-  background: none;
   border: none;
-  color: inherit;
   text-decoration: underline;
-  cursor: pointer;
-  font: inherit;
 
   &:hover {
     opacity: 0.8;

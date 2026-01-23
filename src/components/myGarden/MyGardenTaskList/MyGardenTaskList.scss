@@ -6,7 +6,6 @@
   gap: 1.5rem;
 
   &__list {
-    list-style: none;
     @include flex-column;
     gap: 1.5rem;
   }
@@ -17,7 +16,6 @@
   }
 
   &__month-tasks {
-    list-style: none;
     @include flex-column;
     gap: 0.75rem;
   }
@@ -34,13 +32,8 @@
   }
 
   &__tasks {
-    list-style: none;
     @include flex-column;
     gap: 0.75rem;
-  }
-
-  &__task-group {
-    list-style: none;
   }
 
   &__task-card {
@@ -121,20 +114,17 @@
   }
 
   &__task-label {
-    font-size: 1rem;
     font-weight: 600;
   }
 
 
 
   &__plant-list {
-    list-style: none;
     @include flex-column;
     gap: 0.5rem;
   }
 
   &__subcategory-header {
-    list-style: none;
     margin: 0.25rem 0;
   }
 
@@ -158,15 +148,8 @@
 
   &__plant-name {
     font-size: $font-size-smaller;
-    color: $text-color;
-  }
-
-  &__plant-name-button {
     background: none;
     border: none;
-    margin: 0;
-    cursor: pointer;
-    text-align: left;
   }
 
   &__plant-warning {

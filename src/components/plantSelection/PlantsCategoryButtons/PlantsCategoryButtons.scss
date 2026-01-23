@@ -14,9 +14,7 @@
   border: 1px solid $primary-green;
   color: $primary-green;
   border-radius: 0.25rem;
-  cursor: pointer;
   font-size: $font-size-smaller;
-  @include transition(all);
 
   &:hover {
     background-color: $primary-green;
@@ -50,14 +48,12 @@
   color: white;
   border: none;
   border-radius: 0.5rem;
-  cursor: pointer;
   font-size: $font-size-smaller;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  @include transition(all);
 
   &:hover {
     background-color: $accent-green;

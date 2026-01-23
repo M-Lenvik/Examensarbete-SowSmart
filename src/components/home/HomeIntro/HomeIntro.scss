@@ -67,9 +67,6 @@
   }
 }
 
-.home-intro ol {
-  list-style: none;
-}
 
 .home-intro ol li {
   position: relative;
@@ -107,7 +104,6 @@
 
 .home-intro__link {
   color: $primary-green;
-  text-decoration: none;
   text-decoration-color: $primary-green;
  
   &:hover {

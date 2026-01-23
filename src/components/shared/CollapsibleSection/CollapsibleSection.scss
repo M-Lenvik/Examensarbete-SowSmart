@@ -9,13 +9,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
     width: 100%;
     padding: 1rem;
     background-color: lighten($primary-green, 8%);
     border: none;
     border-radius: 0.5rem;
-    cursor: pointer;
     text-align: left;
     @include transition(background-color);
 

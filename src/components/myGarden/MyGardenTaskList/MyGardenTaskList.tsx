@@ -148,7 +148,7 @@ const TaskGroupCard = ({ type, tasks, warnings, dateFormatted, onPlantClick }: T
                           {onPlantClick ? (
                             <button
                               type="button"
-                              className="my-garden-task-list__plant-name-button"
+                              className="my-garden-task-list__plant-name"
                               onClick={() => onPlantClick(task.plantId)}
                               aria-label={`Öppna detaljer för ${task.plantName}`}
                             >

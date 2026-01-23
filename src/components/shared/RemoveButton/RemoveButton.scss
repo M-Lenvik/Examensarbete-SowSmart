@@ -10,9 +10,7 @@
   background: transparent;
   padding: 0.25rem 0.5rem;
   color: $warning-color;
-  cursor: pointer;
   font-size: $font-size-smaller;
-  font-family: 'Noto Sans', sans-serif;
   @include transition(color, transform);
 
   &:hover {
