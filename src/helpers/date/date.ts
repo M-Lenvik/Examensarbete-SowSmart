@@ -141,3 +141,63 @@ export const formatMonthYearSwedish = (date: Date): string => {
   });
 };
 
+/**
+ * Normalize a date to the start of the day (00:00:00.000).
+ * 
+ * Creates a new Date object with the same date but with time set to midnight.
+ * Useful for date comparisons that should ignore time components.
+ * 
+ * @param date - The date to normalize
+ * @returns New Date object normalized to start of day
+ * 
+ * @example
+ * const date = new Date(2026, 4, 15, 14, 30, 0); // May 15, 2026 at 14:30
+ * const normalized = normalizeToStartOfDay(date);
+ * // Returns: May 15, 2026 at 00:00:00
+ */
+export const normalizeToStartOfDay = (date: Date): Date => {
+  const result = new Date(date);
+  result.setHours(0, 0, 0, 0);
+  return result;
+};
+
+/**
+ * Get JavaScript month index (0-11) from Swedish month name.
+ * 
+ * Converts Swedish month names (e.g., "jan", "feb", "mars") to JavaScript
+ * month indices where January = 0 and December = 11.
+ * 
+ * @param monthName - Swedish month name (case-insensitive, accepts abbreviations)
+ * @returns Month index (0-11) or null if month name is invalid
+ * 
+ * @example
+ * getMonthIndex("mars") // Returns 2 (March)
+ * getMonthIndex("JAN") // Returns 0 (January)
+ * getMonthIndex("sept") // Returns 8 (September)
+ * getMonthIndex("invalid") // Returns null
+ */
+export const getMonthIndex = (monthName: string): number | null => {
+  if (!monthName || typeof monthName !== "string") {
+    return null;
+  }
+
+  const normalized = monthName.toLowerCase().trim();
+  const monthOrderMap: Record<string, number> = {
+    jan: 0,
+    feb: 1,
+    mars: 2,
+    april: 3,
+    maj: 4,
+    juni: 5,
+    juli: 6,
+    aug: 7,
+    sept: 8,
+    sep: 8, // Alias for "sept" (used in plants.json)
+    okt: 9,
+    nov: 10,
+    dec: 11,
+  };
+
+  return monthOrderMap[normalized] ?? null;
+};
+

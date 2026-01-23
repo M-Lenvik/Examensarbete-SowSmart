@@ -1,4 +1,4 @@
-import { parseDateIso, subtractDays } from "../date/date";
+import { parseDateIso, subtractDays, normalizeToStartOfDay } from "../date/date";
 import { getHarvestWindowDates, getPlantingWindowDates, getMovePlantOutdoorWindowDates } from "../date/dateValidation";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
@@ -146,10 +146,8 @@ export const getPlantWarnings = (
         
         // Hardening window: from (moveOutdoorWindow.start - hardeningDays) to moveOutdoorWindow.end
         // This allows hardening to start before the move outdoor window
-        const hardenWindowStart = subtractDays(moveOutdoorWindow.start, hardeningDays);
-        hardenWindowStart.setHours(0, 0, 0, 0);
-        const hardenWindowEnd = new Date(moveOutdoorWindow.end);
-        hardenWindowEnd.setHours(0, 0, 0, 0);
+        const hardenWindowStart = normalizeToStartOfDay(subtractDays(moveOutdoorWindow.start, hardeningDays));
+        const hardenWindowEnd = normalizeToStartOfDay(new Date(moveOutdoorWindow.end));
         
         // Check if hardenStartDate is outside the hardening window
         const isWithinWindow = isDateWithinRange(

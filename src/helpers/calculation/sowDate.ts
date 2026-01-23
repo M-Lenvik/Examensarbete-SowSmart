@@ -8,7 +8,7 @@
  * - Uses seedConstant formula to calculate relative sow date based on harvest date position in harvest window
  */
 
-import { addDays, subtractDays } from "../date/date";
+import { addDays, subtractDays, normalizeToStartOfDay, getMonthIndex } from "../date/date";
 import type { HarvestTime, PlantingMethod, PlantingWindows, Plant } from "../../models/Plant";
 import { selectPlantingWindow } from "../plant/plantingWindow";
 import { getMonthSpan } from "../date/monthSpan";
@@ -25,30 +25,12 @@ import { getMonthSpan } from "../date/monthSpan";
  * // Returns: Date object for March 1, 2026
  */
 const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
-  const monthOrderMap: Record<string, number> = {
-    "jan": 0, // JavaScript months are 0-indexed
-    "feb": 1,
-    "mars": 2,
-    "april": 3,
-    "maj": 4,
-    "juni": 5,
-    "juli": 6,
-    "aug": 7,
-    "sept": 8,
-    "sep": 8, // Alias for "sept" (used in plants.json)
-    "okt": 9,
-    "nov": 10,
-    "dec": 11,
-  };
-
-  const normalized = monthName.toLowerCase().trim();
-  const monthIndex = monthOrderMap[normalized];
-
-  if (monthIndex === undefined) {
+  const monthIndex = getMonthIndex(monthName);
+  if (monthIndex === null) {
     return null;
   }
 
-  return new Date(year, monthIndex, 1);
+  return normalizeToStartOfDay(new Date(year, monthIndex, 1));
 };
 
 /**
@@ -242,8 +224,6 @@ export const calculateTryAnywaySowDate = (
 
   // Calculate sow date backwards: harvestDate - maturityDaysTryAnyway
   const sowDate = subtractDays(harvestDate, maturityDaysTryAnyway);
-  sowDate.setHours(0, 0, 0, 0);
-
-  return sowDate;
+  return normalizeToStartOfDay(sowDate);
 };
 

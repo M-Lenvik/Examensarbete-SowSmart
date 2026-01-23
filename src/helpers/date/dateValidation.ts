@@ -1,4 +1,4 @@
-import { formatDateIso, formatDateSwedish, parseDateIso } from "./date";
+import { formatDateIso, formatDateSwedish, parseDateIso, normalizeToStartOfDay, getMonthIndex } from "./date";
 import { calculateSowDate, calculateTryAnywaySowDate } from "../calculation/sowDate";
 import { selectPlantingWindow } from "../plant/plantingWindow";
 import { getDefaultMovePlantOutdoor } from "../plant/plantDefaults";
@@ -22,35 +22,8 @@ export type PlantSowResult = {
   sowDateIso: string | null;
 };
 
-const normalizeToStartOfDay = (date: Date): Date => {
-  const d = new Date(date);
-  d.setHours(0, 0, 0, 0);
-  return d;
-};
-
 const getNowDate = (now: Date | null): Date => {
   return normalizeToStartOfDay(now ?? new Date());
-};
-
-const getMonthIndex = (monthName: string): number | null => {
-  const normalized = monthName.toLowerCase().trim();
-  const monthOrderMap: Record<string, number> = {
-    jan: 0,
-    feb: 1,
-    mars: 2,
-    april: 3,
-    maj: 4,
-    juni: 5,
-    juli: 6,
-    aug: 7,
-    sept: 8,
-    sep: 8, // Alias for "sept" (used in plants.json)
-    okt: 9,
-    nov: 10,
-    dec: 11,
-  };
-
-  return monthOrderMap[normalized] ?? null;
 };
 
 const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
@@ -58,8 +31,7 @@ const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
   if (monthIndex === null) return null;
 
   const date = new Date(year, monthIndex, 1);
-  date.setHours(0, 0, 0, 0);
-  return date;
+  return normalizeToStartOfDay(date);
 };
 
 const getLastDayOfMonth = (monthName: string, year: number): Date | null => {
@@ -67,8 +39,7 @@ const getLastDayOfMonth = (monthName: string, year: number): Date | null => {
   if (monthIndex === null) return null;
 
   const date = new Date(year, monthIndex + 1, 0);
-  date.setHours(0, 0, 0, 0);
-  return date;
+  return normalizeToStartOfDay(date);
 };
 
 /**
@@ -96,10 +67,8 @@ export const getHarvestWindowDates = (
   // If end is before start (wrap-around), treat as invalid (consistent with monthSpan logic).
   if (endMonthIndex < startMonthIndex) return null;
 
-  const start = new Date(year, startMonthIndex, 1);
-  const end = new Date(year, endMonthIndex + 1, 0); // last day of end month
-  start.setHours(0, 0, 0, 0);
-  end.setHours(0, 0, 0, 0);
+  const start = normalizeToStartOfDay(new Date(year, startMonthIndex, 1));
+  const end = normalizeToStartOfDay(new Date(year, endMonthIndex + 1, 0)); // last day of end month
 
   return { start, end };
 };
@@ -169,10 +138,8 @@ export const getMovePlantOutdoorWindowDates = (
   const endMonthIndex = getMonthIndex(movePlantOutdoor.end);
   if (startMonthIndex === null || endMonthIndex === null) return null;
 
-  const start = new Date(year, startMonthIndex, 1);
-  const end = new Date(year, endMonthIndex + 1, 0); // last day of end month
-  start.setHours(0, 0, 0, 0);
-  end.setHours(0, 0, 0, 0);
+  const start = normalizeToStartOfDay(new Date(year, startMonthIndex, 1));
+  const end = normalizeToStartOfDay(new Date(year, endMonthIndex + 1, 0)); // last day of end month
 
   return { start, end };
 };
@@ -291,8 +258,8 @@ export const getPlantSowResult = (
     return null;
   }
 
-  sowDate.setHours(0, 0, 0, 0);
-  const sowDateIso = formatDateIso(sowDate);
+  const normalizedSowDate = normalizeToStartOfDay(sowDate);
+  const sowDateIso = formatDateIso(normalizedSowDate);
 
   const window = getHarvestWindowDates(plant.harvestTime ?? null, harvestDate.getFullYear());
   if (!window) {

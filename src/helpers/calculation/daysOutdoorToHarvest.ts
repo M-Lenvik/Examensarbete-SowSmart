@@ -8,7 +8,7 @@
  * - hardeningDays: From plants.json or defaults from plantDefaults.ts
  */
 
-import { addDays } from "../date/date";
+import { addDays, normalizeToStartOfDay } from "../date/date";
 
 /**
  * Calculate the number of days a plant will be outdoors before harvest date.
@@ -54,12 +54,10 @@ export const calculateDaysOutdoorToHarvest = (
   // Calculate when plant is moved outdoors
   // moveOutdoorDate = sowDate + daysIndoorGrowth + hardeningDays
   let moveOutdoorDate = addDays(sowDate, daysIndoorGrowth);
-  moveOutdoorDate = addDays(moveOutdoorDate, hardening);
-  moveOutdoorDate.setHours(0, 0, 0, 0);
+  moveOutdoorDate = normalizeToStartOfDay(addDays(moveOutdoorDate, hardening));
 
   // Ensure harvestDate is also at start of day for accurate calculation
-  const harvestDateNormalized = new Date(harvestDate);
-  harvestDateNormalized.setHours(0, 0, 0, 0);
+  const harvestDateNormalized = normalizeToStartOfDay(harvestDate);
 
   // Calculate days outdoor to harvest
   // daysOutdoorToHarvest = harvestDate - moveOutdoorDate

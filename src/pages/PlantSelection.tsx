@@ -1,6 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 import { Panel } from "../components/shared/Panel/Panel";
 import { PlantsCategoryButtons } from "../components/plantSelection/PlantsCategoryButtons/PlantsCategoryButtons";
 import { ModalPlantDetails } from "../components/modal/ModalPlantDetails/ModalPlantDetails";
