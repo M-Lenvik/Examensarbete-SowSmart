@@ -10,7 +10,7 @@ export const About = () => {
           SåSmart är ett examensarbete från Frontend-utbildningen på Medieinstitutet.
           Applikationen är utvecklad för att hjälpa svenska trädgårdsentusiaster att planera sin odling
           så att de kan få optimal skörd innan hösten och vintern. Genom att ta hänsyn till svenska klimatförhållanden 
-          och växtspecifika tillväxtcykler ger appen personliga rekommendationer för när frön ska sår.
+          och växtspecifika tillväxtcykler ger appen personliga rekommendationer för när frön ska sås.
         </p>
         <p>
           Projektet växte fram ur personliga utmaningar med att planera och underhålla en svensk trädgård.
@@ -40,8 +40,7 @@ export const About = () => {
         <h2>Hur det fungerar</h2>
         <p>
           SåSmart hjälper dig att planera din odling från början till slut. Processen börjar med att du väljer
-          vilka grönsaker du vill odla från vår fröbank. Sedan anger du när du vill skörda – antingen ett specifikt
-          datum eller så kan du välja att appen automatiskt beräknar säkra datum före första frosten.
+          vilka grönsaker du vill odla från vår fröbank. Sedan anger du när du vill skörda.
         </p>
         <p>
           Appen beräknar sedan automatiskt när varje växt ska sås, både för inomhus- och utomhussådd.
@@ -58,12 +57,12 @@ export const About = () => {
         <p className="about__intro-text">
           Appen riktar sig till hobbyodlare och stadsodlare som vill:
         </p>
-        <ul>
+        <ul className="about__list">
           <li>Spara tid genom automatiska beräkningar istället för manuell planering</li>
           <li>Förbättra skörderesultatet med rekommendationer anpassade för svenska klimatförhållanden</li>
           <li>Ha all odlingsinformation samlad på ett ställe och spara viktiga instruktioner digitalt</li>
           <li>Planera sin odling baserat på önskat skördedatum eller före första frosten</li>
-          <li>Få tydlig vägledning om när olika växter ska sår, planteras ut och skördas</li>
+          <li>Få tydlig vägledning om när olika växter ska sås, planteras ut och skördas</li>
         </ul>
       </Panel>
     </section>

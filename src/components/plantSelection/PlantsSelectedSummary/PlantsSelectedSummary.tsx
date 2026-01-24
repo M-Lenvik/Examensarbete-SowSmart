@@ -1,6 +1,7 @@
 import { Button } from "../../shared/Button/Button";
 import { SelectedPlantsList } from "../../shared/SelectedPlantsList/SelectedPlantsList";
 import type { Plant } from "../../../models/Plant";
+import type { Recommendation } from "../../../reducers/planReducer";
 import "./PlantsSelectedSummary.scss";
 import { Link } from "react-router-dom";
 
@@ -12,6 +13,8 @@ type PlantsSelectedSummaryProps = {
   onOpenDetails: (plant: Plant) => void;
   onRemove: (plantId: number) => void;
   canContinue: boolean;
+  recommendations?: Recommendation[];
+  harvestDateIso?: string | null;
 };
 
 export const PlantsSelectedSummary = ({
@@ -22,6 +25,8 @@ export const PlantsSelectedSummary = ({
   onOpenDetails,
   onRemove,
   canContinue,
+  recommendations,
+  harvestDateIso,
 }: PlantsSelectedSummaryProps) => {
   return (
     <section className="plants-selected-summary">
@@ -40,6 +45,8 @@ export const PlantsSelectedSummary = ({
             onOpenDetails={onOpenDetails}
             onRemove={onRemove}
             interactiveIcons={true}
+            recommendations={recommendations}
+            harvestDateIso={harvestDateIso}
           />
           <Button 
             variant="secondary" 

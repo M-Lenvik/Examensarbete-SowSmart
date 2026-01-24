@@ -1,4 +1,4 @@
-import { parseDateIso, subtractDays, normalizeToStartOfDay } from "../date/date";
+import { parseDateIso, subtractDays, normalizeToStartOfDay, formatDateIso } from "../date/date";
 import { getHarvestWindowDates, getPlantingWindowDates, getMovePlantOutdoorWindowDates } from "../date/dateValidation";
 import type { Plant } from "../../models/Plant";
 import type { Recommendation } from "../../reducers/planReducer";
@@ -44,6 +44,22 @@ const isDateOutsidePlantingWindow = (
 
   const isTooEarly = date.getTime() < plantingWindowDates.start.getTime();
   return { isOutside: true, isTooEarly };
+};
+
+/**
+ * Get the first date of the planting window for a specific method.
+ */
+const getPlantingWindowStartIsoByMethod = (
+  plant: Plant,
+  year: number,
+  plantingMethod: "indoor" | "outdoor"
+): string | null => {
+  const plantingWindowDates = getPlantingWindowDates(
+    { ...plant, plantingMethod } as Plant,
+    year
+  );
+  if (!plantingWindowDates) return null;
+  return formatDateIso(plantingWindowDates.start);
 };
 
 /**
@@ -97,11 +113,12 @@ export const getPlantWarnings = (
       const sowDate = parseDateIso(recommendation.outdoorSowDate);
       const result = isDateOutsidePlantingWindow(sowDate, plant, currentYear);
       if (result) {
+        const plantingWindowStartIso = getPlantingWindowStartIsoByMethod(plant, currentYear, "outdoor");
         warnings.push({
           plantId: recommendation.plantId,
           plantName: plant.name,
           warningType: result.isTooEarly ? "too-early" : "too-late",
-          message: `${plant.name} bör sås utomhus tidigast ${recommendation.outdoorSowDate}`,
+          message: `${plant.name} bör sås utomhus tidigast ${plantingWindowStartIso || recommendation.outdoorSowDate}`,
           date: recommendation.outdoorSowDate,
           dateType: "outdoorSowDate",
         });
@@ -117,11 +134,12 @@ export const getPlantWarnings = (
       const sowDate = parseDateIso(recommendation.indoorSowDate);
       const result = isDateOutsidePlantingWindow(sowDate, plant, currentYear);
       if (result) {
+        const plantingWindowStartIso = getPlantingWindowStartIsoByMethod(plant, currentYear, "indoor");
         warnings.push({
           plantId: recommendation.plantId,
           plantName: plant.name,
           warningType: result.isTooEarly ? "too-early" : "too-late",
-          message: `${plant.name} bör försås inomhus tidigast ${recommendation.indoorSowDate}`,
+          message: `${plant.name} bör försås inomhus tidigast ${plantingWindowStartIso || recommendation.indoorSowDate}`,
           date: recommendation.indoorSowDate,
           dateType: "indoorSowDate",
         });

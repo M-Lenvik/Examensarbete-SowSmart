@@ -121,6 +121,23 @@ export const HarvestPlanner = () => {
     );
   };
 
+  const getHarvestDateFromMap = (
+    plant: Plant,
+    harvestDatesMap: Map<string, string>,
+    globalHarvestDate: string | null
+  ): string | null => {
+    const plantFilterId = `plant-${plant.id}`;
+    const subcategory = plant.subcategory || "Övrigt";
+    const subcategoryFilterId = `subcategory-${subcategory}`;
+
+    return (
+      harvestDatesMap.get(plantFilterId) ||
+      harvestDatesMap.get(subcategoryFilterId) ||
+      globalHarvestDate ||
+      null
+    );
+  };
+
   // Create map showing harvest date for each plant
   // Use dates from recommendations if available (most accurate), otherwise use saved filter dates
   const harvestDatesByPlant = useMemo(() => {
@@ -202,10 +219,12 @@ export const HarvestPlanner = () => {
   const applyHarvestDate = (dateIso: string) => {
     // Save date for selected filter(s)
     const newHarvestDates = new Map(harvestDatesByFilter);
+    let nextGlobalHarvestDate = state.harvestDateIso;
     
     if (selectedFilterIds.length === 0) {
       // No filter selected, update global date
       actions.setHarvestDateIso(dateIso);
+      nextGlobalHarvestDate = dateIso;
     } else {
       // Save date for each selected filter
       selectedFilterIds.forEach((filterId) => {
@@ -218,18 +237,23 @@ export const HarvestPlanner = () => {
       // Also update global date if "all" is selected
       if (selectedFilterIds.includes("all")) {
         actions.setHarvestDateIso(dateIso);
+        nextGlobalHarvestDate = dateIso;
       } else {
         // If no global date exists, set it as fallback for plants without filters
         if (!state.harvestDateIso) {
           actions.setHarvestDateIso(dateIso);
+          nextGlobalHarvestDate = dateIso;
         }
       }
     }
     
-    // Clear old recommendations if date changed
-    if (state.recommendations.length > 0) {
-      actions.setRecommendations([]);
-    }
+    // Update recommendations immediately based on the new dates
+    const recommendations = selectedPlants.flatMap((plant) => {
+      const harvestDate = getHarvestDateFromMap(plant, newHarvestDates, nextGlobalHarvestDate || null);
+      if (!harvestDate) return [];
+      return generateRecommendations([plant], harvestDate);
+    });
+    actions.setRecommendations(recommendations);
 
     setValidationError(null);
   };
@@ -447,16 +471,23 @@ export const HarvestPlanner = () => {
     const plant = plants.find((currentPlant) => currentPlant.id === plantId);
     if (!plant) return;
 
-    // Clear old recommendations first so plantMessages will recalculate from harvest dates
-    if (state.recommendations.length > 0) {
-      actions.setRecommendations([]);
-    }
-
     // Save date for the specific plant filter
     const plantFilterId = `plant-${plantId}`;
     const newHarvestDates = new Map(harvestDatesByFilter);
     newHarvestDates.set(plantFilterId, dateIso);
     setHarvestDatesByFilter(newHarvestDates);
+
+    // Update recommendations immediately based on the new per-plant date
+    const recommendations = selectedPlants.flatMap((selectedPlant) => {
+      const harvestDate = getHarvestDateFromMap(
+        selectedPlant,
+        newHarvestDates,
+        state.harvestDateIso
+      );
+      if (!harvestDate) return [];
+      return generateRecommendations([selectedPlant], harvestDate);
+    });
+    actions.setRecommendations(recommendations);
 
     // Clear validation error if date is valid
     setValidationError(null);

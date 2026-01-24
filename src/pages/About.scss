@@ -10,3 +10,54 @@
   margin-bottom: 0;
   font-weight: 600;
 }
+
+.about__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  li {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1em;
+    height: 1em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  li:nth-child(1)::before {
+    background-image: url("@/assets/tomato.png");
+  }
+
+  li:nth-child(2)::before {
+    background-image: url("@/assets/chili.png");
+  }
+
+  li:nth-child(3)::before {
+    background-image: url("@/assets/aubergin.png");
+  }
+
+  li:nth-child(4)::before {
+    background-image: url("@/assets/cucumber.png");
+  }
+
+  li:nth-child(5)::before {
+    background-image: url("@/assets/plant.png");
+  }
+
+    li:nth-child(5)::before {
+    background-image: url("@/assets/tomato.png");
+  }
+}

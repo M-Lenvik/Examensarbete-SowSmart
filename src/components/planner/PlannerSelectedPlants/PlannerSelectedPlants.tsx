@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Panel } from "../../shared/Panel/Panel";
 import { SelectedPlantsList } from "../../shared/SelectedPlantsList/SelectedPlantsList";
@@ -28,6 +28,8 @@ export const PlannerSelectedPlants = ({
   recommendations,
   harvestDateIso,
 }: PlannerSelectedPlantsProps) => {
+  const navigate = useNavigate();
+
   if (selectedPlants.length === 0) {
     return null;
   }
@@ -47,9 +49,13 @@ export const PlannerSelectedPlants = ({
           interactiveIcons={true}
         />
         <div className="planner-selected-plants__actions">
-          <Link to="/plants" className="button button--secondary">
+          <button
+            type="button"
+            className="button button--secondary"
+            onClick={() => navigate("/plants")}
+          >
             Ändra dina fröval
-          </Link>
+          </button>
         </div>
       </section>
     </Panel>

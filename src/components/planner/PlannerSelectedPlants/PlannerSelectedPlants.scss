@@ -12,3 +12,30 @@
   margin-top: 0.5rem;
 }
 
+// Local override for the collapsible section in planner
+.planner-selected-plants .collapsible-section__header-button {
+  background-color: $error-color;
+  color: $header-text;
+
+  &:hover {
+    background-color: darken($error-color, 10%);
+  }
+}
+
+.planner-selected-plants .collapsible-section__icon {
+  color: $header-text;
+}
+
+.planner-selected-plants .selected-plants-list__info-asterisk {
+  color: $header-text;
+}
+
+.planner-selected-plants__actions .button {
+  
+  &:hover:not(:disabled) {
+    background-color: $error-color;
+    border-color: $error-color;
+    color: $header-text;
+  }
+}
+

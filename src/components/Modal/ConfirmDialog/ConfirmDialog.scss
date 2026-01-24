@@ -9,12 +9,13 @@
 
 .confirm-dialog__message {
   margin: 0;
+  text-align: center;
 }
 
 .confirm-dialog__actions {
   display: flex;
   gap: 1rem;
-  justify-content: flex-end;
+  justify-content: center;
   flex-wrap: wrap;
 }
 

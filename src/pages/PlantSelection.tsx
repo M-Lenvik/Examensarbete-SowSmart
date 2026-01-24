@@ -205,6 +205,8 @@ export const PlantSelection = () => {
             skipToast();
             actions.toggleSelectedPlant(plantId);
           }}
+          recommendations={state.recommendations}
+          harvestDateIso={state.harvestDateIso}
         />
       </Panel>
 
