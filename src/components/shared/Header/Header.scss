@@ -55,6 +55,7 @@
 
 .header-title {
   font-size: 3rem !important;
+  color: $header-text;
 
   // Very small screens (< 360px)
   @media (max-width: 359px) {
