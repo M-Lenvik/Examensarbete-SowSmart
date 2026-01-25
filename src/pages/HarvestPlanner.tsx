@@ -4,14 +4,16 @@ import toast from "react-hot-toast";
 
 import { FilterDropdown } from "../components/shared/FilterDropdown/FilterDropdown";
 import { Panel } from "../components/shared/Panel/Panel";
+import { Button } from "../components/shared/Button/Button";
 import { PlannerCalculateButton } from "../components/planner/PlannerCalculateButton/PlannerCalculateButton";
 import { PlannerDateInput } from "../components/planner/PlannerDateInput/PlannerDateInput";
 import { PlannerSelectedPlants } from "../components/planner/PlannerSelectedPlants/PlannerSelectedPlants";
 import { ModalPlantDetails } from "../components/Modal/ModalPlantDetails/ModalPlantDetails";
+import { Modal } from "../components/Modal/Modal";
 import { PlanContext } from "../context/PlanContext";
 import { validateHarvestDate, getPlantSowResult, type PlantSowResult } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";
-import { calculatePlantMessagesFromHarvestDates } from "../helpers/date/plantMessages";
+import { calculatePlantMessagesFromHarvestDates, calculatePlantMessagesFromRecommendations } from "../helpers/date/plantMessages";
 import { formatDateSwedish } from "../helpers/date/date";
 import { loadHarvestDatesByFilterFromLocalStorage, saveHarvestDatesByFilterToLocalStorage } from "../helpers/storage/localStorage";
 import { sortPlantsBySubcategoryAndName, sortSubcategories } from "../helpers/utils/sorting";
@@ -29,6 +31,7 @@ export const HarvestPlanner = () => {
   const [validationError, setValidationError] = useState<string | null>(null);
   const [selectedPlantForModal, setSelectedPlantForModal] = useState<Plant | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [blockedDateMessage, setBlockedDateMessage] = useState<string | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
   const [selectedFilterIds, setSelectedFilterIds] = useState<string[]>([]);
   const [cancelDateIso, setCancelDateIso] = useState<string | null>(null);
@@ -170,38 +173,20 @@ export const HarvestPlanner = () => {
       return new Map<number, PlantSowResult>();
     }
 
-    const results = new Map<number, PlantSowResult>();
-
-    // If recommendations exist, show sow dates from them (giltigt datum)
+    // If recommendations exist, calculate messages from them (keeps warnings)
     if (state.recommendations.length > 0) {
-      const recommendationMap = new Map(state.recommendations.map((rec) => [rec.plantId, rec]));
-      
-      for (const plant of selectedPlants) {
-        const recommendation = recommendationMap.get(plant.id);
-        if (recommendation) {
-          const sowDate = recommendation.indoorSowDate || recommendation.outdoorSowDate;
-          if (sowDate) {
-            results.set(plant.id, {
-              key: "harvestDate",
-              message: `Sås på ${sowDate}`,
-              sowDateIso: sowDate,
-            });
-          }
-        }
-      }
-    } else {
-      // No recommendations yet - calculate messages from harvest dates
-      const harvestDatesMap = new Map<number, string>();
-      for (const plant of selectedPlants) {
-        const harvestDate = getHarvestDate(plant);
-        if (harvestDate) {
-          harvestDatesMap.set(plant.id, harvestDate);
-        }
-      }
-      return calculatePlantMessagesFromHarvestDates(harvestDatesMap, selectedPlants);
+      return calculatePlantMessagesFromRecommendations(state.recommendations, selectedPlants);
     }
 
-    return results;
+    // No recommendations yet - calculate messages from harvest dates
+    const harvestDatesMap = new Map<number, string>();
+    for (const plant of selectedPlants) {
+      const harvestDate = getHarvestDate(plant);
+      if (harvestDate) {
+        harvestDatesMap.set(plant.id, harvestDate);
+      }
+    }
+    return calculatePlantMessagesFromHarvestDates(harvestDatesMap, selectedPlants);
   }, [selectedPlants, state.recommendations, harvestDatesByFilter, state.harvestDateIso]);
 
 
@@ -216,7 +201,25 @@ export const HarvestPlanner = () => {
 
   };
 
-  const applyHarvestDate = (dateIso: string) => {
+  const applyHarvestDate = (dateIso: string): boolean => {
+    const shouldBlockForTooClose = selectedPlants.some((plant) => {
+      if (selectedFilterIds.length > 0 && !selectedFilterIds.includes("all")) {
+        const subcategory = plant.subcategory || "Övrigt";
+        const matchesFilter = selectedFilterIds.some((filterId) =>
+          filterId === `plant-${plant.id}` || filterId === `subcategory-${subcategory}`
+        );
+        if (!matchesFilter) return false;
+      }
+
+      const sowResult = getPlantSowResult(dateIso, plant);
+      return sowResult?.key === "harvestToClose";
+    });
+
+    if (shouldBlockForTooClose) {
+      setValidationError("Datumet ligger för nära i tid för att hinna mogna. Välj ett senare datum.");
+      return false;
+    }
+
     // Save date for selected filter(s)
     const newHarvestDates = new Map(harvestDatesByFilter);
     let nextGlobalHarvestDate = state.harvestDateIso;
@@ -256,6 +259,7 @@ export const HarvestPlanner = () => {
     actions.setRecommendations(recommendations);
 
     setValidationError(null);
+    return true;
   };
 
   // Auto-apply the selected date when the native date picker closes.
@@ -265,7 +269,8 @@ export const HarvestPlanner = () => {
 
     if (currentValue !== previousDateValueRef.current) {
       const previousValue = previousDateValueRef.current;
-      applyHarvestDate(currentValue);
+      const didApply = applyHarvestDate(currentValue);
+      if (!didApply) return;
       previousDateValueRef.current = currentValue;
 
       setCancelDateIso(previousValue);
@@ -357,6 +362,9 @@ export const HarvestPlanner = () => {
   // Show a confirmation toast for the currently selected date.
   const handleConfirmToast = () => {
     if (!dateInputValue || validationError) return;
+    const didApply = applyHarvestDate(dateInputValue);
+    if (!didApply) return;
+    previousDateValueRef.current = dateInputValue;
     try {
       const summary = getConfirmationSummary();
       const message = summary || "Datumet är uppdaterat.";
@@ -379,8 +387,10 @@ export const HarvestPlanner = () => {
       const validation = validateHarvestDate(undoValue, null);
       setValidationError(validation.error);
       if (!validation.error) {
-        applyHarvestDate(undoValue);
-        previousDateValueRef.current = undoValue;
+        const didApply = applyHarvestDate(undoValue);
+        if (didApply) {
+          previousDateValueRef.current = undoValue;
+        }
       }
     }
     setCancelDateIso(null);
@@ -470,6 +480,14 @@ export const HarvestPlanner = () => {
     // Find the plant to get its subcategory
     const plant = plants.find((currentPlant) => currentPlant.id === plantId);
     if (!plant) return;
+
+    const sowResult = getPlantSowResult(dateIso, plant);
+    if (sowResult?.key === "harvestToClose") {
+      setBlockedDateMessage(
+        `Skördedatumet för ${plant.name} ligger för nära i tid för att hinna mogna. Välj ett senare datum.`
+      );
+      return;
+    }
 
     // Save date for the specific plant filter
     const plantFilterId = `plant-${plantId}`;
@@ -626,6 +644,14 @@ export const HarvestPlanner = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
+      <Modal
+        isOpen={blockedDateMessage !== null}
+        title="Skördedatum kan inte sättas"
+        onClose={() => setBlockedDateMessage(null)}
+      >
+        <p>{blockedDateMessage}</p>
+        <Button onClick={() => setBlockedDateMessage(null)}>Jag förstår</Button>
+      </Modal>
     </section>
   );
 };
