@@ -16,6 +16,8 @@ export const Header = () => {
                 src={sowsmartImage} 
                 alt="" 
                 className="header-title-image"
+                width={72}
+                height={72}
                 aria-hidden="true"
               />
               <span>SåSmart</span>
