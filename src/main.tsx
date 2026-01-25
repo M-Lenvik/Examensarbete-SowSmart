@@ -5,11 +5,8 @@ import { PlanProvider } from "./context/PlanContext";
 import { router } from "./Router";
 import "@fontsource/combo/400.css";
 import "@fontsource/noto-sans/400.css";
-import "@fontsource/noto-sans/600.css";
-import "@fontsource/noto-sans/700.css";
 import "@fontsource/sour-gummy/400.css";
 import "@fontsource/sour-gummy/600.css";
-import "@fontsource/sour-gummy/700.css";
 import "@fontsource/sour-gummy/800.css";
 import "./Styles/main.scss";
 
