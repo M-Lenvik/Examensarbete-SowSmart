@@ -9,13 +9,16 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      injectRegister: "auto",
+      injectRegister: "inline",
       base: "/Examensarbete-SowSmart/",
       manifestFilename: "manifest.json",
+      workbox: {
+        navigateFallback: "/Examensarbete-SowSmart/index.html",
+      },
       manifest: {
         name: "SåSmart – Din digitala såkalender",
         short_name: "SåSmart",
-        start_url: "/Examensarbete-SowSmart/",
+        start_url: "/Examensarbete-SowSmart/#/",
         scope: "/Examensarbete-SowSmart/",
         display: "standalone",
         background_color: "#ffffff",
