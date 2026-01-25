@@ -2,7 +2,11 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 import { Button } from "../../shared/Button/Button";
 import { Panel } from "../../shared/Panel/Panel";
-import greenImage from "../../../assets/green.png";
+import tomatoImage from "../../../assets/tomato.webp";
+import chiliImage from "../../../assets/chili.webp";
+import auberginImage from "../../../assets/aubergin.webp";
+import cucumberImage from "../../../assets/cucumber.webp";
+import greenImage from "../../../assets/green.webp";
 import "./HomeIntro.scss";
 
 export const HomeIntro = () => {
@@ -17,11 +21,67 @@ export const HomeIntro = () => {
           Allt du behöver fundera över är när du vill skörda din första gröda.</p>
           
           <h3>Du gör såhär:</h3>
-        <ol>
-          <li>Välj dina fröer i <NavLink to="/plants" className="home-intro__link">Fröbanken</NavLink>.</li>
-          <li>Välj skördedatum i <NavLink to="/planner" className="home-intro__link">Planeraren</NavLink>.</li>
-          <li>Se dina datum i <NavLink to="/calendar" className="home-intro__link">Kalendern</NavLink>.</li>
-          <li>Se alla dina val och hela din plan på <NavLink to="/my-garden" className="home-intro__link">Min Frösida</NavLink>.</li>
+        <ol className="home-intro__list">
+          <li>
+            <img
+              src={tomatoImage}
+              alt=""
+              aria-hidden="true"
+              className="home-intro__list-icon"
+              width={24}
+              height={24}
+              loading="lazy"
+            />
+            <span className="home-intro__list-text">
+              Välj dina fröer i{" "}
+              <NavLink to="/plants" className="home-intro__link">Fröbanken</NavLink>.
+            </span>
+          </li>
+          <li>
+            <img
+              src={chiliImage}
+              alt=""
+              aria-hidden="true"
+              className="home-intro__list-icon"
+              width={24}
+              height={24}
+              loading="lazy"
+            />
+            <span className="home-intro__list-text">
+              Välj skördedatum i{" "}
+              <NavLink to="/planner" className="home-intro__link">Planeraren</NavLink>.
+            </span>
+          </li>
+          <li>
+            <img
+              src={auberginImage}
+              alt=""
+              aria-hidden="true"
+              className="home-intro__list-icon"
+              width={24}
+              height={24}
+              loading="lazy"
+            />
+            <span className="home-intro__list-text">
+              Se dina datum i{" "}
+              <NavLink to="/calendar" className="home-intro__link">Kalendern</NavLink>.
+            </span>
+          </li>
+          <li>
+            <img
+              src={cucumberImage}
+              alt=""
+              aria-hidden="true"
+              className="home-intro__list-icon"
+              width={24}
+              height={24}
+              loading="lazy"
+            />
+            <span className="home-intro__list-text">
+              Se alla dina val och hela din plan på{" "}
+              <NavLink to="/my-garden" className="home-intro__link">Min Frösida</NavLink>.
+            </span>
+          </li>
         </ol>
         <div className="home-intro__actions">
           <img 

@@ -106,8 +106,8 @@
 
 .header-menu-button {
   grid-area: menu;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background-color: $accent-dark-green;
+  border: 1px solid $accent-dark-green;
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
   color: $header-text;
@@ -121,7 +121,7 @@
   }
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: darken($accent-dark-green, 5%);
   }
 
   &:focus {

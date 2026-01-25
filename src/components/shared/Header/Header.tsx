@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import sowsmartImage from "../../../assets/sowsmart.png";
+import sowsmartImage from "../../../assets/sowsmart.webp";
 import "./Header.scss";
 
 export const Header = () => {
