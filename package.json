@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/combo": "^5.2.8",
+    "@fontsource/noto-sans": "^5.2.10",
+    "@fontsource/sour-gummy": "^5.2.8",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hot-toast": "^2.6.0",
