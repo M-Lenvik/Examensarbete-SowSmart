@@ -43,8 +43,10 @@ export const EventIconWithLabel = ({
         <EventIcon eventType={eventType} size={size} />
       )}
       <span className="event-icon-with-label__text">
-        {label}
-        {showDate && date && ` ${date}`}
+        <span className="event-icon-with-label__label">{label}</span>
+        {showDate && date && (
+          <span className="event-icon-with-label__date">{date}</span>
+        )}
       </span>
     </div>
   );

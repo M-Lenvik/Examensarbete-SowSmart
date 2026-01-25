@@ -25,6 +25,11 @@
 .selected-plants-list__list {
   padding-left: 1.25rem;
   list-style: disc;
+
+  @media (max-width: 374px) {
+    padding-left: 0;
+    list-style-position: inside;
+  }
 }
 
 .selected-plants-list__item {
@@ -121,13 +126,10 @@
   border-radius: 0.5rem;
   cursor: pointer;
   text-align: center;
-  width: 50%;
+  width: auto;
+  max-width: 100%;
   font-size: $font-size-smaller;
   @include transition(background-color, border-color);
-
-  @include tablet {
-    width: 30%;
-  }
 
   &:hover {
     background: $background-light;
@@ -148,6 +150,7 @@
 
   .input-field {
     flex: 1;
+    min-width: 0;
   }
 }
 

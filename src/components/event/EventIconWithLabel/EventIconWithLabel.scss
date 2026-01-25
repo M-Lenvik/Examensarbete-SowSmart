@@ -11,3 +11,12 @@
   font-size: $font-size-smaller;
 }
 
+.event-icon-with-label__label {
+  display: block;
+}
+
+.event-icon-with-label__date {
+  display: block;
+  white-space: nowrap;
+}
+
