@@ -4,6 +4,17 @@
 .filter-dropdown {
   position: relative;
   width: 100%;
+  max-width: 18rem;
+  margin: 0 auto;
+
+  @media (max-width: 374px) {
+    max-width: 16rem;
+  }
+
+  @include tablet {
+    margin-left: 0;
+    margin-right: auto;
+  }
 }
 
 .filter-dropdown__trigger {

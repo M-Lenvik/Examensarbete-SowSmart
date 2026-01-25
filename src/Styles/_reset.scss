@@ -60,3 +60,9 @@ a:active {
   color: inherit;
 }
 
+a[x-apple-data-detectors],
+a[x-apple-data-detectors] * {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+

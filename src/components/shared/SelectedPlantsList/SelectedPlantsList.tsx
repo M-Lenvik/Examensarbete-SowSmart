@@ -164,6 +164,14 @@ export const SelectedPlantsList = ({
     if (isEditing) {
       return (
         <div className="selected-plants-list__harvest-date-input-wrapper">
+          <button
+            type="button"
+            className="selected-plants-list__harvest-date-cancel"
+            onClick={() => setEditingHarvestDateFor(null)}
+            aria-label="Avbryt"
+          >
+            Avbryt
+          </button>
           <Input
             id={`harvest-date-${plant.id}`}
             type="date"
@@ -176,14 +184,6 @@ export const SelectedPlantsList = ({
             }}
             aria-label={`Välj skördedatum för ${plant.name}`}
           />
-          <button
-            type="button"
-            className="selected-plants-list__harvest-date-cancel"
-            onClick={() => setEditingHarvestDateFor(null)}
-            aria-label="Avbryt"
-          >
-            Avbryt
-          </button>
         </div>
       );
     }
