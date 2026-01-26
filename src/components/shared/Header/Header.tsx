@@ -20,7 +20,7 @@ export const Header = () => {
                 height={72}
                 aria-hidden="true"
               />
-              <span>Test!</span>
+              <span>SåSmart</span>
             </NavLink>
           </h1>
         </div>
