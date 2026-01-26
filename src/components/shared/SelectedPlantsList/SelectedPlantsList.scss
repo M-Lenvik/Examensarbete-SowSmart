@@ -98,6 +98,7 @@
 
 .selected-plants-list__name {
   font-weight: 600;
+  color: red !important;
   @include transition(color);
 
   .selected-plants-list__plant-button:hover & {
@@ -129,6 +130,7 @@
   width: auto;
   max-width: 100%;
   font-size: $font-size-smaller;
+  color: red !important;
   @include transition(background-color, border-color);
 
   &:hover {
