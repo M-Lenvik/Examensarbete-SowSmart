@@ -2,6 +2,7 @@
 @use "../../Styles/base" as *;
 @use "../../Styles/modal" as *;
 
+
 .modal-overlay {
   @extend %modal-overlay-base;
 }
@@ -30,5 +31,4 @@
 .modal__content {
   @extend %modal-content-base;
 }
-
 
