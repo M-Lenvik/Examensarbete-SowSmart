@@ -1,14 +1,11 @@
 /* Color Variables - SowSmart Theme */
 
 /* Primary Colors - Earthy & Garden Inspired */
-$primary-green: #00A053;      // Deep forest green
-$primary-brown: #8b7355;      // Warm earthy brown
+$primary-green: #008042;      // Deep forest green
 $primary-beige: #f5f1e8;      // Soft beige background
 
 /* Accent Colors */
 $accent-green: #6b9e78;       // Lighter green for highlights
-$accent-brown: #a68968;       // Lighter brown for accents
-$accent-dark-green: #3a5f47;  // Dark green for emphasis
 
 /* Neutral Colors */
 $text-color: #2d2d2d;         // Dark charcoal for text
@@ -21,15 +18,12 @@ $header-background: $primary-green;
 $header-text: #ffffff;
 
 /* Semantic Colors */
-$success-color: $accent-green;
 $warning-color: #c5211b;      // Alarm red
 $error-color: #c45c4e;        // Muted red
-$info-color: $primary-green;
 
 /* Border & Divider */
 $border-color: #d4e0d6;       // Light beige-gray
-$border-dark-color: #c5c3ba;       // Light beige-gray
-$divider-color: #d5d1c6;      // Medium beige-gray
+$border-dark-color: #c5c3ba;  // Light beige-gray
 
 /* Shadows */
 $panel-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25), 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
