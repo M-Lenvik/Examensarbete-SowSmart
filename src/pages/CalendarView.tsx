@@ -13,6 +13,7 @@ import { recommendationsToEvents } from "../helpers/calendar/events";
 import type { CalendarEvent } from "../helpers/calendar/events";
 import type { Plant } from "../models/Plant";
 import { getPlants } from "../services/plantsService";
+import "./CalendarView.scss";
 
 export const CalendarView = () => {
   const navigate = useNavigate();
@@ -178,7 +179,7 @@ export const CalendarView = () => {
   }
 
   return (
-    <section>
+    <section className="calendar-view">
       <h1>Kalender</h1>
       <Panel>
         <Panel title="" variant="nested">

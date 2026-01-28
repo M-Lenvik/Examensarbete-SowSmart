@@ -1,0 +1,13 @@
+@use "../Styles/color" as *;
+@use "../Styles/base" as *;
+
+.calendar-view {
+  .filter-dropdown {
+    margin: 0 auto !important;
+
+    @include tablet {
+      margin: 0 auto !important;
+    }
+  }
+}
+

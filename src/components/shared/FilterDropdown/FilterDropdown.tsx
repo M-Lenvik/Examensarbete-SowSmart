@@ -27,23 +27,51 @@ export const FilterDropdown = ({
   onFilterChange,
 }: FilterDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState<number>(-1);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking outside or pressing ESC
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
+        setFocusedIndex(-1);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpen) {
+        setIsOpen(false);
+        setFocusedIndex(-1);
       }
     };
 
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEscape);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
     };
+  }, [isOpen]);
+
+  // Reset focused index when dropdown closes and focus first option when opening
+  useEffect(() => {
+    if (!isOpen) {
+      setFocusedIndex(-1);
+    } else {
+      // Auto-focus first option when opening
+      setFocusedIndex(0);
+      // Use requestAnimationFrame to ensure DOM is ready
+      requestAnimationFrame(() => {
+        if (optionRefs.current[0]) {
+          optionRefs.current[0].focus();
+        }
+      });
+    }
   }, [isOpen]);
 
   // Get selected plants
@@ -102,6 +130,11 @@ export const FilterDropdown = ({
 
     return options;
   }, [selectedPlants]);
+
+  // Reset optionRefs when filterOptions change
+  useEffect(() => {
+    optionRefs.current = new Array(filterOptions.length).fill(null);
+  }, [filterOptions.length]);
 
   const handleToggleOption = (optionId: string) => {
     if (optionId === "all") {
@@ -205,12 +238,95 @@ export const FilterDropdown = ({
     return `${selectedPlantCount} valda`;
   };
 
+  //AI generated code, manually adjusted
+  const handleTriggerKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      setIsOpen(!isOpen);
+      if (!isOpen) {
+        setFocusedIndex(0);
+      }
+    } else if (event.key === "ArrowDown" && !isOpen) {
+      event.preventDefault();
+      setIsOpen(true);
+      setFocusedIndex(0);
+    } else if (event.key === "ArrowUp" && !isOpen) {
+      event.preventDefault();
+      setIsOpen(true);
+      setFocusedIndex(filterOptions.length - 1);
+    } else if (event.key === "Tab" && isOpen) {
+      setIsOpen(false);
+      setFocusedIndex(-1);
+    }
+  };
+
+  const handleMenuKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      const currentIndex = focusedIndex < 0 ? 0 : focusedIndex;
+      const nextIndex = currentIndex < filterOptions.length - 1 ? currentIndex + 1 : 0;
+      setFocusedIndex(nextIndex);
+      setTimeout(() => {
+        optionRefs.current[nextIndex]?.focus();
+      }, 0);
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      const currentIndex = focusedIndex < 0 ? filterOptions.length - 1 : focusedIndex;
+      const prevIndex = currentIndex > 0 ? currentIndex - 1 : filterOptions.length - 1;
+      setFocusedIndex(prevIndex);
+      setTimeout(() => {
+        optionRefs.current[prevIndex]?.focus();
+      }, 0);
+    } else if (event.key === "Tab") {
+      setIsOpen(false);
+      setFocusedIndex(-1);
+    } else if (event.key === "Home") {
+      event.preventDefault();
+      setFocusedIndex(0);
+      setTimeout(() => {
+        optionRefs.current[0]?.focus();
+      }, 0);
+    } else if (event.key === "End") {
+      event.preventDefault();
+      const lastIndex = filterOptions.length - 1;
+      setFocusedIndex(lastIndex);
+      setTimeout(() => {
+        optionRefs.current[lastIndex]?.focus();
+      }, 0);
+    }
+  };
+
+  const handleOptionKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, optionId: string, index: number) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleToggleOption(optionId);
+    } else if (event.key === "ArrowDown") {
+      event.preventDefault();
+      const nextIndex = index < filterOptions.length - 1 ? index + 1 : 0;
+      setFocusedIndex(nextIndex);
+      setTimeout(() => {
+        optionRefs.current[nextIndex]?.focus();
+      }, 0);
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      const prevIndex = index > 0 ? index - 1 : filterOptions.length - 1;
+      setFocusedIndex(prevIndex);
+      setTimeout(() => {
+        optionRefs.current[prevIndex]?.focus();
+      }, 0);
+    } else if (event.key === "Tab") {
+      setIsOpen(false);
+      setFocusedIndex(-1);
+    }
+  };
+
   return (
     <div className="filter-dropdown" ref={dropdownRef}>
       <button
         type="button"
         className="filter-dropdown__trigger"
         onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={handleTriggerKeyDown}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
       >
@@ -220,8 +336,13 @@ export const FilterDropdown = ({
         </span>
       </button>
       {isOpen && (
-        <div className="filter-dropdown__menu" role="listbox">
-          {filterOptions.map((option) => {
+        <div 
+          className="filter-dropdown__menu" 
+          role="listbox"
+          onKeyDown={handleMenuKeyDown}
+          tabIndex={-1}
+        >
+          {filterOptions.map((option, index) => {
             const isPlant = option.type === "plant";
             let isSelected: boolean;
 
@@ -239,11 +360,17 @@ export const FilterDropdown = ({
             return (
               <button
                 key={option.id}
+                ref={(el) => {
+                  optionRefs.current[index] = el;
+                }}
                 type="button"
                 className={`filter-dropdown__option ${isSelected ? "filter-dropdown__option--selected" : ""} ${isPlant ? "filter-dropdown__option--plant" : ""}`}
                 onClick={() => handleToggleOption(option.id)}
+                onKeyDown={(e) => handleOptionKeyDown(e, option.id, index)}
+                onFocus={() => setFocusedIndex(index)}
                 role="option"
                 aria-selected={isSelected}
+                tabIndex={focusedIndex === index ? 0 : -1}
               >
                 <span className="filter-dropdown__checkbox">{isSelected ? "✓" : ""}</span>
                 <span className="filter-dropdown__label">{option.label}</span>
