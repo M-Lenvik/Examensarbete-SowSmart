@@ -1,3 +1,4 @@
+//Partly AI generated code, partly manually written
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { CALENDAR_EVENT_CONFIG } from "../../../helpers/calendar/events";
@@ -7,7 +8,6 @@ import "./EventTooltip.scss";
 /**
  * Tooltip positioning constants.
  * 
- * These values match the SCSS variables defined in _tooltip.scss.
  * Used for dynamic tooltip positioning calculations.
  */
 export const TOOLTIP_PADDING_PX = 16; // 1rem

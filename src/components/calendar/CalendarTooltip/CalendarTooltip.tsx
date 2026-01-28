@@ -1,3 +1,4 @@
+//Partly AI generated code, partly manually written
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { formatDateSwedish } from "../../../helpers/date/date";

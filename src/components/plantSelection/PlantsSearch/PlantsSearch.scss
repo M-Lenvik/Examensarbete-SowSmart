@@ -15,24 +15,48 @@
   position: relative;
 }
 
+.plants-search__input-wrapper .input-field {
+  position: relative;
+}
+
 .plants-search__clear {
   position: absolute;
   right: 0.75rem;
-  top: 0.5rem;
+  // Center vertically in the input field
+  // Label height (1.15rem font + line-height) + gap (0.5rem) + input padding top (0.75rem) + half input line-height
+  top: calc(1.15rem * 1.5 + 0.5rem + 0.75rem + 1rem);
+  transform: translateY(-50%);
   appearance: none;
   border: none;
-  font-size: 1.5rem;
+  background: transparent;
+  font-size: 1.75rem;
   line-height: 1;
-  padding: 0.25rem 0.5rem;
+  padding: 0;
+  margin: 0;
   color: $text-light;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  height: calc(100% - 1rem);
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+  z-index: 1;
+  width: 2rem;
+  height: 2rem;
+
+  &:hover {
+    color: $text-color;
+    transform: translateY(-50%) scale(1.2);
+  }
 
   &:focus {
     outline: 2px solid $accent-green;
     outline-offset: 2px;
     border-radius: 0.25rem;
+  }
+
+  &:active {
+    color: $accent-green;
+    transform: translateY(-50%) scale(1.1);
   }
 }
 
