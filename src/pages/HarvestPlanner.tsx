@@ -14,7 +14,7 @@ import { PlanContext } from "../context/PlanContext";
 import { validateHarvestDate, getPlantSowResult, type PlantSowResult } from "../helpers/date/dateValidation";
 import { generateRecommendations } from "../helpers/calculation/recommendations";
 import { calculatePlantMessagesFromHarvestDates, calculatePlantMessagesFromRecommendations } from "../helpers/date/plantMessages";
-import { formatDateSwedish } from "../helpers/date/date";
+import { formatDateSwedish, formatDateSwedishWithoutYear } from "../helpers/date/date";
 import { loadHarvestDatesByFilterFromLocalStorage, saveHarvestDatesByFilterToLocalStorage } from "../helpers/storage/localStorage";
 import { sortPlantsBySubcategoryAndName, sortSubcategories } from "../helpers/utils/sorting";
 import { capitalizeFirst } from "../helpers/utils/text";
@@ -494,6 +494,10 @@ export const HarvestPlanner = () => {
     const newHarvestDates = new Map(harvestDatesByFilter);
     newHarvestDates.set(plantFilterId, dateIso);
     setHarvestDatesByFilter(newHarvestDates);
+
+    // Show success toast when date is successfully set
+    const formattedDate = formatDateSwedishWithoutYear(dateIso);
+    toast.success(`Skördedatum för ${plant.name} är satt till ${formattedDate}`, { duration: 3000 });
 
     // Update recommendations immediately based on the new per-plant date
     const recommendations = selectedPlants.flatMap((selectedPlant) => {
