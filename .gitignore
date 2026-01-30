@@ -26,15 +26,8 @@ dist-ssr
 # Deployment
 deploy.yml
 
-# Cursor workspace files (project-local plans/rules/terminals)
+# Cursor workspace files (project-local plans/rules/terminals/docs)
 .cursor/
 
 # Local backups
 src/data/plants copy.json
-
-# Local documentation handoff (not for repo)
-docs/HANDOFF.md
-docs/SPRINT_STATUS.md
-docs/STRUCTURE_SCHEMA.md
-docs/anvandartester.md
-docs/berakning_och_planering.md

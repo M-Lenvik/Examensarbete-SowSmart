@@ -1,3 +1,5 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for calculating days outdoor to harvest.
  * 
