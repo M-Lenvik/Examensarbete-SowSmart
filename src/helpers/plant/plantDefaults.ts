@@ -1,3 +1,26 @@
+//AI discussed code, manually written, AI corrected
+
+/**
+ * Helper functions for providing default plant values by subcategory.
+ * 
+ * Data sources:
+ * - Default values: From plantDefaults.ts constants (organized by subcategory, e.g., "tomat", "gurka", "ärter")
+ * - Gardening knowledge: From odla.nu and gardening expertise
+ * - Used when plant data is missing from plants.json (RawPlant fields)
+ * 
+ * Results:
+ * - Default constants: DEFAULT_PLANTING_METHOD_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY, etc.
+ * - getDefaultMovePlantOutdoor: Returns MovePlantOutdoor | null (default move outdoor window)
+ * 
+ * Uses:
+ * - (none - constant definitions only)
+ * 
+ * Used by:
+ * - plant/validation.ts (normalizePlant) - for applying defaults when plant data is missing
+ * - date/dateValidation.ts - for getting default move outdoor windows
+ * - calculation/recommendations.ts - for getting default hardening days and indoor growth days
+ */
+
 import type { MovePlantOutdoor, PlantingMethod } from "../../models/Plant";
 
 /**

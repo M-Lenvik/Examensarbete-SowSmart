@@ -1,3 +1,21 @@
+/**
+ * CollapsibleSection component - expandable/collapsible content section.
+ * 
+ * Data sources:
+ * - Props: title, children, defaultExpanded, ariaLabel
+ * - Local state: isExpanded (controls visibility)
+ * 
+ * Results:
+ * - Returns: JSX (collapsible section with button and content)
+ * 
+ * Uses:
+ * - (none - pure UI component)
+ * 
+ * Used by:
+ * - components/shared/Panel/Panel.tsx - when panel is collapsible
+ * - components/shared/SelectedPlantsList/SelectedPlantsList.tsx - for expandable plant details
+ */
+
 import { useState } from "react";
 import "./CollapsibleSection.scss";
 

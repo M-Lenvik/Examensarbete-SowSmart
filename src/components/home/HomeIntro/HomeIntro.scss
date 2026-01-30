@@ -1,3 +1,12 @@
+/**
+ * HomeIntro component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($primary-green, $accent-green, $font-size-smaller)
+ * - Styles/base.scss - Mixins (@include tablet)
+ * - components/shared/Button/Button.scss - Classes (.button) - for button styling in actions section
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

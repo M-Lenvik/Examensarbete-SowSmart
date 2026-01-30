@@ -1,9 +1,20 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for parsing germination-related data.
  * 
  * Data sources:
  * - germinationTime strings come from plants.json (Plant.germinationTime)
  * - Format: "5-15 dagar" (range) or "10 dagar" (single value)
+ * 
+ * Results:
+ * - parseGerminationTime: Returns number | null (days, average if range)
+ * 
+ * Uses:
+ * - (none - pure string parsing)
+ * 
+ * Used by:
+ * - Currently not used in application (available for future use)
  */
 
 /**

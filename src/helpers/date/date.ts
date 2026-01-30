@@ -1,9 +1,31 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for date calculations and formatting.
  * 
  * Data sources:
  * - Input dates come from user input (harvest date) or calculated dates from other helpers
  * - These are pure utility functions that operate on Date objects
+ * 
+ * Results:
+ * - addDays, subtractDays: Returns Date (new date with days added/subtracted)
+ * - formatDateIso: Returns string (ISO format YYYY-MM-DD)
+ * - parseDateIso: Returns Date (parsed from ISO string)
+ * - formatDateSwedish: Returns string (Swedish format, e.g., "15 mars 2026")
+ * - formatDateSwedishWithoutYear: Returns string (Swedish format without year, e.g., "15 mars")
+ * - formatMonthYearSwedish: Returns string (month and year, e.g., "mars 2026")
+ * - normalizeToStartOfDay: Returns Date (normalized to 00:00:00)
+ * - getMonthIndex: Returns number | null (month index 0-11 from Swedish month name)
+ * 
+ * Uses:
+ * - (none - pure utility functions using native JavaScript Date)
+ * 
+ * Used by:
+ * - All calculation helpers - for date arithmetic and formatting
+ * - All date helpers - for date manipulation
+ * - pages/HarvestPlanner.tsx - for date formatting and validation
+ * - components/calendar/* - for date formatting in calendar
+ * - components/myGarden/* - for date formatting in task lists
  */
 
 /**

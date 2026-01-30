@@ -1,3 +1,21 @@
+/**
+ * Carousel component - auto-rotating carousel for displaying multiple event icons.
+ * 
+ * Data sources:
+ * - Props: eventTypes, resetKey
+ * - Local state: activeIndices (which icon is currently visible)
+ * 
+ * Results:
+ * - Returns: JSX (carousel with rotating event icons)
+ * 
+ * Uses:
+ * - components/event/EventIcon/EventIcon.tsx (EventIcon)
+ * - helpers/calendar/events.ts (CalendarEventType, CALENDAR_ICON_SIZES)
+ * 
+ * Used by:
+ * - components/calendar/CalendarDay/CalendarDay.tsx - for displaying multiple event types on a day
+ */
+
 // base code from https://www.geeksforgeeks.org/javascript/create-an-autoplay-carousel-using-html-css-and-javascript/
 
 import { useState, useEffect, useRef } from "react";

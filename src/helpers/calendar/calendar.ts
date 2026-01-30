@@ -1,8 +1,23 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for calendar operations.
  * 
- * These functions help build calendar grids and handle month navigation.
- * Used by the Calendar View to display months with events.
+ * Data sources:
+ * - year, month: From CalendarMonth component (user navigation)
+ * 
+ * Results:
+ * - getDaysInMonth: Returns number (days in month)
+ * - getFirstDayOfMonth: Returns number (day of week, 0-6)
+ * - getCalendarDays: Returns Date[] (all days for calendar grid including previous/next month days)
+ * - isSameDay: Returns boolean (if two dates are the same day)
+ * - isToday: Returns boolean (if date is today)
+ * 
+ * Uses:
+ * - (none - pure JavaScript Date operations)
+ * 
+ * Used by:
+ * - components/calendar/CalendarMonth/CalendarMonth.tsx - for building calendar grid
  */
 
 /**

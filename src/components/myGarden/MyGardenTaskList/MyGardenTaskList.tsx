@@ -1,3 +1,26 @@
+/**
+ * MyGardenTaskList component - displays chronological task list grouped by date and type.
+ * 
+ * Data sources:
+ * - Props: tasks, warnings, onPlantClick
+ * 
+ * Results:
+ * - Returns: JSX (task list grouped by date and type with warnings)
+ * 
+ * Uses:
+ * - components/event/EventIcon/EventIcon.tsx (EventIcon)
+ * - components/shared/CollapsibleSection/CollapsibleSection.tsx (CollapsibleSection)
+ * - helpers/calendar/events.ts (CALENDAR_EVENT_CONFIG)
+ * - helpers/calendar/tasks.ts (taskTypeToDateType, Task)
+ * - helpers/validation/warnings.ts (PlantWarning)
+ * - helpers/date/date.ts (parseDateIso, formatMonthYearSwedish)
+ * - helpers/utils/text.ts (capitalizeFirst)
+ * - helpers/utils/sorting.ts (sortSubcategories)
+ * 
+ * Used by:
+ * - pages/MyGarden.tsx - for displaying task list
+ */
+
 import { EventIcon } from "../../event/EventIcon/EventIcon";
 import { CollapsibleSection } from "../../shared/CollapsibleSection/CollapsibleSection";
 import { CALENDAR_EVENT_CONFIG } from "../../../helpers/calendar/events";

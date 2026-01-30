@@ -1,3 +1,33 @@
+/**
+ * Helper functions for persisting plan data to localStorage.
+ * 
+ * Data sources:
+ * - plan: From PlanContext (PlanState with selectedPlantIds, harvestDateIso, recommendations)
+ * - harvestDatesByFilter: Map of filter ID to harvest date ISO string (for filter-based harvest dates)
+ * 
+ * This module handles saving and loading user plans to browser localStorage,
+ * allowing users to return to their plan after closing the browser.
+ * 
+ * **Storage keys:**
+ * - "sowsmart_plan": Main plan data (selected plants, harvest date, recommendations)
+ * - "sowsmart_harvest_dates_filter": Filter-based harvest dates (for advanced filtering)
+ * 
+ * Results:
+ * - savePlanToLocalStorage: Returns void (saves plan to localStorage)
+ * - loadPlanFromLocalStorage: Returns SavedPlan | null (loaded plan or null)
+ * - clearPlanFromLocalStorage: Returns void (clears plan from localStorage)
+ * - saveHarvestDatesByFilterToLocalStorage: Returns void (saves filter harvest dates)
+ * - loadHarvestDatesByFilterFromLocalStorage: Returns Map<string, string> (loaded filter harvest dates)
+ * 
+ * Uses:
+ * - (none - browser localStorage API only)
+ * 
+ * Used by:
+ * - context/PlanContext.tsx - for loading saved plan on mount
+ * - reducers/planReducer.ts - for saving plan on every state change
+ * - pages/HarvestPlanner.tsx - for saving/loading filter-based harvest dates
+ */
+
 import type { PlanState, Recommendation } from "../../reducers/planReducer";
 
 const STORAGE_KEY = "sowsmart_plan";
@@ -10,8 +40,12 @@ export type SavedPlan = {
 };
 
 /**
- * Saves plan to localStorage with timestamp
- * @param plan - The plan state to save
+ * Saves plan to localStorage with timestamp.
+ * 
+ * Persists the entire plan state (selected plants, harvest date, recommendations)
+ * to browser localStorage so users can return to their plan later.
+ * 
+ * @param plan - The plan state to save (PlanState from PlanContext)
  */
 export const savePlanToLocalStorage = (plan: PlanState): void => {
   try {
@@ -26,8 +60,12 @@ export const savePlanToLocalStorage = (plan: PlanState): void => {
 };
 
 /**
- * Loads plan from localStorage
- * @returns Saved plan or null if not found or invalid
+ * Loads plan from localStorage.
+ * 
+ * Retrieves the saved plan from browser localStorage and validates its structure.
+ * Returns null if no plan is saved, if the data is invalid, or if parsing fails.
+ * 
+ * @returns Saved plan (SavedPlan) or null if not found or invalid
  */
 export const loadPlanFromLocalStorage = (): SavedPlan | null => {
   try {
@@ -58,7 +96,10 @@ export const loadPlanFromLocalStorage = (): SavedPlan | null => {
 };
 
 /**
- * Clears saved plan from localStorage
+ * Clears saved plan from localStorage.
+ * 
+ * Removes the saved plan from browser localStorage. Used when user wants to
+ * start fresh or when plan data needs to be reset.
  */
 export const clearPlanFromLocalStorage = (): void => {
   try {
@@ -71,7 +112,11 @@ export const clearPlanFromLocalStorage = (): void => {
 const HARVEST_DATES_FILTER_STORAGE_KEY = "sowsmart_harvest_dates_filter";
 
 /**
- * Saves harvest dates by filter to localStorage
+ * Saves harvest dates by filter to localStorage.
+ * 
+ * Persists filter-based harvest dates (used when users set different harvest dates
+ * for different plant filters) to browser localStorage.
+ * 
  * @param harvestDatesByFilter - Map of filter ID to harvest date ISO string
  */
 export const saveHarvestDatesByFilterToLocalStorage = (harvestDatesByFilter: Map<string, string>): void => {
@@ -85,8 +130,12 @@ export const saveHarvestDatesByFilterToLocalStorage = (harvestDatesByFilter: Map
 };
 
 /**
- * Loads harvest dates by filter from localStorage
- * @returns Map of filter ID to harvest date ISO string, or empty Map if not found
+ * Loads harvest dates by filter from localStorage.
+ * 
+ * Retrieves filter-based harvest dates from browser localStorage and validates
+ * the structure. Returns empty Map if no data is saved or if parsing fails.
+ * 
+ * @returns Map of filter ID to harvest date ISO string, or empty Map if not found or invalid
  */
 export const loadHarvestDatesByFilterFromLocalStorage = (): Map<string, string> => {
   try {

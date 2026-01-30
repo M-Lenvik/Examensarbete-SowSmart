@@ -1,3 +1,5 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for calculating sow date.
  * 
@@ -6,6 +8,19 @@
  * - harvestTime: From plants.json (Plant.harvestTime)
  * - harvestDate: User input (selected harvest date)
  * - Uses seedConstant formula to calculate relative sow date based on harvest date position in harvest window
+ * 
+ * Results:
+ * - calculateSowDate: Returns Date | null (optimal sow date)
+ * - calculateTryAnywaySowDate: Returns Date | null (theoretical sow date for "try anyway" scenarios)
+ * 
+ * Uses:
+ * - date/date.ts (addDays, subtractDays, normalizeToStartOfDay, getMonthIndex)
+ * - plant/plantingWindow.ts (selectPlantingWindow)
+ * - date/monthSpan.ts (getMonthSpan)
+ * 
+ * Used by:
+ * - calculation/recommendations.ts (generateRecommendations) - for calculating sow dates in recommendations
+ * - date/dateValidation.ts (getPlantSowResult) - for validating harvest dates and calculating sow dates
  */
 
 import { addDays, subtractDays, normalizeToStartOfDay, getMonthIndex } from "../date/date";

@@ -1,3 +1,12 @@
+/**
+ * PlannerDateInput component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($primary-green, $header-text, $warning-color, $error-color, $font-size-smaller)
+ * - Styles/base.scss - Mixins (@include tablet)
+ * - components/shared/Input/Input.scss - Classes (.input-field, .input-field__input) - for date input styling
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

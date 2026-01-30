@@ -1,3 +1,11 @@
+/**
+ * Header component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($header-background, $header-text, $accent-green, $primary-green, $font-size-smaller)
+ * - Styles/base.scss - Mixins (@include shadow-md, @include container, @include transition, @include tablet, @include desktop-large)
+ */
+
 @use '../../../Styles/color' as *;
 @use '../../../Styles/base' as *;
 
@@ -111,7 +119,7 @@
   border: 1px solid $accent-green;
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
-  color: $accent-green;
+  color: $primary-green;
   font: 1.25rem 'Combo', sans-serif;
   font-weight: 800;
   @include transition(background-color);

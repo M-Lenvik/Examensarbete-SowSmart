@@ -1,3 +1,22 @@
+/**
+ * CalendarMonth component - displays a full month grid with week day headers and all days.
+ * 
+ * Data sources:
+ * - Props: month, events, onDayHover
+ * 
+ * Results:
+ * - Returns: JSX (calendar month grid with week day headers and CalendarDay components)
+ * 
+ * Uses:
+ * - components/calendar/CalendarDay/CalendarDay.tsx (CalendarDay)
+ * - helpers/calendar/calendar.ts (getCalendarDays, isToday)
+ * - helpers/date/date.ts (formatDateIso, formatMonthYearSwedish)
+ * - helpers/calendar/events.ts (CalendarEvent)
+ * 
+ * Used by:
+ * - pages/CalendarView.tsx - for displaying the calendar month
+ */
+
 import { CalendarDay } from "../CalendarDay/CalendarDay";
 import { getCalendarDays, isToday } from "../../../helpers/calendar/calendar";
 import { formatDateIso, formatMonthYearSwedish } from "../../../helpers/date/date";

@@ -1,3 +1,11 @@
+/**
+ * Button component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($primary-green, $primary-beige, $text-color, $border-dark-color, $error-color)
+ * - Styles/base.scss - Mixins (@include shadow-sm)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 
@@ -39,6 +47,8 @@
   background-color: $primary-beige;
   color: $text-color;
   border-color: $border-dark-color;
+
+  
 
   &:hover:not(:disabled) {
     background-color: $error-color;

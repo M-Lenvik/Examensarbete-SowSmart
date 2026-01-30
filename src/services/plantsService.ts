@@ -1,3 +1,20 @@
+/**
+ * Service for loading and managing plant data.
+ * 
+ * Data sources:
+ * - plants.json: Raw plant data from data/plants.json
+ * 
+ * Results:
+ * - getPlants: Returns Promise<Plant[]> (normalized plants, cached after first load)
+ * 
+ * Uses:
+ * - helpers/plant/validation.ts (normalizePlant)
+ * 
+ * Used by:
+ * - All pages that need plant data (PlantSelection, HarvestPlanner, CalendarView, MyGarden)
+ * - Components that display plant information
+ */
+
 import plantsJsonRaw from "../data/plants.json?raw";
 import { normalizePlant } from "../helpers/plant/validation";
 import type { Plant, RawPlant } from "../models/Plant";

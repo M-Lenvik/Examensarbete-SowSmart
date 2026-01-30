@@ -1,3 +1,12 @@
+/**
+ * MyGardenTaskList component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($border-color, $text-color, $text-light, $primary-green, $warning-color, $background-light, $font-size-smaller)
+ * - Styles/base.scss - Mixins (@include flex-column, @include tablet, @include desktop)
+ * - components/shared/CollapsibleSection/CollapsibleSection.scss - Classes (.collapsible-section, .collapsible-section__header-button, .collapsible-section__content) - for task card collapsible sections
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

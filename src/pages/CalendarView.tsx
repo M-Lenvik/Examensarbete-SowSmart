@@ -1,3 +1,24 @@
+/**
+ * CalendarView page component - displays planting schedule in calendar format.
+ * 
+ * Data sources:
+ * - plants: From plantsService (all available plants)
+ * - state: From PlanContext (recommendations, selected plants)
+ * 
+ * Results:
+ * - Returns: JSX (calendar view page with month navigation and event display)
+ * 
+ * Uses:
+ * - context/PlanContext.tsx (PlanContext)
+ * - services/plantsService.ts (getPlants)
+ * - helpers/calendar/events.ts (recommendationsToEvents, CalendarEvent)
+ * - components/calendar/* (CalendarMonth, CalendarMonthNavigation, CalendarLegend, CalendarTooltip)
+ * - components/shared/* (Panel, Button, FilterDropdown)
+ * 
+ * Used by:
+ * - Router.tsx - for "/calendar" route
+ */
+
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 

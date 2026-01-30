@@ -1,3 +1,10 @@
+/**
+ * ToastProvider component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($primary-green, $warning-color)
+ */
+
 @use "../../../Styles/color" as *;
 
 :global(.toast-success) {

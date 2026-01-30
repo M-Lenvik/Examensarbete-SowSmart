@@ -1,3 +1,21 @@
+/**
+ * Input component - reusable input field with label.
+ * 
+ * Data sources:
+ * - Props: id, label, type, value, name, placeholder, required, disabled, onChange, onBlur, onFocus, aria-label
+ * 
+ * Results:
+ * - Returns: JSX (input field with optional label)
+ * 
+ * Uses:
+ * - (none - pure UI component)
+ * 
+ * Used by:
+ * - components/shared/SelectedPlantsList/SelectedPlantsList.tsx - for individual plant harvest dates
+ * - components/planner/PlannerDateInput/PlannerDateInput.tsx - for harvest date input
+ * - components/plantSelection/PlantsSearch/PlantsSearch.tsx - for search input
+ */
+
 import type React from "react";
 
 import "./Input.scss";

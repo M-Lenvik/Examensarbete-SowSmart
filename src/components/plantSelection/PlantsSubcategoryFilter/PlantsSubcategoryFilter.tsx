@@ -1,3 +1,19 @@
+/**
+ * PlantsSubcategoryFilter component - dropdown filter for plant subcategories.
+ * 
+ * Data sources:
+ * - Props: options, value, onChange
+ * 
+ * Results:
+ * - Returns: JSX (select dropdown for filtering by subcategory)
+ * 
+ * Uses:
+ * - (none - pure UI component)
+ * 
+ * Used by:
+ * - pages/PlantSelection.tsx - for filtering plants by subcategory
+ */
+
 import "./PlantsSubcategoryFilter.scss";
 
 type PlantsSubcategoryFilterProps = {

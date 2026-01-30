@@ -1,3 +1,22 @@
+/**
+ * Modal component - accessible modal dialog with focus trap and keyboard navigation.
+ * 
+ * Data sources:
+ * - Props: isOpen, title, onClose, children
+ * 
+ * Results:
+ * - Returns: JSX (modal dialog with overlay, header, and content)
+ * 
+ * Uses:
+ * - react-dom (createPortal)
+ * 
+ * Used by:
+ * - components/Modal/ConfirmDialog/ConfirmDialog.tsx - for confirmation dialogs
+ * - components/Modal/ModalPlantDetails/ModalPlantDetails.tsx - for plant detail modals
+ * - components/event/EventInfoModal/EventInfoModal.tsx - for event info modals
+ */
+
+//Modal accesability is mainly made by AI
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 

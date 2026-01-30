@@ -1,3 +1,20 @@
+/**
+ * GrowingTips page component - displays gardening tips and explanations.
+ * 
+ * Data sources:
+ * - Static content (no external data)
+ * 
+ * Results:
+ * - Returns: JSX (growing tips page with explanations of gardening terms)
+ * 
+ * Uses:
+ * - components/shared/Panel/Panel.tsx (Panel)
+ * - components/growingTips/GrowingTipsList/GrowingTipsList.tsx (GrowingTipsList)
+ * 
+ * Used by:
+ * - Router.tsx - for "/growing-tips" route
+ */
+
 import { Panel } from "../components/shared/Panel/Panel";
 import { GrowingTipsList } from "../components/growingTips/GrowingTipsList/GrowingTipsList";
 

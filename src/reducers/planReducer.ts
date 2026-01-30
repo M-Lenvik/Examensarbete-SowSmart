@@ -1,3 +1,25 @@
+/**
+ * Reducer for managing plan state (selected plants, harvest date, recommendations).
+ * 
+ * Data sources:
+ * - Actions dispatched from PlanContext or pages
+ * - State updates trigger localStorage persistence
+ * 
+ * Results:
+ * - planReducer: Reducer function that handles all plan actions
+ * - PLAN_ACTIONS: Action type constants
+ * - PlanState: Type definition for plan state
+ * - Recommendation: Type definition for plant recommendations
+ * - PlanAction: Union type for all plan actions
+ * - initialPlanState: Default initial state
+ * 
+ * Uses:
+ * - helpers/storage/localStorage.ts (savePlanToLocalStorage, clearPlanFromLocalStorage)
+ * 
+ * Used by:
+ * - context/PlanContext.tsx - for managing global plan state
+ */
+
 import { savePlanToLocalStorage, clearPlanFromLocalStorage } from "../helpers/storage/localStorage";
 
 /**

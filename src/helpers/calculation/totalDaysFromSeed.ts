@@ -1,3 +1,5 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for calculating totalDaysFromSeed.
  * 
@@ -5,6 +7,16 @@
  * - plantingWindows: From plants.json (Plant.plantingWindows)
  * - harvestTime: From plants.json (Plant.harvestTime)
  * - Calculates span from first day of first month in plantingWindows to last day of last month in harvestTime
+ * 
+ * Results:
+ * - Returns: number | null (total days from seed to harvest)
+ * 
+ * Uses:
+ * - plant/plantingWindow.ts (selectPlantingWindow)
+ * - date/monthSpan.ts (getMonthSpan)
+ * 
+ * Used by:
+ * - plant/validation.ts (normalizePlant) - for calculating totalDaysFromSeed when normalizing plant data
  */
 
 import type { HarvestTime, PlantingWindows } from "../../models/Plant";

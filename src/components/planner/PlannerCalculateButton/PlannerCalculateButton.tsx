@@ -1,3 +1,21 @@
+/**
+ * PlannerCalculateButton component - button for calculating sow dates with status messages.
+ * 
+ * Data sources:
+ * - Props: onCalculate, disabled, isLoading, hasHarvestDate, disabledReason
+ * 
+ * Results:
+ * - Returns: JSX (panel with calculate button and status messages)
+ * 
+ * Uses:
+ * - components/shared/Button/Button.tsx (Button)
+ * - components/shared/Panel/Panel.tsx (Panel)
+ * - react-router-dom (Link)
+ * 
+ * Used by:
+ * - pages/HarvestPlanner.tsx - for calculating recommendations
+ */
+
 import { Button } from "../../shared/Button/Button";
 import "./PlannerCalculateButton.scss";
 import { Panel } from "../../shared/Panel/Panel";

@@ -1,3 +1,21 @@
+/**
+ * Header component - main navigation header with logo and menu.
+ * 
+ * Data sources:
+ * - Static content (navigation links)
+ * - Local state: isMenuOpen (mobile menu state)
+ * 
+ * Results:
+ * - Returns: JSX (header with logo, navigation links, and mobile menu)
+ * 
+ * Uses:
+ * - react-router-dom (NavLink)
+ * - assets/sowsmart.webp (logo image)
+ * 
+ * Used by:
+ * - components/shared/Layout/Layout.tsx - as main header for all pages
+ */
+
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import sowsmartImage from "../../../assets/sowsmart.webp";

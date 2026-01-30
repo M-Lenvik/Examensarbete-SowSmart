@@ -1,3 +1,19 @@
+/**
+ * CalendarMonthNavigation component - navigation controls for calendar month.
+ * 
+ * Data sources:
+ * - Props: currentMonth, onPreviousMonth, onNextMonth
+ * 
+ * Results:
+ * - Returns: JSX (month navigation with previous/next buttons and month/year display)
+ * 
+ * Uses:
+ * - (none - pure UI component)
+ * 
+ * Used by:
+ * - pages/CalendarView.tsx - for navigating between months
+ */
+
 import "./CalendarMonthNavigation.scss";
 
 type CalendarMonthNavigationProps = {

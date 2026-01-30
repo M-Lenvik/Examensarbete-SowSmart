@@ -1,3 +1,11 @@
+/**
+ * GrowingTipsList component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($primary-green)
+ * - Styles/base.scss - Mixins (@include flex-column, @include tablet)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

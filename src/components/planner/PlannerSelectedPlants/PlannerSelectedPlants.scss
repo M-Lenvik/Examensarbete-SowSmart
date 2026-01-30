@@ -1,3 +1,14 @@
+/**
+ * PlannerSelectedPlants component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($error-color, $header-text)
+ * - Styles/base.scss - Mixins
+ * - components/shared/Button/Button.scss - Classes (.button) - for action button styling
+ * - components/shared/CollapsibleSection/CollapsibleSection.scss - Classes (.collapsible-section__header-button, .collapsible-section__icon) - for collapsible section styling
+ * - components/shared/SelectedPlantsList/SelectedPlantsList.scss - Classes (.selected-plants-list__info-asterisk) - for info asterisk styling
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 @use "../../shared/Button/Button.scss";

@@ -1,3 +1,12 @@
+/**
+ * Modal component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables
+ * - Styles/base.scss - Mixins
+ * - Styles/modal.scss - Placeholders (%modal-overlay-base, %modal-base, %modal-header-base, %modal-close-base, %modal-content-base) - for modal base styles
+ */
+
 @use "../../Styles/color" as *;
 @use "../../Styles/base" as *;
 @use "../../Styles/modal" as *;

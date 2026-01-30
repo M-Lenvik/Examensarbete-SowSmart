@@ -1,3 +1,19 @@
+/**
+ * RemoveButton component - reusable remove button with × symbol.
+ * 
+ * Data sources:
+ * - Props: onClick, ariaLabel, onMouseDown
+ * 
+ * Results:
+ * - Returns: JSX (remove button with × icon)
+ * 
+ * Uses:
+ * - (none - pure UI component)
+ * 
+ * Used by:
+ * - components/shared/SelectedPlantsList/SelectedPlantsList.tsx - for removing plants from selection
+ */
+
 import "./RemoveButton.scss";
 
 type RemoveButtonProps = {

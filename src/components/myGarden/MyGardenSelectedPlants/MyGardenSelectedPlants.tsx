@@ -1,3 +1,21 @@
+/**
+ * MyGardenSelectedPlants component - displays selected plants in My Garden page.
+ * 
+ * Data sources:
+ * - Props: selectedPlants, recommendations, harvestDateIso, plantMessages
+ * 
+ * Results:
+ * - Returns: JSX (collapsible section with selected plants list)
+ * 
+ * Uses:
+ * - components/shared/CollapsibleSection/CollapsibleSection.tsx (CollapsibleSection)
+ * - components/shared/SelectedPlantsList/SelectedPlantsList.tsx (SelectedPlantsList)
+ * - react-router-dom (Link)
+ * 
+ * Used by:
+ * - pages/MyGarden.tsx - for displaying selected plants
+ */
+
 import { Link } from "react-router-dom";
 
 import { CollapsibleSection } from "../../shared/CollapsibleSection/CollapsibleSection";

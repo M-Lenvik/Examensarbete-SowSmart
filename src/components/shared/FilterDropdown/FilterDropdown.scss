@@ -1,3 +1,11 @@
+/**
+ * FilterDropdown component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($background-color, $border-color, $primary-green, $accent-green, $text-color, $text-light, $background-light, $font-size-smaller, $panel-shadow)
+ * - Styles/base.scss - Mixins (@include transition, @include tablet)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

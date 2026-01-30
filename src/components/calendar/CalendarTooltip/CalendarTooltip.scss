@@ -1,3 +1,12 @@
+/**
+ * CalendarTooltip component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($border-color, $font-size-smaller, $text-light)
+ * - Styles/base.scss - Mixins
+ * - Styles/tooltip.scss - Placeholder (%tooltip-base) - for tooltip base styles
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 @use "../../../Styles/tooltip" as *;

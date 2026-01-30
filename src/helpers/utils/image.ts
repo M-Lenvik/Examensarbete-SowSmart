@@ -1,10 +1,22 @@
+//AI discussed code, manually written, AI corrected
+
 /**
- * Handle broken images by swapping to a safe fallback.
- * This avoids broken image icons and prevents infinite error loops.
+ * Helper functions for handling broken images.
  * 
  * Data sources:
- * - Image URLs come from plants.json (Plant.imageUrl)
- * - Fallback SVG is generated programmatically when image fails to load
+ * - Image URLs: From plants.json (Plant.imageUrl)
+ * - Fallback SVG: Generated programmatically when image fails to load
+ * 
+ * Results:
+ * - FALLBACK_PLANT_IMAGE_SRC: string (data URI for fallback SVG image)
+ * - handleImageError: Returns void (replaces broken image with fallback)
+ * 
+ * Uses:
+ * - (none - React event handling only)
+ * 
+ * Used by:
+ * - components/plantSelection/PlantsCard/PlantsCard.tsx - for handling broken plant images
+ * - components/Modal/ModalPlantDetailsCard/ModalPlantDetailsCard.tsx - for handling broken images in modals
  */
 import type React from "react";
 

@@ -1,3 +1,20 @@
+/**
+ * Custom hook that shows toast notifications when plants are added or removed.
+ * 
+ * Data sources:
+ * - selectedPlantIds: From PlanContext (current selection)
+ * - plants: From plantsService (all available plants)
+ * 
+ * Results:
+ * - Returns: { skipToast: () => void } (function to skip next toast notification)
+ * 
+ * Uses:
+ * - react-hot-toast (toast.success, toast.error)
+ * 
+ * Used by:
+ * - pages/PlantSelection.tsx - for showing toasts when plants are selected/deselected
+ */
+
 import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import type { Plant } from "../models/Plant";

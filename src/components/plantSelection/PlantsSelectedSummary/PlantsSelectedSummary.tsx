@@ -1,3 +1,21 @@
+/**
+ * PlantsSelectedSummary component - displays summary of selected plants with actions.
+ * 
+ * Data sources:
+ * - Props: selectedPlants, selectedCount, recommendations, harvestDateIso
+ * 
+ * Results:
+ * - Returns: JSX (summary section with selected plants list and action buttons)
+ * 
+ * Uses:
+ * - components/shared/Button/Button.tsx (Button)
+ * - components/shared/SelectedPlantsList/SelectedPlantsList.tsx (SelectedPlantsList)
+ * - react-router-dom (Link)
+ * 
+ * Used by:
+ * - pages/PlantSelection.tsx - for displaying selected plants summary
+ */
+
 import { Button } from "../../shared/Button/Button";
 import { SelectedPlantsList } from "../../shared/SelectedPlantsList/SelectedPlantsList";
 import type { Plant } from "../../../models/Plant";

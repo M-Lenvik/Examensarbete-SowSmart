@@ -1,3 +1,21 @@
+/**
+ * Router configuration for the application.
+ * 
+ * Data sources:
+ * - Routes defined in this file
+ * 
+ * Results:
+ * - router: HashRouter configuration with all routes
+ * 
+ * Uses:
+ * - react-router-dom (createHashRouter)
+ * - components/shared/Layout/Layout.tsx (Layout)
+ * - pages/* (all page components)
+ * 
+ * Used by:
+ * - main.tsx - for rendering the application
+ */
+
 import { createHashRouter } from "react-router-dom";
 import { Layout } from "./components/shared/Layout/Layout";
 import { About } from "./pages/About";

@@ -1,3 +1,19 @@
+/**
+ * PlantsSearch component - search input for filtering plants by name or category.
+ * 
+ * Data sources:
+ * - Props: searchQuery, onSearchQueryChange
+ * 
+ * Results:
+ * - Returns: JSX (search input with clear button)
+ * 
+ * Uses:
+ * - components/shared/Input/Input.tsx (Input)
+ * 
+ * Used by:
+ * - pages/PlantSelection.tsx - for searching plants
+ */
+
 import { Input } from "../../shared/Input/Input";
 import "./PlantsSearch.scss";
 

@@ -1,3 +1,11 @@
+/**
+ * CalendarDay component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($border-color, $background-light, $primary-beige, $primary-green)
+ * - Styles/base.scss - Mixins (@include tablet, @include desktop)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

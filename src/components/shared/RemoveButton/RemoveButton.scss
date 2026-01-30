@@ -1,3 +1,11 @@
+/**
+ * RemoveButton component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($warning-color, $font-size-smaller)
+ * - Styles/base.scss - Mixins (@include transition)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

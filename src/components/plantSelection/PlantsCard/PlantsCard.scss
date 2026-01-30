@@ -1,3 +1,11 @@
+/**
+ * PlantsCard component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($border-color, $background-color, $background-light, $accent-green, $primary-green, $text-color, $text-light, $font-size-smaller)
+ * - Styles/base.scss - Mixins (@include shadow-sm)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

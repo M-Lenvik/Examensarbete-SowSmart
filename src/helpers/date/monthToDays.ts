@@ -1,9 +1,20 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for converting month names to number of days.
  * 
  * Data sources:
  * - Month names come from plants.json (plantingWindows, harvestTime)
  * - Uses fixed calendar values (non-leap year)
+ * 
+ * Results:
+ * - getDaysInMonth: Returns number | null (days in month, 28-31)
+ * 
+ * Uses:
+ * - (none - fixed calendar values)
+ * 
+ * Used by:
+ * - date/monthSpan.ts - for calculating spans between months
  */
 
 /**

@@ -1,3 +1,27 @@
+/**
+ * MyGarden page component - displays full plan overview with tasks and warnings.
+ * 
+ * Data sources:
+ * - plants: From plantsService (all available plants)
+ * - state: From PlanContext (selected plants, recommendations)
+ * 
+ * Results:
+ * - Returns: JSX (garden overview page with selected plants and task list)
+ * 
+ * Uses:
+ * - context/PlanContext.tsx (PlanContext)
+ * - services/plantsService.ts (getPlants)
+ * - helpers/calendar/tasks.ts (recommendationsToTasks)
+ * - helpers/validation/warnings.ts (getPlantWarnings)
+ * - helpers/date/plantMessages.ts (calculatePlantMessagesFromRecommendations)
+ * - helpers/utils/sorting.ts (sortPlantsBySubcategoryAndName)
+ * - components/myGarden/* (MyGardenSelectedPlants, MyGardenTaskList)
+ * - components/shared/* (Panel, ModalPlantDetails)
+ * 
+ * Used by:
+ * - Router.tsx - for "/my-garden" route
+ */
+
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 

@@ -1,3 +1,22 @@
+/**
+ * EventIconWithLabel component - displays event icon with its label.
+ * 
+ * Data sources:
+ * - Props: eventType, size, showDate, date, className, interactive
+ * - CALENDAR_EVENT_CONFIG: Event labels from helpers
+ * 
+ * Results:
+ * - Returns: JSX (event icon with label, optionally with date)
+ * 
+ * Uses:
+ * - components/event/EventIcon/EventIcon.tsx (EventIcon)
+ * - components/event/EventIconInteractive/EventIconInteractive.tsx (EventIconInteractive) - when interactive is true
+ * - helpers/calendar/events.ts (CALENDAR_EVENT_CONFIG, CALENDAR_ICON_SIZES, CalendarEventType, EventIconSize)
+ * 
+ * Used by:
+ * - components/shared/SelectedPlantsList/SelectedPlantsList.tsx - for displaying event icons with labels
+ */
+
 import { EventIcon } from "../EventIcon/EventIcon";
 import { EventIconInteractive } from "../EventIconInteractive/EventIconInteractive";
 import { CALENDAR_EVENT_CONFIG, CALENDAR_ICON_SIZES } from "../../../helpers/calendar/events";

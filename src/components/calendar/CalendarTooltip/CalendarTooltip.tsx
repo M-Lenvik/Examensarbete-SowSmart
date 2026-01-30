@@ -1,3 +1,22 @@
+/**
+ * CalendarTooltip component - tooltip that appears when hovering over calendar days.
+ * 
+ * Data sources:
+ * - Props: events, position, isVisible, onMouseEnter
+ * 
+ * Results:
+ * - Returns: JSX (tooltip with grouped events by type and plant names)
+ * 
+ * Uses:
+ * - helpers/date/date.ts (formatDateSwedish)
+ * - helpers/calendar/events.ts (CALENDAR_EVENT_CONFIG, CalendarEvent, CalendarEventType)
+ * - components/event/EventTooltip/EventTooltip.tsx (TOOLTIP_PADDING_PX, TOOLTIP_OFFSET_PX)
+ * - helpers/utils/text.ts (capitalizeFirst)
+ * 
+ * Used by:
+ * - pages/CalendarView.tsx - for displaying tooltip on day hover
+ */
+
 //Partly AI generated code, partly manually written
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";

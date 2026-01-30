@@ -1,3 +1,21 @@
+/**
+ * FilterDropdown component - dropdown for filtering plants by subcategory or individual plant.
+ * 
+ * Data sources:
+ * - Props: selectedPlantIds, plants, selectedFilterIds, onFilterChange
+ * 
+ * Results:
+ * - Returns: JSX (dropdown with filter options)
+ * 
+ * Uses:
+ * - helpers/utils/text.ts (capitalizeFirst)
+ * - helpers/utils/sorting.ts (sortSubcategories)
+ * 
+ * Used by:
+ * - pages/CalendarView.tsx - for filtering calendar events
+ * - pages/HarvestPlanner.tsx - for filtering selected plants
+ */
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Plant } from "../../../models/Plant";
 import { capitalizeFirst } from "../../../helpers/utils/text";
@@ -238,7 +256,7 @@ export const FilterDropdown = ({
     return `${selectedPlantCount} valda`;
   };
 
-  //AI generated code, manually adjusted
+  //AI generated code for ally, manually adjusted
   const handleTriggerKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();

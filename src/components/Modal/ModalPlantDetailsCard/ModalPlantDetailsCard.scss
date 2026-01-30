@@ -1,3 +1,10 @@
+/**
+ * ModalPlantDetailsCard component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($border-color, $background-light, $primary-green, $text-light, $accent-green)
+ */
+
 @use "../../../Styles/color" as *;
 
 .modal-plant-details-card__image {

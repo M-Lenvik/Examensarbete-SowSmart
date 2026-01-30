@@ -1,3 +1,22 @@
+/**
+ * HomeIntro component - introduction section on home page explaining how SåSmart works.
+ * 
+ * Data sources:
+ * - Static content and images
+ * 
+ * Results:
+ * - Returns: JSX (intro panel with instructions and navigation button)
+ * 
+ * Uses:
+ * - components/shared/Button/Button.tsx (Button)
+ * - components/shared/Panel/Panel.tsx (Panel)
+ * - react-router-dom (useNavigate, NavLink)
+ * - assets (tomato, chili, aubergin, cucumber, green images)
+ * 
+ * Used by:
+ * - pages/Home.tsx - for displaying home page introduction
+ */
+
 import { useNavigate, NavLink } from "react-router-dom";
 
 import { Button } from "../../shared/Button/Button";

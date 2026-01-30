@@ -1,3 +1,20 @@
+/**
+ * EventTooltip component - tooltip that appears when hovering over event icons.
+ * 
+ * Data sources:
+ * - Props: eventType, position, isVisible
+ * - CALENDAR_EVENT_CONFIG: Tooltip text from helpers
+ * 
+ * Results:
+ * - Returns: JSX (tooltip with event explanation, positioned dynamically)
+ * 
+ * Uses:
+ * - helpers/calendar/events.ts (CALENDAR_EVENT_CONFIG, CalendarEventType)
+ * 
+ * Used by:
+ * - components/event/EventIconInteractive/EventIconInteractive.tsx - for showing tooltip on hover
+ */
+
 //Partly AI generated code, partly manually written
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";

@@ -1,3 +1,21 @@
+/**
+ * PlannerSelectedPlants component - displays selected plants in planner with actions.
+ * 
+ * Data sources:
+ * - Props: selectedPlants, plantMessages, recommendations, harvestDateIso, harvestDatesByPlant
+ * 
+ * Results:
+ * - Returns: JSX (panel with selected plants list and navigation button)
+ * 
+ * Uses:
+ * - components/shared/Panel/Panel.tsx (Panel)
+ * - components/shared/SelectedPlantsList/SelectedPlantsList.tsx (SelectedPlantsList)
+ * - react-router-dom (useNavigate)
+ * 
+ * Used by:
+ * - pages/HarvestPlanner.tsx - for displaying selected plants in planner
+ */
+
 import { useNavigate } from "react-router-dom";
 
 import { Panel } from "../../shared/Panel/Panel";

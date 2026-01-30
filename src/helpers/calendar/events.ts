@@ -1,3 +1,5 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for converting recommendations to calendar events.
  * 
@@ -8,6 +10,19 @@
  * 
  * This converts the structured recommendation data into flat event objects
  * that can be displayed in a calendar grid.
+ * 
+ * Results:
+ * - recommendationsToEvents: Returns CalendarEvent[] (flat array of events for calendar display)
+ * - CALENDAR_EVENT_CONFIG: Configuration object with labels, tooltips, and modal content for each event type
+ * 
+ * Uses:
+ * - (none - only type definitions)
+ * 
+ * Used by:
+ * - pages/CalendarView.tsx - for displaying events in calendar grid
+ * - components/calendar/* - for event icons, tooltips, modals, and legends
+ * - components/event/* - for event display and interaction
+ * - components/growingTips/GrowingTipsList/GrowingTipsList.tsx - for displaying event types
  */
 
 import type { Plant } from "../../models/Plant";

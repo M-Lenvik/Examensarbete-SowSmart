@@ -1,3 +1,10 @@
+/**
+ * EventIcon component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($calendar-event-sow-outdoor, $calendar-event-sow-indoor, $calendar-event-harden-start, $calendar-event-move-plant-outdoor, $calendar-event-harvest)
+ */
+
 @use "../../../Styles/color" as *;
 
 .calendar-event-icon {

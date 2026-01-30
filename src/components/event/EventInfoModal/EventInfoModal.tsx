@@ -1,3 +1,22 @@
+/**
+ * EventInfoModal component - modal with detailed information about event types.
+ * 
+ * Data sources:
+ * - Props: isOpen, eventType, onClose
+ * - CALENDAR_EVENT_CONFIG: Modal title and content from helpers
+ * 
+ * Results:
+ * - Returns: JSX (modal with event icon and detailed explanation)
+ * 
+ * Uses:
+ * - components/Modal/Modal.tsx (Modal)
+ * - components/event/EventIcon/EventIcon.tsx (EventIcon)
+ * - helpers/calendar/events.ts (CALENDAR_EVENT_CONFIG, CALENDAR_ICON_SIZES, CalendarEventType)
+ * 
+ * Used by:
+ * - components/event/EventIconInteractive/EventIconInteractive.tsx - for showing modal on click
+ */
+
 import { Modal } from "../../Modal/Modal";
 import { EventIcon } from "../EventIcon/EventIcon";
 import { CALENDAR_EVENT_CONFIG, CALENDAR_ICON_SIZES } from "../../../helpers/calendar/events";

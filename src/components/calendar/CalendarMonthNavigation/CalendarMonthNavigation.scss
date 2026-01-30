@@ -1,3 +1,11 @@
+/**
+ * CalendarMonthNavigation component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($border-color, $primary-green)
+ * - Styles/base.scss - Mixins (@include tablet)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

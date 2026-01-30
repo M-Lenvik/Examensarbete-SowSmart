@@ -1,3 +1,19 @@
+/**
+ * PlantsList component - displays a list of plant cards.
+ * 
+ * Data sources:
+ * - Props: plants, selectedPlantIds, onToggleSelected, onOpenDetails
+ * 
+ * Results:
+ * - Returns: JSX (unordered list of PlantsCard components)
+ * 
+ * Uses:
+ * - components/plantSelection/PlantsCard/PlantsCard.tsx (PlantsCard)
+ * 
+ * Used by:
+ * - pages/PlantSelection.tsx - for displaying the list of plants
+ */
+
 import type { Plant } from "../../../models/Plant";
 import { PlantsCard } from "../PlantsCard/PlantsCard";
 import "./PlantsList.scss";

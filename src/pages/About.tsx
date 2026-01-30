@@ -1,3 +1,20 @@
+/**
+ * About page component - displays information about the project.
+ * 
+ * Data sources:
+ * - Static content (no external data)
+ * 
+ * Results:
+ * - Returns: JSX (about page with project information)
+ * 
+ * Uses:
+ * - components/shared/Panel/Panel.tsx (Panel)
+ * - assets/* (static images)
+ * 
+ * Used by:
+ * - Router.tsx - for "/about" route
+ */
+
 import { Panel } from "../components/shared/Panel/Panel";
 import tomatoImage from "../assets/tomato.webp";
 import chiliImage from "../assets/chili.webp";

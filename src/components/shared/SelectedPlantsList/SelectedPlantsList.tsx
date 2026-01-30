@@ -1,3 +1,27 @@
+/**
+ * SelectedPlantsList component - displays list of selected plants with details and controls.
+ * 
+ * Data sources:
+ * - Props: selectedPlants, plantMessages, recommendations, harvestDateIso, harvestDatesByPlant
+ * 
+ * Results:
+ * - Returns: JSX (list of selected plants with details, warnings, and date controls)
+ * 
+ * Uses:
+ * - components/shared/RemoveButton/RemoveButton.tsx (RemoveButton)
+ * - components/event/EventIconWithLabel/EventIconWithLabel.tsx (EventIconWithLabel)
+ * - components/shared/Input/Input.tsx (Input)
+ * - components/Modal/ConfirmDialog/ConfirmDialog.tsx (ConfirmDialog)
+ * - components/shared/CollapsibleSection/CollapsibleSection.tsx (CollapsibleSection)
+ * - helpers/date/date.ts (formatDateSwedishWithoutYear)
+ * - helpers/utils/text.ts (capitalizeFirst)
+ * - helpers/utils/sorting.ts (sortSubcategories)
+ * 
+ * Used by:
+ * - pages/HarvestPlanner.tsx - for displaying selected plants in planner
+ * - components/plantSelection/PlantsSelectedSummary/PlantsSelectedSummary.tsx - for displaying selected plants summary
+ */
+
 import { useState } from "react";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
 import { EventIconWithLabel } from "../../event/EventIconWithLabel/EventIconWithLabel";

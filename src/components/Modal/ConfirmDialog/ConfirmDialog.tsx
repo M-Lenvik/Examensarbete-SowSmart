@@ -1,3 +1,19 @@
+/**
+ * ConfirmDialog component - confirmation dialog for destructive actions.
+ * 
+ * Data sources:
+ * - Props: isOpen, title, message, confirmText, cancelText, onConfirm, onCancel, variant
+ * 
+ * Results:
+ * - Returns: JSX (modal with confirmation message and action buttons)
+ * 
+ * Uses:
+ * - components/Modal/Modal.tsx (Modal)
+ * 
+ * Used by:
+ * - components/shared/SelectedPlantsList/SelectedPlantsList.tsx - for confirming plant removal
+ */
+
 import { Modal } from "../Modal";
 import "./ConfirmDialog.scss";
 

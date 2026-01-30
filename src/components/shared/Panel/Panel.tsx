@@ -1,3 +1,19 @@
+/**
+ * Panel component - container with optional title and collapsible functionality.
+ * 
+ * Data sources:
+ * - Props: title, children, variant, collapsible, defaultExpanded, titleHeadingLevel
+ * 
+ * Results:
+ * - Returns: JSX (panel section with title and content)
+ * 
+ * Uses:
+ * - components/shared/CollapsibleSection/CollapsibleSection.tsx (CollapsibleSection) - when collapsible is true
+ * 
+ * Used by:
+ * - All pages and components that need panel containers
+ */
+
 import type { ReactNode } from "react";
 import { CollapsibleSection } from "../CollapsibleSection/CollapsibleSection";
 import "./Panel.scss";

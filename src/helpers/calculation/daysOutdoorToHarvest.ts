@@ -6,6 +6,15 @@
  * - harvestDate: User input (selected harvest date)
  * - daysIndoorGrowth: From plants.json or defaults from plantDefaults.ts
  * - hardeningDays: From plants.json or defaults from plantDefaults.ts
+ * 
+ * Results:
+ * - Returns: number | null (days outdoor to harvest)
+ * 
+ * Uses:
+ * - date/date.ts (addDays, normalizeToStartOfDay)
+ * 
+ * Used by:
+ * - calculation/recommendations.ts (generateRecommendations) - for calculating daysOutdoorToHarvest in recommendations
  */
 
 import { addDays, normalizeToStartOfDay } from "../date/date";

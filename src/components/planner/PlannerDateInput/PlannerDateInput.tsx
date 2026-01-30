@@ -1,3 +1,19 @@
+/**
+ * PlannerDateInput component - date input for harvest date with error and warning messages.
+ * 
+ * Data sources:
+ * - Props: value, onChange, onBlur, onFocus, error, warning, required
+ * 
+ * Results:
+ * - Returns: JSX (date input with error/warning messages)
+ * 
+ * Uses:
+ * - components/shared/Input/Input.tsx (Input)
+ * 
+ * Used by:
+ * - pages/HarvestPlanner.tsx - for entering harvest date
+ */
+
 import type React from "react";
 
 import { Input } from "../../shared/Input/Input";

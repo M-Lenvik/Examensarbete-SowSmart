@@ -1,3 +1,23 @@
+/**
+ * React Context for global plan state management.
+ * 
+ * Data sources:
+ * - localStorage: Saved plan data (loaded on mount)
+ * - User actions: Plant selection, harvest date input, recommendations
+ * 
+ * Results:
+ * - PlanContext: React Context with plan state and actions
+ * - PlanProvider: React component that provides plan state to children
+ * 
+ * Uses:
+ * - reducers/planReducer.ts (planReducer, initialPlanState, PLAN_ACTIONS, PlanAction, PlanState, Recommendation)
+ * - helpers/storage/localStorage.ts (loadPlanFromLocalStorage, clearPlanFromLocalStorage)
+ * 
+ * Used by:
+ * - All pages that need plan state (HarvestPlanner, CalendarView, MyGarden, PlantSelection)
+ * - Components that interact with plan state
+ */
+
 import { createContext, useMemo, useReducer } from "react";
 
 import type React from "react";

@@ -1,3 +1,11 @@
+/**
+ * PlantsCategoryButtons component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($primary-green, $accent-green, $font-size-smaller)
+ * - Styles/base.scss - Mixins (@include tablet, @include desktop)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

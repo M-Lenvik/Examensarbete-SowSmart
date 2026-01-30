@@ -1,3 +1,21 @@
+/**
+ * CalendarDay component - displays a single day in the calendar grid.
+ * 
+ * Data sources:
+ * - Props: date, events, isCurrentMonth, isToday, onDayHover
+ * 
+ * Results:
+ * - Returns: JSX (calendar day cell with date number and event icons)
+ * 
+ * Uses:
+ * - helpers/date/date.ts (formatDateIso)
+ * - helpers/calendar/events.ts (CalendarEvent, CalendarEventType)
+ * - components/calendar/Carousel/Carousel.tsx (Carousel)
+ * 
+ * Used by:
+ * - components/calendar/CalendarMonth/CalendarMonth.tsx - for rendering each day in the month grid
+ */
+
 import { formatDateIso } from "../../../helpers/date/date";
 import type { CalendarEvent, CalendarEventType } from "../../../helpers/calendar/events";
 import { Carousel } from "../Carousel/Carousel";

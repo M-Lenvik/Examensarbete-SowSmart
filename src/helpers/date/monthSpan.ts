@@ -1,9 +1,21 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for calculating spans between months.
  * 
  * Data sources:
  * - Month names come from plants.json (plantingWindows.indoors/outdoors, harvestTime.start/end)
  * - Used to calculate totalDaysFromSeed and sow date positions
+ * 
+ * Results:
+ * - getMonthSpan: Returns number | null (days from first day of startMonth to last day of endMonth)
+ * 
+ * Uses:
+ * - date/monthToDays.ts (getDaysInMonth)
+ * 
+ * Used by:
+ * - calculation/totalDaysFromSeed.ts - for calculating total days from seed
+ * - calculation/sowDate.ts - for calculating seedConstant and sow date positions
  */
 
 import { getDaysInMonth } from "./monthToDays";

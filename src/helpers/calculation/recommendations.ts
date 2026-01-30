@@ -1,3 +1,5 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for generating planting recommendations.
  * 
@@ -9,6 +11,22 @@
  * 
  * All dates are calculated backwards from the harvest date to ensure
  * the user's selected harvest date is always respected.
+ * 
+ * Results:
+ * - Returns: Recommendation[] (array of recommendations with sow dates, harden dates, move outdoor dates, warnings)
+ * 
+ * Uses:
+ * - date/date.ts (formatDateIso, parseDateIso, subtractDays, addDays, normalizeToStartOfDay)
+ * - date/dateValidation.ts (getMovePlantOutdoorWindowDates)
+ * - calculation/sowDate.ts (calculateTryAnywaySowDate)
+ * - plant/plantDefaults.ts (DEFAULT_DAYS_INDOOR_GROWTH_BY_SUBCATEGORY, DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY)
+ * 
+ * Used by:
+ * - pages/HarvestPlanner.tsx - for generating recommendations when harvest date is set
+ * - context/PlanContext.tsx - for storing recommendations in global state
+ * - calendar/events.ts (recommendationsToEvents) - for converting recommendations to calendar events
+ * - calendar/tasks.ts (recommendationsToTasks) - for converting recommendations to task lists
+ * - validation/warnings.ts (getPlantWarnings) - for validating recommendation dates
  */
 
 import type { Plant } from "../../models/Plant";

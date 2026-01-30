@@ -1,3 +1,20 @@
+/**
+ * CalendarLegend component - displays legend explaining all calendar event types.
+ * 
+ * Data sources:
+ * - Static: ALL_CALENDAR_EVENT_TYPES, CALENDAR_EVENT_CONFIG, CALENDAR_ICON_SIZES from helpers
+ * 
+ * Results:
+ * - Returns: JSX (legend with all event types and their labels)
+ * 
+ * Uses:
+ * - components/event/EventIconInteractive/EventIconInteractive.tsx (EventIconInteractive)
+ * - helpers/calendar/events.ts (ALL_CALENDAR_EVENT_TYPES, CALENDAR_EVENT_CONFIG, CALENDAR_ICON_SIZES, CalendarEventType)
+ * 
+ * Used by:
+ * - pages/CalendarView.tsx - for displaying event type legend
+ */
+
 import { EventIconInteractive } from "../../event/EventIconInteractive/EventIconInteractive";
 import { ALL_CALENDAR_EVENT_TYPES, CALENDAR_EVENT_CONFIG, CALENDAR_ICON_SIZES, type CalendarEventType } from "../../../helpers/calendar/events";
 import "./CalendarLegend.scss";

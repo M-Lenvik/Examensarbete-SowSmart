@@ -1,3 +1,19 @@
+/**
+ * PlantsCategoryButtons component - displays category buttons for filtering plants.
+ * 
+ * Data sources:
+ * - Props: options, selectedValue, onSelect, showBackButton, onBack
+ * 
+ * Results:
+ * - Returns: JSX (grid of category buttons with optional back button)
+ * 
+ * Uses:
+ * - helpers/utils/text.ts (capitalizeFirst)
+ * 
+ * Used by:
+ * - pages/PlantSelection.tsx - for selecting plant categories
+ */
+
 import { capitalizeFirst } from "../../../helpers/utils/text";
 import "./PlantsCategoryButtons.scss";
 

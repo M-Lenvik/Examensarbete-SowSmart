@@ -1,3 +1,11 @@
+/**
+ * EventInfoModal component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables
+ * - Styles/base.scss - Mixins (@include flex-column, @include flex-center)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

@@ -1,3 +1,21 @@
+/**
+ * ScrollToBottom component - button that appears when user scrolls, allows scrolling to bottom.
+ * 
+ * Data sources:
+ * - window.scrollY: Current scroll position
+ * - document.documentElement.scrollHeight: Total document height
+ * - window.innerHeight: Window height for threshold calculation
+ * 
+ * Results:
+ * - Returns: JSX (scroll to bottom button, or null if not visible)
+ * 
+ * Uses:
+ * - (none - pure UI component using browser APIs)
+ * 
+ * Used by:
+ * - components/shared/Layout/Layout.tsx - as global scroll helper
+ */
+
 import { useEffect, useState } from "react";
 import "./ScrollToBottom.scss";
 

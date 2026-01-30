@@ -1,3 +1,12 @@
+/**
+ * CalendarLegend component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($border-color, $font-size-smaller)
+ * - Styles/base.scss - Mixins (@include tablet)
+ * - components/event/EventIcon/EventIcon.scss - Classes (.calendar-event-icon) - for event icon styling
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

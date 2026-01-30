@@ -1,3 +1,26 @@
+/**
+ * PlantSelection page component - allows users to browse and select plants.
+ * 
+ * Data sources:
+ * - plants: From plantsService (all available plants)
+ * - state: From PlanContext (selected plants, current selection)
+ * 
+ * Results:
+ * - Returns: JSX (plant selection page with search, filters, and plant list)
+ * 
+ * Uses:
+ * - context/PlanContext.tsx (PlanContext)
+ * - services/plantsService.ts (getPlants)
+ * - helpers/utils/sorting.ts (sortPlantsBySubcategoryAndName)
+ * - helpers/utils/text.ts (capitalizeFirst)
+ * - hooks/usePlantSelectionToasts.ts (usePlantSelectionToasts)
+ * - components/plantSelection/* (PlantsCategoryButtons, PlantsList, PlantsSearch, PlantsSelectedSummary)
+ * - components/shared/* (Panel, ModalPlantDetails)
+ * 
+ * Used by:
+ * - Router.tsx - for "/plants" route
+ */
+
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

@@ -1,3 +1,24 @@
+/**
+ * EventIconInteractive component - interactive event icon with tooltip and modal.
+ * 
+ * Data sources:
+ * - Props: eventType, size, className
+ * - Local state: isTooltipVisible, isModalOpen, tooltipPosition
+ * 
+ * Results:
+ * - Returns: JSX (interactive button with icon, tooltip on hover, modal on click)
+ * 
+ * Uses:
+ * - components/event/EventIcon/EventIcon.tsx (EventIcon)
+ * - components/event/EventTooltip/EventTooltip.tsx (EventTooltip)
+ * - components/event/EventInfoModal/EventInfoModal.tsx (EventInfoModal)
+ * - helpers/calendar/events.ts (CALENDAR_EVENT_CONFIG, CALENDAR_ICON_SIZES, CalendarEventType, EventIconSize)
+ * 
+ * Used by:
+ * - components/calendar/CalendarLegend/CalendarLegend.tsx - for interactive legend icons
+ * - components/event/EventIconWithLabel/EventIconWithLabel.tsx - when interactive prop is true
+ */
+
 import { useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { EventIcon } from "../EventIcon/EventIcon";

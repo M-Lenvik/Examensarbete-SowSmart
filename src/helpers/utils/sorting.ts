@@ -6,6 +6,21 @@ import type { Plant } from "../../models/Plant";
  * Data sources:
  * - Plants come from plants.json (via Plant type)
  * - Sorts by subcategory and name from plant data
+ * 
+ * Results:
+ * - sortPlantsBySubcategoryAndName: Returns Plant[] (sorted plants, subcategory first, then name)
+ * - sortSubcategories: Returns string[] (sorted subcategories with "Övrigt" last)
+ * 
+ * Uses:
+ * - (none - pure sorting logic)
+ * 
+ * Used by:
+ * - pages/PlantSelection.tsx - for sorting plants in plant selection
+ * - pages/HarvestPlanner.tsx - for sorting selected plants
+ * - pages/MyGarden.tsx - for sorting plants in garden overview
+ * - components/shared/FilterDropdown/FilterDropdown.tsx - for sorting subcategories in filter
+ * - components/shared/SelectedPlantsList/SelectedPlantsList.tsx - for sorting subcategories
+ * - components/myGarden/MyGardenTaskList/MyGardenTaskList.tsx - for sorting subcategories
  */
 
 /**

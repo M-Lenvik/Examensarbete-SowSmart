@@ -1,3 +1,19 @@
+/**
+ * ModalPlantDetailsCard component - displays detailed plant information in modal.
+ * 
+ * Data sources:
+ * - Props: plant (Plant object with all plant data)
+ * 
+ * Results:
+ * - Returns: JSX (detailed plant information card with image, metadata, and growing information)
+ * 
+ * Uses:
+ * - helpers/utils/image.ts (FALLBACK_PLANT_IMAGE_SRC, handleImageError)
+ * 
+ * Used by:
+ * - components/Modal/ModalPlantDetails/ModalPlantDetails.tsx - for displaying plant details in modal
+ */
+
 import React from "react";
 import type { Plant } from "../../../models/Plant";
 import { FALLBACK_PLANT_IMAGE_SRC, handleImageError } from "../../../helpers/utils/image";

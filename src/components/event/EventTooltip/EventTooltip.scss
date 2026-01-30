@@ -1,3 +1,12 @@
+/**
+ * EventTooltip component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($font-size-smaller)
+ * - Styles/base.scss - Mixins
+ * - Styles/tooltip.scss - Placeholder (%tooltip-base) - for tooltip base styles
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 @use "../../../Styles/tooltip" as *;

@@ -1,3 +1,20 @@
+/**
+ * ScrollToTop component - button that appears when user scrolls down, allows scrolling to top.
+ * 
+ * Data sources:
+ * - window.scrollY: Current scroll position
+ * - window.innerHeight: Window height for threshold calculation
+ * 
+ * Results:
+ * - Returns: JSX (scroll to top button, or null if not visible)
+ * 
+ * Uses:
+ * - (none - pure UI component using browser APIs)
+ * 
+ * Used by:
+ * - components/shared/Layout/Layout.tsx - as global scroll helper
+ */
+
 import { useEffect, useState } from "react";
 import "./ScrollToTop.scss";
 

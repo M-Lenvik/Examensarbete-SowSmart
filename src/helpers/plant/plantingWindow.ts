@@ -1,9 +1,22 @@
+//AI discussed code, manually written, AI corrected
+
 /**
  * Helper functions for selecting and validating planting windows.
  * 
  * Data sources:
  * - plantingWindows: From plants.json, accessed via Plant.plantingWindows (type: PlantingWindows)
  * - plantingMethod: From plants.json or inferred, accessed via Plant.plantingMethod (type: PlantingMethod)
+ * 
+ * Results:
+ * - selectPlantingWindow: Returns { start: string, end: string } | null (selected planting window)
+ * 
+ * Uses:
+ * - (none - pure selection logic)
+ * 
+ * Used by:
+ * - calculation/sowDate.ts - for selecting appropriate planting window for sow date calculation
+ * - calculation/totalDaysFromSeed.ts - for selecting planting window for total days calculation
+ * - date/dateValidation.ts - for getting planting window dates
  */
 
 import type { PlantingMethod, PlantingWindows } from "../../models/Plant";

@@ -1,3 +1,35 @@
+//AI discussed code, manually written, AI corrected
+
+/**
+ * Helper functions for validating harvest dates and calculating sow date results.
+ * 
+ * Data sources:
+ * - harvestDateIso: User input (selected harvest date in ISO format)
+ * - plants: From plants.json (Plant.plantingWindows, Plant.harvestTime, Plant.plantingMethod)
+ * - plantingWindows: From plants.json (Plant.plantingWindows)
+ * - harvestTime: From plants.json (Plant.harvestTime)
+ * - movePlantOutdoor: From plants.json or defaults from plantDefaults.ts
+ * 
+ * Results:
+ * - validateHarvestDate: Returns ValidationResult (isValid, error message)
+ * - getPlantSowResult: Returns PlantSowResult | null (sow date and validation message)
+ * - getHarvestWindowDates: Returns { start: Date, end: Date } | null (harvest window dates)
+ * - getPlantingWindowDates: Returns { start: Date, end: Date } | null (planting window dates)
+ * - getMovePlantOutdoorWindowDates: Returns { start: Date, end: Date } | null (move outdoor window dates)
+ * 
+ * Uses:
+ * - date/date.ts (formatDateIso, formatDateSwedish, parseDateIso, normalizeToStartOfDay, getMonthIndex)
+ * - calculation/sowDate.ts (calculateSowDate, calculateTryAnywaySowDate)
+ * - plant/plantingWindow.ts (selectPlantingWindow)
+ * - plant/plantDefaults.ts (getDefaultMovePlantOutdoor)
+ * 
+ * Used by:
+ * - pages/HarvestPlanner.tsx - for validating harvest dates and showing sow date results
+ * - date/plantMessages.ts - for calculating plant messages from harvest dates
+ * - validation/warnings.ts - for checking if dates are outside optimal windows
+ * - calculation/recommendations.ts - for getting move outdoor window dates
+ */
+
 import { formatDateIso, formatDateSwedish, parseDateIso, normalizeToStartOfDay, getMonthIndex } from "./date";
 import { calculateSowDate, calculateTryAnywaySowDate } from "../calculation/sowDate";
 import { selectPlantingWindow } from "../plant/plantingWindow";
@@ -22,10 +54,27 @@ export type PlantSowResult = {
   sowDateIso: string | null;
 };
 
+/**
+ * Get current date normalized to start of day.
+ * 
+ * Used for date comparisons. Allows injecting a custom "now" date for testing.
+ * 
+ * @param now - Optional date to use as "now" (for testing), or null to use actual current date
+ * @returns Date object normalized to start of day (00:00:00)
+ */
 const getNowDate = (now: Date | null): Date => {
   return normalizeToStartOfDay(now ?? new Date());
 };
 
+/**
+ * Get the first day of a month in a given year.
+ * 
+ * Converts Swedish month name to Date object for the first day of that month.
+ * 
+ * @param monthName - Swedish month name (e.g., "mars", "april", "juni")
+ * @param year - Year as number (e.g., 2026)
+ * @returns Date object for the first day of the month, or null if monthName is invalid
+ */
 const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
   const monthIndex = getMonthIndex(monthName);
   if (monthIndex === null) return null;
@@ -34,6 +83,16 @@ const getFirstDayOfMonth = (monthName: string, year: number): Date | null => {
   return normalizeToStartOfDay(date);
 };
 
+/**
+ * Get the last day of a month in a given year.
+ * 
+ * Converts Swedish month name to Date object for the last day of that month.
+ * Uses the trick: new Date(year, monthIndex + 1, 0) gives the last day of monthIndex.
+ * 
+ * @param monthName - Swedish month name (e.g., "mars", "april", "juni")
+ * @param year - Year as number (e.g., 2026)
+ * @returns Date object for the last day of the month, or null if monthName is invalid
+ */
 const getLastDayOfMonth = (monthName: string, year: number): Date | null => {
   const monthIndex = getMonthIndex(monthName);
   if (monthIndex === null) return null;
@@ -144,13 +203,33 @@ export const getMovePlantOutdoorWindowDates = (
   return { start, end };
 };
 
+/**
+ * Calculate the difference in days between two dates.
+ * 
+ * Returns the number of days from the earlier date to the later date.
+ * Result is always positive (or zero) if later >= earlier.
+ * 
+ * @param later - The later date
+ * @param earlier - The earlier date
+ * @returns Number of days between the dates (positive if later >= earlier)
+ */
 const diffDays = (later: Date, earlier: Date): number => {
   return Math.floor((later.getTime() - earlier.getTime()) / (1000 * 60 * 60 * 24));
 };
 
 /**
  * Calculate the nearest recommended sow date for a plant based on current date and planting window.
+ * 
  * Used when the calculated sow date is in the past and we need to recommend the next available opportunity.
+ * 
+ * **Logic:**
+ * - If today is before planting window: returns first day of planting window
+ * - If today is within planting window: returns today
+ * - If today is after planting window: returns first day of next year's planting window
+ * 
+ * @param plant - The plant to calculate for
+ * @param today - The current date (normalized to start of day)
+ * @returns ISO date string for the nearest recommended sow date
  */
 const calculateNearestSowDateIso = (
   plant: Plant,

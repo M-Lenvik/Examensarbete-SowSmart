@@ -1,3 +1,12 @@
+/**
+ * SelectedPlantsList component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($primary-green, $text-color, $text-light, $border-color, $background-color, $background-light, $warning-color, $border-dark-color, $error-color, $font-size-smaller)
+ * - Styles/base.scss - Mixins (@include transition, @include flex-column)
+ * - components/shared/Input/Input.scss - Classes (.input-field, .input-field__input) - for harvest date input
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 
@@ -110,6 +119,7 @@
   color: $warning-color;
   font-weight: 800;
   margin-left: 0.25rem;
+  font-size: 1.25rem;
 }
 
 .selected-plants-list__harvest-date-control {

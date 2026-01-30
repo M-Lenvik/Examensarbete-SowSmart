@@ -1,3 +1,25 @@
+//AI discussed code, manually written, AI corrected
+
+/**
+ * Helper functions for normalizing and validating plant data.
+ * 
+ * Data sources:
+ * - Raw plant data comes from plants.json (via RawPlant type)
+ * - Defaults come from plantDefaults.ts (based on subcategory)
+ * - Calculates totalDaysFromSeed from plantingWindows and harvestTime
+ * 
+ * Results:
+ * - normalizePlant: Returns Plant (normalized plant with defaults applied and calculated fields)
+ * - toNullableNumber: Returns number | null (parsed number or null)
+ * 
+ * Uses:
+ * - plant/plantDefaults.ts (all default constants and getDefaultMovePlantOutdoor)
+ * - calculation/totalDaysFromSeed.ts (calculateTotalDaysFromSeed)
+ * 
+ * Used by:
+ * - services/plantsService.ts - for normalizing all plants when loading from plants.json
+ */
+
 import type { Plant, PlantingMethod, RawPlant } from "../../models/Plant";
 import {
   DEFAULT_HARDENING_DAYS_BY_SUBCATEGORY,
@@ -11,14 +33,7 @@ import {
 } from "./plantDefaults";
 import { calculateTotalDaysFromSeed } from "../calculation/totalDaysFromSeed";
 
-/**
- * Helper functions for normalizing and validating plant data.
- * 
- * Data sources:
- * - Raw plant data comes from plants.json (via RawPlant type)
- * - Defaults come from plantDefaults.ts (based on subcategory)
- * - Calculates totalDaysFromSeed from plantingWindows and harvestTime
- */
+
 
 /**
  * Parse a value into a nullable number.

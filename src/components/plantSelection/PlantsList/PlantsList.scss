@@ -1,3 +1,11 @@
+/**
+ * PlantsList component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables
+ * - Styles/base.scss - Mixins (@include tablet, @include desktop)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

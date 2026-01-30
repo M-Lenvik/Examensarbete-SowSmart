@@ -1,3 +1,11 @@
+/**
+ * ConfirmDialog component styles.
+ * 
+ * Uses:
+ * - Styles/color.scss - Color variables ($warning-color, $header-text, $primary-green)
+ * - Styles/base.scss - Mixins (@include shadow-sm, @include transition)
+ */
+
 @use "../../../Styles/color" as *;
 @use "../../../Styles/base" as *;
 

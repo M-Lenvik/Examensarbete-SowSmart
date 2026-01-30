@@ -1,3 +1,20 @@
+/**
+ * PlantsCard component - displays a single plant card with image, name, and selection checkbox.
+ * 
+ * Data sources:
+ * - Props: plant, isSelected, onToggleSelected, onOpenDetails
+ * 
+ * Results:
+ * - Returns: JSX (plant card with image, name, subcategory, type, and checkbox)
+ * 
+ * Uses:
+ * - helpers/utils/image.ts (FALLBACK_PLANT_IMAGE_SRC, handleImageError)
+ * - helpers/utils/text.ts (capitalizeFirst)
+ * 
+ * Used by:
+ * - components/plantSelection/PlantsList/PlantsList.tsx - for rendering each plant in the list
+ */
+
 import { FALLBACK_PLANT_IMAGE_SRC, handleImageError } from "../../../helpers/utils/image";
 import type { Plant } from "../../../models/Plant";
 import { capitalizeFirst } from "../../../helpers/utils/text";

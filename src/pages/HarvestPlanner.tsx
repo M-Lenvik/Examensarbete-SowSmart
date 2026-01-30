@@ -1,3 +1,32 @@
+/**
+ * HarvestPlanner page component - allows users to set harvest dates and generate planting recommendations.
+ * 
+ * Data sources:
+ * - plants: From plantsService (all available plants)
+ * - state: From PlanContext (selected plants, harvest date, recommendations)
+ * - localStorage: Filter-based harvest dates (for individual plant dates)
+ * 
+ * Results:
+ * - Returns: JSX (harvest planner page with date input, plant list, and recommendations)
+ * - Updates PlanContext with harvest date and recommendations
+ * 
+ * Uses:
+ * - context/PlanContext.tsx (PlanContext)
+ * - services/plantsService.ts (getPlants)
+ * - helpers/date/dateValidation.ts (validateHarvestDate, getPlantSowResult)
+ * - helpers/calculation/recommendations.ts (generateRecommendations)
+ * - helpers/date/plantMessages.ts (calculatePlantMessagesFromHarvestDates, calculatePlantMessagesFromRecommendations)
+ * - helpers/date/date.ts (formatDateSwedish, formatDateSwedishWithoutYear)
+ * - helpers/storage/localStorage.ts (loadHarvestDatesByFilterFromLocalStorage, saveHarvestDatesByFilterToLocalStorage)
+ * - helpers/utils/sorting.ts (sortPlantsBySubcategoryAndName, sortSubcategories)
+ * - helpers/utils/text.ts (capitalizeFirst)
+ * - components/planner/* (PlannerDateInput, PlannerSelectedPlants, PlannerCalculateButton)
+ * - components/shared/* (FilterDropdown, Panel, Button, Modal, ModalPlantDetails)
+ * 
+ * Used by:
+ * - Router.tsx - for "/planner" route
+ */
+
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";

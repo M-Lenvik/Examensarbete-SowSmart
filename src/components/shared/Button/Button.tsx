@@ -1,3 +1,19 @@
+/**
+ * Button component - reusable button with variants.
+ * 
+ * Data sources:
+ * - Props: children, variant, type, disabled, onClick, className
+ * 
+ * Results:
+ * - Returns: JSX (button element with styling)
+ * 
+ * Uses:
+ * - (none - pure UI component)
+ * 
+ * Used by:
+ * - All pages and components that need buttons
+ */
+
 import type React from "react";
 
 import "./Button.scss";
