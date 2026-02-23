@@ -524,8 +524,7 @@ Projektet bedöms utifrån följande kriterier. Nedan visas en översikt över v
 - ✅ **Tillgänglighet:** WCAG AA-anpassad, omfattande tangentbordsnavigering, semantisk HTML, ARIA-attribut
 
 
-### 🏆 Slutbetyg
-
-**Betyg: [Betyg kommer att sättas efter bedömning]**
-
-
+## 🏆 Slutbetyg
+**Betyg: Väl Godkänt**
+<br>
+<img width="2551" height="2077" alt="betyg-examensarbete" src="https://github.com/user-attachments/assets/9e8fdaa7-a2d6-404b-9f6f-fe59b32e125b" />
